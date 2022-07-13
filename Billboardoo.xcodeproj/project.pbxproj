@@ -12,13 +12,14 @@
 		C0CB666180E0BD51BB9C9A07 /* Pods_Billboardoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91877C9883F48E80103B4294 /* Pods_Billboardoo.framework */; };
 		D80F7094287D828200231376 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F7093287D828200231376 /* AppDelegate.swift */; };
 		D80F7096287D828200231376 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F7095287D828200231376 /* SceneDelegate.swift */; };
-		D80F7098287D828200231376 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F7097287D828200231376 /* ViewController.swift */; };
+		D80F7098287D828200231376 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F7097287D828200231376 /* LoginViewController.swift */; };
 		D80F709B287D828200231376 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80F7099287D828200231376 /* Main.storyboard */; };
 		D80F709D287D828300231376 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80F709C287D828300231376 /* Assets.xcassets */; };
 		D80F70A0287D828300231376 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80F709E287D828300231376 /* LaunchScreen.storyboard */; };
 		D80F70AB287D828300231376 /* BillboardooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F70AA287D828300231376 /* BillboardooTests.swift */; };
 		D80F70B5287D828300231376 /* BillboardooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F70B4287D828300231376 /* BillboardooUITests.swift */; };
 		D80F70B7287D828300231376 /* BillboardooUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F70B6287D828300231376 /* BillboardooUITestsLaunchTests.swift */; };
+		D83BBC5C287E899100453E1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83BBC5B287E899100453E1D /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +50,7 @@
 		D80F7090287D828200231376 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80F7093287D828200231376 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D80F7095287D828200231376 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D80F7097287D828200231376 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D80F7097287D828200231376 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D80F709A287D828200231376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D80F709C287D828300231376 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D80F709F287D828300231376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,6 +60,7 @@
 		D80F70B0287D828300231376 /* BillboardooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillboardooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80F70B4287D828300231376 /* BillboardooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITests.swift; sourceTree = "<group>"; };
 		D80F70B6287D828300231376 /* BillboardooUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D83BBC5B287E899100453E1D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F05CB2AC891B44CB1A29ABA4 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FD11D2994A0E6D70C420875D /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,7 +113,6 @@
 				4719DC671067CDF5DEE64AA1 /* Pods-BillboardooTests.debug.xcconfig */,
 				A5DEDFDCFE799108D362E3E8 /* Pods-BillboardooTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -142,8 +143,9 @@
 			children = (
 				D80F7093287D828200231376 /* AppDelegate.swift */,
 				D80F7095287D828200231376 /* SceneDelegate.swift */,
-				D80F7097287D828200231376 /* ViewController.swift */,
+				D80F7097287D828200231376 /* LoginViewController.swift */,
 				D80F7099287D828200231376 /* Main.storyboard */,
+				D83BBC5B287E899100453E1D /* MainViewController.swift */,
 				D80F709C287D828300231376 /* Assets.xcassets */,
 				D80F709E287D828300231376 /* LaunchScreen.storyboard */,
 				D80F70A1287D828300231376 /* Info.plist */,
@@ -407,9 +409,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D80F7098287D828200231376 /* ViewController.swift in Sources */,
+				D80F7098287D828200231376 /* LoginViewController.swift in Sources */,
 				D80F7094287D828200231376 /* AppDelegate.swift in Sources */,
 				D80F7096287D828200231376 /* SceneDelegate.swift in Sources */,
+				D83BBC5C287E899100453E1D /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
