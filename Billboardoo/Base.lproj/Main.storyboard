@@ -3,6 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,7 +17,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pbt-pK-he2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="iconColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="4GY-UA-x7Z" kind="relationship" relationship="viewControllers" id="DEC-f0-VEB"/>
@@ -23,13 +25,15 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b9J-0Z-Suc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-300" y="-124"/>
+            <point key="canvasLocation" x="-522" y="365"/>
         </scene>
-        <!--Item-->
+        <!--Home-->
         <scene sceneID="b8j-sE-KJ4">
             <objects>
                 <navigationController id="4GY-UA-x7Z" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="uJo-Xa-4YC"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="uJo-Xa-4YC">
+                        <imageReference key="image" image="homekit" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jgg-QT-2W8">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -40,7 +44,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDh-no-C07" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="480" y="-140"/>
+            <point key="canvasLocation" x="475" y="-307"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="QYh-JS-WWn">
@@ -52,7 +56,18 @@
                         <viewLayoutGuide key="safeArea" id="bLB-cy-PUH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Z89-u0-7r1"/>
+                    <navigationItem key="navigationItem" id="Z89-u0-7r1">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="mainLogoWhite" id="x25-AQ-i24">
+                            <color key="tintColor" name="iconColor"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" tag="1" id="Yla-1K-sPp">
+                            <imageReference key="image" image="list.dash" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" name="iconColor"/>
+                            <connections>
+                                <action selector="clickTopMenu:" destination="aYn-Hf-pdc" id="P4o-4D-MRr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v14-m5-vge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,6 +75,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="mainLogoWhite" width="146" height="21"/>
+        <namedColor name="iconColor">
+            <color red="0.027450980392156862" green="0.78431372549019607" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -37,19 +37,16 @@ class MainViewController: UIViewController {
         }
     }
     
-    func configureTopBar(){
-  
-        
-        //navigationController?.navigationBar.tintColor = UIColor(named: "iconColor")!
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "list.dash"),style: .plain, target: self, action: #selector(changeMode))
-        
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func clickTopMenu(_ sender: UIBarButtonItem) {
+        changeMode()
     }
-    
-    
-    
-    
-    
     
     
     
@@ -59,7 +56,10 @@ class MainViewController: UIViewController {
     //- MARK: ViewMethod
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTopBar()
+       
+     
+  
+        
         // Do any additional setup after loading the view.
     }
     
