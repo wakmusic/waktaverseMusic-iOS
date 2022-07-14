@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "billboardoo_white-1.png",
+      "filename" : "mainLogo-4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "billboardoo_white.png",
+      "filename" : "mainLogo-3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "billboardoo_white-2.png",
+      "filename" : "mainLogo-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

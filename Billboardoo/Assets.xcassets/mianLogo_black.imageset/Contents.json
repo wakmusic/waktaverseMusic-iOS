@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "mainLogo.png",
+      "filename" : "mianLogo_black-2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "mainLogo-1.png",
+      "filename" : "mianLogo_black-3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "mainLogo-2.png",
+      "filename" : "mianLogo_black-4.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
