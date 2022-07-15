@@ -10,9 +10,12 @@ import RxSwift
 
 class MainViewController: UIViewController {
     
-    var flag: Bool = true
+    // MARK: memBerVariable
     
-    //- MARK: IBOUT
+    var flag: Bool = true
+    var disposeBag = DisposeBag()
+    let viewModel = TopHundredViewModel()
+    
     
     
     
@@ -47,8 +50,7 @@ class MainViewController: UIViewController {
     @IBAction func clickTopMenu(_ sender: UIBarButtonItem) {
         changeMode()
     }
-    
-    
+  
     
     
     
@@ -56,14 +58,15 @@ class MainViewController: UIViewController {
     //- MARK: ViewMethod
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        
      
   
         
         // Do any additional setup after loading the view.
     }
     
-    
+    //- MARK: IBOUT
     
     
     
