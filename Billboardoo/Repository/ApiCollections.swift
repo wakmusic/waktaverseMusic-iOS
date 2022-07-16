@@ -15,6 +15,10 @@ class ApiCollections{
     static let dailyTop100: String = "https://billboardoo.com/api/charts/daily/100" //일간 top 100
     static let weaklyTop100: String = "https://billboardoo.com/api/charts/weekly/100" //주간 top 100
     static let monthlyTop100: String = "https://billboardoo.com/api/charts/monthly/100" //월간 top 100
+    /*
+     {"id":"pl38om066m0","title":"전하지 못한 진심","artist":"해루석, 아이네, 릴파, 비챤","image":"https://i.ytimg.com/vi/pl38om066m0/hqdefault.jpg","url":"https://youtu.be/pl38om066m0","reaction":"https://youtu.be/HiLXC6TWE2k","date":220703,"views":886270,"last_views":452424,"increase":433846,"last":693}
+     
+     */
    
     
     // - MARK: new Songs

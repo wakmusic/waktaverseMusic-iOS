@@ -12,6 +12,7 @@ class Repository{
     
     //private let semaphore = DispatchSemaphore(value: 1)
     
+    //URLSsection Legacy Code
     private func fetch(url: String, onComplete: @escaping (Result<Data,Error>) -> Void )
     {
         URLSession.shared.dataTask(with: URL(string: url)!) { data, res, err in
@@ -31,6 +32,8 @@ class Repository{
         }.resume()
     }
     
+    
+    //RxFetch 
     public func fetchRx(url: String) -> Observable<Data>
     { 
         return Observable.create { emitter in

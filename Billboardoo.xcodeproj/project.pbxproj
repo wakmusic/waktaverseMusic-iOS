@@ -20,7 +20,7 @@
 		D80F70B5287D828300231376 /* BillboardooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F70B4287D828300231376 /* BillboardooUITests.swift */; };
 		D80F70B7287D828300231376 /* BillboardooUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F70B6287D828300231376 /* BillboardooUITestsLaunchTests.swift */; };
 		D82CF69828814B22005711AD /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82CF69728814B22005711AD /* ApiCollections.swift */; };
-		D82CF69C28814D73005711AD /* Top100.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82CF69B28814D73005711AD /* Top100.swift */; };
+		D82CF69C28814D73005711AD /* SimpleViwer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82CF69B28814D73005711AD /* SimpleViwer.swift */; };
 		D82CF69E28814F69005711AD /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82CF69D28814F69005711AD /* Repository.swift */; };
 		D82CF6A02881952F005711AD /* TopHundredViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82CF69F2881952F005711AD /* TopHundredViewModel.swift */; };
 		D83BBC5C287E899100453E1D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83BBC5B287E899100453E1D /* MainViewController.swift */; };
@@ -65,7 +65,7 @@
 		D80F70B4287D828300231376 /* BillboardooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITests.swift; sourceTree = "<group>"; };
 		D80F70B6287D828300231376 /* BillboardooUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D82CF69728814B22005711AD /* ApiCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
-		D82CF69B28814D73005711AD /* Top100.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100.swift; sourceTree = "<group>"; };
+		D82CF69B28814D73005711AD /* SimpleViwer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViwer.swift; sourceTree = "<group>"; };
 		D82CF69D28814F69005711AD /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D82CF69F2881952F005711AD /* TopHundredViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHundredViewModel.swift; sourceTree = "<group>"; };
 		D83BBC5B287E899100453E1D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		D82CF69928814B8E005711AD /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				D82CF69B28814D73005711AD /* Top100.swift */,
+				D82CF69B28814D73005711AD /* SimpleViwer.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -452,7 +452,7 @@
 				D80F7096287D828200231376 /* SceneDelegate.swift in Sources */,
 				D82CF6A02881952F005711AD /* TopHundredViewModel.swift in Sources */,
 				D83BBC5C287E899100453E1D /* MainViewController.swift in Sources */,
-				D82CF69C28814D73005711AD /* Top100.swift in Sources */,
+				D82CF69C28814D73005711AD /* SimpleViwer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
