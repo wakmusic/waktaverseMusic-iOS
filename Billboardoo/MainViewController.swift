@@ -14,8 +14,9 @@ class MainViewController: UIViewController {
     
     var flag: Bool = true
     var disposeBag = DisposeBag()
-    let viewModel = TopHundredViewModel()
-    
+    let topTwentyIdentifier = "TopTwentyTableViewCell"
+    //let viewModel = TopHundredViewModel()
+    var temp:[SimpleViwer] = []
     
     
     
@@ -28,7 +29,6 @@ class MainViewController: UIViewController {
                 let windows = window.windows.first
                 windows?.overrideUserInterfaceStyle = self.flag  == true ? .dark : .light
                 flag = !flag
-                
             }
         } else if let window = UIApplication.shared.windows.first {
             if #available(iOS 13.0, *) {
@@ -40,6 +40,7 @@ class MainViewController: UIViewController {
         }
     }
     
+
     
     
     
@@ -58,6 +59,10 @@ class MainViewController: UIViewController {
     //- MARK: ViewMethod
     override func viewDidLoad() {
         super.viewDidLoad()
+        toptableView.dataSource = self
+        toptableView.delegate = self
+        toptableView.register(UINib(nibName: topTwentyIdentifier, bundle: nil), forCellReuseIdentifier: topTwentyIdentifier)
+        toptableView.separatorStyle = .none
         
         
      
@@ -68,9 +73,31 @@ class MainViewController: UIViewController {
     
     //- MARK: IBOUT
     
-    
-    
-    
-    
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var toptableView: UITableView!
     
 }
+
+extension MainViewController:UITableViewDelegate,UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = toptableView.dequeueReusableCell(withIdentifier: topTwentyIdentifier, for: indexPath) as! TopTwentyTableViewCell
+        cell.timeStampLabel.text = "12:00 기준"
+        for i in 0...20{
+            print("i: \(i)")
+            temp.append(SimpleViwer(id: "\(i)", title: "Song\(i)", artist: "\(i) artiest", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 0))
+        }
+        cell.configure(with: temp)
+        
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500
+    }
+}
+
