@@ -50,7 +50,7 @@ class TopTwentyTableViewCell: UITableViewCell{
         radioButtons[0].isSelected = true // 첫번째꺼 선택
         radioButtons[0].configuration?.background.backgroundColor = UIColor(named:"wakColor")
         radioButtons[0].configuration?.baseForegroundColor = UIColor.white
-        
+        setUpTableView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -88,7 +88,7 @@ class TopTwentyTableViewCell: UITableViewCell{
             sender.isSelected = true
            
             sender.configuration?.background.backgroundColor = UIColor(named:"wakColor") //버튼 색 채우기
-            sender.configuration?.baseForegroundColor = UIColor.white
+            sender.configuration?.baseForegroundColor = UIColor.white //선택된 글자색 변경
             /*
              table 변경
              */
@@ -101,7 +101,7 @@ class TopTwentyTableViewCell: UITableViewCell{
                     radioButtons[unselectedIndex].configuration?.background.backgroundColor = UIColor(named:"unSelectedBtnColor")
                     //버튼 색 채우기
                     
-                    radioButtons[unselectedIndex].configuration?.baseForegroundColor = UIColor(named: "unSelectedTextColor")
+                    radioButtons[unselectedIndex].configuration?.baseForegroundColor = UIColor(named: "unSelectedTextColor")// 선택되지 않은 글자 색 변경
                     
                 
                 }
@@ -133,12 +133,7 @@ extension TopTwentyTableViewCell:UICollectionViewDelegate,UICollectionViewDataSo
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
-                       referenceSizeForFooterInSection section: Int) -> CGSize
-    {
-        return CGSize(width: 200, height: 230)
-    }
+   
   
    
     

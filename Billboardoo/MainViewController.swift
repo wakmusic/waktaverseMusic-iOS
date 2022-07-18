@@ -88,7 +88,6 @@ extension MainViewController:UITableViewDelegate,UITableViewDataSource {
         let cell = toptableView.dequeueReusableCell(withIdentifier: topTwentyIdentifier, for: indexPath) as! TopTwentyTableViewCell
         cell.timeStampLabel.text = "12:00 기준"
         for i in 0...20{
-            print("i: \(i)")
             temp.append(SimpleViwer(id: "\(i)", title: "Song\(i)", artist: "\(i) artiest", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 0))
         }
         cell.configure(with: temp)
@@ -97,7 +96,7 @@ extension MainViewController:UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 400
     }
 }
 
