@@ -25,6 +25,7 @@ struct LaunchScreenView: View {
             
         
        
+        //애니메이션 삽입
     }
 }
 
