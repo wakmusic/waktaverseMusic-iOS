@@ -9,12 +9,21 @@ import SwiftUI
 
 struct LaunchScreenView: View {
     var body: some View {
-        ZStack(alignment: .center) {
-            LinearGradient(gradient: Gradient(colors: [Color("PrimaryColor"), .white]),
-                                        startPoint: .top, endPoint: .bottom)
-                        .edgesIgnoringSafeArea(.all)
+//        ZStack(alignment: .center) {
+//            LinearGradient(gradient: Gradient(colors: [Color("PrimaryColor"), .white]),
+//                                        startPoint: .top, endPoint: .bottom)
+//                        .edgesIgnoringSafeArea(.all)
+//            Image("mainLogoWhite")
+//        }
+      
+        
+        ZStack {
+            Color.black
             Image("mainLogoWhite")
-        }
+        }.frame(width: .infinity, height: .infinity, alignment: .center)
+            .ignoresSafeArea()
+            
+        
        
     }
 }
