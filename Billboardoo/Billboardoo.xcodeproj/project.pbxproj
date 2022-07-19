@@ -1,0 +1,765 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */; };
+		748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */; };
+		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
+		D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA128859FE300999DE6 /* Assets.xcassets */; };
+		D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */; };
+		D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFA628859FE300999DE6 /* Persistence.swift */; };
+		D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFA828859FE300999DE6 /* Billboardoo.xcdatamodeld */; };
+		D87EDFB428859FE300999DE6 /* BillboardooTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFB328859FE300999DE6 /* BillboardooTests.swift */; };
+		D87EDFBE28859FE300999DE6 /* BillboardooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFBD28859FE300999DE6 /* BillboardooUITests.swift */; };
+		D87EDFC028859FE300999DE6 /* BillboardooUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFBF28859FE300999DE6 /* BillboardooUITestsLaunchTests.swift */; };
+		D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */; };
+		E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D87EDFB028859FE300999DE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D87EDF9228859FE200999DE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D87EDF9928859FE200999DE6;
+			remoteInfo = Billboardoo;
+		};
+		D87EDFBA28859FE300999DE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D87EDF9228859FE200999DE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D87EDF9928859FE200999DE6;
+			remoteInfo = Billboardoo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo_BillboardooUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		501220AE8D24BFC8DFEE2940 /* Pods-BillboardooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.release.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.release.xcconfig"; sourceTree = "<group>"; };
+		9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.debug.xcconfig"; sourceTree = "<group>"; };
+		9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BillboardooTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.debug.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D87EDF9A28859FE200999DE6 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooApp.swift; sourceTree = "<group>"; };
+		D87EDFA128859FE300999DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D87EDFA628859FE300999DE6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		D87EDFA928859FE300999DE6 /* Billboardoo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Billboardoo.xcdatamodel; sourceTree = "<group>"; };
+		D87EDFAF28859FE300999DE6 /* BillboardooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillboardooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87EDFB328859FE300999DE6 /* BillboardooTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooTests.swift; sourceTree = "<group>"; };
+		D87EDFB928859FE300999DE6 /* BillboardooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillboardooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87EDFBD28859FE300999DE6 /* BillboardooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITests.swift; sourceTree = "<group>"; };
+		D87EDFBF28859FE300999DE6 /* BillboardooUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.release.xcconfig"; sourceTree = "<group>"; };
+		DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D87EDF9728859FE200999DE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87EDFAC28859FE300999DE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87EDFB628859FE300999DE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE486293D9ACA901E888070E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */,
+				242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */,
+				9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D82041682820E5218334841D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */,
+				D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */,
+				C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */,
+				A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */,
+				B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */,
+				501220AE8D24BFC8DFEE2940 /* Pods-BillboardooTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D87EDF9128859FE200999DE6 = {
+			isa = PBXGroup;
+			children = (
+				D87EDF9C28859FE200999DE6 /* Billboardoo */,
+				D87EDFB228859FE300999DE6 /* BillboardooTests */,
+				D87EDFBC28859FE300999DE6 /* BillboardooUITests */,
+				D87EDF9B28859FE200999DE6 /* Products */,
+				D82041682820E5218334841D /* Pods */,
+				BE486293D9ACA901E888070E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D87EDF9B28859FE200999DE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDF9A28859FE200999DE6 /* Billboardoo.app */,
+				D87EDFAF28859FE300999DE6 /* BillboardooTests.xctest */,
+				D87EDFB928859FE300999DE6 /* BillboardooUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D87EDF9C28859FE200999DE6 /* Billboardoo */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFCC2886DB9800999DE6 /* View */,
+				D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */,
+				D87EDFA128859FE300999DE6 /* Assets.xcassets */,
+				D87EDFA628859FE300999DE6 /* Persistence.swift */,
+				D87EDFA828859FE300999DE6 /* Billboardoo.xcdatamodeld */,
+				D87EDFA328859FE300999DE6 /* Preview Content */,
+			);
+			path = Billboardoo;
+			sourceTree = "<group>";
+		};
+		D87EDFA328859FE300999DE6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D87EDFB228859FE300999DE6 /* BillboardooTests */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFB328859FE300999DE6 /* BillboardooTests.swift */,
+			);
+			path = BillboardooTests;
+			sourceTree = "<group>";
+		};
+		D87EDFBC28859FE300999DE6 /* BillboardooUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFBD28859FE300999DE6 /* BillboardooUITests.swift */,
+				D87EDFBF28859FE300999DE6 /* BillboardooUITestsLaunchTests.swift */,
+			);
+			path = BillboardooUITests;
+			sourceTree = "<group>";
+		};
+		D87EDFCC2886DB9800999DE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D87EDF9928859FE200999DE6 /* Billboardoo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D87EDFC328859FE300999DE6 /* Build configuration list for PBXNativeTarget "Billboardoo" */;
+			buildPhases = (
+				966C62CF649930642EA7DD21 /* [CP] Check Pods Manifest.lock */,
+				D87EDF9628859FE200999DE6 /* Sources */,
+				D87EDF9728859FE200999DE6 /* Frameworks */,
+				D87EDF9828859FE200999DE6 /* Resources */,
+				576CE9FBCCCFA35A0C6C3A41 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Billboardoo;
+			productName = Billboardoo;
+			productReference = D87EDF9A28859FE200999DE6 /* Billboardoo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D87EDFAE28859FE300999DE6 /* BillboardooTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D87EDFC628859FE300999DE6 /* Build configuration list for PBXNativeTarget "BillboardooTests" */;
+			buildPhases = (
+				0C89A95504434A430F377A8C /* [CP] Check Pods Manifest.lock */,
+				D87EDFAB28859FE300999DE6 /* Sources */,
+				D87EDFAC28859FE300999DE6 /* Frameworks */,
+				D87EDFAD28859FE300999DE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D87EDFB128859FE300999DE6 /* PBXTargetDependency */,
+			);
+			name = BillboardooTests;
+			productName = BillboardooTests;
+			productReference = D87EDFAF28859FE300999DE6 /* BillboardooTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D87EDFB828859FE300999DE6 /* BillboardooUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D87EDFC928859FE300999DE6 /* Build configuration list for PBXNativeTarget "BillboardooUITests" */;
+			buildPhases = (
+				A76302D244EA8D3E850AEA54 /* [CP] Check Pods Manifest.lock */,
+				D87EDFB528859FE300999DE6 /* Sources */,
+				D87EDFB628859FE300999DE6 /* Frameworks */,
+				D87EDFB728859FE300999DE6 /* Resources */,
+				7B06F2D8994389F10AE6DF89 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D87EDFBB28859FE300999DE6 /* PBXTargetDependency */,
+			);
+			name = BillboardooUITests;
+			productName = BillboardooUITests;
+			productReference = D87EDFB928859FE300999DE6 /* BillboardooUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D87EDF9228859FE200999DE6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					D87EDF9928859FE200999DE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					D87EDFAE28859FE300999DE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = D87EDF9928859FE200999DE6;
+					};
+					D87EDFB828859FE300999DE6 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = D87EDF9928859FE200999DE6;
+					};
+				};
+			};
+			buildConfigurationList = D87EDF9528859FE200999DE6 /* Build configuration list for PBXProject "Billboardoo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D87EDF9128859FE200999DE6;
+			productRefGroup = D87EDF9B28859FE200999DE6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D87EDF9928859FE200999DE6 /* Billboardoo */,
+				D87EDFAE28859FE300999DE6 /* BillboardooTests */,
+				D87EDFB828859FE300999DE6 /* BillboardooUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D87EDF9828859FE200999DE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */,
+				D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87EDFAD28859FE300999DE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87EDFB728859FE300999DE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C89A95504434A430F377A8C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BillboardooTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		576CE9FBCCCFA35A0C6C3A41 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo/Pods-Billboardoo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo/Pods-Billboardoo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billboardoo/Pods-Billboardoo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B06F2D8994389F10AE6DF89 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		966C62CF649930642EA7DD21 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Billboardoo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A76302D244EA8D3E850AEA54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Billboardoo-BillboardooUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D87EDF9628859FE200999DE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */,
+				D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */,
+				D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */,
+				D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87EDFAB28859FE300999DE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87EDFB428859FE300999DE6 /* BillboardooTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87EDFB528859FE300999DE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87EDFC028859FE300999DE6 /* BillboardooUITestsLaunchTests.swift in Sources */,
+				D87EDFBE28859FE300999DE6 /* BillboardooUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D87EDFB128859FE300999DE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D87EDF9928859FE200999DE6 /* Billboardoo */;
+			targetProxy = D87EDFB028859FE300999DE6 /* PBXContainerItemProxy */;
+		};
+		D87EDFBB28859FE300999DE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D87EDF9928859FE200999DE6 /* Billboardoo */;
+			targetProxy = D87EDFBA28859FE300999DE6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D87EDFC128859FE300999DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D87EDFC228859FE300999DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D87EDFC428859FE300999DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.Billboardoo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D87EDFC528859FE300999DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.Billboardoo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D87EDFC728859FE300999DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.BillboardooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Billboardoo.app/Billboardoo";
+			};
+			name = Debug;
+		};
+		D87EDFC828859FE300999DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 501220AE8D24BFC8DFEE2940 /* Pods-BillboardooTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.BillboardooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Billboardoo.app/Billboardoo";
+			};
+			name = Release;
+		};
+		D87EDFCA28859FE300999DE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.BillboardooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Billboardoo;
+			};
+			name = Debug;
+		};
+		D87EDFCB28859FE300999DE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.BillboardooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Billboardoo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D87EDF9528859FE200999DE6 /* Build configuration list for PBXProject "Billboardoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D87EDFC128859FE300999DE6 /* Debug */,
+				D87EDFC228859FE300999DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D87EDFC328859FE300999DE6 /* Build configuration list for PBXNativeTarget "Billboardoo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D87EDFC428859FE300999DE6 /* Debug */,
+				D87EDFC528859FE300999DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D87EDFC628859FE300999DE6 /* Build configuration list for PBXNativeTarget "BillboardooTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D87EDFC728859FE300999DE6 /* Debug */,
+				D87EDFC828859FE300999DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D87EDFC928859FE300999DE6 /* Build configuration list for PBXNativeTarget "BillboardooUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D87EDFCA28859FE300999DE6 /* Debug */,
+				D87EDFCB28859FE300999DE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D87EDFA828859FE300999DE6 /* Billboardoo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D87EDFA928859FE300999DE6 /* Billboardoo.xcdatamodel */,
+			);
+			currentVersion = D87EDFA928859FE300999DE6 /* Billboardoo.xcdatamodel */;
+			path = Billboardoo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D87EDF9228859FE200999DE6 /* Project object */;
+}
