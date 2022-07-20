@@ -17,7 +17,11 @@ struct SettingScreenView: View {
             
             VStack
             {
-                Toggle("Dark Mode", isOn: $isDarkMode)
+                Toggle("Dark Mode", isOn: $isDarkMode).onChange(of: isDarkMode) { result in
+                    print(" disAppear \(result)")
+                    UserDefaults.standard.set(result, forKey: "isDarkMode")
+                    changeMode(isDarkMode: result)
+                }
                 
                 if isDarkMode
                 {
@@ -28,10 +32,6 @@ struct SettingScreenView: View {
                     Text("White")
                 }
             }
-        }.onDisappear
-        {
-            UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
-            print(isDarkMode)
         }
         .navigationTitle("Setting")
         
@@ -39,8 +39,11 @@ struct SettingScreenView: View {
     }
 }
 
+
+
 struct SettingScreenView_Previews: PreviewProvider {
     static var previews: some View {
         SettingScreenView()
     }
 }
+

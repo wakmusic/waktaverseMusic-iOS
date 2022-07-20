@@ -10,7 +10,7 @@ let window = UIScreen.main.bounds.size
 struct MainScreenView: View {
     @EnvironmentObject var setting:Setting
     @State var isLoading: Bool = true
-    @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
+    
     
     var body: some View {
         NavigationView {
@@ -27,15 +27,11 @@ struct MainScreenView: View {
             else
             {
                 
-
+                
                 //인터넷 처리
                 VStack
                 {
                     Text("Hello")
-                }.onAppear
-                {
-                    print(isDarkMode)
-                    changeMode(isDarkMode: isDarkMode)
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -45,7 +41,7 @@ struct MainScreenView: View {
                         
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        SettinButton(isDarkMode: $isDarkMode)
+                        SettinButton()
                     }
                 }
             }
@@ -85,7 +81,6 @@ struct NavigationLogo: View {
 }
 
 struct SettinButton: View {
-    @Binding var isDarkMode:Bool
     var body: some View {
         NavigationLink {
             SettingScreenView() //Destination
@@ -100,21 +95,4 @@ struct SettinButton: View {
 
 //- MARK: Function
 
-func changeMode(isDarkMode:Bool)
-{
-    if let window = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-        if #available(iOS 15.0, *) {
-            let windows = window.windows.first
-            windows?.overrideUserInterfaceStyle = isDarkMode  == true ? .dark : .light
-            UserDefaults.standard.set(!isDarkMode, forKey: "isDarkMode")
-            
-        }
-    } else if let window = UIApplication.shared.windows.first {
-        if #available(iOS 13.0, *) {
-            window.overrideUserInterfaceStyle = isDarkMode == true ? .dark : .light
-            UserDefaults.standard.set(!isDarkMode, forKey: "isDarkMode")
-        } else { //IOS 13 미만은 dark모드 불가
-            window.overrideUserInterfaceStyle = .light
-        }
-    }
-}
+
