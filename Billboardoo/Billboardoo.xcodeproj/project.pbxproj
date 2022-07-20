@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */; };
 		748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */; };
+		D835785028881ABB00459197 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835784F28881ABB00459197 /* Setting.swift */; };
+		D83578522888291F00459197 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83578512888291F00459197 /* SettingScreenView.swift */; };
 		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
 		D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA128859FE300999DE6 /* Assets.xcassets */; };
 		D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */; };
@@ -18,6 +20,10 @@
 		D87EDFBE28859FE300999DE6 /* BillboardooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFBD28859FE300999DE6 /* BillboardooUITests.swift */; };
 		D87EDFC028859FE300999DE6 /* BillboardooUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFBF28859FE300999DE6 /* BillboardooUITestsLaunchTests.swift */; };
 		D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */; };
+		D87EDFD02887D67F00999DE6 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */; };
+		D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD22887DA3900999DE6 /* Repository.swift */; };
+		D87EDFD62887DA9500999DE6 /* SimpleViwer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD52887DA9500999DE6 /* SimpleViwer.swift */; };
+		D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD72887DAB900999DE6 /* ApiCollections.swift */; };
 		E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +52,9 @@
 		A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.debug.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D835784D2887E5B300459197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D835784F28881ABB00459197 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		D83578512888291F00459197 /* SettingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenView.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooApp.swift; sourceTree = "<group>"; };
 		D87EDFA128859FE300999DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +67,10 @@
 		D87EDFBD28859FE300999DE6 /* BillboardooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITests.swift; sourceTree = "<group>"; };
 		D87EDFBF28859FE300999DE6 /* BillboardooUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		D87EDFD22887DA3900999DE6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		D87EDFD52887DA9500999DE6 /* SimpleViwer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleViwer.swift; sourceTree = "<group>"; };
+		D87EDFD72887DAB900999DE6 /* ApiCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
 		D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.release.xcconfig"; sourceTree = "<group>"; };
 		DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +126,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D835784E28881A5F00459197 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				D835784F28881ABB00459197 /* Setting.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		D87EDF9128859FE200999DE6 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +159,10 @@
 		D87EDF9C28859FE200999DE6 /* Billboardoo */ = {
 			isa = PBXGroup;
 			children = (
+				D835784E28881A5F00459197 /* Util */,
+				D835784D2887E5B300459197 /* Info.plist */,
+				D87EDFD42887DA6D00999DE6 /* Model */,
+				D87EDFD12887DA2A00999DE6 /* Repo */,
 				D87EDFCC2886DB9800999DE6 /* View */,
 				D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */,
 				D87EDFA128859FE300999DE6 /* Assets.xcassets */,
@@ -177,8 +202,27 @@
 			isa = PBXGroup;
 			children = (
 				D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */,
+				D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */,
+				D83578512888291F00459197 /* SettingScreenView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D87EDFD12887DA2A00999DE6 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFD72887DAB900999DE6 /* ApiCollections.swift */,
+				D87EDFD22887DA3900999DE6 /* Repository.swift */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		D87EDFD42887DA6D00999DE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D87EDFD52887DA9500999DE6 /* SimpleViwer.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,10 +463,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D835785028881ABB00459197 /* Setting.swift in Sources */,
+				D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */,
 				D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */,
+				D87EDFD02887D67F00999DE6 /* MainScreenView.swift in Sources */,
 				D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */,
+				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
+				D87EDFD62887DA9500999DE6 /* SimpleViwer.swift in Sources */,
 				D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */,
 				D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */,
+				D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,9 +634,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Billboardoo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -613,9 +664,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Billboardoo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

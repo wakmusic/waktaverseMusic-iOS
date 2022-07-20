@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
-
+import RxSwift
 @main
 struct BillboardooApp: App {
     let persistenceController = PersistenceController.shared
-
+    var setting:Setting = Setting()
     var body: some Scene {
         WindowGroup {
-            LaunchScreenView()
+            MainScreenView()
+                .environmentObject(setting)
         }
     }
 }

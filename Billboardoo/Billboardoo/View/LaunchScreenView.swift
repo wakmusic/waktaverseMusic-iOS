@@ -8,23 +8,35 @@
 import SwiftUI
 
 struct LaunchScreenView: View {
+    
+    let window = UIScreen.main.bounds.size
     var body: some View {
-//        ZStack(alignment: .center) {
-//            LinearGradient(gradient: Gradient(colors: [Color("PrimaryColor"), .white]),
-//                                        startPoint: .top, endPoint: .bottom)
-//                        .edgesIgnoringSafeArea(.all)
-//            Image("mainLogoWhite")
-//        }
-      
+        //        ZStack(alignment: .center) {
+        //            LinearGradient(gradient: Gradient(colors: [Color("PrimaryColor"), .white]),
+        //                                        startPoint: .top, endPoint: .bottom)
+        //                        .edgesIgnoringSafeArea(.all)
+        //            Image("mainLogoWhite")
+        //        }
+        
+        
         
         ZStack {
             Color.black
             Image("mainLogoWhite")
-        }.frame(width: .infinity, height: .infinity, alignment: .center)
-            .ignoresSafeArea()
+                .resizable()
+                .frame(width: self.window.width, height: self.window.height*0.1 , alignment: .center)
             
+                
+        }
+        .ignoresSafeArea()
         
+  
+
        
+        
+        
+        
+        
         //애니메이션 삽입
     }
 }
