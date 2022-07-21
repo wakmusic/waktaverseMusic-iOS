@@ -7,17 +7,26 @@
 
 import SwiftUI
 import RxSwift
+
+
+
+
 @main
 struct BillboardooApp: App {
     let persistenceController = PersistenceController.shared
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
+    @StateObject var router = TabRouter()
+    
     var body: some Scene {
         WindowGroup {
+            
             MainScreenView().onAppear{
-                print(" Appear \(isDarkMode)")
-                changeMode(isDarkMode: isDarkMode)
+                changeMode(isDarkMode: isDarkMode) //보여질 때 다크모드 확인 이벤트 등록
+                //네트워크 등록
             }
-                
+            
+            
+            
         }
     }
 }
@@ -25,7 +34,6 @@ struct BillboardooApp: App {
 
 func changeMode(isDarkMode:Bool)
 {
-    print("change: \(isDarkMode)")
     if let window = UIApplication.shared.connectedScenes.first as? UIWindowScene {
         if #available(iOS 15.0, *) {
             let windows = window.windows.first

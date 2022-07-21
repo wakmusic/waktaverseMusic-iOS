@@ -6,14 +6,36 @@
 //
 
 import SwiftUI
+enum Screen{
+    case home
+    case albums
+    case artists
+}
+
+final class TabRouter: ObservableObject { //Tab State관련 클래스
+    @Published var screen:Screen = .home
+    
+    func change(to screen:Screen)
+    {
+        self.screen = screen
+    }
+}
+
 let window = UIScreen.main.bounds.size
 struct MainScreenView: View {
-    @EnvironmentObject var setting:Setting
     @State var isLoading: Bool = true
+    @StateObject var router:TabRouter = TabRouter()
+    
+    init() {
+        //UITabBar.appearance().unselectedItemTintColor = .red
+        //UITabBar.appearance().backgroundColor = .green 탭 바 배경 색
+        //UITabBar.appearance().barTintColor = .orange
+    }
     
     
     var body: some View {
         NavigationView {
+            
             
             if isLoading
             {
@@ -27,12 +49,21 @@ struct MainScreenView: View {
             else
             {
                 
+                //- MARK: TabView
+                TabView(selection: $router.screen){
+                    HomeScreenView().tag(Screen.home).tabItem {
+                        TabBarItem(title: "Home", imageName: "house.fill")
+
+                    }
+                    
+                    HomeScreenView().tag(Screen.albums).tabItem {
+                        Label("albumns", systemImage: "house.fill")
+                        
+                    }
+                }.accentColor(Color("PrimaryColor")) //Should Refactor
                 
-                //인터넷 처리
-                VStack
-                {
-                    Text("Hello")
-                }
+                
+                //- MARK: Navigation Setting
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
@@ -45,10 +76,6 @@ struct MainScreenView: View {
                     }
                 }
             }
-            
-            
-            
-            
             
             
             
@@ -96,3 +123,14 @@ struct SettinButton: View {
 //- MARK: Function
 
 
+
+struct TabBarItem: View {
+    var title:String
+    var imageName:String
+    var body: some View {
+        VStack {
+            Text(title)
+            Image(systemName: imageName)
+        }
+    }
+}

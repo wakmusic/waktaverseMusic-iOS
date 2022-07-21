@@ -11,6 +11,8 @@
 		748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */; };
 		D835785028881ABB00459197 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835784F28881ABB00459197 /* Setting.swift */; };
 		D83578522888291F00459197 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83578512888291F00459197 /* SettingScreenView.swift */; };
+		D835785428891DAB00459197 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785328891DAB00459197 /* HomeScreenView.swift */; };
+		D835785628893EB300459197 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup.swift */; };
 		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
 		D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA128859FE300999DE6 /* Assets.xcassets */; };
 		D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		D835784D2887E5B300459197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D835784F28881ABB00459197 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		D83578512888291F00459197 /* SettingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenView.swift; sourceTree = "<group>"; };
+		D835785328891DAB00459197 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		D835785528893EB300459197 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooApp.swift; sourceTree = "<group>"; };
 		D87EDFA128859FE300999DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 				D87EDFCD2886DBB500999DE6 /* LaunchScreenView.swift */,
 				D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */,
 				D83578512888291F00459197 /* SettingScreenView.swift */,
+				D835785328891DAB00459197 /* HomeScreenView.swift */,
+				D835785528893EB300459197 /* RadioButtonGroup.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -470,7 +476,9 @@
 				D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */,
 				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
 				D87EDFD62887DA9500999DE6 /* SimpleViwer.swift in Sources */,
+				D835785428891DAB00459197 /* HomeScreenView.swift in Sources */,
 				D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */,
+				D835785628893EB300459197 /* RadioButtonGroup.swift in Sources */,
 				D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */,
 				D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */,
 			);
