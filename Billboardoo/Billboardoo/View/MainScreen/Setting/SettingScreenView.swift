@@ -12,20 +12,20 @@ struct SettingScreenView: View {
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
     
     var body: some View {
-        NavigationView
+        
+        
+        VStack
         {
-            
-            VStack
-            {
-                //토글 및 체인지 이벤트
-                Toggle("Dark Mode", isOn: $isDarkMode).onChange(of: isDarkMode) { result in
-                    UserDefaults.standard.set(result, forKey: "isDarkMode") //기본 값 저장
-                    changeMode(isDarkMode: result)
-                }
-                
+            //토글 및 체인지 이벤트
+            Toggle("Dark Mode", isOn: $isDarkMode).onChange(of: isDarkMode) { result in
+                UserDefaults.standard.set(result, forKey: "isDarkMode") //기본 값 저장
+                changeMode(isDarkMode: result)
             }
+            
         }
-        .navigationTitle("Setting")
+        
+        
+        
         
         
     }

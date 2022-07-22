@@ -19,11 +19,11 @@ struct BillboardooApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
             MainScreenView().onAppear{
                 changeMode(isDarkMode: isDarkMode) //보여질 때 다크모드 확인 이벤트 등록
                 //네트워크 등록
             }
+           
             
             
             
