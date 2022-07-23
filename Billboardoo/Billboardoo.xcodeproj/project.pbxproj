@@ -14,7 +14,7 @@
 		D835785428891DAB00459197 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785328891DAB00459197 /* HomeScreenView.swift */; };
 		D835785628893EB300459197 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup.swift */; };
 		D86B5866288AC4B6001110A5 /* ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5865288AC4B6001110A5 /* ChartHeader.swift */; };
-		D86B5868288ADB29001110A5 /* FiveRowSongGridMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5867288ADB29001110A5 /* FiveRowSongGridMoreView.swift */; };
+		D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */; };
 		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
 		D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA128859FE300999DE6 /* Assets.xcassets */; };
 		D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */; };
@@ -62,7 +62,7 @@
 		D835785328891DAB00459197 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		D835785528893EB300459197 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		D86B5865288AC4B6001110A5 /* ChartHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeader.swift; sourceTree = "<group>"; };
-		D86B5867288ADB29001110A5 /* FiveRowSongGridMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveRowSongGridMoreView.swift; sourceTree = "<group>"; };
+		D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveRowSongGridView.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooApp.swift; sourceTree = "<group>"; };
 		D87EDFA128859FE300999DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 			children = (
 				D835785328891DAB00459197 /* HomeScreenView.swift */,
 				D86B5865288AC4B6001110A5 /* ChartHeader.swift */,
-				D86B5867288ADB29001110A5 /* FiveRowSongGridMoreView.swift */,
+				D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -516,7 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D835785028881ABB00459197 /* Setting.swift in Sources */,
-				D86B5868288ADB29001110A5 /* FiveRowSongGridMoreView.swift in Sources */,
+				D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */,
 				D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */,
 				D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */,
 				D87EDFD02887D67F00999DE6 /* MainScreenView.swift in Sources */,

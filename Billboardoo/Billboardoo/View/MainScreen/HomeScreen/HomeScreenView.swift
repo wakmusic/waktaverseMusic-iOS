@@ -17,6 +17,7 @@ struct HomeScreenView: View {
                 ChartHeader(title: "Title")
                 Spacer()
                 RadioButtonGroup { _ in}
+                FiveRowSongGridView()
                 
                 
             }
