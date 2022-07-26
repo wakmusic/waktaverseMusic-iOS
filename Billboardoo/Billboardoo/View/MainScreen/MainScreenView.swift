@@ -40,8 +40,10 @@ struct MainScreenView: View {
         
         if isLoading
         {
+            
             LaunchScreenView().onAppear
             {
+                
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     withAnimation { isLoading.toggle() }
                 }

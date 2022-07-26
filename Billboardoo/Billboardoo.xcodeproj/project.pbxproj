@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */; };
 		748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */; };
-		D835785028881ABB00459197 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835784F28881ABB00459197 /* Setting.swift */; };
 		D83578522888291F00459197 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83578512888291F00459197 /* SettingScreenView.swift */; };
 		D835785428891DAB00459197 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785328891DAB00459197 /* HomeScreenView.swift */; };
 		D835785628893EB300459197 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup.swift */; };
+		D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C2288FD5DB001FE8F4 /* Alamofire */; };
+		D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C5288FD5E3001FE8F4 /* Kingfisher */; };
 		D86B5866288AC4B6001110A5 /* ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5865288AC4B6001110A5 /* ChartHeader.swift */; };
 		D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */; };
+		D86B586B288C27C6001110A5 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B586A288C27C6001110A5 /* TestView.swift */; };
 		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
 		D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA128859FE300999DE6 /* Assets.xcassets */; };
 		D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA428859FE300999DE6 /* Preview Assets.xcassets */; };
@@ -57,12 +59,12 @@
 		B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.debug.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D835784D2887E5B300459197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D835784F28881ABB00459197 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		D83578512888291F00459197 /* SettingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenView.swift; sourceTree = "<group>"; };
 		D835785328891DAB00459197 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		D835785528893EB300459197 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
 		D86B5865288AC4B6001110A5 /* ChartHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeader.swift; sourceTree = "<group>"; };
 		D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveRowSongGridView.swift; sourceTree = "<group>"; };
+		D86B586A288C27C6001110A5 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooApp.swift; sourceTree = "<group>"; };
 		D87EDFA128859FE300999DE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,7 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */,
 				42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */,
+				D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +141,6 @@
 		D835784E28881A5F00459197 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				D835784F28881ABB00459197 /* Setting.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -186,6 +189,14 @@
 			path = Custom;
 			sourceTree = "<group>";
 		};
+		D86B5869288C27AF001110A5 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				D86B586A288C27C6001110A5 /* TestView.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 		D87EDF9128859FE200999DE6 = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +222,7 @@
 		D87EDF9C28859FE200999DE6 /* Billboardoo */ = {
 			isa = PBXGroup;
 			children = (
+				D86B5869288C27AF001110A5 /* Test */,
 				D835784E28881A5F00459197 /* Util */,
 				D835784D2887E5B300459197 /* Info.plist */,
 				D87EDFD42887DA6D00999DE6 /* Model */,
@@ -295,6 +307,10 @@
 			dependencies = (
 			);
 			name = Billboardoo;
+			packageProductDependencies = (
+				D869C2C2288FD5DB001FE8F4 /* Alamofire */,
+				D869C2C5288FD5E3001FE8F4 /* Kingfisher */,
+			);
 			productName = Billboardoo;
 			productReference = D87EDF9A28859FE200999DE6 /* Billboardoo.app */;
 			productType = "com.apple.product-type.application";
@@ -370,6 +386,10 @@
 				Base,
 			);
 			mainGroup = D87EDF9128859FE200999DE6;
+			packageReferences = (
+				D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = D87EDF9B28859FE200999DE6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -515,7 +535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D835785028881ABB00459197 /* Setting.swift in Sources */,
+				D86B586B288C27C6001110A5 /* TestView.swift in Sources */,
 				D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */,
 				D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */,
 				D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */,
@@ -855,6 +875,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D869C2C2288FD5DB001FE8F4 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		D869C2C5288FD5E3001FE8F4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D87EDFA828859FE300999DE6 /* Billboardoo.xcdatamodeld */ = {

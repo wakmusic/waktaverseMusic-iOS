@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct FiveRowSongGridView: View {
     private let rows = [GridItem(.fixed(40), spacing: 20), //fixed 행 크기 ,spacing, 행간의 거리
@@ -40,10 +41,10 @@ private extension FiveRowSongGridView {
                     
                     
                     //타이틀 , Artist 영역
-                    VStack(alignment: .leading) {
-                        Text("\(temp_data[index].title)").font(.system(size:13))
-                        Text("\(temp_data[index].artist)").font(.system(size:11))
-                    }.frame(width:150)
+                    VStack() {
+                        Text("\(temp_data[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
+                        Text("\(temp_data[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
+                    }
                     
                     
                     Button {
@@ -68,34 +69,52 @@ struct AlbumImageView: View {
     
     var url:String
     var body: some View {
-        AsyncImage(url: URL(string:url), transaction: .init(animation: .spring())) { phase in
-            
-            switch phase{
-            case .empty:
+        KFImage(URL(string: url)!)
+            .cancelOnDisappear(true)
+            .placeholder {
                 Image("placeHolder")
                     .resizable()
-                    .frame(width: 40, height: 40, alignment: .center)
+                    .frame(width: 40, height: 40)
                     .transition(.opacity.combined(with: .scale))
-                
-                
-            case .success(let image):
-                image
-                    .resizable()
-                    .frame(width: 40, height: 40, alignment: .center)
-                
-            case .failure(let error):
-                Image("placeHolder")
-                    .resizable()
-                    .frame(width: 40, height: 40, alignment: .center)
-                    .transition(.opacity.combined(with: .scale))
-                
-                
-                
+            }
+            .onSuccess { result in
+                print("Image Fetch success")
+            }
+            .onFailure { err in
+                print("Error: ,\(err)")
             }
             
-        }
+            .resizable()
+            .frame(width: 40, height: 40) //resize
     }
 }
+            
+
+        //        AsyncImage(url: URL(string:url), transaction: .init(animation: .spring())) { phase in
+        //
+        //            switch phase{
+        //            case .empty:
+        //                Image("placeHolder")
+        //                    .resizable()
+        //                    .frame(width: 40, height: 40, alignment: .center)
+        //                    .transition(.opacity.combined(with: .scale))
+        //
+        //
+        //            case .success(let image):
+        //                image
+        //                    .resizable()
+        //                    .frame(width: 40, height: 40, alignment: .center)
+        //
+        //            case .failure(let error):
+        //                Image("placeHolder")
+        //                    .resizable()
+        //                    .frame(width: 40, height: 40, alignment: .center)
+        //                    .transition(.opacity.combined(with: .scale))
+        
+        
+        
+
+
 
 struct RankView: View {
     
@@ -131,9 +150,9 @@ struct RankView: View {
         VStack(alignment: .center){
             
             
-            Text("\(now_rank)").font(.system(size:18,weight: .bold))
+            Text("\(now_rank)").font(.system(size:16,weight: .bold))
             
-            Text(change_rank).font(.system(size: 15, weight: .bold)).foregroundColor(color)
+            Text(change_rank).font(.system(size: 13, weight: .bold)).foregroundColor(color)
         }.frame(width: 40)
     }
 }
