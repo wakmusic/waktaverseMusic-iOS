@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SimpleViwer : Codable{
+struct SimpleViwer : Codable , Identifiable{
     let id: String
     let title: String
     let artist: String

@@ -15,7 +15,10 @@ struct FiveRowSongGridView: View {
                         GridItem(.fixed(40), spacing: 20),
                         GridItem(.fixed(40), spacing: 20)]
     
-    var temp_data : [SimpleViwer] = [SimpleViwer(id: "0", title: "리와인드 (RE:WIND)", artist: "이세계아이돌", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 100),SimpleViwer(id: "1", title: "팬서비스", artist: "고세구", image: "https://i.ytimg.com/vi/DPEtmqvaKqY/hqdefault.jpg", url: "https://youtu.be/DPEtmqvaKqY", last: 2),SimpleViwer(id: "2", title: "겨울봄", artist: "이세계아이돌", image: "https://i.imgur.com/8Y10Qq9.png", url: "https://youtube/JY-gJkMuJ94", last: 2),SimpleViwer(id: "10", title: "Promise", artist: "릴파", image: "https://i.ytimg.com/vi/6hEvgKL0ClA/hqdefault.jpg", url: "https://youtu.be/6hEvgKL0ClA", last: 4),SimpleViwer(id: "4", title: "왁맥송 #Shorts", artist: "우왁굳", image: "https://i.ytimg.com/vi/08meo6qrhFc/hqdefault.jpg", url: "https://youtu.be/08meo6qrhFc", last: 5),SimpleViwer(id: "5", title: "SCIENTIST", artist: "주르르 (ft. 아이네)", image: "https://i.ytimg.com/vi/rFxJjpSeXHI/hqdefault.jpg", url: "https://youtu.be/rFxJjpSeXHI", last: 6)]
+    @Binding var displayChart:[SimpleViwer]
+    
+    
+    
     
     var body: some View {
         
@@ -25,7 +28,9 @@ struct FiveRowSongGridView: View {
                     fiveRowSongGridItemViews
                 }
             }
-        }.padding()
+        }.padding().onAppear{
+            print(displayChart.count)
+        }
         
     }
 }
@@ -33,22 +38,22 @@ struct FiveRowSongGridView: View {
 
 private extension FiveRowSongGridView {
     var fiveRowSongGridItemViews: some View {
-        ForEach(temp_data.indices){ index in
-            ZStack() {
+    
+        
+        ForEach(displayChart.indices){ index in
+            ZStack{
                 HStack() {
-                    AlbumImageView(url: temp_data[index].image)
-                    RankView(now: index+1, last: temp_data[index].last)
+                    AlbumImageView(url: displayChart[index].image)
+                    RankView(now: index+1, last: displayChart[index].last)
                     
                     
                     //타이틀 , Artist 영역
                     VStack() {
-                        Text("\(temp_data[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
-                        Text("\(temp_data[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
+                        Text("\(displayChart[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
+                        Text("\(displayChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
                     }
-                    
-                    
                     Button {
-                        print(temp_data[index].url)
+                        print(displayChart[index].url)
                     } label: {
                         Image(systemName: "play.fill").foregroundColor(Color("PrimaryColor"))
                     }
@@ -61,7 +66,9 @@ private extension FiveRowSongGridView {
 
 struct FiveRowSongGridView_Previews: PreviewProvider {
     static var previews: some View {
-        FiveRowSongGridView()
+        
+        
+        FiveRowSongGridView(displayChart: .constant([SimpleViwer]()))
     }
 }
 

@@ -35,6 +35,7 @@ struct RadioBttuon: View {
             }
             else{
                 self.callback(self.id)
+                
             }
             
             

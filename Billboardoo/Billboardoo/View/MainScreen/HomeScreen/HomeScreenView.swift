@@ -6,8 +6,22 @@
 //
 
 import SwiftUI
+import Combine
+import Alamofire
 
 struct HomeScreenView: View {
+    
+    @StateObject var viewModel:HomeScreenViewModel
+    
+    init(){
+        
+        _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
+     
+    }
+    
+    
+   
+    
     var body: some View {
         ZStack(alignment: .leading)
         {
@@ -17,7 +31,7 @@ struct HomeScreenView: View {
                 ChartHeader(title: "Title")
                 Spacer()
                 RadioButtonGroup { _ in}
-                FiveRowSongGridView()
+                FiveRowSongGridView(displayChart: $viewModel.nowDisplayChart)
                 
                 
             }
@@ -32,7 +46,7 @@ struct NavigationLogo: View {
             .resizable()
             .renderingMode(.template)
             .foregroundColor(Color("PrimaryColor"))
-            .frame(width: window.width*0.4, height: window.height*0.04 ) //
+            .frame(width: window.width*0.4, height: window.height*0.04) //
     }
 }
 
@@ -63,5 +77,76 @@ struct MainHeader: View {
         HStack(alignment: .top) {
             NavigationLogo()
         }.padding(EdgeInsets(top: 10, leading: 10, bottom: 5, trailing: 10))
+    }
+}
+
+
+extension HomeScreenView{
+    
+    final class HomeScreenViewModel:ObservableObject{
+        
+        
+        var cancelBag = Set<AnyCancellable>()
+        var now:[SimpleViwer]  {
+            get{
+                return nowDisplayChart
+            }
+        }
+        
+        @Published var nowDisplayChart: [SimpleViwer] = [SimpleViwer]()
+        @Published var topToalChart: [SimpleViwer] = [SimpleViwer]()
+        @Published var topTimeChart: [SimpleViwer] = [SimpleViwer]()
+        @Published var topDailyTChart: [SimpleViwer] = [SimpleViwer]()
+        @Published var topWeeklyToalChart : [SimpleViwer] = [SimpleViwer]()
+        @Published var topMonthlyToalChart : [SimpleViwer] = [SimpleViwer]()
+        
+        
+        init()
+        {
+            print("HomeScreenViewModel is Init")
+            fetChTopChart(category: .total)
+            fetChTopChart(category: .time)
+            fetChTopChart(category: .daily)
+            fetChTopChart(category: .weekly)
+            fetChTopChart(category: .monthly)
+        }
+        
+        func fetChTopChart(category:TopCategory)
+        {
+            Repository.shared.fetchTop100(category: category)
+                .sink { completion in
+                    
+                    switch completion
+                    {
+                    case .failure(let err_):
+                        
+                        print("\(category) is Error")
+                        
+                    
+                    case .finished:
+                        print("\(category) is Finished ")
+                    }
+                } receiveValue: { [weak self] (datas:[SimpleViwer]) in
+                    
+                    guard let self = self else {return}
+                    switch category {
+                    case .total:
+                        self.topToalChart = datas
+                        self.nowDisplayChart = datas
+                    case .time:
+                        self.topTimeChart = datas
+                    case .daily:
+                        self.topDailyTChart = datas
+                    case .weekly:
+                        self.topWeeklyToalChart = datas
+                    case .monthly:
+                        self.topMonthlyToalChart = datas
+                    }
+                    
+                }.store(in: &cancelBag)
+        }
+        
+        
+        
     }
 }

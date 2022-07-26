@@ -6,52 +6,51 @@
 //
 
 import Foundation
-import RxSwift
+import Combine
+import Alamofire
+
+enum TopCategory{
+    
+    case total
+    case time
+    case daily
+    case weekly
+    case monthly
+}
+
+
 class Repository{
     static let shared:Repository = Repository()
     
-    //private let semaphore = DispatchSemaphore(value: 1)
     
-    //URLSsection Legacy Code
-    private func fetch(url: String, onComplete: @escaping (Result<Data,Error>) -> Void )
+    
+    func fetchTop100(category:TopCategory) -> AnyPublisher<[SimpleViwer],Error>
     {
-        URLSession.shared.dataTask(with: URL(string: url)!) { data, res, err in
-            
-            if let err = err {
-                onComplete(.failure(err))
-                return
-            }
-            
-            guard let data = data else {
-                let httpResponse = res as! HTTPURLResponse
-                onComplete(.failure(NSError(domain: "no data", code: httpResponse.statusCode,userInfo: nil)))
-                return
-            }
-            
-            onComplete(.success(data))
-        }.resume()
-    }
-    
-    
-    //RxFetch
-    public func fetchRx(url: String) -> Observable<Data>
-    {
-        return Observable.create { emitter in
-            
-            self.fetch(url: url) { result in
-                switch result{
-                
-                case let .success(data):
-                    emitter.onNext(data)
-                    emitter.onCompleted()
-                
-                case let .failure(err):
-                    emitter.onError(err)
-                }
-            }
-            
-            return Disposables.create()
+        let url:String
+        switch category {
+        case .total:
+            url = ApiCollections.totalTop100
+        case .time:
+            url = ApiCollections.timeTop100
+        case .daily:
+            url = ApiCollections.dailyTop100
+        case .weekly:
+            url = ApiCollections.weaklyTop100
+        case .monthly:
+            url = ApiCollections.monthlyTop100
         }
         
+        return AF.request(url)
+            .publishDecodable(type: [SimpleViwer].self)
+            .value()
+            .mapError { (err: AFError) in
+                return err as Error
+            }
+            .eraseToAnyPublisher()
     }
+    
+    
+    
+    
+    
 }
