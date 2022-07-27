@@ -15,11 +15,11 @@ struct HomeScreenView: View {
     
     init(){
         _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
-     
+        
     }
     
     
-   
+    
     
     var body: some View {
         ZStack(alignment: .leading)
@@ -33,7 +33,7 @@ struct HomeScreenView: View {
                     
                     if(prev != now) //이전 값과 다를 경우에만 fetch
                     {
-//
+                        // 하위 뷰인 라이도 버튼의 선택된 버튼 index의 따라 다른 차트를 가져옴
                         switch now{
                         case 0:
                             viewModel.fetchTop20(category: .total)
@@ -70,20 +70,7 @@ struct NavigationLogo: View {
     }
 }
 
-struct SettinButton: View {
-    var body: some View {
-        NavigationLink {
-            SettingScreenView() //Destination
-        } label: {
-            //보여질 방식, 버튼 이미지
-            Image(systemName: "gearshape.fill")
-                .resizable()
-                .foregroundColor(Color("PrimaryColor"))
-                .frame(width: window.width*0.07, height: window.height*0.04)
-        }
-        
-    }
-}
+
 
 
 struct HomeScreenView_Previews: PreviewProvider {
@@ -107,10 +94,10 @@ extension HomeScreenView{
         
         @Published var nowChart:[SimpleViwer] = [SimpleViwer]()
         var cancelBag = Set<AnyCancellable>()
-      
+        
         init()
         {
-            fetchTop20(category: .total) //처음 chart는 누적으로 지정
+            fetchTop20(category: .total) //초기화  chart는 누적으로 지정
         }
         
         func fetchTop20(category:TopCategory)
@@ -124,7 +111,7 @@ extension HomeScreenView{
                         
                         print("\(category) is Error")
                         
-                    
+                        
                     case .finished:
                         print("\(category) is Finished ")
                     }
@@ -132,8 +119,7 @@ extension HomeScreenView{
                     
                     guard let self = self else {return}
                     
-                    self.nowChart = datas
-                    print(datas.count)
+                    self.nowChart = datas  //chart 갱신
                     
                 }.store(in: &cancelBag)
         }

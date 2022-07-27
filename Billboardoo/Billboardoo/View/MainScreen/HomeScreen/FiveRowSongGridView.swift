@@ -40,8 +40,7 @@ private extension FiveRowSongGridView {
     var fiveRowSongGridItemViews: some View {
         
     
-
-        ForEach(nowChart.indices,id: \.self){ index in
+        ForEach(nowChart.indices,id: \.self){ index in //여기서 id설정이 굉장히 중요하다. indices로 접근하기 때문에 속성의 id 말고 \.self를 사용함
             ZStack{
                 HStack() {
                     AlbumImageView(url: nowChart[index].image)
