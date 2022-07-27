@@ -15,7 +15,7 @@ struct FiveRowSongGridView: View {
                         GridItem(.fixed(40), spacing: 20),
                         GridItem(.fixed(40), spacing: 20)]
     
-    @Binding var displayChart:[SimpleViwer]
+    @Binding var nowChart:[SimpleViwer]
     
     
     
@@ -29,7 +29,7 @@ struct FiveRowSongGridView: View {
                 }
             }
         }.padding().onAppear{
-            print(displayChart.count)
+            print(nowChart.count)
         }
         
     }
@@ -38,22 +38,23 @@ struct FiveRowSongGridView: View {
 
 private extension FiveRowSongGridView {
     var fiveRowSongGridItemViews: some View {
-    
         
-        ForEach(displayChart.indices){ index in
+    
+
+        ForEach(nowChart.indices,id: \.self){ index in
             ZStack{
                 HStack() {
-                    AlbumImageView(url: displayChart[index].image)
-                    RankView(now: index+1, last: displayChart[index].last)
+                    AlbumImageView(url: nowChart[index].image)
+                    RankView(now: index+1, last: nowChart[index].last)
                     
                     
                     //타이틀 , Artist 영역
                     VStack() {
-                        Text("\(displayChart[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
-                        Text("\(displayChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
+                        Text("\(nowChart[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
+                        Text("\(nowChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
                     }
                     Button {
-                        print(displayChart[index].url)
+                        print(nowChart[index].url)
                     } label: {
                         Image(systemName: "play.fill").foregroundColor(Color("PrimaryColor"))
                     }
@@ -68,7 +69,7 @@ struct FiveRowSongGridView_Previews: PreviewProvider {
     static var previews: some View {
         
         
-        FiveRowSongGridView(displayChart: .constant([SimpleViwer]()))
+        FiveRowSongGridView(nowChart:.constant([SimpleViwer]()))
     }
 }
 
@@ -85,7 +86,7 @@ struct AlbumImageView: View {
                     .transition(.opacity.combined(with: .scale))
             }
             .onSuccess { result in
-                print("Image Fetch success")
+                
             }
             .onFailure { err in
                 print("Error: ,\(err)")

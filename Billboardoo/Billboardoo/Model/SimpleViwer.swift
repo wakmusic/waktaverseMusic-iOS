@@ -8,11 +8,17 @@
 import Foundation
 
 struct SimpleViwer : Codable , Identifiable{
-    let id: String
+    let id = UUID()
+    let song_id: String
     let title: String
     let artist: String
     let image: String
     let url: String
     let last: Int
+    
+    private enum CodingKeys: String,CodingKey {
+        case song_id = "id"
+        case title,artist,image,url,last
+    }
 }
 

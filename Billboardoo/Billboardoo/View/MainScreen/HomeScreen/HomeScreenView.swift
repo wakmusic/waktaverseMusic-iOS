@@ -11,10 +11,9 @@ import Alamofire
 
 struct HomeScreenView: View {
     
-    @StateObject var viewModel:HomeScreenViewModel
+    @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
     
     init(){
-        
         _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
      
     }
@@ -30,8 +29,29 @@ struct HomeScreenView: View {
                 Spacer()
                 ChartHeader(title: "Title")
                 Spacer()
-                RadioButtonGroup { _ in}
-                FiveRowSongGridView(displayChart: $viewModel.nowDisplayChart)
+                RadioButtonGroup { (prev:Int, now:Int) in
+                    
+                    if(prev != now) //이전 값과 다를 경우에만 fetch
+                    {
+//
+                        switch now{
+                        case 0:
+                            viewModel.fetchTop20(category: .total)
+                        case 1:
+                            viewModel.fetchTop20(category: .time)
+                        case 2:
+                            viewModel.fetchTop20(category: .daily)
+                        case 3:
+                            viewModel.fetchTop20(category: .weekly)
+                        case 4:
+                            viewModel.fetchTop20(category: .monthly)
+                        default :
+                            viewModel.fetchTop20(category: .total)
+                        }
+                        
+                    }
+                }
+                FiveRowSongGridView(nowChart: $viewModel.nowChart) //nowChart 넘겨주기
                 
                 
             }
@@ -85,35 +105,17 @@ extension HomeScreenView{
     
     final class HomeScreenViewModel:ObservableObject{
         
-        
+        @Published var nowChart:[SimpleViwer] = [SimpleViwer]()
         var cancelBag = Set<AnyCancellable>()
-        var now:[SimpleViwer]  {
-            get{
-                return nowDisplayChart
-            }
-        }
-        
-        @Published var nowDisplayChart: [SimpleViwer] = [SimpleViwer]()
-        @Published var topToalChart: [SimpleViwer] = [SimpleViwer]()
-        @Published var topTimeChart: [SimpleViwer] = [SimpleViwer]()
-        @Published var topDailyTChart: [SimpleViwer] = [SimpleViwer]()
-        @Published var topWeeklyToalChart : [SimpleViwer] = [SimpleViwer]()
-        @Published var topMonthlyToalChart : [SimpleViwer] = [SimpleViwer]()
-        
-        
+      
         init()
         {
-            print("HomeScreenViewModel is Init")
-            fetChTopChart(category: .total)
-            fetChTopChart(category: .time)
-            fetChTopChart(category: .daily)
-            fetChTopChart(category: .weekly)
-            fetChTopChart(category: .monthly)
+            fetchTop20(category: .total) //처음 chart는 누적으로 지정
         }
         
-        func fetChTopChart(category:TopCategory)
+        func fetchTop20(category:TopCategory)
         {
-            Repository.shared.fetchTop100(category: category)
+            Repository.shared.fetchTop20(category: category)
                 .sink { completion in
                     
                     switch completion
@@ -129,19 +131,9 @@ extension HomeScreenView{
                 } receiveValue: { [weak self] (datas:[SimpleViwer]) in
                     
                     guard let self = self else {return}
-                    switch category {
-                    case .total:
-                        self.topToalChart = datas
-                        self.nowDisplayChart = datas
-                    case .time:
-                        self.topTimeChart = datas
-                    case .daily:
-                        self.topDailyTChart = datas
-                    case .weekly:
-                        self.topWeeklyToalChart = datas
-                    case .monthly:
-                        self.topMonthlyToalChart = datas
-                    }
+                    
+                    self.nowChart = datas
+                    print(datas.count)
                     
                 }.store(in: &cancelBag)
         }

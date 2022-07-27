@@ -29,14 +29,8 @@ struct RadioBttuon: View {
     var body: some View {
         
         Button {
-            if(self.id==self.selectedId)
-            {
-                print("Same")
-            }
-            else{
-                self.callback(self.id)
-                
-            }
+         
+            self.callback(id)
             
             
         } label: {
@@ -52,7 +46,9 @@ struct RadioBttuon: View {
                 .cornerRadius(10)
             //테두리 설정
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("PrimaryColor"),lineWidth: 1))
-        }.frame(width: window.width*0.15, height: window.height*0.02, alignment: .center) //최종 크기
+        }.frame(width: window.width*0.15, height: window.height*0.02, alignment: .center)
+            //최종 크기
+        
         
         
     }
@@ -66,11 +62,12 @@ struct RadioButtonGroup: View {
     
     @State var selectedId:Int = 0
     
-    let callback: (Int) -> ()
+    let callback: ((Int,Int)) -> ()
     
     func radioGroupCallback(id: Int) {
+        callback((selectedId,id)) //콜백 (이전 선택,현재 선택) 을 튜블 형태로 
         selectedId = id //선택된 아이디 변경
-        callback(id) //콜백
+        
     }
     
     
@@ -90,9 +87,11 @@ struct RadioButtonGroup: View {
 }
 
 struct RadioButtonGroup_Previews: PreviewProvider {
+    
+    @ObservedObject var viewModel:HomeScreenView.HomeScreenViewModel
     static var previews: some View {
-        RadioButtonGroup { Int in
-            print("Hello")
+        RadioButtonGroup { (selected, now) in
+            print("\(selected) \(now)")
         }
     }
 }
