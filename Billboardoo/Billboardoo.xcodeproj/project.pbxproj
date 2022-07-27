@@ -148,6 +148,7 @@
 		D8357857288A658F00459197 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				D848722528912A4C00B508DC /* MusicPlayerBar */,
 				D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */,
 				D835785A288A65DD00459197 /* HomeScreen */,
 				D8357858288A65AA00459197 /* Setting */,
@@ -187,6 +188,13 @@
 				D835785528893EB300459197 /* RadioButtonGroup.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		D848722528912A4C00B508DC /* MusicPlayerBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MusicPlayerBar;
 			sourceTree = "<group>";
 		};
 		D86B5869288C27AF001110A5 /* Test */ = {
