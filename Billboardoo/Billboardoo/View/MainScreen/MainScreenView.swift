@@ -87,22 +87,21 @@ struct MainScreenView: View {
                             TabBarItem(title: "Setting", imageName: "gearshape.fill")
                         }
                     
-                    
-                    
-                }.accentColor(Color("PrimaryColor"))
+                }
                     .zIndex(1.0)
                 
                 if playState.isPlayerViewPresented {
                      PlaybackFullScreenView(animation: animation)
                         .environmentObject(playState)
-                        .edgesIgnoringSafeArea(.all)
+                        .edgesIgnoringSafeArea(.horizontal)
                         .zIndex(2.0)
                 }
                 
                 
-            }
-            .accentColor(Color("PrimaryColor"))
-            .animation(.default) // 재생창 띄울 때 움직이는 애니메이션 설정
+            }.accentColor(Color("PrimaryColor"))
+    
+                .animation(.default)
+            // 재생창 띄울 때 움직이는 애니메이션 설정
             //Should Refactor
             
             

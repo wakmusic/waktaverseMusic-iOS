@@ -23,12 +23,14 @@ struct PlayPuaseButton: View {
                 withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
                 {
                     Image(systemName: "play.fill")
+                        .foregroundColor(Color("PrimaryColor"))
                 }
             }
             else{ //재생 중일 때는 puase 버튼
                 withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
                 {
                     Image(systemName: "pause.fill")
+                        .foregroundColor(Color("PrimaryColor"))
                 }
                 
             }

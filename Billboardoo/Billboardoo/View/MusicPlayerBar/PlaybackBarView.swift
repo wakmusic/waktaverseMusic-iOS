@@ -49,6 +49,7 @@ struct PlaybackBarView: View {
                             print("prev!!")
                         } label: {
                             Image(systemName: "backward.fill")
+                                .foregroundColor(Color("PrimaryColor"))
                             
                         }
                         
@@ -57,7 +58,7 @@ struct PlaybackBarView: View {
                         
                     }
 
-                }.background(.thinMaterial)
+                }.background(.ultraThickMaterial,in: RoundedRectangle(cornerRadius: 8))
             }.onTapGesture {
                 playState.isPlayerViewPresented.toggle()
             }

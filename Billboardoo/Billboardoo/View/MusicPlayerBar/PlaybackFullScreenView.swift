@@ -10,11 +10,11 @@ import Kingfisher
 
 struct PlaybackFullScreenView: View {
     
-    var animation: Namespace.ID
+    var animation: Namespace.ID //화면전환을 위한 애니메이션 Identify
     @EnvironmentObject var playState:PlayState
     
     var body: some View {
-        
+        let window = UIScreen.main.bounds
         if let currentSong = playState.nowPlayingSong
         {
             
@@ -30,7 +30,8 @@ struct PlaybackFullScreenView: View {
                         .frame(width:300, height: 300)
                         .padding()
                         .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.7)
-                        .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: 0, y: 60)
+                        .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: -60, y: 60)
+                        //각 종 애니메이션
                     
                     
                     VStack{
@@ -74,11 +75,17 @@ struct PlaybackFullScreenView: View {
                         
                     }.padding()
                         .accentColor(Color("PrimaryColor"))
-                        .background(.thinMaterial)
+                    
                 }.onTapGesture {
                     playState.isPlayerViewPresented.toggle()
                 }
             }
+            .frame(width: window.width, height: window.height, alignment: .center)
+            .background(
+                .ultraThickMaterial,
+                in: RoundedRectangle(cornerRadius: 8, style: .continuous)
+            )
+            
             
             
         }
