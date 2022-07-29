@@ -22,10 +22,14 @@ final class TabRouter: ObservableObject { //Tab State관련 클래스
     }
 }
 
-let window = UIScreen.main.bounds.size
+
 struct MainScreenView: View {
+
+    
     @State var isLoading: Bool = true
     @StateObject var router:TabRouter = TabRouter()
+    @EnvironmentObject var playState: PlayState
+    @Namespace var animation
     
     init() {
         //UITabBar.appearance().unselectedItemTintColor = .red
@@ -43,7 +47,6 @@ struct MainScreenView: View {
             
             LaunchScreenView().onAppear
             {
-                
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     withAnimation { isLoading.toggle() }
                 }
@@ -53,20 +56,54 @@ struct MainScreenView: View {
         {
             
             //- MARK: TabView
-            TabView(selection: $router.screen){
+            ZStack {
                 
-                HomeScreenView().tag(Screen.home).tabItem {
-                    TabBarItem(title: "Home", imageName: "house.fill")
-                }
-                
-                
-                
-                
-                SettingScreenView().tag(Screen.setting).tabItem {
-                    TabBarItem(title: "Setting", imageName: "gearshape.fill")
+                InvisibleRefreshView()
+                    .opacity(0.0001)
+
+                TabView(selection: $router.screen){
                     
+                    ZStack() {
+                        HomeScreenView()
+                        
+                        if !playState.isPlayerViewPresented
+                        {
+                            PlaybackBarView(animation: animation).environmentObject(playState)
+                        }
+                        
+                    }.tag(Screen.home)
+                        .tabItem {
+                            TabBarItem(title: "Home", imageName: "house.fill")
+                        }
+                    
+                    ZStack{
+                        SettingScreenView()
+                        if !playState.isPlayerViewPresented
+                        {
+                            PlaybackBarView(animation: animation).environmentObject(playState)
+                        }
+                    }.tag(Screen.setting)
+                        .tabItem {
+                            TabBarItem(title: "Setting", imageName: "gearshape.fill")
+                        }
+                    
+                    
+                    
+                }.accentColor(Color("PrimaryColor"))
+                    .zIndex(1.0)
+                
+                if playState.isPlayerViewPresented {
+                     PlaybackFullScreenView(animation: animation)
+                        .environmentObject(playState)
+                        .edgesIgnoringSafeArea(.all)
+                        .zIndex(2.0)
                 }
-            }.accentColor(Color("PrimaryColor")) //Should Refactor
+                
+                
+            }
+            .accentColor(Color("PrimaryColor"))
+            .animation(.default) // 재생창 띄울 때 움직이는 애니메이션 설정
+            //Should Refactor
             
             
             //- MARK: Navigation Setting
@@ -96,7 +133,7 @@ struct MainScreenView: View {
 
 struct MainScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        MainScreenView()
+        MainScreenView().environmentObject(PlayState())
     }
 }
 

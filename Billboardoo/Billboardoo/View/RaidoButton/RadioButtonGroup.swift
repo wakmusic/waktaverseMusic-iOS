@@ -58,7 +58,7 @@ struct RadioBttuon: View {
 //- MARK: Group
 struct RadioButtonGroup: View {
     let window = UIScreen.main.bounds.size
-    let items :[String] = ["누적","최신","일간","주간","월간"]
+    let items :[String] = ["누적","시간","일간","주간","월간"]
     
     @State var selectedId:Int = 0 //현재 선택된 상태를 저장할 변수
     

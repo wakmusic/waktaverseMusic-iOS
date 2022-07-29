@@ -92,7 +92,7 @@ extension HomeScreenView{
     
     final class HomeScreenViewModel:ObservableObject{
         
-        @Published var nowChart:[SimpleViwer] = [SimpleViwer]()
+        @Published var nowChart:[SimpleSong] = [SimpleSong]()
         var cancelBag = Set<AnyCancellable>()
         
         init()
@@ -115,7 +115,7 @@ extension HomeScreenView{
                     case .finished:
                         print("\(category) is Finished ")
                     }
-                } receiveValue: { [weak self] (datas:[SimpleViwer]) in
+                } receiveValue: { [weak self] (datas:[SimpleSong]) in
                     
                     guard let self = self else {return}
                     

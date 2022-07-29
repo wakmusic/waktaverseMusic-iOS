@@ -15,12 +15,13 @@ import RxSwift
 struct BillboardooApp: App {
     let persistenceController = PersistenceController.shared
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
-    @StateObject var router = TabRouter()
+    var playState = PlayState.shared
     
     
     var body: some Scene {
         WindowGroup {
-            MainScreenView().onAppear{
+            MainScreenView().environmentObject(playState).onAppear{
+                //환경 객체 설정 
                 changeMode(isDarkMode: isDarkMode) //보여질 때 다크모드 확인 이벤트 등록
                 //네트워크 등록
             }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SimpleViwer : Codable , Identifiable{
+struct SimpleSong : Codable , Identifiable, Equatable{
     let id = UUID()
     let song_id: String
     let title: String
@@ -15,6 +15,10 @@ struct SimpleViwer : Codable , Identifiable{
     let image: String
     let url: String
     let last: Int
+    
+    static func == (lhs:Self,rhs:Self) -> Bool {
+        return lhs.song_id == rhs.song_id
+    }
     
     private enum CodingKeys: String,CodingKey {
         case song_id = "id"

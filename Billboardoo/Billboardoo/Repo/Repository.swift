@@ -24,7 +24,7 @@ class Repository{
     
     
     
-    func fetchTop20(category:TopCategory) -> AnyPublisher<[SimpleViwer],Error> //메인 화면에 20개만
+    func fetchTop20(category:TopCategory) -> AnyPublisher<[SimpleSong],Error> //메인 화면에 20개만
     {
         var url:String
         switch category {
@@ -42,7 +42,7 @@ class Repository{
         }
         url = url.replacingOccurrences(of: "100", with: "20") //100을 20개로
         return AF.request(url)
-            .publishDecodable(type: [SimpleViwer].self) //SimpleViewr 타입으로 decoding
+            .publishDecodable(type: [SimpleSong].self) //SimpleSong 타입으로 decoding
             .value() //  return:  AnyPublisher<[SimpleViwer], AFError>
             .mapError { (err: AFError) in
                 return err as Error
@@ -50,7 +50,7 @@ class Repository{
             .eraseToAnyPublisher() //UnWraaping
     }
     
-    func fetchTop100(category:TopCategory) -> AnyPublisher<[SimpleViwer],Error>
+    func fetchTop100(category:TopCategory) -> AnyPublisher<[SimpleSong],Error>
     {
         let url:String
         switch category {
@@ -66,7 +66,7 @@ class Repository{
             url = ApiCollections.monthlyTop100
         }
         return AF.request(url)
-            .publishDecodable(type: [SimpleViwer].self)
+            .publishDecodable(type: [SimpleSong].self)
             .value()
             .mapError { (err: AFError) in
                 return err as Error

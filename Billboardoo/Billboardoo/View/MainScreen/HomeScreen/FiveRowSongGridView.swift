@@ -15,7 +15,7 @@ struct FiveRowSongGridView: View {
                         GridItem(.fixed(40), spacing: 20),
                         GridItem(.fixed(40), spacing: 20)]
     
-    @Binding var nowChart:[SimpleViwer]
+    @Binding var nowChart:[SimpleSong]
     
     
     
@@ -28,9 +28,7 @@ struct FiveRowSongGridView: View {
                     fiveRowSongGridItemViews
                 }
             }
-        }.padding().onAppear{
-            print(nowChart.count)
-        }
+        }.padding()
         
     }
 }
@@ -68,7 +66,7 @@ struct FiveRowSongGridView_Previews: PreviewProvider {
     static var previews: some View {
         
         
-        FiveRowSongGridView(nowChart:.constant([SimpleViwer]()))
+        FiveRowSongGridView(nowChart:.constant([SimpleSong]()))
     }
 }
 
