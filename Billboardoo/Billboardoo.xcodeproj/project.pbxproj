@@ -19,6 +19,8 @@
 		D84872522893C2F600B508DC /* SongCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872512893C2F600B508DC /* SongCardView.swift */; };
 		D84872542893FC8600B508DC /* InvisibleRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872532893FC8600B508DC /* InvisibleRefreshView.swift */; };
 		D84872562894101400B508DC /* PlayPuaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872552894101400B508DC /* PlayPuaseButton.swift */; };
+		D84872592895172D00B508DC /* TextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872582895172C00B508DC /* TextModifier.swift */; };
+		D848725B2895245800B508DC /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848725A2895245800B508DC /* ImageModifier.swift */; };
 		D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C2288FD5DB001FE8F4 /* Alamofire */; };
 		D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C5288FD5E3001FE8F4 /* Kingfisher */; };
 		D86B5866288AC4B6001110A5 /* ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5865288AC4B6001110A5 /* ChartHeader.swift */; };
@@ -75,6 +77,8 @@
 		D84872512893C2F600B508DC /* SongCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCardView.swift; sourceTree = "<group>"; };
 		D84872532893FC8600B508DC /* InvisibleRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvisibleRefreshView.swift; sourceTree = "<group>"; };
 		D84872552894101400B508DC /* PlayPuaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPuaseButton.swift; sourceTree = "<group>"; };
+		D84872582895172C00B508DC /* TextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
+		D848725A2895245800B508DC /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		D86B5865288AC4B6001110A5 /* ChartHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeader.swift; sourceTree = "<group>"; };
 		D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveRowSongGridView.swift; sourceTree = "<group>"; };
 		D86B586A288C27C6001110A5 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
@@ -230,6 +234,15 @@
 			path = Song;
 			sourceTree = "<group>";
 		};
+		D84872572895171900B508DC /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				D84872582895172C00B508DC /* TextModifier.swift */,
+				D848725A2895245800B508DC /* ImageModifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		D86B5869288C27AF001110A5 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +320,7 @@
 		D87EDFCC2886DB9800999DE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D84872572895171900B508DC /* Modifier */,
 				D84872502893C2E500B508DC /* Song */,
 				D848722528912A4C00B508DC /* MusicPlayerBar */,
 				D835785B288A660C00459197 /* RaidoButton */,
@@ -585,10 +599,12 @@
 				D86B586B288C27C6001110A5 /* TestView.swift in Sources */,
 				D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */,
 				D848724F2893BC8800B508DC /* PlaybackFullScreenView.swift in Sources */,
+				D848725B2895245800B508DC /* ImageModifier.swift in Sources */,
 				D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */,
 				D84872542893FC8600B508DC /* InvisibleRefreshView.swift in Sources */,
 				D87EDFCE2886DBB500999DE6 /* LaunchScreenView.swift in Sources */,
 				D87EDFD02887D67F00999DE6 /* MainScreenView.swift in Sources */,
+				D84872592895172D00B508DC /* TextModifier.swift in Sources */,
 				D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */,
 				D84872522893C2F600B508DC /* SongCardView.swift in Sources */,
 				D848724A2893ACE700B508DC /* PlayState.swift in Sources */,

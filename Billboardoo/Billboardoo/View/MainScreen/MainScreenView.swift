@@ -24,12 +24,13 @@ final class TabRouter: ObservableObject { //Tab State관련 클래스
 
 
 struct MainScreenView: View {
-
+    
     
     @State var isLoading: Bool = true
     @StateObject var router:TabRouter = TabRouter()
     @EnvironmentObject var playState: PlayState
     @Namespace var animation
+    
     
     init() {
         //UITabBar.appearance().unselectedItemTintColor = .red
@@ -60,15 +61,16 @@ struct MainScreenView: View {
                 
                 InvisibleRefreshView()
                     .opacity(0.0001)
-
+                
                 TabView(selection: $router.screen){
                     
                     ZStack() {
-                        HomeScreenView()
+                        HomeScreenView().animation(.none) // 애니메이션 막고 오직 스크롤만 되게
                         
                         if !playState.isPlayerViewPresented
                         {
                             PlaybackBarView(animation: animation).environmentObject(playState)
+                                
                         }
                         
                     }.tag(Screen.home)
@@ -88,19 +90,22 @@ struct MainScreenView: View {
                         }
                     
                 }
-                    .zIndex(1.0)
+                .zIndex(1.0)
                 
                 if playState.isPlayerViewPresented {
-                     PlaybackFullScreenView(animation: animation)
+                    PlaybackFullScreenView(animation: animation)
                         .environmentObject(playState)
-                        .edgesIgnoringSafeArea(.horizontal)
+                        .edgesIgnoringSafeArea(.all)
                         .zIndex(2.0)
+                    
+                    
                 }
                 
                 
             }.accentColor(Color("PrimaryColor"))
-    
-                .animation(.default)
+                
+            
+            
             // 재생창 띄울 때 움직이는 애니메이션 설정
             //Should Refactor
             

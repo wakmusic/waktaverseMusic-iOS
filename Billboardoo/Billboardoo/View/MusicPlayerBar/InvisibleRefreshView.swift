@@ -20,7 +20,7 @@ struct InvisibleRefreshView: View {
             .onReceive(timer) { _ in
                 
              
-                if let nowPlayingSong = playState.nowPlayingSong {
+                if let nowPlayingSong = playState.nowPlayingSong { //트랙킹
                     if playState.currentSong != nowPlayingSong  {
                         print("RE:WIND")
                         playState.currentSong = nowPlayingSong

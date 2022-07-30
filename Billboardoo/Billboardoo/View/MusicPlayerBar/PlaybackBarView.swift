@@ -13,52 +13,70 @@ struct PlaybackBarView: View {
     
     var animation: Namespace.ID // 화면전환을 위한 애니메이션 Identify
     @EnvironmentObject var playState:PlayState
-    
+    var buttonModifier: PlayBarButtonImageModifier = PlayBarButtonImageModifier()
+    var xWardButton: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     var body: some View {
         
         if let currentSong = playState.nowPlayingSong
         {
-            VStack {
+            VStack(alignment: .leading) {
                 
-                Spacer(minLength: 0)
+                Spacer(minLength: 0) // 밑에 배치할 수 있게 해주는  빈 공간
+                
                 HStack{
                     
-                    KFImage(URL(string: currentSong.image)!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .matchedGeometryEffect(id: currentSong.song_id  + "art", in: animation)
-                        .frame(width: 50, height: 50)
-                    
-                    
+                    Button {
+                        print("List")
+                    }label: {
+                        Image(systemName: "music.note.list")
+                            .resizable()
+                            .modifier(buttonModifier)
+                        
+                        
+                    }
+
                     VStack(alignment:.leading){
                         Text(currentSong.title)
-                            .font(.headline)
+                            .modifier(PlayBarTitleModifier())
                         
                         Text(currentSong.artist)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }.matchedGeometryEffect(id: currentSong.song_id + "details" , in: animation)
+                            .modifier(PlayBarArtistModifer())
+                    }
                     
                     
                     
                     Spacer()
                     
-                    HStack{
-                        
+                    HStack(spacing:15){
                         Button {
                             print("prev!!")
                         } label: {
                             Image(systemName: "backward.fill")
-                                .foregroundColor(Color("PrimaryColor"))
+                                .resizable()
+                                .modifier(buttonModifier)
                             
                         }
                         
                         PlayPuaseButton().environmentObject(playState)
-                            .matchedGeometryEffect(id: currentSong.song_id + "playButton" , in: animation)
+                        
+                        
+                        Button {
+                            print("Next!!")
+                        } label: {
+                            Image(systemName: "forward.fill")
+                                .resizable()
+                                .modifier(buttonModifier)
+                            
+                        }
+                        
                         
                     }
-
-                }.background(.ultraThickMaterial,in: RoundedRectangle(cornerRadius: 8))
+ 
+                    
+                }
+                .padding(.horizontal)
+                .background(.ultraThickMaterial,in: RoundedRectangle(cornerRadius: 8))
+                
             }.onTapGesture {
                 playState.isPlayerViewPresented.toggle()
             }

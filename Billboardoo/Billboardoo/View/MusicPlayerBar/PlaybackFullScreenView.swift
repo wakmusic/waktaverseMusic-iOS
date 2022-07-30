@@ -12,79 +12,90 @@ struct PlaybackFullScreenView: View {
     
     var animation: Namespace.ID //화면전환을 위한 애니메이션 Identify
     @EnvironmentObject var playState:PlayState
-    
+    var titleModifier = FullScreenTitleModifier()
+    var artistModifier = FullScreenArtistModifer()
+    var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+    let window = UIScreen.main.bounds
     var body: some View {
         let window = UIScreen.main.bounds
         if let currentSong = playState.nowPlayingSong
         {
-            
             HStack{
                 VStack {
-                    
                     Spacer(minLength: 0)
-                    
                     KFImage(URL(string: currentSong.image)!)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .matchedGeometryEffect(id: currentSong.song_id + "art", in: animation)
-                        .frame(width:300, height: 300)
+                        .frame(width:window.width*0.6, height: window.width*0.6)
                         .padding()
-                        .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.7)
+                        .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.8)
                         .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: -60, y: 60)
-                        //각 종 애니메이션
-                    
+                    //각 종 애니메이션
                     
                     VStack{
                         Text(currentSong.title)
-                            .font(.headline)
+                            .modifier(titleModifier)
                         
                         Text(currentSong.artist)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                            .modifier(artistModifier)
                     }
-                    .matchedGeometryEffect(id: currentSong.song_id + "details" , in: animation)
+                    .padding()
                     
                     
                     Spacer(minLength: 0)
                     
-                    HStack(spacing: 15){
+                    HStack(spacing: 20){
+                        
+                        Button {
+                            print("List")
+                        }label: {
+                            Image(systemName: "music.note.list")
+                                .resizable()
+                                .modifier(buttonModifier)
+                            
+                        }
+                        
                         
                         Button {
                             print("prev!!")
                         } label: {
                             Image(systemName: "backward.fill")
+                                .resizable()
+                                .modifier(buttonModifier)
                             
                         }
                         
                         PlayPuaseButton().environmentObject(playState)
-                            .matchedGeometryEffect(id: currentSong.song_id + "playButton" , in: animation)
-                            .padding()
-                            .padding(.horizontal)
+                        
+                        
                         
                         
                         Button {
                             print("next!!")
                         } label: {
                             Image(systemName: "forward.fill")
+                                .resizable()
+                                .modifier(buttonModifier)
                             
                         }
                         
                         
                         
-                        
-                        
-                    }.padding()
-                        .accentColor(Color("PrimaryColor"))
+                    }
+                    .accentColor(Color("PrimaryColor"))
                     
-                }.onTapGesture {
-                    playState.isPlayerViewPresented.toggle()
+                    
                 }
             }
-            .frame(width: window.width, height: window.height, alignment: .center)
+            
+            .frame(width: window.width, height: window.height)
             .background(
-                .ultraThickMaterial,
-                in: RoundedRectangle(cornerRadius: 8, style: .continuous)
-            )
+                .ultraThinMaterial,
+                in: RoundedRectangle(cornerRadius: 8)
+                //백그라운드를 늘린 후  onTapGesture
+            ).onTapGesture {
+                playState.isPlayerViewPresented.toggle()
+            }
             
             
             
@@ -93,5 +104,6 @@ struct PlaybackFullScreenView: View {
         
     }
 }
+
 
 
