@@ -11,8 +11,10 @@ struct PlayPuaseButton: View {
         Button {
             if playState.isPlaying == .stop || playState.isPlaying == .pause { //stop 또는 pause 상태일 때 눌리면 play
                 playState.isPlaying = .play
+                playState.youTubePlayer.play()
             }
             else{ // play 때 눌리면 pause
+                playState.youTubePlayer.pause()
                 playState.isPlaying = .pause
             }
             

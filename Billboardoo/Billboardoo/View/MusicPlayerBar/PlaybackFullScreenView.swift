@@ -14,10 +14,11 @@ struct PlaybackFullScreenView: View {
     @EnvironmentObject var playState:PlayState
     var titleModifier = FullScreenTitleModifier()
     var artistModifier = FullScreenArtistModifer()
-    var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+    
     let window = UIScreen.main.bounds
     var body: some View {
         let window = UIScreen.main.bounds
+        let standardLen = window.width > window.height ? window.width : window.height
         if let currentSong = playState.nowPlayingSong
         {
             HStack{
@@ -25,13 +26,12 @@ struct PlaybackFullScreenView: View {
                     Spacer(minLength: 0)
                     KFImage(URL(string: currentSong.image)!)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width:window.width*0.6, height: window.width*0.6)
+                        .scaledToFit()
+                        .frame(width:standardLen*0.6,height: standardLen*0.6)
                         .padding()
                         .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.8)
                         .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: -60, y: 60)
                     //각 종 애니메이션
-                    
                     VStack{
                         Text(currentSong.title)
                             .modifier(titleModifier)
@@ -41,54 +41,18 @@ struct PlaybackFullScreenView: View {
                     }
                     .padding()
                     
-                    
                     Spacer(minLength: 0)
                     
-                    HStack(spacing: 20){
-                        
-                        Button {
-                            print("List")
-                        }label: {
-                            Image(systemName: "music.note.list")
-                                .resizable()
-                                .modifier(buttonModifier)
-                            
-                        }
-                        
-                        
-                        Button {
-                            print("prev!!")
-                        } label: {
-                            Image(systemName: "backward.fill")
-                                .resizable()
-                                .modifier(buttonModifier)
-                            
-                        }
-                        
-                        PlayPuaseButton().environmentObject(playState)
-                        
-                        
-                        
-                        
-                        Button {
-                            print("next!!")
-                        } label: {
-                            Image(systemName: "forward.fill")
-                                .resizable()
-                                .modifier(buttonModifier)
-                            
-                        }
-                        
-                        
-                        
-                    }
-                    .accentColor(Color("PrimaryColor"))
+                    PlayBar().environmentObject(playState)
+                    
+                    
                     
                     
                 }
             }
             
             .frame(width: window.width, height: window.height)
+            .padding(.horizontal)
             .background(
                 .ultraThinMaterial,
                 in: RoundedRectangle(cornerRadius: 8)
@@ -107,3 +71,70 @@ struct PlaybackFullScreenView: View {
 
 
 
+
+struct PlayBar: View {
+    
+    
+    
+    var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+    @EnvironmentObject var playState:PlayState
+    
+    var body: some View {
+        HStack
+        {
+            
+            Button {
+                print("List")
+            }label: {
+                Image(systemName: "music.note.list")
+                    .resizable()
+                    .modifier(buttonModifier)
+            }
+            
+            
+            Spacer()
+            
+            Button {
+                playState.backWard()
+                //토스트 메시지 필요
+            } label: {
+                Image(systemName: "backward.fill")
+                    .resizable()
+                    .modifier(buttonModifier)
+                
+            }
+            
+            PlayPuaseButton().environmentObject(playState)
+            
+            
+            
+            
+            Button {
+                playState.forWard()
+                //토스트 메시지 필요
+            } label: {
+                Image(systemName: "forward.fill")
+                    .resizable()
+                    .modifier(buttonModifier)
+                
+            }
+            
+            Spacer()
+            
+            Button {
+                print("Sound!!")
+            } label: {
+                Image(systemName: "speaker.wave.3.fill")
+                    .resizable()
+                    .modifier(buttonModifier)
+                
+            }
+            
+            
+            
+            
+            
+        }
+        .accentColor(Color("PrimaryColor"))
+    }
+}

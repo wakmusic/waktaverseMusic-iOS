@@ -44,12 +44,14 @@ struct PlaybackBarView: View {
                     }
                     
                     
-                    
                     Spacer()
                     
                     HStack(spacing:15){
                         Button {
-                            print("prev!!")
+                            
+                            playState.backWard()
+                            //토스트 메시지 필요
+                            
                         } label: {
                             Image(systemName: "backward.fill")
                                 .resizable()
@@ -61,7 +63,8 @@ struct PlaybackBarView: View {
                         
                         
                         Button {
-                            print("Next!!")
+                            playState.forWard()
+                            //토스트 메시지 필요
                         } label: {
                             Image(systemName: "forward.fill")
                                 .resizable()

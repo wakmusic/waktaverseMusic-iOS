@@ -12,6 +12,7 @@ import Alamofire
 struct HomeScreenView: View {
     
     @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
+    @EnvironmentObject var playState:PlayState
     
     init(){
         _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
@@ -51,7 +52,7 @@ struct HomeScreenView: View {
                         
                     }
                 }
-                FiveRowSongGridView(nowChart: $viewModel.nowChart) //nowChart 넘겨주기
+                FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
                 
                 
             }
@@ -70,14 +71,6 @@ struct NavigationLogo: View {
     }
 }
 
-
-
-
-struct HomeScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeScreenView()
-    }
-}
 
 struct MainHeader: View {
     var body: some View {

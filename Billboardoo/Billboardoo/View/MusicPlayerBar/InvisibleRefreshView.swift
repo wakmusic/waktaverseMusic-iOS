@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import YouTubePlayerKit
 struct InvisibleRefreshView: View {
     
     @EnvironmentObject var playState:PlayState
@@ -20,9 +20,9 @@ struct InvisibleRefreshView: View {
             .onReceive(timer) { _ in
                 
              
-                if let nowPlayingSong = playState.nowPlayingSong { //트랙킹
+                if let nowPlayingSong = playState.nowPlayingSong { //트랙킹 다를 경우 .load
                     if playState.currentSong != nowPlayingSong  {
-                        print("RE:WIND")
+                        playState.youTubePlayer.load(source: .url(nowPlayingSong.url))
                         playState.currentSong = nowPlayingSong
                     }
                 }

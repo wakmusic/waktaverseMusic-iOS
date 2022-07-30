@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import YouTubePlayerKit
+
 enum Screen{
     case home
     case albums
@@ -59,18 +61,33 @@ struct MainScreenView: View {
             //- MARK: TabView
             ZStack {
                 
+                
+                VStack{
+                    YouTubePlayerView(self.playState.youTubePlayer) { state in
+                        // Overlay ViewBuilder closure to place an overlay View
+                        // for the current `YouTubePlayer.State`
+                        switch state {
+                        case .idle:
+                            ProgressView()
+                        case .ready:
+                            EmptyView()
+                        case .error(let error):
+                            Text(verbatim: "YouTube player couldn't be loaded")
+                        }
+                    }.frame(width: 0, height: 0)
+                }
+                
                 InvisibleRefreshView()
                     .opacity(0.0001)
                 
                 TabView(selection: $router.screen){
                     
                     ZStack() {
-                        HomeScreenView().animation(.none) // 애니메이션 막고 오직 스크롤만 되게
+                        HomeScreenView().environmentObject(playState).animation(.none).environmentObject(playState) // 애니메이션 막고 오직 스크롤만 되게
                         
                         if !playState.isPlayerViewPresented
                         {
                             PlaybackBarView(animation: animation).environmentObject(playState)
-                                
                         }
                         
                     }.tag(Screen.home)
@@ -103,7 +120,7 @@ struct MainScreenView: View {
                 
                 
             }.accentColor(Color("PrimaryColor"))
-                
+            
             
             
             // 재생창 띄울 때 움직이는 애니메이션 설정
@@ -155,3 +172,4 @@ struct TabBarItem: View {
         }
     }
 }
+
