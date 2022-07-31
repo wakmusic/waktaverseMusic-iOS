@@ -28,8 +28,7 @@ struct HomeScreenView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 MainHeader()
                 Spacer()
-                ChartHeader(title: "Title")
-                Spacer()
+                
                 RadioButtonGroup { (prev:Int, now:Int) in
                     
                     if(prev != now) //이전 값과 다를 경우에만 fetch

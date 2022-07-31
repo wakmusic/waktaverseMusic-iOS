@@ -29,7 +29,7 @@ struct RadioBttuon: View {
     var body: some View {
         
         Button {
-         
+            
             self.callback(id)
             
             
@@ -47,7 +47,7 @@ struct RadioBttuon: View {
             //테두리 설정
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("PrimaryColor"),lineWidth: 1))
         }.frame(width: window.width*0.15, height: window.height*0.02, alignment: .center)
-            //최종 크기
+        //최종 크기
         
         
         
@@ -65,13 +65,14 @@ struct RadioButtonGroup: View {
     let callback: ((Int,Int)) -> ()
     
     func radioGroupCallback(id: Int) {
-        callback((selectedId,id)) //콜백 (이전 선택,현재 선택) 을 튜블 형태로 
+        callback((selectedId,id)) //콜백 (이전 선택,현재 선택) 을 튜블 형태로
         selectedId = id //선택된 아이디 변경
     }
     
     
     var body: some View {
-        
+        ChartHeader(chartIndex: $selectedId)
+        Spacer()
         VStack(alignment: .leading) {
             HStack(spacing: 1) { //버튼간 간격
                 
@@ -84,6 +85,44 @@ struct RadioButtonGroup: View {
     }
     
 }
+
+
+struct ChartHeader: View {
+    
+    @Binding var chartIndex:Int
+    
+    
+    var body: some View {
+        
+        
+        VStack(alignment:.leading,spacing: 5){
+            HStack {
+                switch chartIndex{
+                case 0:
+                    Text("빌보두 누적 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                case 1:
+                    Text("빌보두 실시간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                case 2:
+                    Text("빌보두 일간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                case 3:
+                    Text("빌보두 주간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                case 4:
+                    Text("빌보두 월간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                default:
+                    Text("빌보두 누적 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                }
+                Spacer()
+                Text("더보기").foregroundColor(.gray).onTapGesture {
+                    //전체 차트로 이동 
+                    print(chartIndex)
+                }
+            }
+        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+    }
+}
+
+
+
 
 struct RadioButtonGroup_Previews: PreviewProvider {
     

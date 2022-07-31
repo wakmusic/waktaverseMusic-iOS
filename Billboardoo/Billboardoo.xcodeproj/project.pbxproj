@@ -11,7 +11,7 @@
 		748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */; };
 		D83578522888291F00459197 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83578512888291F00459197 /* SettingScreenView.swift */; };
 		D835785428891DAB00459197 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785328891DAB00459197 /* HomeScreenView.swift */; };
-		D835785628893EB300459197 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup.swift */; };
+		D835785628893EB300459197 /* RadioButtonGroup+ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup+ChartHeader.swift */; };
 		D84872282892606B00B508DC /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = D84872272892606B00B508DC /* YouTubePlayerKit */; };
 		D848724A2893ACE700B508DC /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872492893ACE700B508DC /* PlayState.swift */; };
 		D848724D2893B6A300B508DC /* PlaybackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848724C2893B6A300B508DC /* PlaybackBarView.swift */; };
@@ -23,7 +23,6 @@
 		D848725B2895245800B508DC /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848725A2895245800B508DC /* ImageModifier.swift */; };
 		D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C2288FD5DB001FE8F4 /* Alamofire */; };
 		D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C5288FD5E3001FE8F4 /* Kingfisher */; };
-		D86B5866288AC4B6001110A5 /* ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5865288AC4B6001110A5 /* ChartHeader.swift */; };
 		D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */; };
 		D86B586B288C27C6001110A5 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B586A288C27C6001110A5 /* TestView.swift */; };
 		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
@@ -70,7 +69,7 @@
 		D835784D2887E5B300459197 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D83578512888291F00459197 /* SettingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenView.swift; sourceTree = "<group>"; };
 		D835785328891DAB00459197 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
-		D835785528893EB300459197 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
+		D835785528893EB300459197 /* RadioButtonGroup+ChartHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RadioButtonGroup+ChartHeader.swift"; sourceTree = "<group>"; };
 		D84872492893ACE700B508DC /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
 		D848724C2893B6A300B508DC /* PlaybackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackBarView.swift; sourceTree = "<group>"; };
 		D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackFullScreenView.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		D84872552894101400B508DC /* PlayPuaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPuaseButton.swift; sourceTree = "<group>"; };
 		D84872582895172C00B508DC /* TextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
 		D848725A2895245800B508DC /* ImageModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
-		D86B5865288AC4B6001110A5 /* ChartHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeader.swift; sourceTree = "<group>"; };
 		D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveRowSongGridView.swift; sourceTree = "<group>"; };
 		D86B586A288C27C6001110A5 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* Billboardoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billboardoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,18 +191,17 @@
 			isa = PBXGroup;
 			children = (
 				D835785328891DAB00459197 /* HomeScreenView.swift */,
-				D86B5865288AC4B6001110A5 /* ChartHeader.swift */,
 				D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
 		};
-		D835785B288A660C00459197 /* RaidoButton */ = {
+		D835785B288A660C00459197 /* RaidoButton+ChartHeader */ = {
 			isa = PBXGroup;
 			children = (
-				D835785528893EB300459197 /* RadioButtonGroup.swift */,
+				D835785528893EB300459197 /* RadioButtonGroup+ChartHeader.swift */,
 			);
-			path = RaidoButton;
+			path = "RaidoButton+ChartHeader";
 			sourceTree = "<group>";
 		};
 		D848722528912A4C00B508DC /* MusicPlayerBar */ = {
@@ -218,12 +215,12 @@
 			path = MusicPlayerBar;
 			sourceTree = "<group>";
 		};
-		D848724B2893AD0B00B508DC /* PlayList */ = {
+		D848724B2893AD0B00B508DC /* PlayState */ = {
 			isa = PBXGroup;
 			children = (
 				D84872492893ACE700B508DC /* PlayState.swift */,
 			);
-			path = PlayList;
+			path = PlayState;
 			sourceTree = "<group>";
 		};
 		D84872502893C2E500B508DC /* Song */ = {
@@ -283,7 +280,7 @@
 				D87EDFD12887DA2A00999DE6 /* Repo */,
 				D87EDFCC2886DB9800999DE6 /* View */,
 				D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */,
-				D848724B2893AD0B00B508DC /* PlayList */,
+				D848724B2893AD0B00B508DC /* PlayState */,
 				D87EDFA128859FE300999DE6 /* Assets.xcassets */,
 				D87EDFA628859FE300999DE6 /* Persistence.swift */,
 				D87EDFA828859FE300999DE6 /* Billboardoo.xcdatamodeld */,
@@ -323,7 +320,7 @@
 				D84872572895171900B508DC /* Modifier */,
 				D84872502893C2E500B508DC /* Song */,
 				D848722528912A4C00B508DC /* MusicPlayerBar */,
-				D835785B288A660C00459197 /* RaidoButton */,
+				D835785B288A660C00459197 /* RaidoButton+ChartHeader */,
 				D8357859288A65C000459197 /* LaunchScreen */,
 				D8357857288A658F00459197 /* MainScreen */,
 			);
@@ -612,9 +609,8 @@
 				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
 				D87EDFD62887DA9500999DE6 /* SimpleSong.swift in Sources */,
 				D835785428891DAB00459197 /* HomeScreenView.swift in Sources */,
-				D86B5866288AC4B6001110A5 /* ChartHeader.swift in Sources */,
 				D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */,
-				D835785628893EB300459197 /* RadioButtonGroup.swift in Sources */,
+				D835785628893EB300459197 /* RadioButtonGroup+ChartHeader.swift in Sources */,
 				D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */,
 				D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */,
 			);

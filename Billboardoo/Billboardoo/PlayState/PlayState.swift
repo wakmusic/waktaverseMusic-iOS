@@ -50,6 +50,7 @@ class PlayState:ObservableObject {
         
         
         
+        
         if(self.currentPlayIndex ==  playList.count-1)
         {
             self.currentPlayIndex = 0
