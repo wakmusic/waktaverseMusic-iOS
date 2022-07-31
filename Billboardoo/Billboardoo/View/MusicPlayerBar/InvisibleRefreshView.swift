@@ -20,7 +20,6 @@ struct InvisibleRefreshView: View {
                 if let nowPlayingSong = playState.nowPlayingSong
                 { //트랙킹 다를 경우 .load
                     
-                    print("State: \(playState.isPlaying)")
                     if playState.currentSong != nowPlayingSong // 값이 다를경우
                     {
                         playState.currentSong = nowPlayingSong //곡 을 변경 후

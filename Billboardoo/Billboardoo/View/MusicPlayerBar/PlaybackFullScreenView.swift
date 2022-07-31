@@ -57,9 +57,7 @@ struct PlaybackFullScreenView: View {
                 .ultraThinMaterial,
                 in: RoundedRectangle(cornerRadius: 8)
                 //백그라운드를 늘린 후  onTapGesture
-            ).onTapGesture {
-                playState.isPlayerViewPresented.toggle()
-            }
+            )
             
             
             

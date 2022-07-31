@@ -80,10 +80,7 @@ struct PlaybackBarView: View {
                 .padding(.horizontal)
                 .background(.ultraThickMaterial,in: RoundedRectangle(cornerRadius: 8))
                 
-            }.onTapGesture {
-                playState.isPlayerViewPresented.toggle()
             }
-            
         }
         
         

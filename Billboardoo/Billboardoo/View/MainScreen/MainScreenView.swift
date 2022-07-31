@@ -33,6 +33,11 @@ struct MainScreenView: View {
     @EnvironmentObject var playState: PlayState
     @Namespace var animation
     
+    // PlayBar Slide 애니메이션을 위한 상태
+    @GestureState var gestureState = CGSize.zero
+    @State var gestureStore = CGSize.zero
+    //
+    
     
     init() {
         //UITabBar.appearance().unselectedItemTintColor = .red
@@ -60,116 +65,137 @@ struct MainScreenView: View {
             
             //- MARK: TabView
             ZStack {
-                
-                
-                VStack{
-                    YouTubePlayerView(self.playState.youTubePlayer) { state in
-                        // Overlay ViewBuilder closure to place an overlay View
-                        // for the current `YouTubePlayer.State`
-                        switch state {
-                        case .idle:
-                            ProgressView()
-                        case .ready:
-                            EmptyView()
-                        case .error(let error):
-                            Text(verbatim: "YouTube player couldn't be loaded")
-                        }
-                    }.frame(width: 0, height: 0)
-                }
-                
+                YotubeView().environmentObject(playState)
                 InvisibleRefreshView()
                     .opacity(0.0001)
-                
                 TabView(selection: $router.screen){
-                    
-                    ZStack() {
-                        HomeScreenView().environmentObject(playState).animation(.none).environmentObject(playState) // 애니메이션 막고 오직 스크롤만 되게
-                        
-                        if !playState.isPlayerViewPresented
-                        {
-                            PlaybackBarView(animation: animation).environmentObject(playState)
-                        }
-                        
-                    }.tag(Screen.home)
+                    HomeScreenView().environmentObject(playState).animation(.none).environmentObject(playState) // 애니메이션 막고 오직 스크롤만 되게
+                        .tag(Screen.home)
                         .tabItem {
                             TabBarItem(title: "Home", imageName: "house.fill")
                         }
+                    SettingScreenView()
                     
-                    ZStack{
-                        SettingScreenView()
-                        if !playState.isPlayerViewPresented
-                        {
-                            PlaybackBarView(animation: animation).environmentObject(playState)
-                        }
-                    }.tag(Screen.setting)
+                        .tag(Screen.setting)
                         .tabItem {
                             TabBarItem(title: "Setting", imageName: "gearshape.fill")
                         }
                     
                 }
-                .zIndex(1.0)
                 
-                if playState.isPlayerViewPresented {
-                    PlaybackFullScreenView(animation: animation)
-                        .environmentObject(playState)
-                        .edgesIgnoringSafeArea(.all)
-                        .zIndex(2.0)
-                    
-                    
+                
+                
+                Group{
+                    if playState.isPlayerViewPresented {
+                        PlaybackFullScreenView(animation: animation)
+                            .environmentObject(playState)
+                            .offset(CGSize(width: gestureState.width + gestureStore.width, height: gestureState.height + gestureStore.height))
+                        //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
+                        //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
+                        // 위: - 아래 + ,
+                        
+                        
+                    } else{
+                        PlaybackBarView(animation: animation)
+                            .environmentObject(playState)
+                            .onTapGesture {
+                                //PlayBar를 터치하면  store의 height을 0으로 초기화
+                                gestureStore.height = 0
+                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                   
+                                    playState.isPlayerViewPresented.toggle()
+                                }
+                            }
+                            .padding(.bottom,60) //탭 바와 곂치지않게 
+                        
+                    }
                 }
+                .zIndex(2.0)
+                //드래그 제스쳐를 updating
+                .simultaneousGesture(DragGesture().updating($gestureState, body: { value, state, transaction in
+                    
+                   
+                    
+                    if value.translation.height > 0 { // 아래로 드래그 하면 ,저장
+                        state.height = value.translation.height
+                    }
+                })
+                    .onEnded({ value in //드래그가 끝났을 때
+    
+                        let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
+                        
+                        if translationHeight > 0 { //0보다 위면 그냥 트랙킹만
+                            gestureStore.height = translationHeight
+                        }
+                        
+                        if translationHeight > 50 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
+                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                playState.isPlayerViewPresented = false
+                            }
+                        } else { //50 보다 작으면 다시 화면 꽉 채우게 
+                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                gestureStore.height = 0
+                            }
+                        }
+                    }))
                 
+                .edgesIgnoringSafeArea(.all)
+                //Group
                 
-            }.accentColor(Color("PrimaryColor"))
-            
-            
-            
-            // 재생창 띄울 때 움직이는 애니메이션 설정
-            //Should Refactor
-            
-            
-            //- MARK: Navigation Setting
-            //                    .navigationBarTitleDisplayMode(.inline)
-            //                    .toolbar {
-            //                        ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-            //
-            //                            NavigationLogo()
-            //
-            //                        }
-            //                        ToolbarItem(placement: .navigationBarTrailing) {
-            //                            SettinButton()
-            //                        }
-            //                    }
+                //ZStack
+                
+            }
+            .accentColor(Color("PrimaryColor"))
             
         }
         
-        
-        
+    }
+}
+    
+    
+    
+    //- MARK: Preview
+    
+    struct MainScreenView_Previews: PreviewProvider {
+        static var previews: some View {
+            MainScreenView().environmentObject(PlayState())
+        }
     }
     
-}
-
-
-
-//- MARK: Preview
-
-struct MainScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreenView().environmentObject(PlayState())
+    //- MARK: Function
+    
+    
+    
+    struct TabBarItem: View {
+        var title:String
+        var imageName:String
+        var body: some View {
+            VStack {
+                Text(title)
+                Image(systemName: imageName)
+            }
+        }
     }
-}
-
-//- MARK: Function
-
+    
+    
 
 
-struct TabBarItem: View {
-    var title:String
-    var imageName:String
+struct YotubeView: View {
+    @EnvironmentObject var playState: PlayState
     var body: some View {
-        VStack {
-            Text(title)
-            Image(systemName: imageName)
+        VStack{
+            YouTubePlayerView(self.playState.youTubePlayer) { state in
+                // Overlay ViewBuilder closure to place an overlay View
+                // for the current `YouTubePlayer.State`
+                switch state {
+                case .idle:
+                    ProgressView()
+                case .ready:
+                    EmptyView()
+                case .error(let error):
+                    Text(verbatim: "YouTube player couldn't be loaded")
+                }
+            }.frame(width: 0, height: 0)
         }
     }
 }
-
