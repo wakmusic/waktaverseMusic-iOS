@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import UIKit
 
 struct PlaybackFullScreenView: View {
     
@@ -19,48 +20,60 @@ struct PlaybackFullScreenView: View {
     var body: some View {
         let window = UIScreen.main.bounds
         let standardLen = window.width > window.height ? window.width : window.height
+        
         if let currentSong = playState.nowPlayingSong
         {
-            HStack{
-                VStack {
-                    Spacer(minLength: 0)
-                    KFImage(URL(string: currentSong.image)!)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width:standardLen*0.6,height: standardLen*0.6)
-                        .padding()
-                        .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.8)
-                        .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: -60, y: 60)
-                    //각 종 애니메이션
-                    VStack{
-                        Text(currentSong.title)
-                            .modifier(titleModifier)
+            if let artwork = bringAlbumImage(url: currentSong.image)
+            {
+                HStack{
+                    VStack {
                         
-                        Text(currentSong.artist)
-                            .modifier(artistModifier)
+                        //Spacer(minLength: 0)
+                        
+                        Image(uiImage: artwork)
+                            .resizable()
+                            .frame(width:standardLen*0.5,height: standardLen*0.5)
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding()
+                            .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.8)
+                            .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: -60, y: 60)
+                        //각 종 애니메이션
+                        VStack{
+                            Text(currentSong.title)
+                                .modifier(titleModifier)
+                            
+                            Text(currentSong.artist)
+                                .modifier(artistModifier)
+                        }
+                        .padding()
+                        
+                        Spacer(minLength: 0)
+                        
+                        PlayBar().environmentObject(playState)
+                            .padding(.bottom,60) //밑에서 띄우기
+                            .padding(.horizontal)
+                        
+                        
+                        
+                        
                     }
-                    .padding()
-                    
-                    Spacer(minLength: 0)
-                    
-                    PlayBar().environmentObject(playState)
-                    
-                    
-                    
-                    
                 }
+                
+                .frame(width: window.width, height: window.height)
+                .padding(.horizontal)
+                .background(
+                    
+                    //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
+                    //                        .saturation(0.5) //포화도
+                    //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
+                    //                        .edgesIgnoringSafeArea(.all)
+                    .ultraThinMaterial
+                    
+                )
+                
+                
             }
-            
-            .frame(width: window.width, height: window.height)
-            .padding(.horizontal)
-            .background(
-                .ultraThinMaterial,
-                in: RoundedRectangle(cornerRadius: 8)
-                //백그라운드를 늘린 후  onTapGesture
-            )
-            
-            
-            
         }
         
         
@@ -68,11 +81,7 @@ struct PlaybackFullScreenView: View {
 }
 
 
-
-
 struct PlayBar: View {
-    
-    
     
     var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @EnvironmentObject var playState:PlayState
@@ -134,5 +143,45 @@ struct PlayBar: View {
             
         }
         .accentColor(Color("PrimaryColor"))
+    }
+}
+
+func bringAlbumImage(url:String) ->UIImage?
+{
+    let url = URL(string: url)
+    let data = try? Data(contentsOf: url!)
+    return UIImage(data: data!)
+}
+
+extension UIImage {
+    //평균 색깔 구역
+    var averageColor: UIColor? {
+        
+        //UIImage를 CIImage로 변환
+        guard let inputImage = CIImage(image: self) else{ return nil }
+        
+        // extent vector 생성 ( width와 height은 input 이미지 그대로)
+        let extentVector = CIVector (x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
+        
+        
+        //CIAreaAverage 이름이란 필터 만듬 , image에서 평균 색깔을 뽑아낼 것
+        guard let filter = CIFilter(name: "CIAreaAverage",parameters:[kCIInputImageKey:inputImage, kCIInputExtentKey: extentVector]) else { return nil}
+        
+        //필터로 부터 뽑아낸 이미지
+        guard let outputImage = filter.outputImage else { return nil}
+        
+        // bitmap (r,g,b,a)
+        var bitmap = [UInt8](repeating: 0, count: 4)
+        
+        let context = CIContext(options: [.workingColorSpace: kCFNull!])
+        
+        // output 이미지를 1대1로 bitmap에 r g b a값을 뽑아내어 bitmap 배열 채워 랜더시킨다
+        
+        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
+        
+        
+        //bitmap image를 rgba UIColor로 변환
+        return UIColor(red: CGFloat(bitmap[0])*0.6/255, green: CGFloat(bitmap[1])*0.6/255, blue: CGFloat(bitmap[2])*0.6/255, alpha: CGFloat(bitmap[3])/255)
+        
     }
 }

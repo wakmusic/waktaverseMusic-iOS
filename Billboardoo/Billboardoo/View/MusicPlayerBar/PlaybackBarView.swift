@@ -34,7 +34,7 @@ struct PlaybackBarView: View {
                         
                         
                     }
-
+                    
                     VStack(alignment:.leading){
                         Text(currentSong.title)
                             .modifier(PlayBarTitleModifier())
@@ -74,7 +74,7 @@ struct PlaybackBarView: View {
                         
                         
                     }
- 
+                    
                     
                 }
                 .padding(.horizontal)

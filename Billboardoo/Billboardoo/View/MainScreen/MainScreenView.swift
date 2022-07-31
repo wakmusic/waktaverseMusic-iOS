@@ -89,32 +89,32 @@ struct MainScreenView: View {
                     if playState.isPlayerViewPresented {
                         PlaybackFullScreenView(animation: animation)
                             .environmentObject(playState)
-                            .offset(CGSize(width: gestureState.width + gestureStore.width, height: gestureState.height + gestureStore.height))
+                            .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
                         //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
                         //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
-                        // 위: - 아래 + ,
+                        // 위: - 아래 + , 좌우는  슬라이드 애니메이션을 넣지 않고 바꾼다
                         
                         
                     } else{
                         PlaybackBarView(animation: animation)
                             .environmentObject(playState)
                             .onTapGesture {
-                                //PlayBar를 터치하면  store의 height을 0으로 초기화
+                                //PlayBar를 터치하면  store의 height,width을 0으로 초기화
                                 gestureStore.height = 0
+                                gestureStore.width = 0
                                 withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
                                    
                                     playState.isPlayerViewPresented.toggle()
                                 }
                             }
-                            .padding(.bottom,60) //탭 바와 곂치지않게 
-                        
+                            .padding(.bottom,60) //탭 바와 곂치지않게
                     }
-                }
+                } //그룹
                 .zIndex(2.0)
                 //드래그 제스쳐를 updating
                 .simultaneousGesture(DragGesture().updating($gestureState, body: { value, state, transaction in
                     
-                   
+                    
                     
                     if value.translation.height > 0 { // 아래로 드래그 하면 ,저장
                         state.height = value.translation.height
@@ -124,22 +124,46 @@ struct MainScreenView: View {
     
                         let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
                         
+                        
+                        let tranlationWidth = max(value.translation.width, value.predictedEndTranslation.width * 0.2)
+                       
+                        
+                        
                         if translationHeight > 0 { //0보다 위면 그냥 트랙킹만
                             gestureStore.height = translationHeight
                         }
                         
-                        if translationHeight > 50 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
+                        if tranlationWidth > 0 {
+                            gestureStore.width = tranlationWidth
+                        }
+                        
+                        if translationHeight > 100 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
                                 playState.isPlayerViewPresented = false
                             }
-                        } else { //50 보다 작으면 다시 화면 꽉 채우게 
+                        } else { //50 보다 작으면 다시 화면 꽉 채우게
                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
                                 gestureStore.height = 0
                             }
                         }
+                        
+                        //위에서 꺼지는 작업이 아닐 때
+                        //width가  (왼->오) + (forWard)
+                        //width가. (오->왼) - (backWard)
+                        if tranlationWidth > 80 {
+                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                playState.forWard()
+                            }
+                        }
+                        
+                        if tranlationWidth < -80 {
+                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                playState.backWard()
+                            }
+                        }
                     }))
                 
-                .edgesIgnoringSafeArea(.all)
+                
                 //Group
                 
                 //ZStack
