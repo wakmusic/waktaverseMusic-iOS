@@ -29,15 +29,18 @@ struct PlaybackFullScreenView: View {
                     VStack {
                         
                         //Spacer(minLength: 0)
-                        
+                        /*
+                         .aspectRatio(contentMode: .fit) == scaledToFit() ⇒ 이미지의 비율을 유지 + 이미지의 전체를 보여준다.
+                         .aspectRatio(contentMode: .fill) ⇒ 이미지의 비율을 유지 + 이미지가 잘리더라도 꽉채움
+                         */
                         Image(uiImage: artwork)
                             .resizable()
                             .frame(width:standardLen*0.5,height: standardLen*0.5)
                             .aspectRatio(contentMode: .fit)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .padding()
-                            .scaleEffect(playState.isPlaying == .play ? 1.0 : 0.8)
-                            .shadow(color: .black.opacity(playState.isPlaying == .play ? 0.2:0.0), radius: 30, x: -60, y: 60)
+                            .scaleEffect(playState.isPlaying == .playing ? 1.0 : 0.8)
+                            .shadow(color: .black.opacity(playState.isPlaying == .playing ? 0.2:0.0), radius: 30, x: -60, y: 60)
                         //각 종 애니메이션
                         VStack{
                             Text(currentSong.title)

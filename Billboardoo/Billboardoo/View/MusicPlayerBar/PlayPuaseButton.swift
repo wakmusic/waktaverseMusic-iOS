@@ -10,20 +10,19 @@ struct PlayPuaseButton: View {
         
         Button {
             
-            if playState.isPlaying == .stop || playState.isPlaying == .pause { //stop 또는 pause 상태일 때 눌리면 play
-                playState.isPlaying = .play
+            if playState.isPlaying != .playing { //stop 또는 pause 상태일 때 눌리면 play
+                
                 playState.youTubePlayer.play()
             }
-            else{ // play 때 눌리면 pause
+            else{
                 playState.youTubePlayer.pause()
-                playState.isPlaying = .pause
             }
             
         } label: {
             
             withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
             {
-                Image(systemName: playState.isPlaying == .play ? "pause.fill" : "play.fill")
+                Image(systemName: playState.isPlaying == .playing ? "pause.fill" : "play.fill")
                     .resizable()
                     .modifier(buttonModifier)
                 
