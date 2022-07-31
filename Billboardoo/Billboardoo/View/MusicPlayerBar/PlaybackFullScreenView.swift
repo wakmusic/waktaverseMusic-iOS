@@ -23,60 +23,70 @@ struct PlaybackFullScreenView: View {
         
         if let currentSong = playState.nowPlayingSong
         {
-            if let artwork = bringAlbumImage(url: currentSong.image)
-            {
-                HStack{
-                    VStack {
-                        
-                        //Spacer(minLength: 0)
-                        /*
-                         .aspectRatio(contentMode: .fit) == scaledToFit() ⇒ 이미지의 비율을 유지 + 이미지의 전체를 보여준다.
-                         .aspectRatio(contentMode: .fill) ⇒ 이미지의 비율을 유지 + 이미지가 잘리더라도 꽉채움
-                         */
-                        Image(uiImage: artwork)
-                            .resizable()
-                            .frame(width:standardLen*0.5,height: standardLen*0.5)
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding()
-                            .scaleEffect(playState.isPlaying == .playing ? 1.0 : 0.8)
-                            .shadow(color: .black.opacity(playState.isPlaying == .playing ? 0.2:0.0), radius: 30, x: -60, y: 60)
-                        //각 종 애니메이션
-                        VStack{
-                            Text(currentSong.title)
-                                .modifier(titleModifier)
-                            
-                            Text(currentSong.artist)
-                                .modifier(artistModifier)
-                        }
+            //if let artwork = bringAlbumImage(url: currentSong.image)
+            
+            HStack{
+                VStack {
+                    
+                    //Spacer(minLength: 0)
+                    /*
+                     .aspectRatio(contentMode: .fit) == scaledToFit() ⇒ 이미지의 비율을 유지 + 이미지의 전체를 보여준다.
+                     .aspectRatio(contentMode: .fill) ⇒ 이미지의 비율을 유지 + 이미지가 잘리더라도 꽉채움
+                     */
+                    //                    Image(uiImage: artwork)
+                    KFImage(URL(string: currentSong.image)!)
+                        .resizable()
+                        .frame(width:standardLen*0.5,height: standardLen*0.5)
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding()
+                        .scaleEffect(playState.isPlaying == .playing ? 1.0 : 0.8)
+                        .shadow(color: .black.opacity(playState.isPlaying == .playing ? 0.2:0.0), radius: 30, x: -60, y: 60)
+                    //각 종 애니메이션
+                    VStack{
+                        Text(currentSong.title)
+                            .modifier(titleModifier)
                         
-                        Spacer(minLength: 0)
-                        
-                        PlayBar().environmentObject(playState)
-                            .padding(.bottom,60) //밑에서 띄우기
-                            .padding(.horizontal)
-                        
-                        
-                        
-                        
+                        Text(currentSong.artist)
+                            .modifier(artistModifier)
                     }
+                    .padding(.top,45)
+                    .padding(.bottom,20)
+                    
+                    
+                    
+                    Spacer(minLength: 0)
+                    
+                    ProgressBar().padding(.horizontal)
+                    
+                    Spacer(minLength: 0)
+                    
+                    
+                    
+                    PlayBar().environmentObject(playState)
+                        .padding(.bottom,60) //밑에서 띄우기
+                        .padding(.horizontal)
+                    
+                    
+                    
+                    
                 }
-                
-                .frame(width: window.width, height: window.height)
-                .padding(.horizontal)
-                .background(
-                    
-                    //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
-                    //                        .saturation(0.5) //포화도
-                    //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
-                    //                        .edgesIgnoringSafeArea(.all)
-                    .ultraThinMaterial
-                    
-                )
-                
-                
             }
+            
+            .frame(width: window.width, height: window.height)
+            .padding(.horizontal)
+            .background(
+                
+                //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
+                //                        .saturation(0.5) //포화도
+                //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
+                //                        .edgesIgnoringSafeArea(.all)
+                .ultraThinMaterial
+                
+            )
+            
+            
+            
         }
         
         
@@ -146,6 +156,34 @@ struct PlayBar: View {
             
         }
         .accentColor(Color("PrimaryColor"))
+    }
+}
+
+struct ProgressBar: View{
+    
+    @EnvironmentObject var playState:PlayState
+    
+    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    
+    var body: some View{
+        
+        if let currentSong = playState.nowPlayingSong {
+            ProgressView("",value: playState.currentProgress,total: 100)
+                .onReceive(timer) { _ in
+                    
+                    playState.youTubePlayer.getCurrentTime { completion in
+                        
+                        switch completion{
+                        case .success(let time):
+                            playState.currentProgress = (time/playState.endProgress) * 100
+                            //print("\(playState.currentProgress)  \(playState.endProgress)")
+                        case.failure(let err):
+                            print("currentProgress Error")
+                        }
+                    }
+                    
+                }
+        }
     }
 }
 

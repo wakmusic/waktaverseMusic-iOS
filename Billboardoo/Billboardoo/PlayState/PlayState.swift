@@ -22,6 +22,7 @@ class PlayState:ObservableObject {
     @Published var volum:Int
     @Published var playList:[SimpleSong]
     @Published var currentProgress: Double = 0
+    @Published var endProgress:Double = 0
     @Published var isPlayerViewPresented = false //false = Bar , true = FullScreen
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay:false))
     @Published var currentSong:SimpleSong? = nil
