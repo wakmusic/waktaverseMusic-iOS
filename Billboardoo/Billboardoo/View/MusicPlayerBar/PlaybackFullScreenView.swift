@@ -50,8 +50,7 @@ struct PlaybackFullScreenView: View {
                         Text(currentSong.artist)
                             .modifier(artistModifier)
                     }
-                    .padding(.top,45)
-                    .padding(.bottom,20)
+                    .padding(.bottom,30)
                     
                     
                     

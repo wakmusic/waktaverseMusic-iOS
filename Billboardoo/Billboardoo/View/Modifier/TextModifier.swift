@@ -14,7 +14,9 @@ struct FullScreenTitleModifier: ViewModifier{
     func body(content: Content) -> some View {
         
         content.font(.system(size: window.height/35, weight: .bold, design: .default))
-                    
+            .lineLimit(1) // 1줄 제한
+            .truncationMode(.tail) //뒤에짜리기
+        
     }
 }
 
@@ -24,6 +26,8 @@ struct FullScreenArtistModifer: ViewModifier{
     func body(content: Content) -> some View {
         
         content.font(.system(size: window.height/45,design: .serif)).foregroundColor(.secondary)
+            .lineLimit(1) // 1줄 제한
+            .truncationMode(.tail) //뒤에짜리기
     }
 }
 
@@ -33,6 +37,8 @@ struct PlayBarTitleModifier: ViewModifier{
     
     func body(content: Content) -> some View {
         content.font(.system(size: window.height/40, weight: .bold, design: .default))
+            .lineLimit(1) // 1줄 제한
+            .truncationMode(.tail) //뒤에짜리기
     }
 }
 
@@ -42,5 +48,7 @@ struct PlayBarArtistModifer: ViewModifier{
     func body(content: Content) -> some View {
         
         content.font(.system(size: window.height/45,design: .serif)).foregroundColor(.secondary)
+            .lineLimit(1) // 1줄 제한
+            .truncationMode(.tail) //뒤에짜리기
     }
 }
