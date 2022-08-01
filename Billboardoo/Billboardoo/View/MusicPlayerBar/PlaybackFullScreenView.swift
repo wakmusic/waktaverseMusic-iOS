@@ -161,27 +161,41 @@ struct PlayBar: View {
 struct ProgressBar: View{
     
     @EnvironmentObject var playState:PlayState
-    
     let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    
+    @State var playtime:String = "00:00"
+    @State var endtime:String = "00:00"
+
     
     var body: some View{
         
         if let currentSong = playState.nowPlayingSong {
-            ProgressView("",value: playState.currentProgress,total: 100)
-                .onReceive(timer) { _ in
+            VStack {
+                ProgressView("",value: playState.currentProgress,total: 100)
+                
+                
+                HStack{
                     
-                    playState.youTubePlayer.getCurrentTime { completion in
-                        
-                        switch completion{
-                        case .success(let time):
-                            playState.currentProgress = (time/playState.endProgress) * 100
-                            //print("\(playState.currentProgress)  \(playState.endProgress)")
-                        case.failure(let err):
-                            print("currentProgress Error")
-                        }
-                    }
-                    
+                    Text(playtime).modifier(PlayBarTitleModifier()).foregroundColor(Color("PrimaryColor"))
+                    Spacer()
+                    Text(endtime).modifier(PlayBarTitleModifier()).foregroundColor(Color("PrimaryColor"))
                 }
+                
+            }.onReceive(timer) { _ in
+                
+                playState.youTubePlayer.getCurrentTime { completion in
+                    switch completion{
+                    case .success(let time):
+                        playState.currentProgress = (time/playState.endProgress) * 100
+                        playtime = playState.convertTimetoString(time)
+                        endtime = playState.convertTimetoString(playState.endProgress)
+            
+                        //print("\(playState.currentProgress)  \(playState.endProgress)")
+                    case.failure(let err):
+                        print("currentProgress Error")
+                    }
+                }
+            }
         }
     }
 }

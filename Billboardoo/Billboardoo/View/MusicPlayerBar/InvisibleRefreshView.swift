@@ -62,19 +62,26 @@ struct InvisibleRefreshView: View {
                     {
                         playState.currentSong = nowPlayingSong //곡 을 변경 후
                         
-                        if (playState.isPlaying == .playing || playState.isPlaying == .unstarted || playState.isPlaying == .ended)   {
-                            
-                            //playing , unstarted , ended 때만 load
-                            
-                            //만약 재새중에 옮겼다면  load
+                        switch playState.isPlaying{
+                        case .unstarted,.buffering,.ended,.playing:
                             playState.youTubePlayer.load(source: .url(nowPlayingSong.url)) //바로 load
-                        }
-                        else //나머지는 cue
-                        {
-                            
+                        case .cued,.paused:
                             playState.youTubePlayer.cue(source: .url(nowPlayingSong.url))
                         }
                         
+//                        if (playState.isPlaying == .playing || playState.isPlaying == .unstarted || playState.isPlaying == .ended || playState.isPlaying == .buffering){
+//                            
+//                            //playing , unstarted , ended 때만 load
+//                            
+//                            //만약 재새중에 옮겼다면  load
+//                            playState.youTubePlayer.load(source: .url(nowPlayingSong.url)) //바로 load
+//                        }
+//                        else //나머지는 cue
+//                        {
+//                            
+//                            playState.youTubePlayer.cue(source: .url(nowPlayingSong.url))
+//                        }
+//                        
                         
                     }
                     

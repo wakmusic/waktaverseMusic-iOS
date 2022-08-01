@@ -53,7 +53,13 @@ private extension FiveRowSongGridView {
                         Text("\(nowChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
                     }
                     Button {
+                        //FiveRowSong Grid에서는 재생 버튼 누르면 일단 load와 currentSong을 바꿈
+                        playState.currentSong = nowChart[index] //강제 배정
+                        playState.youTubePlayer.load(source: .url(nowChart[index].url)) //강제 재생
                         playState.uniqueAppend(item: nowChart[index]) //현재 누른 곡 담기
+                        
+                        
+                       
                     } label: {
                         Image(systemName: "play.fill").foregroundColor(Color("PrimaryColor"))
                     }

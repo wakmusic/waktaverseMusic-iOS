@@ -27,13 +27,34 @@ class PlayState:ObservableObject {
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay:false))
     @Published var currentSong:SimpleSong? = nil
     
+    
+    
     var nowPlayingSong: SimpleSong? {
-        if playList.count == 0
-        {
-            return nil
+        
+        get {
+            if playList.count == 0
+            {
+                return nil
+            }
+            return playList[currentPlayIndex]
         }
-        return playList[currentPlayIndex]
+        
     }
+    
+    func convertTimetoString(_ dtime:Double) ->String{
+        
+        let convertInt = lround(dtime)-1 >= 0 ? lround(dtime)-1 : 0
+        
+        let min:String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
+        
+        let sec:String = "\(convertInt%60)".count == 1 ? "0\(convertInt%60)" : "\(convertInt%60)"
+        
+        return min+sec
+        
+        
+    }
+    
+    
     
     init()
     {
@@ -83,7 +104,7 @@ class PlayState:ObservableObject {
     
     func uniqueAppend(item:SimpleSong){
         
-       
+        
         for (index,song) in playList.enumerated() { //이미 재생목록에 있으면  추가안함
             
             if(song==item)
