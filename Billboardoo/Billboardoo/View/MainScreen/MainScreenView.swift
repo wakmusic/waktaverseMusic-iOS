@@ -12,7 +12,6 @@ enum Screen{
     case home
     case albums
     case artists
-    case setting
 }
 
 final class TabRouter: ObservableObject { //Tab State관련 클래스
@@ -74,12 +73,7 @@ struct MainScreenView: View {
                         .tabItem {
                             TabBarItem(title: "Home", imageName: "house.fill")
                         }
-                    SettingScreenView()
                     
-                        .tag(Screen.setting)
-                        .tabItem {
-                            TabBarItem(title: "Setting", imageName: "gearshape.fill")
-                        }
                     
                 }
                 
@@ -96,14 +90,14 @@ struct MainScreenView: View {
                         
                         
                     } else{
-                        PlaybackBarView(animation: animation)
+                        PlaybackBarView(animation: animation,gestureStore:$gestureStore)
                             .environmentObject(playState)
                             .onTapGesture {
                                 //PlayBar를 터치하면  store의 height,width을 0으로 초기화
                                 gestureStore.height = 0
                                 gestureStore.width = 0
                                 withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                   
+                                    
                                     playState.isPlayerViewPresented.toggle()
                                 }
                             }
@@ -121,12 +115,12 @@ struct MainScreenView: View {
                     }
                 })
                     .onEnded({ value in //드래그가 끝났을 때
-    
+                        
                         let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
                         
                         
                         let tranlationWidth = max(value.translation.width, value.predictedEndTranslation.width * 0.2)
-                       
+                        
                         
                         
                         if translationHeight > 0 { //0보다 위면 그냥 트랙킹만
@@ -139,7 +133,10 @@ struct MainScreenView: View {
                         
                         if translationHeight > 100 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                
+                               
                                 playState.isPlayerViewPresented = false
+                                playState.isPlayerListViewPresented  = false  //꺼질 때 list화면 도 같이
                             }
                         } else { //50 보다 작으면 다시 화면 꽉 채우게
                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
@@ -175,33 +172,33 @@ struct MainScreenView: View {
         
     }
 }
-    
-    
-    
-    //- MARK: Preview
-    
-    struct MainScreenView_Previews: PreviewProvider {
-        static var previews: some View {
-            MainScreenView().environmentObject(PlayState())
+
+
+
+//- MARK: Preview
+
+struct MainScreenView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainScreenView().environmentObject(PlayState())
+    }
+}
+
+//- MARK: Function
+
+
+
+struct TabBarItem: View {
+    var title:String
+    var imageName:String
+    var body: some View {
+        VStack {
+            Text(title)
+            Image(systemName: imageName)
         }
     }
-    
-    //- MARK: Function
-    
-    
-    
-    struct TabBarItem: View {
-        var title:String
-        var imageName:String
-        var body: some View {
-            VStack {
-                Text(title)
-                Image(systemName: imageName)
-            }
-        }
-    }
-    
-    
+}
+
+
 
 
 struct YotubeView: View {

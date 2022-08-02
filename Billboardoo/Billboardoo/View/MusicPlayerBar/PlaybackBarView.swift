@@ -15,6 +15,7 @@ struct PlaybackBarView: View {
     @EnvironmentObject var playState:PlayState
     var buttonModifier: PlayBarButtonImageModifier = PlayBarButtonImageModifier()
     var xWardButton: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+    @Binding var gestureStore:CGSize
     var body: some View {
         
         if let currentSong = playState.nowPlayingSong
@@ -26,7 +27,16 @@ struct PlaybackBarView: View {
                 HStack{
                     
                     Button {
-                        print("List")
+                        withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                            
+                            //offset에 영향없게 상위 뷰의 gestureStore의 값을 0 으로
+                            gestureStore.height = 0
+                            gestureStore.width  = 0
+                            playState.isPlayerViewPresented = true //play화면을 보여주고
+                            playState.isPlayerListViewPresented = true // 리스트 화면까지 같이
+                        }
+                        
+                        
                     }label: {
                         Image(systemName: "music.note.list")
                             .resizable()

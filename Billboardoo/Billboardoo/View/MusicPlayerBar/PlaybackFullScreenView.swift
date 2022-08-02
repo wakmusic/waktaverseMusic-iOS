@@ -34,22 +34,59 @@ struct PlaybackFullScreenView: View {
                      .aspectRatio(contentMode: .fill) ⇒ 이미지의 비율을 유지 + 이미지가 잘리더라도 꽉채움
                      */
                     //                    Image(uiImage: artwork)
-                    KFImage(URL(string: currentSong.image)!)
-                        .resizable()
-                        .frame(width:standardLen*0.5,height: standardLen*0.5)
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .padding()
-                        .scaleEffect(playState.isPlaying == .playing ? 1.0 : 0.8)
-                        .shadow(color: .black.opacity(playState.isPlaying == .playing ? 0.2:0.0), radius: 30, x: -60, y: 60)
-                    //각 종 애니메이션
-                    VStack{
-                        Text(currentSong.title)
-                            .modifier(titleModifier)
+                    
+                    
+                    Group{ //그룹으로 묶어 조건적으로 보여준다.
+                        if playState.isPlayerListViewPresented {
+                            PlayListView().environmentObject(playState)
+                        }
                         
-                        Text(currentSong.artist)
-                            .modifier(artistModifier)
+                        else
+                        {
+                            KFImage(URL(string: currentSong.image)!)
+                                .resizable()
+                                .frame(width:standardLen*0.5,height: standardLen*0.5)
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .padding()
+                                .scaleEffect(playState.isPlaying == .playing ? 0.8 : 0.6)
+                                .shadow(color: .black.opacity(playState.isPlaying == .playing ? 0.2:0.0), radius: 30, x: -60, y: 60)
+                            //각 종 애니메이션
+                        }
+                        
+                        
                     }
+                    
+                    
+                    
+                    
+                    HStack{
+                        
+                        if playState.isPlayerListViewPresented { //ListView가 켜지면 작은 썸네일 보이게 
+                            KFImage(URL(string: currentSong.image)!)
+                                .resizable()
+                                .frame(width:standardLen*0.1,height: standardLen*0.1)
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                
+                                
+                                
+                        }
+                      
+                        //  이미지 와 함께 중앙정렬 -> PlayList 꾸미러 가자
+                        
+                        
+                        
+                        VStack{
+                            Text(currentSong.title)
+                                .modifier(titleModifier)
+                            
+                            Text(currentSong.artist)
+                                .modifier(artistModifier)
+                        }
+                        
+                    }
+                    .padding(.trailing, playState.isPlayerListViewPresented ? standardLen*0.1 : 0) //리스트 보여줄 때는 이미지 width만큼 padding
                     .padding(.bottom,30)
                     
                     
@@ -102,8 +139,11 @@ struct PlayBar: View {
         HStack
         {
             
-            Button {
-                print("List")
+            Button {  //리스트 버튼을 누를 경우 animation과 같이 toggle
+                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                    playState.isPlayerListViewPresented.toggle()
+                }
+                
             }label: {
                 Image(systemName: "music.note.list")
                     .resizable()
@@ -165,7 +205,7 @@ struct ProgressBar: View{
     
     @State var playtime:String = "00:00"
     @State var endtime:String = "00:00"
-
+    
     
     var body: some View{
         
@@ -189,7 +229,6 @@ struct ProgressBar: View{
                         playState.currentProgress = (time/playState.endProgress) * 100
                         playtime = playState.convertTimetoString(time)
                         endtime = playState.convertTimetoString(playState.endProgress)
-            
                         //print("\(playState.currentProgress)  \(playState.endProgress)")
                     case.failure(let err):
                         print("currentProgress Error")

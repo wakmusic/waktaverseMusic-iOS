@@ -10,7 +10,7 @@ import Combine
 import Alamofire
 
 struct HomeScreenView: View {
-    
+    @ScaledMetric var scale: CGFloat = 15
     @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
     @EnvironmentObject var playState:PlayState
     
@@ -25,48 +25,81 @@ struct HomeScreenView: View {
     var body: some View {
         ZStack(alignment: .leading)
         {
-            ScrollView(.vertical, showsIndicators: false) {
-                MainHeader()
-                Spacer()
-                
-                RadioButtonGroup { (prev:Int, now:Int) in
+            NavigationView {
+                ScrollView(.vertical, showsIndicators: false) {
+                    //                    MainHeader()
+                    //                    Spacer()
                     
-                    if(prev != now) //이전 값과 다를 경우에만 fetch
-                    {
-                        // 하위 뷰인 라이도 버튼의 선택된 버튼 index의 따라 다른 차트를 가져옴
-                        switch now{
-                        case 0:
-                            viewModel.fetchTop20(category: .total)
-                        case 1:
-                            viewModel.fetchTop20(category: .time)
-                        case 2:
-                            viewModel.fetchTop20(category: .daily)
-                        case 3:
-                            viewModel.fetchTop20(category: .weekly)
-                        case 4:
-                            viewModel.fetchTop20(category: .monthly)
-                        default :
-                            viewModel.fetchTop20(category: .total)
-                        }
+                    RadioButtonGroup { (prev:Int, now:Int) in
                         
+                        if(prev != now) //이전 값과 다를 경우에만 fetch
+                        {
+                            // 하위 뷰인 라이도 버튼의 선택된 버튼 index의 따라 다른 차트를 가져옴
+                            switch now{
+                            case 0:
+                                viewModel.fetchTop20(category: .total)
+                            case 1:
+                                viewModel.fetchTop20(category: .time)
+                            case 2:
+                                viewModel.fetchTop20(category: .daily)
+                            case 3:
+                                viewModel.fetchTop20(category: .weekly)
+                            case 4:
+                                viewModel.fetchTop20(category: .monthly)
+                            default :
+                                viewModel.fetchTop20(category: .total)
+                            }
+                            
+                        }
+                    }
+                    FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
+                    
+                    
+                } //ScrollView
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                        NavigationLogo()
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        SettinButton()
                     }
                 }
-                FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
-                
-                
-            }
+                .padding(.vertical)
+            }.navigationViewStyle(.stack) //Naivi
         }
     }
 }
 
 struct NavigationLogo: View {
+    @ScaledMetric(relativeTo: .headline)
+    var scale: CGFloat = 0.3
     let window = UIScreen.main.bounds.size
     var body: some View {
         Image("mainLogoWhite")
             .resizable()
             .renderingMode(.template)
             .foregroundColor(Color("PrimaryColor"))
-            .frame(width: window.width*0.4, height: window.height*0.04) //
+            .frame(width: window.width*0.4, height: window.height*0.04) 
+        
+    }
+}
+
+struct SettinButton:View {
+    let window = UIScreen.main.bounds.size
+    //@ScaledMetric(relativeTo: .headline)
+    //var scale: CGFloat =
+    var body: some View{
+        
+        NavigationLink(destination: SettingScreenView(), label: {
+            Image(systemName: "gearshape.fill")
+                .resizable()
+                .scaledToFill()
+            //                .frame(width: window.width*scale, height: window.height*scale)
+                .foregroundColor(Color("PrimaryColor"))
+        })
+        
+        
     }
 }
 
