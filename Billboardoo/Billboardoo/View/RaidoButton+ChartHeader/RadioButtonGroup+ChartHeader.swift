@@ -36,17 +36,17 @@ struct RadioBttuon: View {
         } label: {
             
             Text(title).fontWeight(.bold).tracking(4) //자간 간격 4 만큼
-            
+             
             
             //글자 색
                 .foregroundColor(self.selectedId != self.id ? Color("UnSelectedTextColor"):.white)
-            
+               // .padding()
             //배경색
                 .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color("PrimaryColor"))
                 .cornerRadius(10)
             //테두리 설정
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("PrimaryColor"),lineWidth: 1))
-        }.frame(width: window.width*0.15, height: window.height*0.02, alignment: .center)
+                .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color("PrimaryColor"),lineWidth: 1))
+        }
         //최종 크기
         
         
@@ -74,12 +74,12 @@ struct RadioButtonGroup: View {
         ChartHeader(chartIndex: $selectedId)
         Spacer()
         VStack(alignment: .leading) {
-            HStack(spacing: 1) { //버튼간 간격
+            HStack(spacing: 10) { //버튼간 간격
                 
                 ForEach(Array(items.enumerated()), id: \.offset) { idx, item in
                     RadioBttuon(title: item, id:idx, callback: self.radioGroupCallback, selectedID: self.selectedId) //버튼 설정
                 }
-            }.frame(width: window.width, height: 30, alignment: .center)
+            }.frame(width: window.width, alignment: .center)
         }
         
     }

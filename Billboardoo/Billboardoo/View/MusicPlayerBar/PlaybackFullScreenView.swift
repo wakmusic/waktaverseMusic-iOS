@@ -38,7 +38,10 @@ struct PlaybackFullScreenView: View {
                     
                     Group{ //그룹으로 묶어 조건적으로 보여준다.
                         if playState.isPlayerListViewPresented {
+                            
                             PlayListView().environmentObject(playState)
+                            
+                                
                         }
                         
                         else
@@ -77,7 +80,7 @@ struct PlaybackFullScreenView: View {
                         
                         
                         
-                        VStack{
+                        VStack(alignment:.leading){
                             Text(currentSong.title)
                                 .modifier(titleModifier)
                             
@@ -117,7 +120,9 @@ struct PlaybackFullScreenView: View {
                 //                        .saturation(0.5) //포화도
                 //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
                 //                        .edgesIgnoringSafeArea(.all)
-                .ultraThinMaterial
+                
+                // playList 백그라운드 색 해결 못해서 주석 ..
+                //.ultraThinMaterial
                 
             )
             
@@ -140,7 +145,7 @@ struct PlayBar: View {
         {
             
             Button {  //리스트 버튼을 누를 경우 animation과 같이 toggle
-                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.85)) {
                     playState.isPlayerListViewPresented.toggle()
                 }
                 
@@ -216,9 +221,9 @@ struct ProgressBar: View{
                 
                 HStack{
                     
-                    Text(playtime).modifier(PlayBarTitleModifier()).foregroundColor(Color("PrimaryColor"))
+                    Text(playtime).modifier(FullScreenTimeModifer())
                     Spacer()
-                    Text(endtime).modifier(PlayBarTitleModifier()).foregroundColor(Color("PrimaryColor"))
+                    Text(endtime).modifier(FullScreenTimeModifer())
                 }
                 
             }.onReceive(timer) { _ in

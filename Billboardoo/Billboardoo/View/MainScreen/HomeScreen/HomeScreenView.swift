@@ -35,6 +35,7 @@ struct HomeScreenView: View {
                         if(prev != now) //이전 값과 다를 경우에만 fetch
                         {
                             // 하위 뷰인 라이도 버튼의 선택된 버튼 index의 따라 다른 차트를 가져옴
+                            
                             switch now{
                             case 0:
                                 viewModel.fetchTop20(category: .total)

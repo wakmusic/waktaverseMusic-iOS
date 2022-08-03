@@ -210,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				D848724C2893B6A300B508DC /* PlaybackBarView.swift */,
-				D848725C2897E30000B508DC /* New Group */,
+				D848725C2897E30000B508DC /* PlayList */,
 				D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */,
 				D84872532893FC8600B508DC /* InvisibleRefreshView.swift */,
 				D84872552894101400B508DC /* PlayPuaseButton.swift */,
@@ -243,12 +243,12 @@
 			path = Modifier;
 			sourceTree = "<group>";
 		};
-		D848725C2897E30000B508DC /* New Group */ = {
+		D848725C2897E30000B508DC /* PlayList */ = {
 			isa = PBXGroup;
 			children = (
 				D848725D2897E30F00B508DC /* PlayListView.swift */,
 			);
-			path = "New Group";
+			path = PlayList;
 			sourceTree = "<group>";
 		};
 		D86B5869288C27AF001110A5 /* Test */ = {

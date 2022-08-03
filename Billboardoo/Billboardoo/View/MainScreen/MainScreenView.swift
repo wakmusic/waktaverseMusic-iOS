@@ -98,7 +98,7 @@ struct MainScreenView: View {
                                 gestureStore.width = 0
                                 withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
                                     
-                                    playState.isPlayerViewPresented.toggle()
+                                    playState.isPlayerViewPresented = true // Full Sreen 보이게
                                 }
                             }
                             .padding(.bottom,60) //탭 바와 곂치지않게
@@ -115,7 +115,7 @@ struct MainScreenView: View {
                     }
                 })
                     .onEnded({ value in //드래그가 끝났을 때
-                        
+                        print("Parent Drage value: \(value.translation.width)")
                         let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
                         
                         
@@ -147,13 +147,13 @@ struct MainScreenView: View {
                         //위에서 꺼지는 작업이 아닐 때
                         //width가  (왼->오) + (forWard)
                         //width가. (오->왼) - (backWard)
-                        if tranlationWidth > 80 {
+                        if tranlationWidth > 100 {
                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
                                 playState.forWard()
                             }
                         }
                         
-                        if tranlationWidth < -80 {
+                        if tranlationWidth < -100 {
                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
                                 playState.backWard()
                             }

@@ -31,6 +31,20 @@ struct FullScreenArtistModifer: ViewModifier{
     }
 }
 
+struct FullScreenTimeModifer: ViewModifier{
+    let window = UIScreen.main.bounds
+    
+    func body(content: Content) -> some View {
+        
+        content.font(.system(size: window.height/48,design: .serif)).foregroundColor(Color("PrimaryColor"))
+            .lineLimit(1) // 1줄 제한
+            .truncationMode(.tail) //뒤에짜리기
+    }
+}
+
+
+
+
 struct PlayBarTitleModifier: ViewModifier{
     let window = UIScreen.main.bounds
     
@@ -52,3 +66,4 @@ struct PlayBarArtistModifer: ViewModifier{
             .truncationMode(.tail) //뒤에짜리기
     }
 }
+

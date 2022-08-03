@@ -88,7 +88,7 @@ struct PlaybackBarView: View {
                     
                 }
                 .padding(.horizontal)
-                .background(.ultraThickMaterial,in: RoundedRectangle(cornerRadius: 8))
+                .background(.ultraThinMaterial,in: RoundedRectangle(cornerRadius: 8))
                 
             }
         }
