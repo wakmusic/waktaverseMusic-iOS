@@ -25,26 +25,10 @@ struct PlayListView: View {
         {
             ScrollView {
                 LazyVStack(spacing:5){
-                    if(editMode == true)
+                    if(editMode == true) //editMode true일 때만 보여줌
                     {
-                        HStack{
-                            Button {
-                                print("Delete")
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                            
-                            Spacer()
-                            Button {
-                                withAnimation(.spring()) {
-                                    editMode = false
-                                }
-                            } label: {
-                                Text("Done")
-                            }
-                            
-                            
-                        }
+                        TopControlView(editMode: $editMode)
+                        Spacer()
                     }
                     
                     
@@ -58,14 +42,14 @@ struct PlayListView: View {
                             if(editMode == true)
                             {
                                 Spacer()
-                                Image(systemName:"arrow.up.and.down")
+                                Image(systemName:"arrow.up.and.down").foregroundColor(Color("PrimaryColor"))
                             }
                         } .onDrag{
                             self.draggedItem = song
                             return NSItemProvider(item: nil, typeIdentifier: song.title)
                         }
                         
-                        .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, editMode: $editMode, dataList:$playState.playList, draggedItem: $draggedItem))
+                        .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, editMode: $editMode, dataList:$playState.playList, draggedItem: $draggedItem))
                         
                         
                     }
@@ -136,11 +120,21 @@ struct ItemCell: View {
 struct MyDropDelegate : DropDelegate {
     
     let currentItem: SimpleSong
+    @Binding var currentIndex:Int
     @Binding var editMode:Bool
     @Binding var dataList:[SimpleSong]
     @Binding var draggedItem: SimpleSong?
     
-    
+    /*
+     
+     MyDropDelegate - validateDrop() called
+     MyDropDelegate - dropEntered() called
+     MyDropDelegate - dropExited() called
+     MyDropDelegate - validateDrop() called
+     MyDropDelegate - dropEntered() called
+     MyDropDelegate - performDrop() called
+     
+     */
     
     // 드랍에서 벗어났을 때
     func dropExited(info: DropInfo) {
@@ -185,6 +179,8 @@ struct MyDropDelegate : DropDelegate {
             withAnimation {
                 //from에서 to로 이동 ,  to > from일 때는 to+1  아니면 to로
                 self.dataList.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to+1 : to)
+                self.currentIndex = dataList.firstIndex(of: draggedItem) ?? 0
+                // 옮긴 후 재생이 멈추지 않게 현재 인덱스 변경 
             }
             
         }
@@ -193,4 +189,29 @@ struct MyDropDelegate : DropDelegate {
     }
     
     
+}
+
+struct TopControlView: View {
+    
+    @Binding var editMode:Bool
+    var body: some View {
+        HStack{
+            Button {
+                print("Delete")
+            } label: {
+                Image(systemName: "trash")
+            }
+            
+            Spacer()
+            Button {
+                withAnimation(.spring()) {
+                    editMode = false
+                }
+            } label: {
+                Text("완료")
+            }
+            
+            
+        }
+    }
 }
