@@ -12,8 +12,9 @@ struct PlayListView: View {
     
     @State var editMode: Bool = false
     @EnvironmentObject var playState:PlayState
-    @State private var multipleSelection = Set<UUID> ()
-    @State var draggedItem: SimpleSong?
+    @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
+    @State var draggedItem: SimpleSong? // 현재 드래그된 노래
+    
     
     var body: some View {
         
@@ -27,7 +28,8 @@ struct PlayListView: View {
                 LazyVStack(spacing:5){
                     if(editMode == true) //editMode true일 때만 보여줌
                     {
-                        TopControlView(editMode: $editMode)
+                        //상위 편집 컨트롤 뷰
+                        TopControlView(editMode: $editMode,playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
                         Spacer()
                     }
                     
@@ -35,7 +37,7 @@ struct PlayListView: View {
                     ForEach(playState.playList,id: \.self.id) { song in
                         
                         HStack{
-                            ItemCell(editMode: $editMode, song: song, dataList: $playState.playList)
+                            ItemCell(editMode: $editMode, song: song, playList: $playState.playList, multipleSelection: $multipleSelection)
                             
                             
                             
@@ -45,17 +47,17 @@ struct PlayListView: View {
                                 Image(systemName:"arrow.up.and.down").foregroundColor(Color("PrimaryColor"))
                             }
                         } .onDrag{
-                            self.draggedItem = song
+                            self.draggedItem = song //드래그 된 아이템 저장
                             return NSItemProvider(item: nil, typeIdentifier: song.title)
                         }
                         
-                        .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, editMode: $editMode, dataList:$playState.playList, draggedItem: $draggedItem))
+                        .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, editMode: $editMode, playList:$playState.playList, draggedItem: $draggedItem))
                         
                         
                     }
                 }
             }.padding()
-                
+            
             
             
         }
@@ -70,24 +72,37 @@ struct PlayListView: View {
 
 struct ItemCell: View {
     
-    @Binding var editMode:Bool
-    var song:SimpleSong
-    @Binding var dataList:[SimpleSong]
-    @State var selected:Bool = false
-    @State var draggedItem: SimpleSong?
+    @Binding var editMode:Bool //현재 편집 상태
+    var song:SimpleSong // 해당 셀 노래
+    @Binding var playList:[SimpleSong] // playList
+    @Binding var multipleSelection:Set<UUID> // 다중 선택 셋
+    @State var draggedItem: SimpleSong? // 드래그 된 아이템
+    
+    
     
     var body: some View {
         HStack {
-            if(editMode == true)
+            if(editMode == true) //true일 때만 , 체크와 move 아이콘 나옴
             {
                 Button {
-                    
                     withAnimation(.spring()) {
-                        selected =  !selected
+                        
+                        
+                        if(multipleSelection.contains(song.id)) //셋 안에 있을 때 눌리면  remove
+                        {
+                            multipleSelection.remove(song.id)
+                        }
+                        else //없는데 눌르면 insert
+                        {
+                            multipleSelection.insert(song.id)
+                        }
+                        
+                        
+                        
                     }
                 } label: {
                     
-                    Image(systemName: selected == true ? "checkmark.circle.fill" : "circle" )
+                    Image(systemName:  multipleSelection.contains(song.id) ? "checkmark.circle.fill" : "circle") //멑티 셋 안에 해당 음악 id 있을 때 는 check 없으면 빈 circle
                     
                 }
                 
@@ -122,8 +137,9 @@ struct MyDropDelegate : DropDelegate {
     let currentItem: SimpleSong
     @Binding var currentIndex:Int
     @Binding var editMode:Bool
-    @Binding var dataList:[SimpleSong]
+    @Binding var playList:[SimpleSong]
     @Binding var draggedItem: SimpleSong?
+    
     
     /*
      
@@ -172,15 +188,17 @@ struct MyDropDelegate : DropDelegate {
         }
         
         if draggedItem != currentItem { //현재 드래그 아이템과 현재 내 아이템과 다르면
-            let from = dataList.firstIndex(of: draggedItem)!
-            let to = dataList.firstIndex(of: currentItem)!
+            let from = playList.firstIndex(of: draggedItem)!
+            let to = playList.firstIndex(of: currentItem)!
             
             
             withAnimation {
                 //from에서 to로 이동 ,  to > from일 때는 to+1  아니면 to로
-                self.dataList.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to+1 : to)
-                self.currentIndex = dataList.firstIndex(of: draggedItem) ?? 0
-                // 옮긴 후 재생이 멈추지 않게 현재 인덱스 변경 
+                let nowPlaySong:SimpleSong = self.playList[currentIndex] // 현재 재생중인 곳
+                self.playList.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to+1 : to)
+                //move 함
+                self.currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0
+                // 옮긴 후 재생이 멈추지 않게 현재 재생중인 곳의 인덱스로 변경
             }
             
         }
@@ -194,18 +212,67 @@ struct MyDropDelegate : DropDelegate {
 struct TopControlView: View {
     
     @Binding var editMode:Bool
+    @Binding var playList:[SimpleSong]
+    @Binding var currentIndex:Int
+    @Binding var multipleSelection:Set<UUID>
+    @EnvironmentObject var playState:PlayState
     var body: some View {
-        HStack{
-            Button {
-                print("Delete")
-            } label: {
-                Image(systemName: "trash")
-            }
+        HStack(alignment:.center){
+            
+            VStack(alignment:.center){
+                
+                Button {
+                    if(multipleSelection.count == playList.count) //모두 담고있으면 제거
+                    {
+                        multipleSelection.removeAll()
+                    }
+                    else
+                    {
+                        for song in playList{ //모두 담기
+                            multipleSelection.insert(song.id) //id 담기
+                        }
+                    }
+                } label: {
+                    Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle")
+                }
+                
+                
+                
+                Text("전체").font(.caption)
+            }.padding(.vertical,3).foregroundColor(Color("PrimaryColor"))
+            
+            
+            Text("\(multipleSelection.count)").font(.title2).foregroundColor(Color("PrimaryColor"))
             
             Spacer()
             Button {
+                print("Delete")
+                
+                //토스트 메시지 또는 제거 확인 메시지
+                
+              
+                
+                if(multipleSelection.count == playList.count) //전체 제거 시
+                {
+                    withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
+                    {
+                        playList.removeAll() // 리스트 제거
+                        multipleSelection.removeAll() // 셋 제거
+                        playState.isPlayerViewPresented = false // Fullscrren 끄고
+                        playState.isPlayerListViewPresented = false //리스트창 끄고
+                        playState.youTubePlayer.stop() //youtubePlayer Stop
+                    }
+                }
+                
+                
+                
+            } label: {
+                Image(systemName: "trash")
+            }
+            Button {
                 withAnimation(.spring()) {
                     editMode = false
+                    multipleSelection.removeAll()// 완료 눌렀을 때 선택 셋 비우기
                 }
             } label: {
                 Text("완료")

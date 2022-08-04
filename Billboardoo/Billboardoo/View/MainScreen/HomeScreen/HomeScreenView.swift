@@ -73,8 +73,6 @@ struct HomeScreenView: View {
 }
 
 struct NavigationLogo: View {
-    @ScaledMetric(relativeTo: .headline)
-    var scale: CGFloat = 0.3
     let window = UIScreen.main.bounds.size
     var body: some View {
         Image("mainLogoWhite")
