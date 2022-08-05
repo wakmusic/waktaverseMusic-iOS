@@ -39,6 +39,7 @@
 		D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD22887DA3900999DE6 /* Repository.swift */; };
 		D87EDFD62887DA9500999DE6 /* SimpleSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD52887DA9500999DE6 /* SimpleSong.swift */; };
 		D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD72887DAB900999DE6 /* ApiCollections.swift */; };
+		D896DF08289C1C450020C615 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D896DF07289C1C450020C615 /* PopupView */; };
 		E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 			files = (
 				D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */,
 				42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */,
+				D896DF08289C1C450020C615 /* PopupView in Frameworks */,
 				D84872282892606B00B508DC /* YouTubePlayerKit in Frameworks */,
 				D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */,
 			);
@@ -377,6 +379,7 @@
 				D869C2C2288FD5DB001FE8F4 /* Alamofire */,
 				D869C2C5288FD5E3001FE8F4 /* Kingfisher */,
 				D84872272892606B00B508DC /* YouTubePlayerKit */,
+				D896DF07289C1C450020C615 /* PopupView */,
 			);
 			productName = Billboardoo;
 			productReference = D87EDF9A28859FE200999DE6 /* Billboardoo.app */;
@@ -457,6 +460,7 @@
 				D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D84872262892606B00B508DC /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				D896DF06289C1C450020C615 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = D87EDF9B28859FE200999DE6 /* Products */;
 			projectDirPath = "";
@@ -977,6 +981,14 @@
 				kind = branch;
 			};
 		};
+		D896DF06289C1C450020C615 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -994,6 +1006,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		D896DF07289C1C450020C615 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D896DF06289C1C450020C615 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

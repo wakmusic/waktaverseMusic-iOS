@@ -216,6 +216,7 @@ struct TopControlView: View {
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
+    @State var isShowAlert: Bool = false
     var body: some View {
         HStack(alignment:.center){
             
@@ -246,28 +247,63 @@ struct TopControlView: View {
             
             Spacer()
             Button {
-                print("Delete")
-                
-                //토스트 메시지 또는 제거 확인 메시지
-                
-              
-                
-                if(multipleSelection.count == playList.count) //전체 제거 시
+                if(multipleSelection.count != 0) //선택된게 있다면
                 {
-                    withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
-                    {
-                        playList.removeAll() // 리스트 제거
-                        multipleSelection.removeAll() // 셋 제거
-                        playState.isPlayerViewPresented = false // Fullscrren 끄고
-                        playState.isPlayerListViewPresented = false //리스트창 끄고
-                        playState.youTubePlayer.stop() //youtubePlayer Stop
-                    }
+                    isShowAlert = true
                 }
-                
                 
                 
             } label: {
                 Image(systemName: "trash")
+            }
+            .alert("삭제하시겠습니까?", isPresented: $isShowAlert) {
+                
+                Button(role: .cancel) {
+                    print("Cancel")
+                } label: {
+                    Text("아니요")
+                }
+                
+                Button(role: .destructive) {
+                    
+                    if(multipleSelection.count == playList.count) //전체 제거 시
+                    {
+                        withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
+                        {
+                            playList.removeAll() // 리스트 제거
+                            multipleSelection.removeAll() // 셋 제거
+                            playState.isPlayerViewPresented = false // Fullscrren 끄고
+                            playState.isPlayerListViewPresented = false //리스트창 끄고
+                            playState.youTubePlayer.stop() //youtubePlayer Stop
+                        }
+                    }
+                    
+                    else //전체 제거가 아닐 때
+                    {
+                        withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
+                        {
+                            playList = playList.filter{!multipleSelection.contains($0.id)} // 폼함되지 않은 것만 제거
+                            if(multipleSelection.contains(playState.currentSong!.id)) //현재삭제 목록에 재생중인 노래가 포함됬을 때
+                            {
+                                currentIndex = 0 //가장 처음 인덱스로
+                                
+                            }
+                            else
+                            {
+                                let nowPlaySong:SimpleSong = playState.currentSong!
+                                currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 //현재 재생중인 노래로
+                                
+                            }
+                            multipleSelection.removeAll() // 멀티셋 비우고
+                        }
+                        
+                    }
+                } label: {
+                    Text("에")
+                }
+                
+                
+                
             }
             Button {
                 withAnimation(.spring()) {

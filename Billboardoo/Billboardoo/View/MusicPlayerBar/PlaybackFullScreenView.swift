@@ -216,8 +216,16 @@ struct ProgressBar: View{
         
         if let currentSong = playState.nowPlayingSong {
             VStack {
-                ProgressView("",value: playState.currentProgress,total: 100)
                 
+                //Sldier 설정 및 바인딩
+                Slider(value:$playState.currentProgress,in: 0...playState.endProgress) { change in
+                    //onEditChanged
+                    if(change == false) //change == true는 slider를 건들기 시작할 때 false는 slider를 내려 놓을 때
+                    {
+                        playState.youTubePlayer.seek(to: playState.currentProgress, allowSeekAhead: true) //allowSeekAhead = true 서버로 요청
+                    }
+                }
+//                ProgressView(value: playState.currentProgress, total: 100)
                 
                 HStack{
                     
@@ -231,7 +239,7 @@ struct ProgressBar: View{
                 playState.youTubePlayer.getCurrentTime { completion in
                     switch completion{
                     case .success(let time):
-                        playState.currentProgress = (time/playState.endProgress) * 100
+                        playState.currentProgress = time
                         playtime = playState.convertTimetoString(time)
                         endtime = playState.convertTimetoString(playState.endProgress)
                         //print("\(playState.currentProgress)  \(playState.endProgress)")
