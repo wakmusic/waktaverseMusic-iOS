@@ -15,7 +15,8 @@ struct FiveRowSongGridView: View {
                         GridItem(.fixed(40), spacing: 20),
                         GridItem(.fixed(40), spacing: 20)]
     
-    @Binding var nowChart:[SimpleViwer]
+    @Binding var nowChart:[SimpleSong]
+    @EnvironmentObject var playState:PlayState
     
     
     
@@ -25,18 +26,17 @@ struct FiveRowSongGridView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             VStack(alignment: .leading) {
                 LazyHGrid(rows: rows,spacing: 30){ //GridItem 형태와, 요소간 옆 거리
-                    fiveRowSongGridItemViews
+                    fiveRowSongGridItemViews.environmentObject(playState)
                 }
             }
-        }.padding().onAppear{
-            print(nowChart.count)
-        }
+        }.padding()
         
     }
 }
 
 
 private extension FiveRowSongGridView {
+    
     var fiveRowSongGridItemViews: some View {
         
     
@@ -53,7 +53,13 @@ private extension FiveRowSongGridView {
                         Text("\(nowChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
                     }
                     Button {
-                        print(nowChart[index].url)
+                        //FiveRowSong Grid에서는 재생 버튼 누르면 일단 load와 currentSong을 바꿈
+                        playState.currentSong = nowChart[index] //강제 배정
+                        playState.youTubePlayer.load(source: .url(nowChart[index].url)) //강제 재생
+                        playState.uniqueAppend(item: nowChart[index]) //현재 누른 곡 담기
+                        
+                        
+                       
                     } label: {
                         Image(systemName: "play.fill").foregroundColor(Color("PrimaryColor"))
                     }
@@ -64,13 +70,6 @@ private extension FiveRowSongGridView {
     }
 }
 
-struct FiveRowSongGridView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        
-        FiveRowSongGridView(nowChart:.constant([SimpleViwer]()))
-    }
-}
 
 struct AlbumImageView: View {
     
@@ -95,29 +94,7 @@ struct AlbumImageView: View {
             .frame(width: 40, height: 40) //resize
     }
 }
-            
 
-        //        AsyncImage(url: URL(string:url), transaction: .init(animation: .spring())) { phase in
-        //
-        //            switch phase{
-        //            case .empty:
-        //                Image("placeHolder")
-        //                    .resizable()
-        //                    .frame(width: 40, height: 40, alignment: .center)
-        //                    .transition(.opacity.combined(with: .scale))
-        //
-        //
-        //            case .success(let image):
-        //                image
-        //                    .resizable()
-        //                    .frame(width: 40, height: 40, alignment: .center)
-        //
-        //            case .failure(let error):
-        //                Image("placeHolder")
-        //                    .resizable()
-        //                    .frame(width: 40, height: 40, alignment: .center)
-        //                    .transition(.opacity.combined(with: .scale))
-        
         
         
 
