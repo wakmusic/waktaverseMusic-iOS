@@ -43,7 +43,7 @@ struct PlaybackFullScreenView: View {
                         Group{ //그룹으로 묶어 조건적으로 보여준다.
                             if playState.isPlayerListViewPresented {
                                 
-                                PlayListView().environmentObject(playState).padding(.top,UIDevice.current.hasNotch ? 40 : 0) //notch에 따라 패팅 top 줌 (
+                                PlayListView().environmentObject(playState).padding(.top,UIDevice.current.hasNotch ? 30 : 0) //notch에 따라 패팅 top 줌 (
                                 
                                     
                             }
