@@ -40,6 +40,8 @@
 		D87EDFD62887DA9500999DE6 /* SimpleSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD52887DA9500999DE6 /* SimpleSong.swift */; };
 		D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD72887DAB900999DE6 /* ApiCollections.swift */; };
 		D896DF08289C1C450020C615 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D896DF07289C1C450020C615 /* PopupView */; };
+		D896DF0B289D17240020C615 /* VolumeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0A289D17240020C615 /* VolumeSheet.swift */; };
+		D896DF0E289D51070020C615 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0D289D51070020C615 /* Extensions.swift */; };
 		E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +101,8 @@
 		D87EDFD22887DA3900999DE6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D87EDFD52887DA9500999DE6 /* SimpleSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSong.swift; sourceTree = "<group>"; };
 		D87EDFD72887DAB900999DE6 /* ApiCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
+		D896DF0A289D17240020C615 /* VolumeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSheet.swift; sourceTree = "<group>"; };
+		D896DF0D289D51070020C615 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.release.xcconfig"; sourceTree = "<group>"; };
 		DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -211,6 +215,7 @@
 		D848722528912A4C00B508DC /* MusicPlayerBar */ = {
 			isa = PBXGroup;
 			children = (
+				D896DF09289D16FE0020C615 /* Volume */,
 				D848724C2893B6A300B508DC /* PlaybackBarView.swift */,
 				D848725C2897E30000B508DC /* PlayList */,
 				D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */,
@@ -286,6 +291,7 @@
 		D87EDF9C28859FE200999DE6 /* Billboardoo */ = {
 			isa = PBXGroup;
 			children = (
+				D896DF0C289D50F20020C615 /* Extension */,
 				D86B5869288C27AF001110A5 /* Test */,
 				D835784E28881A5F00459197 /* Util */,
 				D835784D2887E5B300459197 /* Info.plist */,
@@ -355,6 +361,22 @@
 				D87EDFD52887DA9500999DE6 /* SimpleSong.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D896DF09289D16FE0020C615 /* Volume */ = {
+			isa = PBXGroup;
+			children = (
+				D896DF0A289D17240020C615 /* VolumeSheet.swift */,
+			);
+			path = Volume;
+			sourceTree = "<group>";
+		};
+		D896DF0C289D50F20020C615 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D896DF0D289D51070020C615 /* Extensions.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -611,6 +633,7 @@
 				D84872562894101400B508DC /* PlayPuaseButton.swift in Sources */,
 				D86B586B288C27C6001110A5 /* TestView.swift in Sources */,
 				D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */,
+				D896DF0B289D17240020C615 /* VolumeSheet.swift in Sources */,
 				D848724F2893BC8800B508DC /* PlaybackFullScreenView.swift in Sources */,
 				D848725B2895245800B508DC /* ImageModifier.swift in Sources */,
 				D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */,
@@ -625,6 +648,7 @@
 				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
 				D87EDFD62887DA9500999DE6 /* SimpleSong.swift in Sources */,
 				D835785428891DAB00459197 /* HomeScreenView.swift in Sources */,
+				D896DF0E289D51070020C615 /* Extensions.swift in Sources */,
 				D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */,
 				D835785628893EB300459197 /* RadioButtonGroup+ChartHeader.swift in Sources */,
 				D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */,

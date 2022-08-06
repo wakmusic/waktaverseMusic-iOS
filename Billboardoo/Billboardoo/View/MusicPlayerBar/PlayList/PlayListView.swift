@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Kingfisher
 
 struct PlayListView: View {
     
@@ -37,7 +38,7 @@ struct PlayListView: View {
                     ForEach(playState.playList,id: \.self.id) { song in
                         
                         HStack{
-                            ItemCell(editMode: $editMode, song: song, playList: $playState.playList, multipleSelection: $multipleSelection)
+                            ItemCell(editMode: $editMode, song: song, multipleSelection: $multipleSelection).environmentObject(playState)
                             
                             
                             
@@ -74,9 +75,9 @@ struct ItemCell: View {
     
     @Binding var editMode:Bool //현재 편집 상태
     var song:SimpleSong // 해당 셀 노래
-    @Binding var playList:[SimpleSong] // playList
     @Binding var multipleSelection:Set<UUID> // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 드래그 된 아이템
+    @EnvironmentObject var playState:PlayState
     
     
     
@@ -109,13 +110,39 @@ struct ItemCell: View {
             }
             
             HStack{
-                VStack{
-                    Text(song.title)
-                    Text(song.artist)
-                }
                 
+                KFImage(URL(string: song.image)!)
+                    .resizable()
+                    .frame(width:50,height: 50)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                
+                
+                VStack(alignment:.leading){
+                    Text(song.title).modifier(PlayBarTitleModifier())
+                    Text(song.artist).modifier(PlayBarArtistModifer())
+                }
                 Spacer(minLength: 0)
-            } .onLongPressGesture(minimumDuration: 0.8) {
+                
+                
+                Button {
+                    withAnimation(.spring()) {
+                        // 플레이리스트 재생 버튼 눌렀을 때 강제 재생
+                        playState.currentSong = song
+                        playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
+                        playState.currentPlayIndex = playState.playList.firstIndex(of: song) ?? 0
+                    }
+                } label: {
+                    Image(systemName: "play.fill")
+                }.foregroundColor(Color("PrimaryColor"))
+                
+                
+                
+                
+            }
+            
+            .padding(.all)
+            .onLongPressGesture(minimumDuration: 0.8) {
                 withAnimation(.spring()) {
                     editMode = true
                 }
@@ -125,10 +152,16 @@ struct ItemCell: View {
             
             
             
-        }
+        }.overlay(RoundedRectangle(cornerRadius: 10).stroke(song.song_id == playState.currentSong?.song_id ? Color("PrimaryColor") : .clear,lineWidth: 2).foregroundColor(.clear)) //재생중인 리스트 항목에 stroke 설정
         
     }
     
+}
+
+struct ItemCell_Previewr: PreviewProvider {
+    static var previews: some View {
+        ItemCell(editMode:.constant(false),song:SimpleSong(song_id: "fgSXAKsq-Vo", title: "리와인드 (RE:WIND)", artist: "이세계아이돌", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 1),multipleSelection: .constant(Set<UUID>())).environmentObject(PlayState())
+    }
 }
 
 
@@ -318,3 +351,5 @@ struct TopControlView: View {
         }
     }
 }
+
+
