@@ -52,7 +52,7 @@ struct HomeScreenView: View {
                             }
                             
                         }
-                    }
+                    }.environmentObject(playState)
                     FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
                     
                     

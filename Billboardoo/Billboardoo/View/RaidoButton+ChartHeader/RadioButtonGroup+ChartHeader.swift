@@ -90,6 +90,7 @@ struct RadioButtonGroup: View {
 struct ChartHeader: View {
     
     @Binding var chartIndex:Int
+    @EnvironmentObject var playState:PlayState
     
     
     var body: some View {
@@ -112,10 +113,14 @@ struct ChartHeader: View {
                     Text("빌보두 누적 Top 100").bold().foregroundColor(Color("PrimaryColor"))
                 }
                 Spacer()
-                Text("더보기").foregroundColor(.gray).onTapGesture {
-                    //전체 차트로 이동 
-                    print(chartIndex)
+                
+                NavigationLink {
+                    ChartMoreView(index: $chartIndex).environmentObject(playState)
+                } label: {
+                    Text("더보기").foregroundColor(.gray)
                 }
+
+                
             }
         }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
     }
