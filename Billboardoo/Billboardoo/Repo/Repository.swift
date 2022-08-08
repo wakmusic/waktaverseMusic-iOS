@@ -50,7 +50,7 @@ class Repository{
             .eraseToAnyPublisher() //UnWraaping
     }
     
-    func fetchTop100(category:TopCategory) -> AnyPublisher<[SimpleSong],Error>
+    func fetchTop100(category:TopCategory) -> AnyPublisher<[DetailSong],Error>
     {
         let url:String
         switch category {
@@ -66,7 +66,7 @@ class Repository{
             url = ApiCollections.monthlyTop100
         }
         return AF.request(url)
-            .publishDecodable(type: [SimpleSong].self)
+            .publishDecodable(type: [DetailSong].self)
             .value()
             .mapError { (err: AFError) in
                 return err as Error

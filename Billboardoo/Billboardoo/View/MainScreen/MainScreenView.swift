@@ -101,7 +101,7 @@ struct MainScreenView: View {
                                     playState.isPlayerViewPresented = true // Full Sreen 보이게
                                 }
                             }
-                            .padding(.bottom,60) //탭 바와 곂치지않게
+                            .padding(.bottom,45) //탭 바와 곂치지않게
                     }
                 } //그룹
                 .zIndex(2.0)

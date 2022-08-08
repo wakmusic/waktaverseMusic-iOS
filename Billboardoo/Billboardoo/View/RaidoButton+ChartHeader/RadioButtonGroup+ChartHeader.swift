@@ -36,11 +36,11 @@ struct RadioBttuon: View {
         } label: {
             
             Text(title).fontWeight(.bold).tracking(4) //자간 간격 4 만큼
-             
+            
             
             //글자 색
                 .foregroundColor(self.selectedId != self.id ? Color("UnSelectedTextColor"):.white)
-               // .padding()
+            // .padding()
             //배경색
                 .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color("PrimaryColor"))
                 .cornerRadius(10)
@@ -60,8 +60,8 @@ struct RadioButtonGroup: View {
     let window = UIScreen.main.bounds.size
     let items :[String] = ["누적","시간","일간","주간","월간"]
     
-    @State var selectedId:Int = 0 //현재 선택된 상태를 저장할 변수
-    
+    //@State var selectedId:Int = 0 //현재 선택된 상태를 저장할 변수
+    @Binding var selectedId:Int
     let callback: ((Int,Int)) -> ()
     
     func radioGroupCallback(id: Int) {
@@ -115,11 +115,11 @@ struct ChartHeader: View {
                 Spacer()
                 
                 NavigationLink {
-                    ChartMoreView(index: $chartIndex).environmentObject(playState)
+                    ChartMoreView(Bindingindex: $chartIndex).environmentObject(playState)
                 } label: {
                     Text("더보기").foregroundColor(.gray)
                 }
-
+                
                 
             }
         }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
@@ -129,12 +129,4 @@ struct ChartHeader: View {
 
 
 
-struct RadioButtonGroup_Previews: PreviewProvider {
-    
-    @ObservedObject var viewModel:HomeScreenView.HomeScreenViewModel
-    static var previews: some View {
-        RadioButtonGroup { (selected, now) in
-            print("\(selected) \(now)")
-        }
-    }
-}
+

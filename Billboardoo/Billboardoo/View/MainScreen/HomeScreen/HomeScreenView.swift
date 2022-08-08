@@ -31,13 +31,16 @@ struct HomeScreenView: View {
                     //                    MainHeader()
                     //                    Spacer()
                     
-                    RadioButtonGroup { (prev:Int, now:Int) in
+                    RadioButtonGroup(selectedId:$viewModel.selectedIndex) { (prev:Int, now:Int) in
                         
-                        if(prev != now) //이전 값과 다를 경우에만 fetch
-                        {
-                            // 하위 뷰인 라이도 버튼의 선택된 버튼 index의 따라 다른 차트를 가져옴
+                        print("")
+                        
+                    }.environmentObject(playState)
+                    FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
+                        .onChange(of: viewModel.selectedIndex) { newValue in
                             
-                            switch now{
+                            
+                            switch newValue{
                             case 0:
                                 viewModel.fetchTop20(category: .total)
                             case 1:
@@ -52,9 +55,9 @@ struct HomeScreenView: View {
                                 viewModel.fetchTop20(category: .total)
                             }
                             
+                            
                         }
-                    }.environmentObject(playState)
-                    FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
+                    
                     
                     
                 } //ScrollView
@@ -81,7 +84,7 @@ struct NavigationLogo: View {
             .resizable()
             .renderingMode(.template)
             .foregroundColor(Color("PrimaryColor"))
-            .frame(width: window.width*0.4, height: window.height*0.04) 
+            .frame(width: window.width*0.4, height: window.height*0.04)
         
     }
 }
@@ -117,7 +120,7 @@ struct MainHeader: View {
 extension HomeScreenView{
     
     final class HomeScreenViewModel:ObservableObject{
-        
+        @Published var selectedIndex:Int = 0
         @Published var nowChart:[SimpleSong] = [SimpleSong]()
         var cancelBag = Set<AnyCancellable>()
         
