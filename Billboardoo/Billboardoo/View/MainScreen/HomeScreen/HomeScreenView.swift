@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import Alamofire
 
+
 struct HomeScreenView: View {
     @ScaledMetric var scale: CGFloat = 15
     @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
@@ -68,6 +69,7 @@ struct HomeScreenView: View {
                 }
                 .padding(.vertical)
             }.navigationViewStyle(.stack) //Naivi
+            
         }
     }
 }

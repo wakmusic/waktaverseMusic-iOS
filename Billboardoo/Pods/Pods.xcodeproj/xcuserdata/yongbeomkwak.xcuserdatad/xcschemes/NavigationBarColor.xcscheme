@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EA9EA43B3B503823EE36C60D9C8A865F"
-               BuildableName = "RxSwift.framework"
-               BlueprintName = "RxSwift"
+               BlueprintIdentifier = "664DC93157607FE30865BF970C210420"
+               BuildableName = "NavigationBarColor.framework"
+               BlueprintName = "NavigationBarColor"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

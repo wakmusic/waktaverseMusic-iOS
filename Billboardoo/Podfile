@@ -8,8 +8,9 @@ target 'Billboardoo' do
   # Pods for Billboardoo
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
-
-  target 'BillboardooTests' do
+  pod 'NavigationBarColor'
+  
+target 'BillboardooTests' do
     inherit! :search_paths
     # Pods for testing
   end
