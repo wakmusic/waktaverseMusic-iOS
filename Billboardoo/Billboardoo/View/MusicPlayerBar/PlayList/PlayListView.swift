@@ -14,7 +14,7 @@ struct PlayListView: View {
     @State var editMode: Bool = false
     @EnvironmentObject var playState:PlayState
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
-    @State var draggedItem: SimpleSong? // 현재 드래그된 노래
+    @State var draggedItem: DetailSong? // 현재 드래그된 노래
     
     
     var body: some View {
@@ -31,6 +31,7 @@ struct PlayListView: View {
                     {
                         //상위 편집 컨트롤 뷰
                         TopControlView(editMode: $editMode,playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
+                            .padding()
                         Spacer()
                     }
                     
@@ -46,8 +47,15 @@ struct PlayListView: View {
                             {
                                 Spacer()
                                 Image(systemName:"arrow.up.and.down").foregroundColor(Color("PrimaryColor"))
+                                Spacer()
                             }
-                        } .onDrag{
+                        }
+                        
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(song.song_id == playState.currentSong?.song_id ? Color("PrimaryColor") : .clear,lineWidth: 2).foregroundColor(.clear)) //재생중인 리스트 항목에 stroke 설정
+                        
+                        
+                        
+                        .onDrag{
                             self.draggedItem = song //드래그 된 아이템 저장
                             return NSItemProvider(item: nil, typeIdentifier: song.title)
                         }
@@ -57,7 +65,9 @@ struct PlayListView: View {
                         
                     }
                 }
-            }.padding()
+            }
+            .frame(width:UIScreen.main.bounds.width)
+            .padding(.all)
             
             
             
@@ -74,9 +84,9 @@ struct PlayListView: View {
 struct ItemCell: View {
     
     @Binding var editMode:Bool //현재 편집 상태
-    var song:SimpleSong // 해당 셀 노래
+    var song:DetailSong // 해당 셀 노래
     @Binding var multipleSelection:Set<UUID> // 다중 선택 셋
-    @State var draggedItem: SimpleSong? // 드래그 된 아이템
+    @State var draggedItem: DetailSong? // 드래그 된 아이템
     @EnvironmentObject var playState:PlayState
     
     
@@ -104,6 +114,7 @@ struct ItemCell: View {
                 } label: {
                     
                     Image(systemName:  multipleSelection.contains(song.id) ? "checkmark.circle.fill" : "circle") //멑티 셋 안에 해당 음악 id 있을 때 는 check 없으면 빈 circle
+                        .padding(.leading)
                     
                 }
                 
@@ -134,6 +145,7 @@ struct ItemCell: View {
                     }
                 } label: {
                     Image(systemName: "play.fill")
+                        .padding(.leading)
                 }.foregroundColor(Color("PrimaryColor"))
                 
                 
@@ -152,7 +164,8 @@ struct ItemCell: View {
             
             
             
-        }.overlay(RoundedRectangle(cornerRadius: 10).stroke(song.song_id == playState.currentSong?.song_id ? Color("PrimaryColor") : .clear,lineWidth: 2).foregroundColor(.clear)) //재생중인 리스트 항목에 stroke 설정
+        }
+            
         
     }
     
@@ -160,18 +173,18 @@ struct ItemCell: View {
 
 struct ItemCell_Previewr: PreviewProvider {
     static var previews: some View {
-        ItemCell(editMode:.constant(false),song:SimpleSong(song_id: "fgSXAKsq-Vo", title: "리와인드 (RE:WIND)", artist: "이세계아이돌", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 1),multipleSelection: .constant(Set<UUID>())).environmentObject(PlayState())
+        ItemCell(editMode:.constant(false),song:DetailSong(song_id: "fgSXAKsq-Vo", title: "리와인드 (RE:WIND)", artist: "이세계아이돌", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 1,views: 213),multipleSelection: .constant(Set<UUID>())).environmentObject(PlayState())
     }
 }
 
 
 struct MyDropDelegate : DropDelegate {
     
-    let currentItem: SimpleSong
+    let currentItem: DetailSong
     @Binding var currentIndex:Int
     @Binding var editMode:Bool
-    @Binding var playList:[SimpleSong]
-    @Binding var draggedItem: SimpleSong?
+    @Binding var playList:[DetailSong]
+    @Binding var draggedItem: DetailSong?
     
     
     /*
@@ -227,7 +240,7 @@ struct MyDropDelegate : DropDelegate {
             
             withAnimation {
                 //from에서 to로 이동 ,  to > from일 때는 to+1  아니면 to로
-                let nowPlaySong:SimpleSong = self.playList[currentIndex] // 현재 재생중인 곳
+                let nowPlaySong:DetailSong = self.playList[currentIndex] // 현재 재생중인 곳
                 self.playList.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to+1 : to)
                 //move 함
                 self.currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0
@@ -245,7 +258,7 @@ struct MyDropDelegate : DropDelegate {
 struct TopControlView: View {
     
     @Binding var editMode:Bool
-    @Binding var playList:[SimpleSong]
+    @Binding var playList:[DetailSong]
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
@@ -323,7 +336,7 @@ struct TopControlView: View {
                             }
                             else
                             {
-                                let nowPlaySong:SimpleSong = playState.currentSong!
+                                let nowPlaySong:DetailSong = playState.currentSong!
                                 currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 //현재 재생중인 노래로
                                 
                             }

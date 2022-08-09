@@ -15,7 +15,7 @@ struct FiveRowSongGridView: View {
                         GridItem(.fixed(40), spacing: 20),
                         GridItem(.fixed(40), spacing: 20)]
     
-    @Binding var nowChart:[SimpleSong]
+    @Binding var nowChart:[DetailSong]
     @EnvironmentObject var playState:PlayState
     
     
@@ -137,7 +137,7 @@ struct RankView: View {
             Text("\(now_rank)").font(.system(size:16,weight: .bold))
             
             Text(change_rank).font(.system(size: 13, weight: .bold)).foregroundColor(color)
-        }.frame(width: 40)
+        }.frame(width: 40).padding(.horizontal,3)
     }
 }
 

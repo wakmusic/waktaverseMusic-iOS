@@ -24,7 +24,7 @@ class Repository{
     
     
     
-    func fetchTop20(category:TopCategory) -> AnyPublisher<[SimpleSong],Error> //메인 화면에 20개만
+    func fetchTop20(category:TopCategory) -> AnyPublisher<[DetailSong],Error> //메인 화면에 20개만
     {
         var url:String
         switch category {
@@ -42,7 +42,7 @@ class Repository{
         }
         url = url.replacingOccurrences(of: "100", with: "20") //100을 20개로
         return AF.request(url)
-            .publishDecodable(type: [SimpleSong].self) //SimpleSong 타입으로 decoding
+            .publishDecodable(type: [DetailSong].self) //SimpleSong 타입으로 decoding
             .value() //  return:  AnyPublisher<[SimpleViwer], AFError>
             .mapError { (err: AFError) in
                 return err as Error

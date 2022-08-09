@@ -3,4 +3,54 @@
    uuid = "89D9FBA9-5E5F-42B5-BB48-A342BA76458F"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B9966FB8-510C-429D-8731-32ACDBB2FC4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Billboardoo/View/MusicPlayerBar/PlayList/PlayListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "PlayListView"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "B9966FB8-510C-429D-8731-32ACDBB2FC4E - 53f5e16f30fcb581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Billboardoo.PlayListView.draggedItem : Swift.Optional&lt;Billboardoo.DetailSong&gt;"
+                  moduleName = "Billboardoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yongbeomkwak/Development/Billboardoo/Billboardoo/Billboardoo/View/MusicPlayerBar/PlayList/PlayListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  uuid = "B9966FB8-510C-429D-8731-32ACDBB2FC4E - 4f14f28e7553bca7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Billboardoo.PlayListView.init() -&gt; Billboardoo.PlayListView"
+                  moduleName = "Billboardoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yongbeomkwak/Development/Billboardoo/Billboardoo/Billboardoo/View/MusicPlayerBar/PlayList/PlayListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

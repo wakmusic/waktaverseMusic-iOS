@@ -8,6 +8,13 @@
 import Foundation
 import SwiftUI
 
+
+extension String {
+    func getChar(at index: Int) -> Character {
+        return self[self.index(self.startIndex, offsetBy: index)]
+    }
+}
+
 extension Color {
     
     init(hexcode:String)
