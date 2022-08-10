@@ -215,7 +215,17 @@ struct PinnedHeaderView:View{
             }
             // - MARK: 셔플 및 전체 듣기
             HStack{
-                ImageButton(text: "셔플 재생", imageSource: "jingboy")
+                ImageButton(text: "셔플 재생", imageSource: "angelGosegu").onTapGesture {
+                    playState.playList.removeAll() //전부 지운후
+                    playState.youTubePlayer.stop() // stop
+                    playState.playList = chart // 현재 해당 chart로 덮어쓰고
+                    
+                    shuffle(playlist: &playState.playList)  //셔플 시킨 후
+                    
+                    playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                    playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                    
+                }
                 ImageButton(text: "100곡 전체 듣기", imageSource: "jingboy").onTapGesture {
                     playState.playList.removeAll() //전부 지운후
                     playState.youTubePlayer.stop() // stop
@@ -430,4 +440,17 @@ func convertTimeStamp(_ time:Int) -> String{
         
    return dateFormater.string(from: Date(timeIntervalSince1970:TimeInterval(time)))
                         
+}
+
+
+func shuffle(playlist:inout [DetailSong]){
+    
+    
+    for i in 0..<playlist.count - 1 { // 0 ~ n-2
+        let randomIndex = Int.random(in: i..<playlist.count)
+          
+        let temp = playlist[i]
+        playlist[i] = playlist[randomIndex]
+        playlist[randomIndex] = temp
+    }
 }
