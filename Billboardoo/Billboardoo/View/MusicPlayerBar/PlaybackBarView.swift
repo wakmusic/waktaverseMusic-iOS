@@ -16,13 +16,19 @@ struct PlaybackBarView: View {
     var buttonModifier: PlayBarButtonImageModifier = PlayBarButtonImageModifier()
     var xWardButton: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @Binding var gestureStore:CGSize
+    let myDevice = UIDevice.current.userInterfaceIdiom
     var body: some View {
         
         if let currentSong = playState.nowPlayingSong
         {
+           
             VStack(alignment: .leading) {
                 
                 Spacer(minLength: 0) // 밑에 배치할 수 있게 해주는  빈 공간
+                
+                if myDevice == .pad{
+                    Spacer()
+                }
                 
                 HStack{
                     
@@ -51,7 +57,7 @@ struct PlaybackBarView: View {
                         
                         Text(currentSong.artist)
                             .modifier(PlayBarArtistModifer())
-                    }
+                    }.padding(.vertical,2)
                     
                     
                     Spacer()

@@ -67,7 +67,7 @@ struct MainScreenView: View {
             ZStack {
                 YotubeView().environmentObject(playState)
                 InvisibleRefreshView()
-                    .opacity(0.0001)
+                    .opacity(0)
                 TabView(selection: $router.screen){
                     HomeScreenView().environmentObject(playState).animation(.none).environmentObject(playState) // 애니메이션 막고 오직 스크롤만 되게
                         .tag(Screen.home)

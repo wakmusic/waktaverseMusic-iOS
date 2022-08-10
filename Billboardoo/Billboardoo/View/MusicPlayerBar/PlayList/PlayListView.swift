@@ -50,8 +50,9 @@ struct PlayListView: View {
                                 Spacer()
                             }
                         }
+                        .background(song.song_id == playState.currentSong?.song_id ? Color("SelectedSongBgColor") : .clear)
                         
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(song.song_id == playState.currentSong?.song_id ? Color("PrimaryColor") : .clear,lineWidth: 2).foregroundColor(.clear)) //재생중인 리스트 항목에 stroke 설정
+                      
                         
                         
                         

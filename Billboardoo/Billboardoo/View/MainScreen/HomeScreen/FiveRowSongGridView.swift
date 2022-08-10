@@ -136,10 +136,10 @@ struct RankView: View {
         VStack(alignment: .center){
             
             
-            Text("\(now_rank)").font(.system(size:16,weight: .bold))
+            Text("\(now_rank)").font(.system(size:13,weight: .bold))
             
-            Text(change_rank).font(.system(size: 13, weight: .bold)).foregroundColor(color)
-        }.frame(width: 40).padding(.horizontal,3)
+            Text(change_rank).font(.system(size: 10, weight: .bold)).foregroundColor(color)
+        }.frame(width: 35)
     }
 }
 

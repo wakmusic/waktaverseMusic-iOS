@@ -39,7 +39,7 @@ struct RadioBttuon: View {
             
             
             //글자 색
-                .foregroundColor(self.selectedId != self.id ? Color("UnSelectedTextColor"):.white)
+                .foregroundColor(self.selectedId != self.id ? Color("PrimaryColor"):Color("UnSelectedRbtnColor"))
             // .padding()
             //배경색
                 .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color("PrimaryColor"))

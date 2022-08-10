@@ -85,7 +85,7 @@ struct PlaybackFullScreenView: View {
                             
                             
                             
-                            VStack(alignment:.leading){
+                            VStack(alignment:.center){
                                 Text(currentSong.title)
                                     .modifier(titleModifier)
                                 
@@ -237,6 +237,12 @@ struct ProgressBar: View{
                     {
                         playState.youTubePlayer.seek(to: playState.currentProgress, allowSeekAhead: true) //allowSeekAhead = true 서버로 요청
                     }
+                }.onAppear {
+                    // 슬라이더 볼 사이즈 수정 
+                    let progressCircleConfig = UIImage.SymbolConfiguration(scale: .small)
+                    UISlider.appearance()
+                        .setThumbImage(UIImage(systemName: "circle.fill",
+                                               withConfiguration: progressCircleConfig), for: .normal)
                 }
 //                ProgressView(value: playState.currentProgress, total: 100)
                 
