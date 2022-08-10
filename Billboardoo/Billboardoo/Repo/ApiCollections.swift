@@ -49,6 +49,16 @@ class ApiCollections{
     
     
     
+    static let chartUpdateTotal: String = "https://billboardoo.com/api/charts/update/total"
+    
+    static let chartUpdateHourly: String = "https://billboardoo.com/api/charts/update/hourly"
+    
+    static let chartUpdateDaily: String = "https://billboardoo.com/api/charts/update/daily"
+    
+    static let chartUpdateWeekly: String = "https://billboardoo.com/api/charts/update/weekly"
+    
+    static let chartUpdateMonthly: String = "https://billboardoo.com/api/charts/update/monthly"
+    
     /*
   
     

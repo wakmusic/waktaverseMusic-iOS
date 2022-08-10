@@ -18,7 +18,7 @@ struct ChartMoreView: View {
     @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     @StateObject var viewModel:ChartViewModel = ChartViewModel()
-
+    
     
     
     // MARK: For Smooth Sliding Effect
@@ -46,7 +46,7 @@ struct ChartMoreView: View {
                         }
                         
                     } header: {
-                        PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts).background(Color("forcedBackground")).environmentObject(playState) //header 위로 올렸을 때 가리기 위함
+                        PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).background(Color("forcedBackground")).environmentObject(playState) //header 위로 올렸을 때 가리기 위함
                         
                     }
                     
@@ -60,19 +60,21 @@ struct ChartMoreView: View {
                 switch index{
                 case 0:
                     viewModel.fetchChart(.total)
+                    viewModel.fetchUpdateTime(.total)
                 case 1:
                     viewModel.fetchChart(.time)
+                    viewModel.fetchUpdateTime(.time)
                     
                 case 2:
                     viewModel.fetchChart(.daily)
-                    
+                    viewModel.fetchUpdateTime(.daily)
                     
                 case 3:
                     viewModel.fetchChart(.weekly)
-                    
+                    viewModel.fetchUpdateTime(.weekly)
                 case 4:
-                    
                     viewModel.fetchChart(.monthly)
+                    viewModel.fetchUpdateTime(.monthly)
                 default:
                     print("Default")
                 }
@@ -81,19 +83,21 @@ struct ChartMoreView: View {
                 switch newValue{
                 case 0:
                     viewModel.fetchChart(.total)
+                    viewModel.fetchUpdateTime(.total)
                 case 1:
                     viewModel.fetchChart(.time)
+                    viewModel.fetchUpdateTime(.time)
                     
                 case 2:
                     viewModel.fetchChart(.daily)
-                    
+                    viewModel.fetchUpdateTime(.daily)
                     
                 case 3:
                     viewModel.fetchChart(.weekly)
-                    
+                    viewModel.fetchUpdateTime(.weekly)
                 case 4:
-                    
                     viewModel.fetchChart(.monthly)
+                    viewModel.fetchUpdateTime(.monthly)
                 default:
                     print("Default")
                 }
@@ -104,8 +108,8 @@ struct ChartMoreView: View {
             .coordinateSpace(name: "SCROLL")
         }.navigationBarBackButtonHidden(true) //백 버튼 없애고
             .navigationBarHidden(true) //Bar 제거
-        .ignoresSafeArea(.container,edges:.vertical)
-        .padding(.vertical,50)
+            .ignoresSafeArea(.container,edges:.vertical)
+            .padding(.vertical,50)
         
         
             .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
@@ -161,6 +165,7 @@ struct PinnedHeaderView:View{
     @Namespace var animation
     @EnvironmentObject var playState:PlayState
     @Binding var chart:[DetailSong]
+    @Binding var updateTime:Int
     
     var body: some View{
         
@@ -180,14 +185,14 @@ struct PinnedHeaderView:View{
                                 .font(.system(size: 15)) //
                                 .foregroundColor(selectedIndex == idx ? Color("PrimaryColor") : .gray)
                             
-                            ZStack{
+                            ZStack{ //움직이는 막대기
                                 if (selectedIndex == idx) {
                                     RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color("PrimaryColor")).matchedGeometryEffect(id: "TAB", in: animation)
-                                        
+                                    
                                 }
                                 else{
                                     RoundedRectangle(cornerRadius: 4 , style:  .continuous) .fill(.clear)
-                                        
+                                    
                                 }
                             }
                             
@@ -220,8 +225,15 @@ struct PinnedHeaderView:View{
                     
                     
                 }
-            }.padding(.vertical)
-        }.padding(.horizontal)
+            }.padding(.top)
+            
+            HStack{
+                Spacer()
+                Image(systemName: "checkmark").foregroundColor(Color("PrimaryColor")).font(.caption)
+                Text(convertTimeStamp(updateTime)).font(.caption)
+                
+            }
+        }.padding(.bottom).padding(.horizontal)
         
     }
 }
@@ -240,7 +252,7 @@ struct ChartItemView: View {
         
         HStack{
             RankView(now: rank, last: song.last)
-           
+            
             KFImage(URL(string: song.image))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -262,23 +274,23 @@ struct ChartItemView: View {
             
             
             
-          
-
+            
+            
             
             
             Menu {
-                                
+                
                 
                 Button(role:.cancel) {
-                     showAlert = playState.appendList(item: song)
+                    showAlert = playState.appendList(item: song)
                 } label: {
                     Label {
                         Text("담기")
                     } icon: {
                         Image(systemName: "text.badge.plus")
                     }
-
-
+                    
+                    
                 }
                 
                 Button {
@@ -291,19 +303,19 @@ struct ChartItemView: View {
                     } icon: {
                         Image(systemName: "play.fill")
                     }
-
+                    
                 }
                 
                 
-
+                
             } label: {
                 Image(systemName: "ellipsis").rotationEffect(.degrees(90))
             }.foregroundColor(Color("PrimaryColor"))
-
-           
+            
+            
             Spacer()
             
-        }.alert("이미 재생목록에 포함되어있습니다.", isPresented: $showAlert) { 
+        }.alert("이미 재생목록에 포함되어있습니다.", isPresented: $showAlert) {
             Text("확인")
         }
         
@@ -349,6 +361,7 @@ extension ChartMoreView{
     
     final class ChartViewModel:ObservableObject{
         @Published var currentShowCharts:[DetailSong] = [DetailSong]()
+        @Published var updateTime:Int = 0
         var cancelBag = Set<AnyCancellable>()
         
         
@@ -374,39 +387,47 @@ extension ChartMoreView{
             }.store(in: &cancelBag)
             
         }
+        
+        func fetchUpdateTime(_ category:TopCategory)
+        {
+            Repository.shared.fetchUpdateTimeStmap(category: category).sink { completion in
+                
+                switch completion
+                {
+                case .failure(let err):
+                    print("\(Date()) \(#file) \(#function) \(#line)")
+                case.finished:
+                    print("chart: \(category) update time  finish")
+                }
+                
+            } receiveValue: { [weak self] time in
+                
+                guard let self = self else {return}
+                
+                self.updateTime = time
+            }.store(in: &cancelBag)
+            
+        }
     }
 }
 
 
 func convertViews(_ views:Int) -> String // 조회수 변환 함수
 {
-    let convStr = String(views)
-        
-    let len = convStr.count
-    if(len<4)
-    {
-        return "\(convStr)회"
-    }
-    
-    
-    var ret:String = ""
-    
-    var cnt:Int = 0
-    
-    for i in stride(from: len-1, to: -1, by: -1)
-    {
-        if(cnt<3){
-            cnt+=1
-            ret =  String(convStr.getChar(at: i)) +  ret
-        }
-        else{
-            cnt = 1
-            ret =  String(convStr.getChar(at: i)) + "," + ret
-        }
-        
-    }
-        
-    return "\(ret)회"
-    
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
 
+    let result = numberFormatter.string(from: NSNumber(value: views))!
+    
+    return "\(result)회"
+    
+    
+}
+
+func convertTimeStamp(_ time:Int) -> String{
+    let dateFormater : DateFormatter = DateFormatter()
+    dateFormater.dateFormat = "yyyy.MM.dd hh:mm"
+        
+   return dateFormater.string(from: Date(timeIntervalSince1970:TimeInterval(time)))
+                        
 }

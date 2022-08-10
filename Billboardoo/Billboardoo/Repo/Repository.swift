@@ -75,6 +75,31 @@ class Repository{
     }
     
     
+    func fetchUpdateTimeStmap(category:TopCategory) -> AnyPublisher<Int,Error>
+    {
+        let url:String
+        switch category {
+        case .total:
+            url = ApiCollections.chartUpdateTotal
+        case .time:
+            url = ApiCollections.chartUpdateHourly
+        case .daily:
+            url = ApiCollections.chartUpdateDaily
+        case .weekly:
+            url = ApiCollections.chartUpdateWeekly
+        case .monthly:
+            url = ApiCollections.chartUpdateMonthly
+        }
+        
+        return AF.request(url)
+            .publishDecodable(type: Int.self)
+            .value()
+            .mapError { (err:AFError) in
+                return err as Error
+            }
+            .eraseToAnyPublisher()
+    }
+    
     
     
     
