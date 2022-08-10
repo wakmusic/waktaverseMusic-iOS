@@ -9,11 +9,13 @@ import SwiftUI
 import Kingfisher
 
 struct FiveRowSongGridView: View {
-    private let rows = [GridItem(.fixed(40), spacing: 20), //fixed 행 크기 ,spacing, 행간의 거리
-                        GridItem(.fixed(40), spacing: 20),
-                        GridItem(.fixed(40), spacing: 20),
-                        GridItem(.fixed(40), spacing: 20),
-                        GridItem(.fixed(40), spacing: 20)]
+    
+    
+    
+    private let rows = [GridItem(.fixed(40), spacing: 10), //fixed 행 크기 ,spacing, 행간의 거리
+                        GridItem(.fixed(40), spacing: 10),
+                        GridItem(.fixed(40), spacing: 10),
+                        GridItem(.fixed(40), spacing: 10)]
     
     @Binding var nowChart:[DetailSong]
     @EnvironmentObject var playState:PlayState
@@ -39,7 +41,7 @@ private extension FiveRowSongGridView {
     
     var fiveRowSongGridItemViews: some View {
         
-    
+        
         ForEach(nowChart.indices,id: \.self){ index in //여기서 id설정이 굉장히 중요하다. indices로 접근하기 때문에 속성의 id 말고 \.self를 사용함
             ZStack{
                 HStack() {
@@ -59,7 +61,7 @@ private extension FiveRowSongGridView {
                         playState.uniqueAppend(item: nowChart[index]) //현재 누른 곡 담기
                         
                         
-                       
+                        
                     } label: {
                         Image(systemName: "play.fill").foregroundColor(Color("PrimaryColor"))
                     }
@@ -89,14 +91,14 @@ struct AlbumImageView: View {
             .onFailure { err in
                 print("Error: ,\(err)")
             }
-            
+        
             .resizable()
             .frame(width: 40, height: 40) //resize
     }
 }
 
-        
-        
+
+
 
 
 
