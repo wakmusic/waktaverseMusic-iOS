@@ -25,6 +25,7 @@ struct LaunchScreenView: View {
             Image("mainLogoWhite")
                 .resizable()
                 .frame(width: self.window.width, height: self.window.height*0.1 , alignment: .center)
+                .aspectRatio(contentMode: .fill)
             
                 
         }
