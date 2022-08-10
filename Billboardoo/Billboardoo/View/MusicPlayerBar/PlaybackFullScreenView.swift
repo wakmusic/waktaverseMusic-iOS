@@ -15,6 +15,7 @@ struct PlaybackFullScreenView: View {
     var animation: Namespace.ID //화면전환을 위한 애니메이션 Identify
     @EnvironmentObject var playState:PlayState
     @State var showVolume:Bool = false
+    @Binding var editMode:Bool
     var titleModifier = FullScreenTitleModifier()
     var artistModifier = FullScreenArtistModifer()
     
@@ -43,7 +44,7 @@ struct PlaybackFullScreenView: View {
                         Group{ //그룹으로 묶어 조건적으로 보여준다.
                             if playState.isPlayerListViewPresented {
                                 
-                                PlayListView().environmentObject(playState).padding(.top,UIDevice.current.hasNotch ? 30 : 0) //notch에 따라 패팅 top 줌 (
+                                PlayListView(editMode: $editMode).environmentObject(playState).padding(.top,UIDevice.current.hasNotch ? 30 : 0) //notch에 따라 패팅 top 줌 (
                                 
                                     
                             }

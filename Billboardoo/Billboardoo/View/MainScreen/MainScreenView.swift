@@ -35,6 +35,7 @@ struct MainScreenView: View {
     // PlayBar Slide 애니메이션을 위한 상태
     @GestureState var gestureState = CGSize.zero
     @State var gestureStore = CGSize.zero
+    @State var editMode:Bool = false //playbackFullScreen에서 수정모드, 수정모드가 true일 때는 드래그 모션 멈춤
     //
     
     
@@ -81,7 +82,7 @@ struct MainScreenView: View {
                 
                 Group{
                     if playState.isPlayerViewPresented {
-                        PlaybackFullScreenView(animation: animation)
+                        PlaybackFullScreenView(animation: animation,editMode: $editMode)
                             .environmentObject(playState)
                             .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
                         //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
@@ -110,12 +111,18 @@ struct MainScreenView: View {
                     
                     
                     
-                    if value.translation.height > 0 { // 아래로 드래그 하면 ,저장
+                    if value.translation.height > 0 && !editMode { // 아래로 드래그 하면 ,저장
+                        //offset 방지 editMode가 false여야 저장
                         state.height = value.translation.height
                     }
                 })
                     .onEnded({ value in //드래그가 끝났을 때
-                        print("Parent Drage value: \(value.translation.width)")
+                     
+                        
+                        if(editMode) //editMode가 켜져있으면 막음
+                        {
+                            return
+                        }
                         let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
                         
                         

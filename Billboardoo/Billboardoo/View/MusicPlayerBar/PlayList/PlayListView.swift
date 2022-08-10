@@ -11,7 +11,7 @@ import Kingfisher
 
 struct PlayListView: View {
     
-    @State var editMode: Bool = false
+    @Binding var editMode: Bool 
     @EnvironmentObject var playState:PlayState
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: DetailSong? // 현재 드래그된 노래
