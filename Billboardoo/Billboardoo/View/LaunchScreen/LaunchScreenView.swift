@@ -22,10 +22,11 @@ struct LaunchScreenView: View {
         
         ZStack {
             Color.black
-            Image("mainLogoWhite")
+            Image("LaunchImage")
                 .resizable()
-                .frame(width: self.window.width, height: self.window.height*0.1 , alignment: .center)
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit).padding(.horizontal)
+                //.frame(width:window.width/10,height:window.height/10)
+               
             
                 
         }

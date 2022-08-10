@@ -140,8 +140,8 @@ struct HeaderView: View{
                     {
                         VStack{
                             //텍스트 크기를 proxy를 기준으로 변경
-                            Text("BILLBOARDOO CHART").font(.system(size: proxy.size.height/8, weight: .light, design: .default))
-                            Text("HOT 100").font(.system(size: proxy.size.height/5, weight: .bold, design: .monospaced))
+                            Text("BILLBOARDOO CHART").font(.system(size: proxy.size.height/5, weight: .light, design: .default))
+                            Text("HOT 100").font(.system(size: proxy.size.height/3, weight: .bold, design: .monospaced))
                         }
                         
                     }
@@ -170,14 +170,14 @@ struct PinnedHeaderView:View{
             {
                 
                 // - MARK: TAB bar
-                HStack(spacing:20)
+                HStack(spacing:5)
                 {
                     ForEach(types.indices, id: \.self){ idx in
                         
                         VStack(spacing:12){
                             
                             Text(types[idx])
-                                .fontWeight(.semibold)
+                                .font(.system(size: 15)) //
                                 .foregroundColor(selectedIndex == idx ? Color("PrimaryColor") : .gray)
                             
                             ZStack{
@@ -240,7 +240,7 @@ struct ChartItemView: View {
         
         HStack{
             RankView(now: rank, last: song.last)
-            Divider()
+           
             KFImage(URL(string: song.image))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -330,7 +330,7 @@ struct ImageButton: View {
         
         ZStack(alignment:.center) {
             
-            Text(text).font(.system(size: 20, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
+            Text(text).font(.system(size: 15, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
             Image(imageSource)
                 .resizable()
                 .frame(width: 150, height: 45, alignment: .center)

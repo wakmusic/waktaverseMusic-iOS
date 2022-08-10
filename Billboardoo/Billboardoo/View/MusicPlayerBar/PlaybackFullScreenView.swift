@@ -85,7 +85,7 @@ struct PlaybackFullScreenView: View {
                             
                             
                             
-                            VStack(alignment:.center){
+                            VStack(alignment: playState.isPlayerListViewPresented ? .leading : .center){ //리스트 보여주면 .leading
                                 Text(currentSong.title)
                                     .modifier(titleModifier)
                                 
@@ -107,8 +107,8 @@ struct PlaybackFullScreenView: View {
                         
                         
                         
-                        PlayBar(showVolumnSheet: $showVolume).environmentObject(playState)
-                            .padding(.bottom,60) //밑에서 띄우기
+                        PlayBar(showVolumnSheet: $showVolume,editMode: $editMode).environmentObject(playState)
+                            .padding(.vertical,playState.isPlayerListViewPresented ? 40 : 60) //밑에서 띄우기
                             .padding(.horizontal)
                         
                         
@@ -149,6 +149,7 @@ struct PlayBar: View {
     var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @EnvironmentObject var playState:PlayState
     @Binding var showVolumnSheet:Bool
+    @Binding var editMode:Bool
     
     var body: some View {
         HStack
@@ -157,6 +158,10 @@ struct PlayBar: View {
             Button {  //리스트 버튼을 누를 경우 animation과 같이 toggle
                 withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.85)) {
                     playState.isPlayerListViewPresented.toggle()
+                    if(playState.isPlayerListViewPresented == false) //만약 리스트 꺼지면 editmode 역시 자동으로 꺼짐
+                    {
+                        editMode = false
+                    }
                 }
                 
             }label: {
