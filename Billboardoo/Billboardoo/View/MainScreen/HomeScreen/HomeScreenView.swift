@@ -59,7 +59,7 @@ struct HomeScreenView: View {
                             
                         }
                     
-                    NewSongOfTheMonth().environmentObject(playState)
+                    NewSongOfTheMonthView().environmentObject(playState)
                     
                     
                     
@@ -137,16 +137,7 @@ extension HomeScreenView{
             Repository.shared.fetchTop20(category: category)
                 .sink { completion in
                     
-                    switch completion
-                    {
-                    case .failure(let err_):
-                        
-                        print("\(category) is Error")
-                        
-                        
-                    case .finished:
-                        print("\(category) is Finished ")
-                    }
+                    
                 } receiveValue: { [weak self] (datas:[RankedSong]) in
                     
                     guard let self = self else {return}

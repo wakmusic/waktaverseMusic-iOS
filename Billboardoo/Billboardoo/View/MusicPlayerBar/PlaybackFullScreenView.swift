@@ -76,6 +76,7 @@ struct PlaybackFullScreenView: View {
                                     .frame(width:standardLen*0.1,height: standardLen*0.1)
                                     .aspectRatio(contentMode: .fit)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .padding(.horizontal)
                                     
                                     
                                     
@@ -96,6 +97,7 @@ struct PlaybackFullScreenView: View {
                         }
                         .padding(.trailing, playState.isPlayerListViewPresented ? standardLen*0.1 : 0) //리스트 보여줄 때는 이미지 width만큼 padding
                         .padding(.bottom,30)
+                        
                         
                         
                         

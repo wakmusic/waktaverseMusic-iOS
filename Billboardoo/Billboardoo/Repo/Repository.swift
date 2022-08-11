@@ -101,6 +101,19 @@ class Repository{
     }
     
     
+    func fetchNewMonthSong() -> AnyPublisher<newMonthInfo,Error>
+    {
+        let url = ApiCollections.newMonthly
+        
+        return AF.request(url)
+            .publishDecodable(type:newMonthInfo.self)
+            .value()
+            .mapError { (err:AFError) in
+                return err as Error
+            }
+            .eraseToAnyPublisher()
+    }
+    
     
     
     
