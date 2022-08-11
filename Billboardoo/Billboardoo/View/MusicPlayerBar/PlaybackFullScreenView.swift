@@ -14,7 +14,7 @@ struct PlaybackFullScreenView: View {
     
     var animation: Namespace.ID //화면전환을 위한 애니메이션 Identify
     @EnvironmentObject var playState:PlayState
-    @State var showVolume:Bool = false
+    @State var isUnMute:Bool = true
     @Binding var editMode:Bool
     var titleModifier = FullScreenTitleModifier()
     var artistModifier = FullScreenArtistModifer()
@@ -107,7 +107,7 @@ struct PlaybackFullScreenView: View {
                         
                         
                         
-                        PlayBar(showVolumnSheet: $showVolume,editMode: $editMode).environmentObject(playState)
+                        PlayBar(isUnMute: $isUnMute,editMode: $editMode).environmentObject(playState)
                             .padding(.vertical,playState.isPlayerListViewPresented ? 40 : 60) //밑에서 띄우기
                             .padding(.horizontal)
                         
@@ -130,9 +130,10 @@ struct PlaybackFullScreenView: View {
                     //.ultraThinMaterial
                     
             )
-            }.popup(isPresented: $showVolume, type: .toast, position: .bottom, animation: .easeOut, autohideIn: nil, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: true, backgroundColor:.black.opacity(0.4)) {
-                VolumeSheet().environmentObject(playState)
             }
+//            .popup(isPresented: $showVolume, type: .toast, position: .bottom, animation: .easeOut, autohideIn: nil, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: true, backgroundColor:.black.opacity(0.4)) {
+//                VolumeSheet().environmentObject(playState)
+//            }
             
             
             
@@ -148,7 +149,7 @@ struct PlayBar: View {
     
     var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @EnvironmentObject var playState:PlayState
-    @Binding var showVolumnSheet:Bool
+    @Binding var isUnMute:Bool
     @Binding var editMode:Bool
     
     var body: some View {
@@ -201,9 +202,17 @@ struct PlayBar: View {
             Spacer()
             
             Button {
-                showVolumnSheet = true
+                isUnMute.toggle()
+                if(isUnMute)
+                {
+                    playState.youTubePlayer.unmute()
+                }
+                else
+                {
+                    playState.youTubePlayer.mute()
+                }
             } label: {
-                Image(systemName: "speaker.wave.3.fill")
+                Image(systemName: isUnMute ? "speaker.wave.3.fill" : "speaker.slash.fill")
                     .resizable()
                     .modifier(buttonModifier)
                 
