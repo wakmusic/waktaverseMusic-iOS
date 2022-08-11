@@ -19,11 +19,11 @@ struct NewSongOfTheMonthView: View {
     
     
     var body: some View {
-        AlbumHeader().environmentObject(playState)
+        AlbumHeader(newSongs: $viewModel.newSongs).environmentObject(playState)
         Divider()
         ScrollView(.horizontal, showsIndicators: false) {
             
-            VStack(alignment:.leading)
+            VStack(alignment:.center)
             {
                 LazyHGrid(rows: rows, spacing: 10)
                 {
@@ -39,6 +39,7 @@ struct NewSongOfTheMonthView: View {
 struct AlbumHeader: View {
     
     @EnvironmentObject var playState:PlayState
+    @Binding var newSongs:[NewSong]
     var body: some View {
         
         
@@ -48,7 +49,7 @@ struct AlbumHeader: View {
                 Spacer()
                 
                 NavigationLink {
-                    Text("Move")
+                    NewSongMoreView(newsongs: $newSongs).environmentObject(playState)
                 } label: {
                     Text("더보기").foregroundColor(.gray)
                 }
@@ -129,6 +130,7 @@ extension NewSongOfTheMonthView{
                     guard let self = self else {return}
                     
                     self.newSongs = rawData.data
+              
                 }.store(in: &cancelBag)
 
         }
