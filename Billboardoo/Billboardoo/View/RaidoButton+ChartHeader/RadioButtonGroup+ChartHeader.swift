@@ -72,7 +72,7 @@ struct RadioButtonGroup: View {
     
     var body: some View {
         ChartHeader(chartIndex: $selectedId)
-        Spacer()
+        
         VStack(alignment: .leading) {
             HStack(spacing: 10) { //버튼간 간격
                 

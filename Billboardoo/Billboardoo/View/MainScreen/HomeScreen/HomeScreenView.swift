@@ -36,6 +36,7 @@ struct HomeScreenView: View {
                         print("")
                         
                     }.environmentObject(playState)
+                    
                     FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
                         .onChange(of: viewModel.selectedIndex) { newValue in
                             
@@ -57,7 +58,8 @@ struct HomeScreenView: View {
                             
                             
                         }
-                    Divider()
+                    
+                    NewSongOfTheMonth().environmentObject(playState)
                     
                     
                     
@@ -122,7 +124,7 @@ extension HomeScreenView{
     
     final class HomeScreenViewModel:ObservableObject{
         @Published var selectedIndex:Int = 0
-        @Published var nowChart:[DetailSong] = [DetailSong]()
+        @Published var nowChart:[RankedSong] = [RankedSong]()
         var cancelBag = Set<AnyCancellable>()
         
         init()
@@ -145,7 +147,7 @@ extension HomeScreenView{
                     case .finished:
                         print("\(category) is Finished ")
                     }
-                } receiveValue: { [weak self] (datas:[DetailSong]) in
+                } receiveValue: { [weak self] (datas:[RankedSong]) in
                     
                     guard let self = self else {return}
                     

@@ -164,7 +164,7 @@ struct PinnedHeaderView:View{
     @Binding var selectedIndex:Int
     @Namespace var animation
     @EnvironmentObject var playState:PlayState
-    @Binding var chart:[DetailSong]
+    @Binding var chart:[RankedSong]
     @Binding var updateTime:Int
     
     var body: some View{
@@ -218,7 +218,7 @@ struct PinnedHeaderView:View{
                 ImageButton(text: "셔플 재생", imageSource: "angelGosegu").onTapGesture {
                     playState.playList.removeAll() //전부 지운후
                     playState.youTubePlayer.stop() // stop
-                    playState.playList = chart // 현재 해당 chart로 덮어쓰고
+                    playState.playList = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
                     
                     shuffle(playlist: &playState.playList)  //셔플 시킨 후
                     
@@ -229,7 +229,7 @@ struct PinnedHeaderView:View{
                 ImageButton(text: "100곡 전체 듣기", imageSource: "jingboy").onTapGesture {
                     playState.playList.removeAll() //전부 지운후
                     playState.youTubePlayer.stop() // stop
-                    playState.playList = chart // 현재 해당 chart로 덮어쓰고
+                    playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
                     playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
                     
@@ -254,7 +254,7 @@ struct ChartItemView: View {
     
     
     var rank:Int
-    var song:DetailSong
+    var song:RankedSong
     @EnvironmentObject var playState:PlayState
     @State var showAlert = false
     var body: some View {
@@ -288,11 +288,11 @@ struct ChartItemView: View {
             
             
             
-            Menu {
+            Menu { //메뉴
                 
                 
                 Button(role:.cancel) {
-                    showAlert = playState.appendList(item: song)
+                    showAlert = playState.appendList(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
                 } label: {
                     Label {
                         Text("담기")
@@ -304,9 +304,10 @@ struct ChartItemView: View {
                 }
                 
                 Button {
-                    playState.currentSong = song //강제 배정
+                    let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                    playState.currentSong = simpleSong//강제 배정
                     playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
-                    playState.uniqueAppend(item: song) //현재 누른 곡 담기
+                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
                 } label: {
                     Label {
                         Text("재생")
@@ -319,7 +320,7 @@ struct ChartItemView: View {
                 
                 
             } label: {
-                Image(systemName: "ellipsis").rotationEffect(.degrees(90))
+                Image(systemName: "ellipsis").rotationEffect(.degrees(90)).font(.title2)
             }.foregroundColor(Color("PrimaryColor"))
             
             
@@ -336,7 +337,7 @@ struct ChartItemView: View {
 
 struct ChartItemVIew_Previews: PreviewProvider {
     static var previews: some View {
-        ChartItemView(rank: 3, song: DetailSong(song_id: "fgSXAKsq-Vo", title: "리와인드", artist: "이세계아이돌", image:"https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 2, views: 8557785)).environmentObject(PlayState())
+        ChartItemView(rank: 3, song: RankedSong(song_id: "fgSXAKsq-Vo", title: "리와인드", artist: "이세계아이돌", image:"https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 2, views: 8557785)).environmentObject(PlayState())
     }
 }
 
@@ -370,7 +371,7 @@ struct ImageButton: View {
 extension ChartMoreView{
     
     final class ChartViewModel:ObservableObject{
-        @Published var currentShowCharts:[DetailSong] = [DetailSong]()
+        @Published var currentShowCharts:[RankedSong] = [RankedSong]()
         @Published var updateTime:Int = 0
         var cancelBag = Set<AnyCancellable>()
         
@@ -387,7 +388,7 @@ extension ChartMoreView{
                     
                 }
                 
-            } receiveValue: { [weak self] (data:[DetailSong]) in
+            } receiveValue: { [weak self] (data:[RankedSong]) in
                 
                 guard let self = self else {return}
                 
@@ -443,7 +444,20 @@ func convertTimeStamp(_ time:Int) -> String{
 }
 
 
-func shuffle(playlist:inout [DetailSong]){
+func castingFromRankedToSimple(rankedList:[RankedSong]) ->[SimpleSong]
+{
+    var simpleList:[SimpleSong] = [SimpleSong]()
+    
+    
+    for rSong in rankedList {
+        simpleList.append(SimpleSong(song_id: rSong.song_id, title: rSong.title, artist: rSong.artist, image: rSong.image, url: rSong.url))
+    }
+    
+    return simpleList
+}
+
+
+func shuffle(playlist:inout [SimpleSong]){
     
     
     for i in 0..<playlist.count - 1 { // 0 ~ n-2

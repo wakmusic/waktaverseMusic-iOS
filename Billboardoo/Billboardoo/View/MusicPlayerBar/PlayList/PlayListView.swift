@@ -14,7 +14,7 @@ struct PlayListView: View {
     @Binding var editMode: Bool
     @EnvironmentObject var playState:PlayState
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
-    @State var draggedItem: DetailSong? // 현재 드래그된 노래
+    @State var draggedItem: SimpleSong? // 현재 드래그된 노래
     
     
     var body: some View {
@@ -126,9 +126,9 @@ struct PlayListView: View {
 struct ItemCell: View {
     
     @Binding var editMode:Bool //현재 편집 상태
-    var song:DetailSong // 해당 셀 노래
+    var song:SimpleSong // 해당 셀 노래
     @Binding var multipleSelection:Set<UUID> // 다중 선택 셋
-    @State var draggedItem: DetailSong? // 드래그 된 아이템
+    @State var draggedItem: SimpleSong? // 드래그 된 아이템
     @EnvironmentObject var playState:PlayState
     
     
@@ -211,20 +211,14 @@ struct ItemCell: View {
     
 }
 
-struct ItemCell_Previewr: PreviewProvider {
-    static var previews: some View {
-        ItemCell(editMode:.constant(false),song:DetailSong(song_id: "fgSXAKsq-Vo", title: "리와인드 (RE:WIND)", artist: "이세계아이돌", image: "https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 1,views: 213),multipleSelection: .constant(Set<UUID>())).environmentObject(PlayState())
-    }
-}
-
 
 struct MyDropDelegate : DropDelegate {
     
-    let currentItem: DetailSong
+    let currentItem: SimpleSong
     @Binding var currentIndex:Int
     @Binding var editMode:Bool
-    @Binding var playList:[DetailSong]
-    @Binding var draggedItem: DetailSong?
+    @Binding var playList:[SimpleSong]
+    @Binding var draggedItem: SimpleSong?
     
     
     /*
@@ -280,7 +274,7 @@ struct MyDropDelegate : DropDelegate {
             
             withAnimation {
                 //from에서 to로 이동 ,  to > from일 때는 to+1  아니면 to로
-                let nowPlaySong:DetailSong = self.playList[currentIndex] // 현재 재생중인 곳
+                let nowPlaySong:SimpleSong = self.playList[currentIndex] // 현재 재생중인 곳
                 self.playList.move(fromOffsets: IndexSet(integer: from), toOffset: to > from ? to+1 : to)
                 //move 함
                 self.currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0
@@ -299,7 +293,7 @@ struct MyDropDelegate : DropDelegate {
 
 struct TopLeftControlView: View {
     
-    @Binding var playList:[DetailSong]
+    @Binding var playList:[SimpleSong]
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
@@ -345,7 +339,7 @@ struct TopLeftControlView: View {
 
 struct TopRightControlView: View {
     @Binding var editMode:Bool
-    @Binding var playList:[DetailSong]
+    @Binding var playList:[SimpleSong]
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
@@ -398,7 +392,7 @@ struct TopRightControlView: View {
                             }
                             else
                             {
-                                let nowPlaySong:DetailSong = playState.currentSong!
+                                let nowPlaySong:SimpleSong = playState.currentSong!
                                 currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 //현재 재생중인 노래로
                                 
                             }

@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct DetailSong : Codable , Identifiable, Equatable{
+struct RankedSong : Codable , Identifiable, Equatable{
     let id = UUID()
     let song_id: String
     let title: String
