@@ -90,9 +90,9 @@ extension NewSongOfTheMonthView{
                         .frame(width: 100, height: 100,alignment: .center)
                 
                 VStack(alignment:.leading) {
-                    Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default))
-                    Text(song.artist).font(.caption)
-                    Text(viewModel.convertTimeStamp(song.date)).font(.caption2).foregroundColor(.gray)
+                    Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1)
+                    Text(song.artist).font(.caption).lineLimit(1)
+                    Text(viewModel.convertTimeStamp(song.date)).font(.caption2).lineLimit(1).foregroundColor(.gray)
                 }.frame(width: 100)
                 
             }.padding()

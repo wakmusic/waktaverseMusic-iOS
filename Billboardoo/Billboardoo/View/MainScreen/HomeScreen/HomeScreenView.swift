@@ -61,6 +61,8 @@ struct HomeScreenView: View {
                     
                     NewSongOfTheMonthView().environmentObject(playState)
                     
+                    NewsView()
+                    
                     
                     
                 } //ScrollView

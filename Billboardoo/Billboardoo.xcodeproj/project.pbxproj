@@ -47,6 +47,8 @@
 		D896DF7128A4DE320020C615 /* SimpleSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF7028A4DE320020C615 /* SimpleSong.swift */; };
 		D896DF7328A4E5DE0020C615 /* newMonthInfo+NewSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF7228A4E5DE0020C615 /* newMonthInfo+NewSong.swift */; };
 		D896DF7628A54C300020C615 /* NewSongMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF7528A54C300020C615 /* NewSongMoreView.swift */; };
+		D896DF7828A630F80020C615 /* NewsView+Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF7728A630F70020C615 /* NewsView+Header.swift */; };
+		D896DF7A28A6399F0020C615 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF7928A6399F0020C615 /* NewsModel.swift */; };
 		E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +115,8 @@
 		D896DF7028A4DE320020C615 /* SimpleSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSong.swift; sourceTree = "<group>"; };
 		D896DF7228A4E5DE0020C615 /* newMonthInfo+NewSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "newMonthInfo+NewSong.swift"; sourceTree = "<group>"; };
 		D896DF7528A54C300020C615 /* NewSongMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongMoreView.swift; sourceTree = "<group>"; };
+		D896DF7728A630F70020C615 /* NewsView+Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsView+Header.swift"; sourceTree = "<group>"; };
+		D896DF7928A6399F0020C615 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.release.xcconfig"; sourceTree = "<group>"; };
 		DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -213,6 +217,7 @@
 				D835785328891DAB00459197 /* HomeScreenView.swift */,
 				D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */,
 				D896DF6E28A4D5D20020C615 /* NewSongOfTheMonth+Header.swift */,
+				D896DF7728A630F70020C615 /* NewsView+Header.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 				D896DF6C28A14E230020C615 /* RankedSong.swift */,
 				D896DF7028A4DE320020C615 /* SimpleSong.swift */,
 				D896DF7228A4E5DE0020C615 /* newMonthInfo+NewSong.swift */,
+				D896DF7928A6399F0020C615 /* NewsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -663,6 +669,7 @@
 				D848725E2897E30F00B508DC /* PlayListView.swift in Sources */,
 				D896DF7128A4DE320020C615 /* SimpleSong.swift in Sources */,
 				D84872562894101400B508DC /* PlayPuaseButton.swift in Sources */,
+				D896DF7828A630F80020C615 /* NewsView+Header.swift in Sources */,
 				D86B586B288C27C6001110A5 /* TestView.swift in Sources */,
 				D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */,
 				D896DF0B289D17240020C615 /* VolumeSheet.swift in Sources */,
@@ -677,6 +684,7 @@
 				D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */,
 				D84872522893C2F600B508DC /* SongCardView.swift in Sources */,
 				D848724A2893ACE700B508DC /* PlayState.swift in Sources */,
+				D896DF7A28A6399F0020C615 /* NewsModel.swift in Sources */,
 				D848724D2893B6A300B508DC /* PlaybackBarView.swift in Sources */,
 				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
 				D835785428891DAB00459197 /* HomeScreenView.swift in Sources */,

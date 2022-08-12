@@ -115,6 +115,21 @@ class Repository{
     }
     
     
+    func fetchNews() -> AnyPublisher<[NewsModel],Error>
+    {
+        
+        let url = ApiCollections.news
+        
+        return AF.request(url)
+            .publishDecodable(type:[NewsModel].self)
+            .value()
+            .mapError { (err:AFError) in
+                return err as Error
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    
     
     
     

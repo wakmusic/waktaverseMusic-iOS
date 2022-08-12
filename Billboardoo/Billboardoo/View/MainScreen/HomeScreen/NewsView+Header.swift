@@ -1,0 +1,126 @@
+//
+//  NewsView.swift
+//  Billboardoo
+//
+//  Created by yongbeomkwak on 2022/08/12.
+//
+
+import SwiftUI
+import Foundation
+import Combine
+import Kingfisher
+
+struct NewsView: View {
+    
+    private let rows = [GridItem(.fixed(200))] //row 높이
+    @StateObject var viewModel = NewsViewModel()
+     //https://billboardoo.com/news/thumbnail/2022022.png
+    
+    var body: some View {
+        NewsHeader()
+        Divider()
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHGrid(rows: rows,spacing: 30) { //뉴스간 거리
+               OneGridRow
+            }.padding(.horizontal)
+        }
+    }
+}
+
+struct NewsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NewsView()
+        
+    }
+}
+
+extension NewsView{
+    
+    var OneGridRow: some View {
+        
+      
+        ForEach(viewModel.news, id: \.self.id) { news in
+            
+            VStack(){
+                KFImage(URL(string: "https://billboardoo.com/news/thumbnail/\(news.time).png")!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 280, height: 160, alignment: .center)
+                    .offset(y:-20)
+                    .clipped()
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    final class NewsViewModel:ObservableObject {
+        
+        @Published var news:[NewsModel] = [NewsModel]()
+        var cancelBag = Set<AnyCancellable> ()
+        
+        init(){
+            
+            fetchNews()
+        }
+        
+        
+        
+        func fetchNews()
+        {
+            Repository.shared.fetchNews().sink { completion in
+                
+                switch completion{
+                case .failure(let err):
+                    print(" \(#file) \(#function) \(#line) \(err)")
+                    
+                case .finished:
+                    print(" \(#file) \(#function) \(#line) Finish")
+                }
+                
+            } receiveValue: { [weak self] (data:[NewsModel]) in
+                
+                guard let self = self else {return}
+                
+                self.news = data
+                
+            }.store(in: &cancelBag)
+
+        
+        }
+    }
+    
+    
+    
+  
+            
+    
+}
+
+
+struct NewsHeader: View {
+    
+    var body: some View {
+        
+        
+        VStack(alignment:.leading,spacing: 5){
+            HStack {
+                Text("NEWS").font(.system(size: 35, weight: .bold, design: .rounded)).foregroundColor(Color("PrimaryColor"))
+                Spacer()
+                
+                NavigationLink {
+                    //NewSongMoreView(newsongs: $newSongs).environmentObject(playState)
+                    Text("Hello")
+                } label: {
+                    Text("더보기").foregroundColor(.gray)
+                }
+                
+                
+            }
+        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+    }
+}
+
+
