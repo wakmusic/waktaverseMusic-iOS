@@ -134,7 +134,6 @@ class PlayState:ObservableObject {
     func uniqueAppend(item:SimpleSong){
         
         let isHave = isAlreadyHave(item)
-        
         if(isHave == -1)
         {
             self.playList.append(item)
@@ -144,6 +143,9 @@ class PlayState:ObservableObject {
         {
             self.currentPlayIndex = isHave
         }
+        currentSong = item
+    
+        
         //없으면 추가
         
     

@@ -13,7 +13,7 @@ import Kingfisher
 
 struct NewsMoreView: View {
     
-    
+    @EnvironmentObject var playState:PlayState
     @Binding var news:[NewsModel]
     //let columns:[GridItem] = [GridItem(.fixed(220))] //row 높이
     let columns:[GridItem] = Array(repeating: GridItem(.fixed(180),spacing: 20), count: Int(UIScreen.main.bounds.width)/180)
@@ -34,6 +34,13 @@ struct NewsMoreView: View {
                 {
                     ThreeColumnsGrid
                 }
+            }
+            if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
+            {
+                
+                Spacer(minLength: 60)
+                
+                
             }
             
         }.navigationTitle("NEWS")

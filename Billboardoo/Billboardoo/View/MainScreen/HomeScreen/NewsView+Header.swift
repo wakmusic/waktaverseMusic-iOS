@@ -13,12 +13,13 @@ import Kingfisher
 struct NewsView: View {
     
     private let rows = [GridItem(.fixed(220))] //row 높이
+    @EnvironmentObject var playState:PlayState
     @StateObject var viewModel = NewsViewModel()
      //https://billboardoo.com/news/thumbnail/2022022.png
 
     
     var body: some View {
-        NewsHeader(news: $viewModel.news)
+        NewsHeader(news: $viewModel.news).environmentObject(playState)
         Divider()
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: rows,spacing: 30) { //뉴스간 거리
@@ -56,6 +57,7 @@ extension NewsView{
                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
                     Text(news.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.title2).lineLimit(1)
                 }.frame(width: 280)
+                    
             }
 
             

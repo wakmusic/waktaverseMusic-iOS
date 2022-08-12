@@ -62,7 +62,7 @@ struct HomeScreenView: View {
                     
                     NewSongOfTheMonthView().environmentObject(playState)
                     
-                    NewsView()
+                    NewsView().environmentObject(playState)
                     
                     if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
                     {

@@ -376,7 +376,9 @@ struct TopRightControlView: View {
                             multipleSelection.removeAll() // 셋 제거
                             playState.isPlayerViewPresented = false // Fullscrren 끄고
                             playState.isPlayerListViewPresented = false //리스트창 끄고
+                            editMode = false // 편집모드도 끄고
                             playState.youTubePlayer.stop() //youtubePlayer Stop
+                            playState.currentSong = nil // 현재 재생 노래 비어둠 
                         }
                     }
                     

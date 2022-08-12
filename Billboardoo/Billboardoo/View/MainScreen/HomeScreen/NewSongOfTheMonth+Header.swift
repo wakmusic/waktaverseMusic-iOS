@@ -66,7 +66,8 @@ extension NewSongOfTheMonthView{
     
     var TwoRowGrid: some View{
         
-        ForEach(viewModel.newSongs,id:\.self.id){ song in
+        //viewModel.newSongs[0..<6] - > ArraySlice -> Array(Arraylice)
+        ForEach(viewModel.newSongs.count < 6 ? viewModel.newSongs: Array(viewModel.newSongs[0..<6]),id:\.self.id){ song in
             
             VStack(alignment:.center){
              
@@ -80,7 +81,14 @@ extension NewSongOfTheMonthView{
                         .overlay {
                             ZStack{
                                 Button {
-                                    playState.uniqueAppend(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
+                                    let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                                    if(playState.currentSong != simpleSong)
+                                    {
+                                        playState.currentSong =  simpleSong //강제 배정
+                                        playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                        playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+                                    }
+                                  
                                 } label: {
                                     Image(systemName: "play.fill").foregroundColor(.white)
                                 }

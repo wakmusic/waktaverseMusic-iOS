@@ -33,7 +33,13 @@ struct NewSongMoreView: View {
                 {
                    ThreeColumnsGrid
                 }
+                if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
+                {
+                    
+                    Spacer(minLength: 30)
+                }
             }
+            
             
         }.navigationTitle("이달의 신곡")
     }
@@ -56,7 +62,16 @@ extension NewSongMoreView{
                         .overlay {
                             ZStack{
                                 Button {
-                                    playState.uniqueAppend(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
+                                    let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                                    
+                                    if(playState.currentSong != simpleSong)
+                                    {
+                                        playState.currentSong =  simpleSong //강제 배정
+                                        playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                        playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+                                    }
+                                    
+                                    
                                 } label: {
                                     Image(systemName: "play.fill").foregroundColor(.white)
                                 }

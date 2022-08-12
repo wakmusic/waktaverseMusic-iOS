@@ -106,6 +106,12 @@ struct ChartMoreView: View {
                 Bindingindex = index //닫힐 때 저장된 인덱스 보냄
             })
             .coordinateSpace(name: "SCROLL")
+            
+            if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
+            {
+                
+                Spacer(minLength: 30)
+            }
         }.navigationBarBackButtonHidden(true) //백 버튼 없애고
             .navigationBarHidden(true) //Bar 제거
             .ignoresSafeArea(.container,edges:.vertical)
@@ -224,6 +230,7 @@ struct PinnedHeaderView:View{
                     
                     playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                    playState.youTubePlayer.play()
                     
                 }
                 ImageButton(text: "100곡 전체 듣기", imageSource: "jingboy").onTapGesture {
@@ -232,6 +239,7 @@ struct PinnedHeaderView:View{
                     playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
                     playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                    playState.youTubePlayer.play()
                     
                     
                 }
