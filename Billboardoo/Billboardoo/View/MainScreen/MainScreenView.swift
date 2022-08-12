@@ -10,7 +10,6 @@ import YouTubePlayerKit
 
 enum Screen{
     case home
-    case albums
     case artists
 }
 
@@ -69,18 +68,20 @@ struct MainScreenView: View {
                 InvisibleRefreshView()
                     .opacity(0)
                 TabView(selection: $router.screen){
-                    HomeScreenView().environmentObject(playState).animation(.none).environmentObject(playState) // 애니메이션 막고 오직 스크롤만 되게
+                    HomeScreenView().environmentObject(playState).animation(.none)
                         .tag(Screen.home)
                         .tabItem {
                             TabBarItem(title: "Home", imageName: "house.fill")
                         }
                     
-                    
-                        
-                    
-                
+                    ArtistScreenView().environmentObject(playState).animation(.none)
+                        .tag(Screen.artists)
+                        .tabItem {
+                            TabBarItem(title: "ARTIST", imageName: "music.mic")
+                        }
                 }
                 
+               
                 
                 
                 Group{

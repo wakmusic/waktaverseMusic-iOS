@@ -13,7 +13,7 @@ import RxSwift
 
 @main
 struct BillboardooApp: App {
-    let persistenceController = PersistenceController.shared
+   
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
     var playState = PlayState.shared
     
