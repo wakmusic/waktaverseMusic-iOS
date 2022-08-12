@@ -97,6 +97,7 @@ struct PlaybackBarView: View {
                 .background(.ultraThinMaterial,in: RoundedRectangle(cornerRadius: 8))
                 
             }
+
         }
         
         

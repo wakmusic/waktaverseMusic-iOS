@@ -15,6 +15,7 @@ struct HomeScreenView: View {
     @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
     @EnvironmentObject var playState:PlayState
     
+    
     init(){
         _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
         
@@ -63,6 +64,14 @@ struct HomeScreenView: View {
                     
                     NewsView()
                     
+                    if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
+                    {
+                        
+                        Spacer(minLength: 30)
+                        
+                        
+                    }
+                    
                     
                     
                 } //ScrollView
@@ -77,6 +86,7 @@ struct HomeScreenView: View {
                 }
                 .padding(.vertical)
             }.navigationViewStyle(.stack) //Naivi
+            
             
         }
     }

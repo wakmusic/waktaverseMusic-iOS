@@ -12,9 +12,10 @@ import Kingfisher
 
 struct NewsView: View {
     
-    private let rows = [GridItem(.fixed(200))] //row 높이
+    private let rows = [GridItem(.fixed(220))] //row 높이
     @StateObject var viewModel = NewsViewModel()
      //https://billboardoo.com/news/thumbnail/2022022.png
+
     
     var body: some View {
         NewsHeader()
@@ -38,17 +39,20 @@ extension NewsView{
     
     var OneGridRow: some View {
         
+        
       
         ForEach(viewModel.news, id: \.self.id) { news in
             
-            VStack(){
+            VStack(alignment:.leading,spacing: 20){
                 KFImage(URL(string: "https://billboardoo.com/news/thumbnail/\(news.time).png")!)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 280, height: 160, alignment: .center)
-                    .offset(y:-20)
+                    .scaledToFill()
                     .clipped()
-            }
+                    .frame(width: 280, height: 180,alignment: .center)
+                    .cornerRadius(10)
+                    .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
+                Text(news.title).font(.title2).lineLimit(1)
+            }.frame(width: 280)
         }
         
         
