@@ -35,6 +35,8 @@ class ApiCollections{
     // - MARK: others
     
     static let news: String = "https://billboardoo.com/api/news" //news
+    static let newsThumbnail: String = "https://billboardoo.com/news/thumbnail/"
+    static let newsCafe: String = "https://cafe.naver.com/steamindiegame/"
     static let videos: String = "https://billboardoo.com/api/videos" //videos
     
     static let artiest: String = "https://billboardoo.com/api/artist/" //+artiest id

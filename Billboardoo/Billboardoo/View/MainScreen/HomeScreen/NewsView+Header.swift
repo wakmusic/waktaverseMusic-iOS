@@ -18,7 +18,7 @@ struct NewsView: View {
 
     
     var body: some View {
-        NewsHeader()
+        NewsHeader(news: $viewModel.news)
         Divider()
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHGrid(rows: rows,spacing: 30) { //뉴스간 거리
@@ -43,16 +43,23 @@ extension NewsView{
       
         ForEach(viewModel.news, id: \.self.id) { news in
             
-            VStack(alignment:.leading,spacing: 20){
-                KFImage(URL(string: "https://billboardoo.com/news/thumbnail/\(news.time).png")!)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
-                    .frame(width: 280, height: 180,alignment: .center)
-                    .cornerRadius(10)
-                    .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
-                Text(news.title).font(.title2).lineLimit(1)
-            }.frame(width: 280)
+            NavigationLink {
+                CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(news.newsId)")
+            } label: {
+                VStack(alignment:.leading,spacing: 20){
+                    KFImage(URL(string: "\(ApiCollections.newsThumbnail)\(news.time).png")!)
+                        .resizable()
+                        .scaledToFill()
+                        .clipped()
+                        .frame(width: 280, height: 180,alignment: .center)
+                        .cornerRadius(10)
+                        .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
+                    Text(news.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.title2).lineLimit(1)
+                }.frame(width: 280)
+            }
+
+            
+           
         }
         
         
@@ -106,6 +113,8 @@ extension NewsView{
 
 struct NewsHeader: View {
     
+    @Binding var news:[NewsModel]
+    
     var body: some View {
         
         
@@ -115,8 +124,7 @@ struct NewsHeader: View {
                 Spacer()
                 
                 NavigationLink {
-                    //NewSongMoreView(newsongs: $newSongs).environmentObject(playState)
-                    Text("Hello")
+                    NewsMoreView(news: $news)
                 } label: {
                     Text("더보기").foregroundColor(.gray)
                 }
