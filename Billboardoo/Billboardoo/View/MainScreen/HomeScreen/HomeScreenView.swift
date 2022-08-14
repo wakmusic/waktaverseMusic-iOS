@@ -60,6 +60,8 @@ struct HomeScreenView: View {
                             
                         }
                     
+                  
+                    
                     NewSongOfTheMonthView().environmentObject(playState)
                     
                     NewsView().environmentObject(playState)

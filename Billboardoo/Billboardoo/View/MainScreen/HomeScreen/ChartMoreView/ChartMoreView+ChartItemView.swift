@@ -151,7 +151,7 @@ struct HeaderView: View{
                         VStack{
                             //텍스트 크기를 proxy를 기준으로 변경
                             Text("BILLBOARDOO CHART").font(.system(size: proxy.size.height/5, weight: .light, design: .default))
-                            Text("HOT 100").font(.system(size: proxy.size.height/3, weight: .bold, design: .monospaced))
+                            Text("HOT 100").font(.custom("LeferiPoint-Special", size: proxy.size.height/3)).bold()
                         }
                         
                     }

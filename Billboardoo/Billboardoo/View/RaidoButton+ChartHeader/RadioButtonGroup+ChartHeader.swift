@@ -35,7 +35,7 @@ struct RadioBttuon: View {
             
         } label: {
             
-            Text(title).fontWeight(.bold).tracking(4) //자간 간격 4 만큼
+            Text(title).font(.custom("PretendardVariable-SemiBold", size: 15)).tracking(3).padding(2) //자간 간격 4 만큼
             
             
             //글자 색
@@ -45,7 +45,7 @@ struct RadioBttuon: View {
                 .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color("PrimaryColor"))
                 .cornerRadius(10)
             //테두리 설정
-                .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color("PrimaryColor"),lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color("PrimaryColor")))
         }
         //최종 크기
         
@@ -100,17 +100,17 @@ struct ChartHeader: View {
             HStack {
                 switch chartIndex{
                 case 0:
-                    Text("빌보두 누적 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
                 case 1:
-                    Text("빌보두 실시간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 실시간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
                 case 2:
-                    Text("빌보두 일간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 일간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
                 case 3:
-                    Text("빌보두 주간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 주간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
                 case 4:
-                    Text("빌보두 월간 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 월간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
                 default:
-                    Text("빌보두 누적 Top 100").bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
                 }
                 Spacer()
                 
@@ -118,6 +118,13 @@ struct ChartHeader: View {
                     ChartMoreView(Bindingindex: $chartIndex).environmentObject(playState)
                 } label: {
                     Text("더보기").foregroundColor(.gray)
+                }.onAppear {
+                    for family: String in UIFont.familyNames {
+                                    print(family)
+                                    for names : String in UIFont.fontNames(forFamilyName: family){
+                                        print("=== \(names)")
+                                    }
+                                }
                 }
                 
                 

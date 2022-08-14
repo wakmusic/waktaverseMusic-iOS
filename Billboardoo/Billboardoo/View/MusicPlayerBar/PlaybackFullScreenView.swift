@@ -88,7 +88,7 @@ struct PlaybackFullScreenView: View {
                             
                             VStack(alignment: playState.isPlayerListViewPresented ? .leading : .center){ //리스트 보여주면 .leading
                                 Text(currentSong.title)
-                                    .modifier(titleModifier)
+                                    .font(.custom("PretendardVariable-Regular", size: 18)).bold()
                                 
                                 Text(currentSong.artist)
                                     .modifier(artistModifier)

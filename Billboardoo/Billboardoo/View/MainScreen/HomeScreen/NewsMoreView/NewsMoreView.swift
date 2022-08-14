@@ -15,7 +15,6 @@ struct NewsMoreView: View {
     
     @EnvironmentObject var playState:PlayState
     @Binding var news:[NewsModel]
-    //let columns:[GridItem] = [GridItem(.fixed(220))] //row 높이
     let columns:[GridItem] = Array(repeating: GridItem(.fixed(180),spacing: 20), count: Int(UIScreen.main.bounds.width)/180)
     
     //GridItem 크기 130을 기기의 가로크기로 나눈 몫 개수로 다이나믹하게 보여줌
@@ -35,13 +34,13 @@ struct NewsMoreView: View {
                     ThreeColumnsGrid
                 }
             }
-            if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
-            {
-                
-                Spacer(minLength: 60)
-                
-                
-            }
+//            if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
+//            {
+//                
+//                Spacer(minLength: 60)
+//                
+//                
+//            }
             
         }.navigationTitle("NEWS")
             .navigationBarTitleDisplayMode(.large)
@@ -56,7 +55,7 @@ extension NewsMoreView{
             NavigationLink {
                 CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(data.newsId)")
             } label: {
-                VStack(alignment:.leading,spacing: 20){
+                VStack(alignment:.leading,spacing: 5){
                     KFImage(URL(string: "\(ApiCollections.newsThumbnail)\(data.time).png")!)
                         .resizable()
                         .scaledToFill()
@@ -65,6 +64,7 @@ extension NewsMoreView{
                         .cornerRadius(10)
                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
                     Text(data.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.title3).lineLimit(1)
+                    Spacer(minLength: 20)
                 }.frame(width: 180)
             }
             

@@ -39,7 +39,7 @@ class ApiCollections{
     static let newsCafe: String = "https://cafe.naver.com/steamindiegame/"
     static let videos: String = "https://billboardoo.com/api/videos" //videos
     
-    static let artiest: String = "https://billboardoo.com/api/artist/" //+artiest id
+    static let artiest: String = "https://billboardoo.com/api/artists/" //+artiest id
     static let albums: String = "https://billboardoo.com/api/albums/" //+artiest id
     
    

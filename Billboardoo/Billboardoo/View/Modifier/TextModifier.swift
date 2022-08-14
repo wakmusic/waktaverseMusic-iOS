@@ -61,7 +61,7 @@ struct PlayBarArtistModifer: ViewModifier{
     
     func body(content: Content) -> some View {
         
-        content.font(.system(size: window.height/45,design: .serif)).foregroundColor(.secondary)
+        content.font(.system(size: window.height/45,weight: .semibold,design: .serif)).foregroundColor(.secondary)
             .lineLimit(1) // 1줄 제한
             .truncationMode(.tail) //뒤에짜리기
     }

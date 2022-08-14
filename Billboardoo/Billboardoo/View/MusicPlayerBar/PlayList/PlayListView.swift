@@ -172,7 +172,7 @@ struct ItemCell: View {
                 
                 
                 VStack(alignment:.leading){
-                    Text(song.title).modifier(PlayBarTitleModifier())
+                    Text(song.title).font(.custom("PretendardVariable-Regular", size: 18)).bold()
                     Text(song.artist).modifier(PlayBarArtistModifer())
                 }
                 Spacer()
