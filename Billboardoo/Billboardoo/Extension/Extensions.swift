@@ -83,7 +83,7 @@ extension UIImage {
         
         
         //bitmap image를 rgba UIColor로 변환
-        return UIColor(red: CGFloat(bitmap[0])*0.6/255, green: CGFloat(bitmap[1])*0.6/255, blue: CGFloat(bitmap[2])*0.6/255, alpha: CGFloat(bitmap[3])/255)
+        return UIColor(red: CGFloat(bitmap[0])*1/255, green: CGFloat(bitmap[1])*1/255, blue: CGFloat(bitmap[2])*1/255, alpha: CGFloat(bitmap[3])/255)
         
     }
 }

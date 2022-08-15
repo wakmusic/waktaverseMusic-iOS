@@ -6,41 +6,49 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CardView: View {
     
     var artist:Artist
+    @Binding var selectedId:String
+   // var size:CGSize
+    let window = UIScreen.main.bounds
     var body: some View {
-       
-        ZStack() {
-            let artwork = UIImage(named: artist.artistId)
-                
-            let shadowcolor = artwork?.averageColor
-           VStack
+        
+      
+           
+            VStack()
             {
                 Image(artist.artistId)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .mask(RoundedRectangle(cornerRadius: 30,style: .continuous))
-                    .frame(maxWidth:.infinity,maxHeight: .infinity)
-                    .shadow(color: Color(uiColor: shadowcolor ?? .black), radius: 8, x: 0, y: 12)
-                    .shadow(color: Color(uiColor: shadowcolor ?? .black), radius: 2, x: 0, y: 1)
+                    .mask(Circle())
+                    //.frame(maxWidth:.infinity,maxHeight: .infinity)
+                    //.shadow(color: Color(uiColor: shadowcolor ?? .black), radius: 8, x: 0, y: 3)
+                    //.shadow(color: Color(uiColor: shadowcolor ?? .black), radius: 2, x: 0, y: 1)
                 
-                Text(artist.name).font(.title).foregroundColor(.white)
+                Text(artist.name).font(.title3).foregroundColor(.white)
+            }.onTapGesture {
+                
+                withAnimation(.default)
+                {
+                    selectedId = artist.artistId
+                }
+                
+                
             }
             
-        }
         
-        .padding(30)
-        .frame(width:200,height: 280)
+       
+        .frame(width:window.width/6,height:window.height/6)
+        .padding(.horizontal,30)
+        .scaleEffect(selectedId == artist.artistId ? 1 : 0.8)
+        
         
         
         
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(artist: Artist(artistId: "ine", name: "아이네", artistGroup: .isedol, image: ""))
-    }
-}
+

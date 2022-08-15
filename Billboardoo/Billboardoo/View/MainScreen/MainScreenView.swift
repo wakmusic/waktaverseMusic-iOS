@@ -39,7 +39,7 @@ struct MainScreenView: View {
     
     
     init() {
-        //UITabBar.appearance().unselectedItemTintColor = .red
+        UITabBar.appearance().unselectedItemTintColor = .gray
         //UITabBar.appearance().backgroundColor = .green 탭 바 배경 색
         //UITabBar.appearance().barTintColor = .orange
     }
@@ -177,7 +177,7 @@ struct MainScreenView: View {
                 //ZStack
                 
             }
-            .accentColor(Color("PrimaryColor"))
+            .accentColor(router.screen == .artists ? .white : Color("PrimaryColor"))
             
         }
         

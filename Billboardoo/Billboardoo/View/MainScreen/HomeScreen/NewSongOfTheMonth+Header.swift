@@ -67,7 +67,8 @@ extension NewSongOfTheMonthView{
     var TwoRowGrid: some View{
         
         //viewModel.newSongs[0..<6] - > ArraySlice -> Array(Arraylice)
-        ForEach(viewModel.newSongs.count < 6 ? viewModel.newSongs: Array(viewModel.newSongs[0..<6]),id:\.self.id){ song in
+        //(viewModel.newSongs.count < 6 ? viewModel.newSongs: Array(viewModel.newSongs[0..<6])
+        ForEach(viewModel.newSongs,id:\.self.id){ song in
             
             VStack(alignment:.center){
              

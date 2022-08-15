@@ -129,6 +129,18 @@ class Repository{
             .eraseToAnyPublisher()
     }
     
+    func fetchArtists() -> AnyPublisher<[Artist],Error>
+    {
+        let url = ApiCollections.artiest
+        
+        return AF.request(url)
+            .publishDecodable(type: [Artist].self)
+            .value()
+            .mapError { (err:AFError) in
+                return err as Error
+            }
+            .eraseToAnyPublisher()
+    }
     
     
     
