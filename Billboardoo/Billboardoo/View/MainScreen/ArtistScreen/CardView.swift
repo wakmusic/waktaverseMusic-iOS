@@ -23,6 +23,11 @@ struct CardView: View {
             VStack()
             {
                 KFImage(URL(string: "\(url)\(artist.artistId!).png")!)
+                    .placeholder({
+                        Image("cardholder")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    })
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .mask(Circle())

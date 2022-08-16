@@ -12,10 +12,5 @@
 		<string>PretendardVariable.ttf</string>
 		<string>LeferiPointSpecial.ttf</string>
 	</array>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UILaunchScreen</key>
-		<dict/>
-	</dict>
 </dict>
 </plist>

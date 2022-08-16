@@ -11,6 +11,7 @@ import YouTubePlayerKit
 enum Screen{
     case home
     case artists
+    case search
 }
 
 final class TabRouter: ObservableObject { //Tab State관련 클래스
@@ -71,7 +72,7 @@ struct MainScreenView: View {
                     HomeScreenView().environmentObject(playState).animation(.none)
                         .tag(Screen.home)
                         .tabItem {
-                            TabBarItem(title: "Home", imageName: "house.fill")
+                            TabBarItem(title: "HOME", imageName: "house.fill")
                         }
                     
                     ArtistScreenView().environmentObject(playState).animation(.none)
@@ -79,7 +80,13 @@ struct MainScreenView: View {
                         .tabItem {
                             TabBarItem(title: "ARTIST", imageName: "music.mic")
                         }
-                        .environmentObject(playState)
+                        
+                    
+                    SearchView().environmentObject(playState).animation(.none)
+                        .tag(Screen.search)
+                        .tabItem {
+                            TabBarItem(title: "SEARCH", imageName: "magnifyingglass")
+                        }
                 }
                 
                

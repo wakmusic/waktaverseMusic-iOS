@@ -105,6 +105,11 @@ struct ArtistHeaderVIew: View{
         
         
         KFImage(URL(string: "\(url)\(selectedid).jpg")!)
+            .placeholder({
+                Image("bigholder")
+                .resizable()
+                .scaledToFill()
+            })
             .resizable()
             .scaledToFill()
             .overlay {

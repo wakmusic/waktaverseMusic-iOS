@@ -38,6 +38,7 @@
 		D87EDFD02887D67F00999DE6 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */; };
 		D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD22887DA3900999DE6 /* Repository.swift */; };
 		D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD72887DAB900999DE6 /* ApiCollections.swift */; };
+		D893200C28AB8BD500A529BC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893200B28AB8BD500A529BC /* SearchView.swift */; };
 		D896DF08289C1C450020C615 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D896DF07289C1C450020C615 /* PopupView */; };
 		D896DF0B289D17240020C615 /* VolumeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0A289D17240020C615 /* VolumeSheet.swift */; };
 		D896DF0E289D51070020C615 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0D289D51070020C615 /* Extensions.swift */; };
@@ -118,6 +119,7 @@
 		D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		D87EDFD22887DA3900999DE6 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D87EDFD72887DAB900999DE6 /* ApiCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
+		D893200B28AB8BD500A529BC /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D896DF0A289D17240020C615 /* VolumeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSheet.swift; sourceTree = "<group>"; };
 		D896DF0D289D51070020C615 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D896DF4B289E933B0020C615 /* ChartMoreView+ChartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChartMoreView+ChartItemView.swift"; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		D8357857288A658F00459197 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				D893200928AB8BA500A529BC /* SearchScreen */,
 				D896DF8228A69E0F0020C615 /* ArtistScreen */,
 				D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */,
 				D835785A288A65DD00459197 /* HomeScreen */,
@@ -405,6 +408,14 @@
 				D896DF8928A7A4940020C615 /* Artist.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D893200928AB8BA500A529BC /* SearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D893200B28AB8BD500A529BC /* SearchView.swift */,
+			);
+			path = SearchScreen;
 			sourceTree = "<group>";
 		};
 		D896DF09289D16FE0020C615 /* Volume */ = {
@@ -752,6 +763,7 @@
 				D848724A2893ACE700B508DC /* PlayState.swift in Sources */,
 				D896DF7E28A65B780020C615 /* NewsMoreView.swift in Sources */,
 				D896DF7A28A6399F0020C615 /* NewsModel.swift in Sources */,
+				D893200C28AB8BD500A529BC /* SearchView.swift in Sources */,
 				D848724D2893B6A300B508DC /* PlaybackBarView.swift in Sources */,
 				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
 				D835785428891DAB00459197 /* HomeScreenView.swift in Sources */,
@@ -929,6 +941,7 @@
 				INFOPLIST_FILE = Billboardoo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -959,6 +972,7 @@
 				INFOPLIST_FILE = Billboardoo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
