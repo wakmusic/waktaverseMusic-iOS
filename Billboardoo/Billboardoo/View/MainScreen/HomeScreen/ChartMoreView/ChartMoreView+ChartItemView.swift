@@ -328,7 +328,7 @@ struct ChartItemView: View {
                 
                 
             } label: {
-                Image(systemName: "ellipsis").rotationEffect(.degrees(90)).font(.title2)
+                Image(systemName: "ellipsis").font(.title2)
             }.foregroundColor(Color("PrimaryColor"))
             
             
@@ -354,21 +354,23 @@ struct ChartItemVIew_Previews: PreviewProvider {
 
 struct ImageButton: View {
     
+    let window = UIScreen.main.bounds
     var text:String
     var imageSource:String
+    let device = UIDevice.current.userInterfaceIdiom
     var body: some View{
         
         
         ZStack(alignment:.center) {
             
-            Text(text).font(.system(size: 15, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
+            Text(text).font(.system(size: device == .phone ? 15 : 20, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
             Image(imageSource)
                 .resizable()
-                .frame(width: 150, height: 45, alignment: .center)
+                .frame(width: device == .phone ?  window.width/2.5 : window.width/6, height: device == .phone ? window.width/8 : window.width/18, alignment: .center)
                 .aspectRatio(contentMode: .fit)
                 .clipShape(Capsule())
             LinearGradient(colors: [.clear,.black.opacity(0.7)], startPoint: .leading, endPoint: .trailing).clipShape(Capsule())
-                .frame(width: 150, height: 45)
+                .frame(width: device == .phone ?  window.width/2.5 : window.width/6, height: device == .phone ? window.width/8 : window.width/18)
             
             
         }

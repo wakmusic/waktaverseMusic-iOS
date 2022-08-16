@@ -79,6 +79,7 @@ struct MainScreenView: View {
                         .tabItem {
                             TabBarItem(title: "ARTIST", imageName: "music.mic")
                         }
+                        .environmentObject(playState)
                 }
                 
                
@@ -87,6 +88,7 @@ struct MainScreenView: View {
                 Group{
                     if playState.isPlayerViewPresented {
                         PlaybackFullScreenView(animation: animation,editMode: $editMode)
+                            
                             .environmentObject(playState)
                             .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
                         //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
@@ -177,7 +179,7 @@ struct MainScreenView: View {
                 //ZStack
                 
             }
-            .accentColor(router.screen == .artists ? .white : Color("PrimaryColor"))
+            .accentColor(Color("PrimaryColor"))
             
         }
         

@@ -53,7 +53,7 @@ struct PlaybackBarView: View {
                     
                     VStack(alignment:.leading){
                         Text(currentSong.title)
-                            .font(.custom("PretendardVariable-Regular", size: 18)).bold()
+                            .font(.custom("PretendardVariable-Regular", size: 18)).bold().lineLimit(1)
                         
                         Text(currentSong.artist)
                             .modifier(PlayBarArtistModifer())

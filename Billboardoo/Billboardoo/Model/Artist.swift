@@ -9,10 +9,11 @@ import Foundation
 
 struct Artist: Codable,Identifiable, Equatable {
     let id = UUID()
-    let artistId, name: String
-    let artistGroup: ArtistGroup
-    let card: String
-    let big: String
+    let artistId, name,color: String?
+    let artistGroup: ArtistGroup?
+
+    //let card: String
+    //let big: String
     //let youtube, twitch,String?
     
     static func == (lhs:Self,rhs:Self) -> Bool {
@@ -21,7 +22,7 @@ struct Artist: Codable,Identifiable, Equatable {
     
     private enum CodingKeys: String,CodingKey {
         case artistId = "id"
-        case name,card,big
+        case name,color
         case artistGroup = "group"
        
         

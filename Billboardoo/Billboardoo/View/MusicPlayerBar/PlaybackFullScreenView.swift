@@ -225,7 +225,7 @@ struct PlayBar: View {
             
             
         }
-        .accentColor(Color("PrimaryColor"))
+        //.foregroundColor(Color("PrimaryColor"))
     }
 }
 

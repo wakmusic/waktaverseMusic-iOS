@@ -142,6 +142,18 @@ class Repository{
             .eraseToAnyPublisher()
     }
     
+    func fetchSearchSongsList(_ name:String) -> AnyPublisher<[NewSong],Error>
+    {
+        let url = "\(ApiCollections.albums)\(name)"
+        return  AF.request(url)
+            .publishDecodable(type: [NewSong].self)
+            .value()
+            .mapError { (err:AFError) in
+                return err as Error
+            }
+            .eraseToAnyPublisher()
+    }
+    
     
     
     
