@@ -34,13 +34,7 @@ struct NewsMoreView: View {
                     ThreeColumnsGrid
                 }
             }
-//            if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
-//            {
-//                
-//                Spacer(minLength: 60)
-//                
-//                
-//            }
+
             
         }.navigationTitle("NEWS")
             .navigationBarTitleDisplayMode(.large)
@@ -64,7 +58,7 @@ extension NewsMoreView{
                         .cornerRadius(10)
                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
                     Text(data.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.title3).lineLimit(1)
-                    Spacer(minLength: 20)
+                    
                 }.frame(width: 180)
             }
             

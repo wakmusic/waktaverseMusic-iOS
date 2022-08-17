@@ -112,7 +112,7 @@ extension NewSongOfTheMonthView{
     
     final class NewSongOfTheMonthViewModel:ObservableObject{
         
-        var cancelBag = Set<AnyCancellable>()
+        var subscription = Set<AnyCancellable>()
         
         @Published var newSongs:[NewSong] = [NewSong]()
         
@@ -140,7 +140,7 @@ extension NewSongOfTheMonthView{
                     
                     self.newSongs = rawData.data
               
-                }.store(in: &cancelBag)
+                }.store(in: &subscription)
 
         }
         

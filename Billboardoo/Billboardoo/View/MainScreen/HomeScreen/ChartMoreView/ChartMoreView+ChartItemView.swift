@@ -107,15 +107,11 @@ struct ChartMoreView: View {
             })
             .coordinateSpace(name: "SCROLL")
             
-            if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
-            {
-                
-                Spacer(minLength: 30)
-            }
+         
         }.navigationBarBackButtonHidden(true) //백 버튼 없애고
             .navigationBarHidden(true) //Bar 제거
             .ignoresSafeArea(.container,edges:.vertical)
-            .padding(.vertical,50)
+            .padding(.vertical,20) // 가리기 위한 패딩
         
         
             .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
@@ -363,6 +359,7 @@ struct ImageButton: View {
         
         ZStack(alignment:.center) {
             
+        
             Text(text).font(.system(size: device == .phone ? 15 : 20, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
             Image(imageSource)
                 .resizable()
@@ -383,7 +380,7 @@ extension ChartMoreView{
     final class ChartViewModel:ObservableObject{
         @Published var currentShowCharts:[RankedSong] = [RankedSong]()
         @Published var updateTime:Int = 0
-        var cancelBag = Set<AnyCancellable>()
+        var subscription = Set<AnyCancellable>()
         
         
         func fetchChart(_ category:TopCategory)
@@ -405,7 +402,7 @@ extension ChartMoreView{
                 self.currentShowCharts = data
                 
                 
-            }.store(in: &cancelBag)
+            }.store(in: &subscription)
             
         }
         
@@ -426,7 +423,7 @@ extension ChartMoreView{
                 guard let self = self else {return}
                 
                 self.updateTime = time
-            }.store(in: &cancelBag)
+            }.store(in: &subscription)
             
         }
     }

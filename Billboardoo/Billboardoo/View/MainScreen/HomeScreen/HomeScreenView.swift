@@ -29,8 +29,7 @@ struct HomeScreenView: View {
         {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
-                    //                    MainHeader()
-                    //                    Spacer()
+                 
                     
                     RadioButtonGroup(selectedId:$viewModel.selectedIndex) { (prev:Int, now:Int) in
                         
@@ -66,13 +65,7 @@ struct HomeScreenView: View {
                     
                     NewsView().environmentObject(playState)
                     
-                    if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
-                    {
-                        
-                        Spacer(minLength: 30)
-                        
-                        
-                    }
+                  
                     
                     
                     
@@ -86,7 +79,7 @@ struct HomeScreenView: View {
                         SettinButton()
                     }
                 }
-                .padding(.vertical)
+                
             }.navigationViewStyle(.stack) //Naivi
             
             
@@ -125,13 +118,7 @@ struct SettinButton:View {
 }
 
 
-struct MainHeader: View {
-    var body: some View {
-        HStack(alignment: .top) {
-            NavigationLogo()
-        }.padding(EdgeInsets(top: 10, leading: 10, bottom: 5, trailing: 10))
-    }
-}
+
 
 
 extension HomeScreenView{
@@ -139,7 +126,7 @@ extension HomeScreenView{
     final class HomeScreenViewModel:ObservableObject{
         @Published var selectedIndex:Int = 0
         @Published var nowChart:[RankedSong] = [RankedSong]()
-        var cancelBag = Set<AnyCancellable>()
+        var subscription = Set<AnyCancellable>()
         
         init()
         {
@@ -158,7 +145,7 @@ extension HomeScreenView{
                     
                     self.nowChart = datas  //chart 갱신
                     
-                }.store(in: &cancelBag)
+                }.store(in: &subscription)
         }
         
         

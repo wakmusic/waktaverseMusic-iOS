@@ -24,11 +24,7 @@ struct PlaybackBarView: View {
            
             VStack(alignment: .leading) {
                 
-                Spacer(minLength: 0) // 밑에 배치할 수 있게 해주는  빈 공간
-                
-                if myDevice == .pad{
-                    Spacer()
-                }
+               
                 
                 HStack{
                     
@@ -94,7 +90,7 @@ struct PlaybackBarView: View {
                     
                 }
                 .padding(.horizontal)
-                .background(.ultraThinMaterial,in: RoundedRectangle(cornerRadius: 8))
+                .background(.blue.opacity(0.5),in: RoundedRectangle(cornerRadius: 8))
                 
             }
 

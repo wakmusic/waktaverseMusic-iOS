@@ -72,7 +72,7 @@ extension NewsView{
     final class NewsViewModel:ObservableObject {
         
         @Published var news:[NewsModel] = [NewsModel]()
-        var cancelBag = Set<AnyCancellable> ()
+        var subscription = Set<AnyCancellable> ()
         
         init(){
             
@@ -99,7 +99,7 @@ extension NewsView{
                 
                 self.news = data
                 
-            }.store(in: &cancelBag)
+            }.store(in: &subscription)
 
         
         }

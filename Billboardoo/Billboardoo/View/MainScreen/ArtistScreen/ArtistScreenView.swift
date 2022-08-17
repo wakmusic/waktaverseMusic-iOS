@@ -52,7 +52,7 @@ struct ArtistScreenView: View {
                            
                         }
                     
-                    Spacer(minLength: 50)
+                   
                     LazyVStack(alignment:.center,pinnedViews: .sectionHeaders){
                         Section {
                             ForEach(viewModel.currentShowChart,id:\.self.id){ (song:NewSong) in
@@ -71,13 +71,7 @@ struct ArtistScreenView: View {
                     }
                     
                     
-                    
-                    Spacer(minLength: 100)
-                    if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
-                    {
-                        
-                        Spacer(minLength: 30)
-                    }
+                 
             
                     
                     
@@ -257,7 +251,7 @@ extension ArtistScreenView{
         @Published var selectedid:String = "woowakgood"
         @Published var artists:[Artist] = [Artist] ()
         @Published var currentShowChart:[NewSong] = [NewSong]()
-        var cancelBag = Set<AnyCancellable>()
+        var subscription = Set<AnyCancellable>()
         
         init()
         {
@@ -280,7 +274,7 @@ extension ArtistScreenView{
                 }
                
                 
-            }.store(in: &cancelBag)
+            }.store(in: &subscription)
          
         }
         
@@ -294,7 +288,7 @@ extension ArtistScreenView{
                
                 
                 self.currentShowChart = data
-            }.store(in: &cancelBag)
+            }.store(in: &subscription)
 
         }
         

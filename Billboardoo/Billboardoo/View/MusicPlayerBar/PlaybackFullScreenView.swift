@@ -29,9 +29,9 @@ struct PlaybackFullScreenView: View {
         {
             //if let artwork = bringAlbumImage(url: currentSong.image)
             
-            ZStack {
-                HStack{
-                    VStack {
+            ZStack{
+                HStack(){
+                    VStack() {
                         
                         //Spacer(minLength: 0)
                         /*
@@ -119,8 +119,7 @@ struct PlaybackFullScreenView: View {
                     }
                 }
                 
-                .frame(width: window.width, height: window.height)
-                .padding(.horizontal)
+                
                 .background(
                     
                     //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용

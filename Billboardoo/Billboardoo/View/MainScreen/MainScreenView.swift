@@ -40,7 +40,7 @@ struct MainScreenView: View {
     
     
     init() {
-        UITabBar.appearance().unselectedItemTintColor = .gray
+        //UITabBar.appearance().unselectedItemTintColor = .gray
         //UITabBar.appearance().backgroundColor = .green 탭 바 배경 색
         //UITabBar.appearance().barTintColor = .orange
     }
@@ -64,46 +64,27 @@ struct MainScreenView: View {
         {
             
             //- MARK: TabView
-            ZStack {
-                YotubeView().environmentObject(playState)
-                InvisibleRefreshView()
-                    .opacity(0)
-                TabView(selection: $router.screen){
-                    HomeScreenView().environmentObject(playState).animation(.none)
-                        .tag(Screen.home)
-                        .tabItem {
-                            TabBarItem(title: "HOME", imageName: "house.fill")
-                        }
+            
+        
+            GeometryReader{ geometry in
+                ZStack(alignment:.center) {
+                    YotubeView().environmentObject(playState)
+                        .opacity(0)
+                    InvisibleRefreshView()
+                        .opacity(0)
                     
-                    ArtistScreenView().environmentObject(playState).animation(.none)
-                        .tag(Screen.artists)
-                        .tabItem {
-                            TabBarItem(title: "ARTIST", imageName: "music.mic")
+                    VStack(spacing:0){
+                        switch router.screen{
+                        case .home:
+                            HomeScreenView().environmentObject(playState).animation(.none)
+                        case .artists:
+                            ArtistScreenView().environmentObject(playState).animation(.none)
+                        case .search:
+                            SearchView().environmentObject(playState).animation(.none).zIndex(1)
                         }
                         
-                    
-                    SearchView().environmentObject(playState).animation(.none)
-                        .tag(Screen.search)
-                        .tabItem {
-                            TabBarItem(title: "SEARCH", imageName: "magnifyingglass")
-                        }
-                }
-                
-               
-                
-                
-                Group{
-                    if playState.isPlayerViewPresented {
-                        PlaybackFullScreenView(animation: animation,editMode: $editMode)
-                            
-                            .environmentObject(playState)
-                            .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
-                        //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
-                        //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
-                        // 위: - 아래 + , 좌우는  슬라이드 애니메이션을 넣지 않고 바꾼다
                         
                         
-                    } else{
                         PlaybackBarView(animation: animation,gestureStore:$gestureStore)
                             .environmentObject(playState)
                             .onTapGesture {
@@ -115,78 +96,97 @@ struct MainScreenView: View {
                                     playState.isPlayerViewPresented = true // Full Sreen 보이게
                                 }
                             }
-                            .padding(.bottom,45) //탭 바와 곂치지않게
-                    }
-                } //그룹
-                .zIndex(2.0)
-                //드래그 제스쳐를 updating
-                .simultaneousGesture(DragGesture().updating($gestureState, body: { value, state, transaction in
+                        
+                        HStack{
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "homekit", assignedPage: .home,router: router)
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "music.mic", assignedPage: .artists,router: router)
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.height/15)
+                        .background(Color("TabBarBackground"))
+                        .shadow(radius: 2)
+                    }//.edgesIgnoringSafeArea(.bottom)
                     
+                    Group{
+                        if playState.isPlayerViewPresented {
+                            PlaybackFullScreenView(animation: animation,editMode: $editMode)
+                            
+                                .environmentObject(playState)
+                                .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
+                            //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
+                            //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
+                            // 위: - 아래 + , 좌우는  슬라이드 애니메이션을 넣지 않고 바꾼다
+                        }
+                            
                     
+                    } //그룹
+                   
                     
-                    if value.translation.height > 0 && !editMode { // 아래로 드래그 하면 ,저장
-                        //offset 방지 editMode가 false여야 저장
-                        state.height = value.translation.height
-                    }
-                })
-                    .onEnded({ value in //드래그가 끝났을 때
-                     
+                    //드래그 제스쳐를 updating
+                    .simultaneousGesture(DragGesture().updating($gestureState, body: { value, state, transaction in
                         
-                        if(editMode) //editMode가 켜져있으면 막음
-                        {
-                            return
+                        
+                        
+                        if value.translation.height > 0 && !editMode { // 아래로 드래그 하면 ,저장
+                            //offset 방지 editMode가 false여야 저장
+                            state.height = value.translation.height
                         }
-                        let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
-                        
-                        
-                        let tranlationWidth = max(value.translation.width, value.predictedEndTranslation.width * 0.2)
-                        
-                        
-                        
-                        if translationHeight > 0 { //0보다 위면 그냥 트랙킹만
-                            gestureStore.height = translationHeight
-                        }
-                        
-                        if tranlationWidth > 0 {
-                            gestureStore.width = tranlationWidth
-                        }
-                        
-                        if translationHeight > 100 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
-                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                
-                               
-                                playState.isPlayerViewPresented = false
-                                playState.isPlayerListViewPresented  = false  //꺼질 때 list화면 도 같이
+                    })
+                        .onEnded({ value in //드래그가 끝났을 때
+                            
+                            
+                            if(editMode) //editMode가 켜져있으면 막음
+                            {
+                                return
                             }
-                        } else { //50 보다 작으면 다시 화면 꽉 채우게
-                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                gestureStore.height = 0
+                            let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
+                            
+                            
+                            let tranlationWidth = max(value.translation.width, value.predictedEndTranslation.width * 0.2)
+                            
+                            
+                            
+                            if translationHeight > 0 { //0보다 위면 그냥 트랙킹만
+                                gestureStore.height = translationHeight
                             }
-                        }
-                        
-                        //위에서 꺼지는 작업이 아닐 때
-                        //width가  (왼->오) + (forWard)
-                        //width가. (오->왼) - (backWard)
-                        if tranlationWidth > 100 {
-                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                playState.forWard()
+                            
+                            if tranlationWidth > 0 {
+                                gestureStore.width = tranlationWidth
                             }
-                        }
-                        
-                        if tranlationWidth < -100 {
-                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                playState.backWard()
+                            
+                            if translationHeight > 100 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
+                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                    
+                                    
+                                    playState.isPlayerViewPresented = false
+                                    playState.isPlayerListViewPresented  = false  //꺼질 때 list화면 도 같이
+                                }
+                            } else { //50 보다 작으면 다시 화면 꽉 채우게
+                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                    gestureStore.height = 0
+                                }
                             }
-                        }
-                    }))
-                
-                
-                //Group
-                
-                //ZStack
-                
+                            
+                            //위에서 꺼지는 작업이 아닐 때
+                            //width가  (왼->오) + (forWard)
+                            //width가. (오->왼) - (backWard)
+                            if tranlationWidth > 100 {
+                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                    playState.forWard()
+                                }
+                            }
+                            
+                            if tranlationWidth < -100 {
+                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                    playState.backWard()
+                                }
+                            }
+                        }))
+                }
             }
-            .accentColor(Color("PrimaryColor"))
+            
+            
+            
             
         }
         
@@ -215,6 +215,29 @@ struct TabBarItem: View {
             Text(title)
             Image(systemName: imageName)
         }
+    }
+}
+
+struct TabBarIcon: View{
+    let width, height: CGFloat
+    let systemIconName: String
+    let assignedPage:Screen
+    @StateObject var router:TabRouter
+    
+    var body: some View {
+        VStack{
+            Image(systemName:systemIconName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: width, height: height)
+                .padding(.top,10)
+            
+        }.padding(.horizontal,-4)
+            .onTapGesture {
+                router.screen = assignedPage
+            }
+        
+            .foregroundColor(router.screen == assignedPage ? Color("PrimaryColor") : .gray)
     }
 }
 
