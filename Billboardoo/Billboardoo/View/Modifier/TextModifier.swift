@@ -36,7 +36,7 @@ struct FullScreenTimeModifer: ViewModifier{
     
     func body(content: Content) -> some View {
         
-        content.font(.system(size: window.height/48,design: .serif)).foregroundColor(Color("PrimaryColor"))
+        content.font(.system(size: window.height/48,design: .serif)).foregroundColor(Color.primary)
             .lineLimit(1) // 1줄 제한
             .truncationMode(.tail) //뒤에짜리기
     }

@@ -50,6 +50,14 @@ extension Color {
     public static var searchBaraccentColor:Color {
         return Color(uiColor: .lightGray)
     }
+    
+    public static var searchBarBackground:Color {
+        return Color("SearchBarBackground")
+    }
+    
+    public static var primary:Color {
+        return Color("PrimaryColor")
+    }
 
 }
 
@@ -129,4 +137,11 @@ struct NavigationBarColorModifier<Background>: ViewModifier where Background: Vi
     }
 }
 
+
+extension UIApplication{
+    func endEditing()
+    {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) // 키보드 없애기
+    }
+}
 

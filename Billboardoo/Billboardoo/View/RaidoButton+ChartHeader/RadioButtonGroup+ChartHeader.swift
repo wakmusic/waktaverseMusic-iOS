@@ -35,17 +35,17 @@ struct RadioBttuon: View {
             
         } label: {
             
-            Text(title).font(.custom("PretendardVariable-SemiBold", size: 15)).tracking(3).padding(2) //자간 간격 4 만큼
+            Text(title).font(.custom("PretendardVariable-Regular", size: 15)).padding(.vertical,2).padding(.horizontal,6) //자간 간격 4 만큼
             
             
             //글자 색
-                .foregroundColor(self.selectedId != self.id ? Color("PrimaryColor"):Color("UnSelectedRbtnColor"))
+                .foregroundColor(self.selectedId != self.id ? Color.primary:Color("UnSelectedRbtnColor"))
             // .padding()
             //배경색
-                .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color("PrimaryColor"))
+                .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color.primary)
                 .cornerRadius(10)
             //테두리 설정
-                .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color("PrimaryColor")))
+                .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color.primary))
         }
         //최종 크기
         
@@ -100,17 +100,17 @@ struct ChartHeader: View {
             HStack {
                 switch chartIndex{
                 case 0:
-                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 1:
-                    Text("빌보두 실시간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 실시간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 2:
-                    Text("빌보두 일간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 일간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 3:
-                    Text("빌보두 주간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 주간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 4:
-                    Text("빌보두 월간 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 월간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 default:
-                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 20)).bold().foregroundColor(Color("PrimaryColor"))
+                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 }
                 Spacer()
                 

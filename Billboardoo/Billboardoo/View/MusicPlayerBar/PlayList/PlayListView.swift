@@ -42,7 +42,7 @@ struct PlayListView: View {
                                 if(editMode == true)
                                 {
                                     Spacer()
-                                    Image(systemName:"arrow.up.and.down").foregroundColor(Color("PrimaryColor"))
+                                    Image(systemName:"arrow.up.and.down").foregroundColor(Color.primary)
                                     Spacer()
                                 }
                             }
@@ -188,7 +188,7 @@ struct ItemCell: View {
                 } label: {
                     Image(systemName: "play.fill")
                         .padding(.leading)
-                }.foregroundColor(Color("PrimaryColor"))
+                }.foregroundColor(Color.primary)
                 
             }
             
@@ -316,7 +316,7 @@ struct TopLeftControlView: View {
                     
                     
                     Label {
-                        Text("0").foregroundColor(Color("PrimaryColor")).font(.caption2)
+                        Text("0").foregroundColor(Color.primary).font(.caption2)
                     } icon: {
                         Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle")
                     }
@@ -327,7 +327,7 @@ struct TopLeftControlView: View {
                 //Text("전체").font(.caption2)
             
             
-            Text("\(multipleSelection.count)").font(.title2).foregroundColor(Color("PrimaryColor"))
+            Text("\(multipleSelection.count)").font(.title2).foregroundColor(Color.primary)
         }
         
         

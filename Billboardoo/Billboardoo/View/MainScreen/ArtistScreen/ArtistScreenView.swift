@@ -56,7 +56,7 @@ struct ArtistScreenView: View {
                     LazyVStack(alignment:.center,pinnedViews: .sectionHeaders){
                         Section {
                             ForEach(viewModel.currentShowChart,id:\.self.id){ (song:NewSong) in
-                                SongListItemView(song: song).environmentObject(playState)
+                                SongListItemView(song: song,accentColor: .white).environmentObject(playState)
                                 
                             }
                             
@@ -128,6 +128,7 @@ struct SongListItemView: View {
     var song:NewSong
     @EnvironmentObject var playState:PlayState
     @State var showAlert = false
+    var accentColor:Color
     var body: some View {
         
         
@@ -141,8 +142,8 @@ struct SongListItemView: View {
             
             VStack(alignment:.leading,spacing: 8)
             {
-                Text(song.title).foregroundColor(.white).font(.caption2).bold().lineLimit(1)
-                Text(song.artist).foregroundColor(.white).font(.caption2).lineLimit(1)
+                Text(song.title).foregroundColor(accentColor).font(.caption2).bold().lineLimit(1)
+                Text(song.artist).foregroundColor(accentColor).font(.caption2).lineLimit(1)
             }.frame(maxWidth: .infinity ,alignment: .leading)
             
             
@@ -190,8 +191,8 @@ struct SongListItemView: View {
                 
                 
             } label: {
-                Image(systemName: "ellipsis").foregroundColor(.white)
-            }.foregroundColor(Color("PrimaryColor"))
+                Image(systemName: "ellipsis").foregroundColor(accentColor)
+            }.foregroundColor(Color.primary)
             
             
             Spacer()

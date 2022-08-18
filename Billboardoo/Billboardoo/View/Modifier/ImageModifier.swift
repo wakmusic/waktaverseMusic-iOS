@@ -21,7 +21,7 @@ struct PlayBarButtonImageModifier:ViewModifier{
     func body(content: Content) -> some View {
         content
             .scaledToFit() //원래 종횡비를 유지합니다 
-            .frame(width: window.width/20, height: window.width/20).foregroundColor(Color("PrimaryColor"))
+            .frame(width: window.width/20, height: window.width/20).foregroundColor(Color.primary)
             
     }
 }
@@ -32,7 +32,7 @@ struct FullScreenButtonImageModifier:ViewModifier{
     func body(content: Content) -> some View {
         content
             .scaledToFit() //원래 종횡비를 유지합니다
-            .frame(width: window.width/15, height: window.width/15).foregroundColor(Color("PrimaryColor"))
+            .frame(width: window.width/15, height: window.width/15).foregroundColor(Color.primary)
             .padding(.horizontal)
         
     }

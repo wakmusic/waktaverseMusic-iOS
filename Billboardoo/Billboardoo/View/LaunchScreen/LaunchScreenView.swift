@@ -12,7 +12,7 @@ struct LaunchScreenView: View {
     let window = UIScreen.main.bounds.size
     var body: some View {
         //        ZStack(alignment: .center) {
-        //            LinearGradient(gradient: Gradient(colors: [Color("PrimaryColor"), .white]),
+        //            LinearGradient(gradient: Gradient(colors: [Color.primary, .white]),
         //                                        startPoint: .top, endPoint: .bottom)
         //                        .edgesIgnoringSafeArea(.all)
         //            Image("mainLogoWhite")

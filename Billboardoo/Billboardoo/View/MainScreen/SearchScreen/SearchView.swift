@@ -12,24 +12,77 @@ struct SearchView: View {
     
     
     @StateObject private var vm = SearchViewModel(initalValue: "",delay: 0.3)
+    @EnvironmentObject var playState:PlayState
     
     var body: some View {
-        VStack{
+        
+        ZStack {
+            VStack{
+                
+                SearchBarView(currentValue: $vm.currentValue).padding()
+                ScrollView(.vertical,showsIndicators: false) {
+                    
+                    LazyVStack(alignment:.center){
+                        Section {
+                            ForEach(vm.results,id:\.self.id){ (song:NewSong) in
+                                SongListItemView(song: song,accentColor: .primary).environmentObject(playState)
+                                
+                            }
+                            
+                        }
+                    }.onChange(of: vm.debouncedValue) { newValue in
+                        vm.fetchSong(newValue)
+                    }
+                    
+                    
+                }.onTapGesture {
+                    UIApplication.shared.endEditing()
+                }
+                
+                
+            }
+        }
+        
+        
+    }
+       
+}
+
+struct SearchBarView: View {
+    
+    
+    @Binding var currentValue:String
+    
+    var body: some View {
+        
             HStack{
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(Color.searchBaraccentColor)
+                    .foregroundColor( currentValue.isEmpty ? .searchBaraccentColor : .primary)
                 
-                TextField("검색어를 입력해주세요",text: $vm.currentValue)
+                TextField("검색어를 입력해주세요",text: $currentValue)
+                    .foregroundColor(Color.primary)
+                    .disableAutocorrection(true) // 자동완성 끄기
+                
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.primary)
+                    .opacity(currentValue.isEmpty ? 0.0 : 1.0)
+                
+                    .onTapGesture {
+                        UIApplication.shared.endEditing()
+                        currentValue = ""
+                    }.frame(alignment: .trailing)
+                
             }
             .font(.headline)
-            .padding()
+            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
             .background(
                 RoundedRectangle(cornerRadius: 25)
-                    //.fill(Color(")
-                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                    .fill(Color.searchBarBackground)
+                    .shadow(color: Color.primary.opacity(0.5), radius: 10, x: 0, y: 0)
             )
-            .padding()
-        }
+            
+            
+        
         
     }
        
@@ -64,6 +117,19 @@ extension SearchView{
                     self?.results = data
                 }.store(in: &subscription)
             
+        }
+    }
+}
+
+struct SearchVView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        Group{
+            SearchView().previewLayout(.sizeThatFits)
+                .preferredColorScheme(.light)
+            
+            SearchView().previewLayout(.sizeThatFits)
+                .preferredColorScheme(.dark)
         }
     }
 }

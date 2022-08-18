@@ -45,7 +45,7 @@ struct AlbumHeader: View {
         
         VStack(alignment:.leading,spacing: 5){
             HStack {
-                Text("이달의 신곡").bold().foregroundColor(Color("PrimaryColor"))
+                Text("이달의 신곡").bold().foregroundColor(Color.primary)
                 Spacer()
                 
                 NavigationLink {

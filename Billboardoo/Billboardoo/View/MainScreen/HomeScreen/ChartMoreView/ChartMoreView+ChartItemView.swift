@@ -185,11 +185,11 @@ struct PinnedHeaderView:View{
                             
                             Text(types[idx])
                                 .font(.system(size: 15)) //
-                                .foregroundColor(selectedIndex == idx ? Color("PrimaryColor") : .gray)
+                                .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
                             
                             ZStack{ //움직이는 막대기
                                 if (selectedIndex == idx) {
-                                    RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color("PrimaryColor")).matchedGeometryEffect(id: "TAB", in: animation)
+                                    RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary).matchedGeometryEffect(id: "TAB", in: animation)
                                     
                                 }
                                 else{
@@ -243,7 +243,7 @@ struct PinnedHeaderView:View{
             
             HStack{
                 Spacer()
-                Image(systemName: "checkmark").foregroundColor(Color("PrimaryColor")).font(.caption)
+                Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
                 Text(convertTimeStamp(updateTime)).font(.caption)
                 
             }
@@ -325,7 +325,7 @@ struct ChartItemView: View {
                 
             } label: {
                 Image(systemName: "ellipsis").font(.title2)
-            }.foregroundColor(Color("PrimaryColor"))
+            }.foregroundColor(Color.primary)
             
             
             Spacer()

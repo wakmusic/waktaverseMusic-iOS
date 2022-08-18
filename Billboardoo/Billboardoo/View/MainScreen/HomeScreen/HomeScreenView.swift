@@ -93,7 +93,7 @@ struct NavigationLogo: View {
         Image("mainLogoWhite")
             .resizable()
             .renderingMode(.template)
-            .foregroundColor(Color("PrimaryColor"))
+            .foregroundColor(Color.primary)
             .frame(width: window.width*0.4, height: window.height*0.04)
         
     }
@@ -110,7 +110,7 @@ struct SettinButton:View {
                 .resizable()
                 .scaledToFill()
             //                .frame(width: window.width*scale, height: window.height*scale)
-                .foregroundColor(Color("PrimaryColor"))
+                .foregroundColor(Color.primary)
         })
         
         

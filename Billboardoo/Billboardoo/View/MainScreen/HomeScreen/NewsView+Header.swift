@@ -122,7 +122,7 @@ struct NewsHeader: View {
         
         VStack(alignment:.leading,spacing: 5){
             HStack {
-                Text("NEWS").font(.system(size: 35, weight: .bold, design: .rounded)).foregroundColor(Color("PrimaryColor"))
+                Text("NEWS").font(.system(size: 35, weight: .bold, design: .rounded)).foregroundColor(Color.primary)
                 Spacer()
                 
                 NavigationLink {

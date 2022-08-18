@@ -103,9 +103,9 @@ struct MainScreenView: View {
                             TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/15)
-                        .background(Color("TabBarBackground"))
+                        .background(.ultraThinMaterial)
                         .shadow(radius: 2)
-                    }//.edgesIgnoringSafeArea(.bottom)
+                    }
                     
                     Group{
                         if playState.isPlayerViewPresented {
@@ -183,7 +183,7 @@ struct MainScreenView: View {
                             }
                         }))
                 }
-            }
+            }//.ignoresSafeArea(.keyboard)
             
             
             
@@ -230,14 +230,14 @@ struct TabBarIcon: View{
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: height)
-                .padding(.top,10)
+                //.padding(.top,10)
             
-        }.padding(.horizontal,-4)
+        }
             .onTapGesture {
                 router.screen = assignedPage
             }
         
-            .foregroundColor(router.screen == assignedPage ? Color("PrimaryColor") : .gray)
+            .foregroundColor(router.screen == assignedPage ? Color.primary : .gray)
     }
 }
 

@@ -68,7 +68,7 @@ private extension FiveRowSongGridView {
                         
                         
                     } label: {
-                        Image(systemName: "play.fill").foregroundColor(Color("PrimaryColor"))
+                        Image(systemName: "play.fill").foregroundColor(Color.primary)
                     }
                     
                 }

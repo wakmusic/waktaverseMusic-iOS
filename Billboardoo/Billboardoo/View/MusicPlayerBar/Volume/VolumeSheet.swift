@@ -16,7 +16,7 @@ struct VolumeSheet: View {
         
         HStack(alignment:.center){
             //speaker.wave.1
-            Image(systemName: "speaker.wave.1").foregroundColor(Color("PrimaryColor"))
+            Image(systemName: "speaker.wave.1").foregroundColor(Color.primary)
             
             Button {
                 if(playState.volume > 0)
