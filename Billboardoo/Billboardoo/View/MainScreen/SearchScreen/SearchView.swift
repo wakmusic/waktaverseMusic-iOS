@@ -11,54 +11,28 @@ import Combine
 struct SearchView: View {
     
     
-    @StateObject private var viewModel = SearchViewModel(initalValue: "",delay: 0.3)
-    
-    
-    
-    
-    
+    @StateObject private var vm = SearchViewModel(initalValue: "",delay: 0.3)
     
     var body: some View {
-        NavigationView{
-            VStack
-            {
+        VStack{
+            HStack{
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color.searchBaraccentColor)
                 
-                if(!viewModel.currentValue.isEmpty && viewModel.results.count == 0)
-                {
-                    Text("결과가 없습니다.")
-                }
-                else
-                {
-                    
-                    List{
-                        ForEach(viewModel.results, id:\.self.id){ song in
-                            Text(song.title)
-                        }
-                    }
-                    
-                    
-                    
-                }
-                
-                
-                
-            } .navigationTitle("SearchView")
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationViewStyle(.stack)
-        .searchable(text: $viewModel.currentValue,prompt:"검색어를 입력해주세요", suggestions: {
-            ForEach(viewModel.results,id:\.self.id){ result in
-                Text("\(result.title)").searchCompletion(result.title)
+                TextField("검색어를 입력해주세요",text: $vm.currentValue)
             }
-        })
-        .onChange(of: viewModel.debouncedValue, perform: { newValue in
-            
-            print(newValue)
-            viewModel.fetchSong(newValue)
-        })
+            .font(.headline)
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 25)
+                    //.fill(Color(")
+                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+            )
+            .padding()
+        }
         
-        .accentColor(.blue)
     }
+       
 }
 
 

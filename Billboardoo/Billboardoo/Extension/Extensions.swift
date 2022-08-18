@@ -46,6 +46,11 @@ extension Color {
         
         self.init(red:Double(red)/0xff,green: Double(green)/0xff,blue: Double(blue)/0xff)
     }
+    
+    public static var searchBaraccentColor:Color {
+        return Color(uiColor: .lightGray)
+    }
+
 }
 
 extension UIDevice {

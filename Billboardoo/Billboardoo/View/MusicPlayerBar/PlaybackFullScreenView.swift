@@ -112,15 +112,17 @@ struct PlaybackFullScreenView: View {
                         PlayBar(isUnMute: $isUnMute,editMode: $editMode).environmentObject(playState)
                             .padding(.vertical,playState.isPlayerListViewPresented ? 40 : 60) //밑에서 띄우기
                             .padding(.horizontal)
+                         
                         
                         
                         
                         
-                    }
+                    }.frame(width:window.width) // notch 없는 것들 오른쪽 치우침 방지..
                 }
                 
                 
                 .background(
+                 
                     
                     //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
                     //                        .saturation(0.5) //포화도
@@ -286,12 +288,6 @@ struct ProgressBar: View{
     }
 }
 
-func bringAlbumImage(url:String) ->UIImage?
-{
-    let url = URL(string: url)
-    let data = try? Data(contentsOf: url!)
-    return UIImage(data: data!)
-}
 
 
 
