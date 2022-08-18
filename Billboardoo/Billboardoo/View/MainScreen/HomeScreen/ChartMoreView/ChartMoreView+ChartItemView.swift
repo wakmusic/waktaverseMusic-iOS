@@ -45,12 +45,14 @@ struct ChartMoreView: View {
                             ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index])
                         }
                         
-                    } header: {
+                    }
+                
+                    header: {
                         PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).background(Color("forcedBackground")).environmentObject(playState) //header 위로 올렸을 때 가리기 위함
                         
                     }
                     
-                }
+                }.animation(.ripple(), value: viewModel.currentShowCharts)
                 
             }.onAppear(perform: {
                 //초기에 이전 화면 정보와 같게 하기 위해

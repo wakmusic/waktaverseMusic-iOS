@@ -13,6 +13,7 @@ struct ArtistScreenView: View {
     
     let columns:[GridItem] = [GridItem(.fixed(20),spacing: 20)]
     let window = UIScreen.main.bounds
+    let device = UIDevice.current.userInterfaceIdiom
     
     @StateObject var viewModel = ArtistScreenViewModel()
     @EnvironmentObject var playState:PlayState
@@ -36,9 +37,10 @@ struct ArtistScreenView: View {
                                 Text("ARTISTS").foregroundColor(.white).font(.custom("LeferiPoint-Special", size: window.height/30)).bold()
                                    // .padding(.top,UIDevice.current.hasNotch ? 30 : 50)
                                 Spacer()
+                              
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     
-                                    LazyHGrid(rows: columns,alignment: .bottom) {
+                                    LazyHGrid(rows: columns,alignment: device == .phone ? .top : .bottom,spacing: 0) {
                                         ForEach(viewModel.artists,id:\.self.id){ artist in
                                             
                                             CardView(artist: artist,selectedId: $viewModel.selectedid)
@@ -47,12 +49,16 @@ struct ArtistScreenView: View {
                                     }
                                     
                                     
-                                }.frame(height:window.height/5).zIndex(2)
+                                }.frame(height: UIDevice.current.hasNotch ? window.height/5 : window.height/3)
+                                
+                              
                             }
                            
                         }
                     
-                   
+                    Spacer(minLength: UIDevice.current.hasNotch ? 100 : 50 )
+                    
+                    
                     LazyVStack(alignment:.center,pinnedViews: .sectionHeaders){
                         Section {
                             ForEach(viewModel.currentShowChart,id:\.self.id){ (song:NewSong) in
@@ -69,6 +75,9 @@ struct ArtistScreenView: View {
                     }.onChange(of: viewModel.selectedid) { newValue in
                         viewModel.fetchSongList(newValue)
                     }
+                    .animation(.ripple(), value: viewModel.currentShowChart)
+                    
+                    
                     
                     
                  
@@ -199,7 +208,7 @@ struct SongListItemView: View {
             
         }.alert("이미 재생목록에 포함되어있습니다.", isPresented: $showAlert) {
             Text("확인")
-        }
+        }.padding(.horizontal,5)
         
         
     }
@@ -240,7 +249,7 @@ struct ArtistPinnedHeader: View {
                     
                 }
             }
-        }.frame(width:UIScreen.main.bounds.width,height: UIDevice.current.hasNotch ? 130 : 100).background(.black).padding(.bottom)
+        }.frame(width:UIScreen.main.bounds.width,height: UIDevice.current.hasNotch ? 130 :100).background(.black).padding(.bottom)
        
     }
 }

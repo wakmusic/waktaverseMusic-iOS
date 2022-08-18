@@ -56,8 +56,9 @@ struct HomeScreenView: View {
                                 viewModel.fetchTop20(category: .total)
                             }
                             
-                            
+                                
                         }
+                        .animation(.easeInOut, value: viewModel.nowChart)
                     
                   
                     

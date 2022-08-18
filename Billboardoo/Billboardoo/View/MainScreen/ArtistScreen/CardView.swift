@@ -45,7 +45,7 @@ struct CardView: View {
             
         
        
-            .frame(width:device == .phone ? window.width/6 : window.width/7 ,height:device == .phone ? window.height/7 : window.height/10)
+            .frame(width:device == .phone ? window.width/6 : window.width/7 ,height:device == .phone ? window.height/8 : window.height/10)
         .padding(.horizontal,10)
         .padding(.vertical,30)
         .scaleEffect(selectedId == artist.artistId ? 1 : 0.8)

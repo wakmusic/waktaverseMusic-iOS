@@ -97,10 +97,15 @@ struct MainScreenView: View {
                                 }
                             }
                         
+                        
+                        // - MARK: TabBar
                         HStack{
                             TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "homekit", assignedPage: .home,router: router)
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "music.mic", assignedPage: .artists,router: router)
+                            
                             TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
+                            
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "music.mic", assignedPage: .artists,router: router)
+                            
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/15)
                         .background(.ultraThinMaterial)
