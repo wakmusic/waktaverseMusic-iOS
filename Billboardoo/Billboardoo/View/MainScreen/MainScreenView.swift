@@ -12,6 +12,7 @@ enum Screen{
     case home
     case artists
     case search
+    case account
 }
 
 final class TabRouter: ObservableObject { //Tab State관련 클래스
@@ -81,6 +82,9 @@ struct MainScreenView: View {
                             ArtistScreenView().environmentObject(playState)
                         case .search:
                             SearchView().environmentObject(playState)
+                            
+                        case .account:
+                            AccountView()
                         }
                         
                         
@@ -105,6 +109,8 @@ struct MainScreenView: View {
                             TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
                             
                             TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "music.mic", assignedPage: .artists,router: router)
+                            
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "person.circle", assignedPage: .account,router: router)
                             
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/15)

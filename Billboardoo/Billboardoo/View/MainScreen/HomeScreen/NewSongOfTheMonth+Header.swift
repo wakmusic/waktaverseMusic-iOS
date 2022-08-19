@@ -70,7 +70,7 @@ extension NewSongOfTheMonthView{
         //(viewModel.newSongs.count < 6 ? viewModel.newSongs: Array(viewModel.newSongs[0..<6])
         ForEach(viewModel.newSongs,id:\.self.id){ song in
             
-            VStack(alignment:.center){
+            VStack(){
              
              
                     
@@ -99,9 +99,9 @@ extension NewSongOfTheMonthView{
                         .frame(width: 100, height: 100,alignment: .center)
                 
                 VStack(alignment:.leading) {
-                    Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1)
-                    Text(song.artist).font(.caption).lineLimit(1)
-                    Text(viewModel.convertTimeStamp(song.date)).font(.caption2).lineLimit(1).foregroundColor(.gray)
+                    Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1).frame(width: 100,alignment:.leading)
+                    Text(song.artist).font(.caption).lineLimit(1).frame(width: 100,alignment:.leading)
+                    Text(viewModel.convertTimeStamp(song.date)).font(.caption2).lineLimit(1).foregroundColor(.gray).frame(width: 100,alignment:.leading)
                 }.frame(width: 100)
                 
             }.padding()

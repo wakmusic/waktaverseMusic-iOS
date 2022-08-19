@@ -75,9 +75,7 @@ struct HomeScreenView: View {
                     ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                         NavigationLogo()
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        SettinButton()
-                    }
+                   
                 }
                 
             }.navigationViewStyle(.stack) //Naivi

@@ -61,9 +61,14 @@ class ApiCollections{
     
     static let chartUpdateMonthly: String = "https://billboardoo.com/api/charts/update/monthly"
     
-    /*
-  
     
-     업데이트 시각(아직 본 서버 추가 안됨): /api/charts/update/(total, hourly, daily, weekly, monthly)
-     */
+    
+    static let tiwtch:String = "https://billboardoo.com/auth/login/twitch"
+    static let google:String = "https://billboardoo.com/auth/login/google"
+    static let naver:String = "https://billboardoo.com/auth/login/naver"
+    
+    static let verify:String = "https://billboardoo.com/auth/api"
+   
+    
+ 
 }

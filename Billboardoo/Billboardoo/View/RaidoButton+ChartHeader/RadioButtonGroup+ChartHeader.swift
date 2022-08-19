@@ -39,10 +39,10 @@ struct RadioBttuon: View {
             
             
             //글자 색
-                .foregroundColor(self.selectedId != self.id ? Color.primary:Color("UnSelectedRbtnColor"))
+                .foregroundColor(self.selectedId != self.id ? Color.primary:Color("normal"))
             // .padding()
             //배경색
-                .background(self.selectedId != self.id ? Color("UnSelectedRbtnColor")  : Color.primary)
+                .background(self.selectedId != self.id ? Color("normal")  : Color.primary)
                 .cornerRadius(10)
             //테두리 설정
                 .overlay(RoundedRectangle(cornerRadius: 13).stroke(Color.primary))

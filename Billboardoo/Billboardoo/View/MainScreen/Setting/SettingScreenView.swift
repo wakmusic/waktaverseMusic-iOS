@@ -15,16 +15,15 @@ struct SettingScreenView: View {
     var body: some View {
         
         
-        VStack
-        {
+      
             //토글 및 체인지 이벤트 , isOn: Binding
-            Toggle("Dark Mode", isOn: $isDarkMode).onChange(of: isDarkMode) { result in
+            Toggle("다크모드", isOn: $isDarkMode).onChange(of: isDarkMode) { result in
                 //result 값이 of인 isDarkMode에 저장됨
-                UserDefaults.standard.set(result, forKey: "isDarkMode") //기본 값 저장
+                UserDefaults.standard.set(result, forKey: "darkMode") //기본 값 저장
                 changeMode(isDarkMode: result)
-            }
+            }.padding(.horizontal)
             
-        }
+        
         
         
         
