@@ -31,10 +31,9 @@ struct HomeScreenView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                  
                     
-                    RadioButtonGroup(selectedId:$viewModel.selectedIndex) { (prev:Int, now:Int) in
+                    RadioButtonGroup(selectedId:$viewModel.selectedIndex) { (_,_) in
                         
-                        print("")
-                        
+    
                     }.environmentObject(playState)
                     
                     FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기

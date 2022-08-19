@@ -20,21 +20,34 @@ struct FiveRowSongGridView: View {
     @Binding var nowChart:[RankedSong]
     @EnvironmentObject var playState:PlayState
     
+   
+    
     
     
     
     var body: some View {
         
         ScrollView(.horizontal, showsIndicators: false) {
-            VStack(alignment: .leading) {
-                LazyHGrid(rows: rows,spacing: 30){ //GridItem 형태와, 요소간 옆 거리
-                    fiveRowSongGridItemViews.environmentObject(playState)
+            ScrollViewReader{ (proxy:ScrollViewProxy) in
+                
+                VStack(alignment: .leading) {
+                    LazyHGrid(rows: rows,spacing: 30){ //GridItem 형태와, 요소간 옆 거리
+                        fiveRowSongGridItemViews.environmentObject(playState).id(0)
+                    }
                 }
-            }
-        }.padding()
-        
+                .onChange(of: nowChart) { newValue in
+                    withAnimation(.easeOut)
+                    {
+                        proxy.scrollTo(0)
+                    }
+                }
+            }.padding()
+                
+        }
     }
+    
 }
+
 
 
 private extension FiveRowSongGridView {

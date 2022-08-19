@@ -13,39 +13,49 @@ struct SearchView: View {
     
     @StateObject private var vm = SearchViewModel(initalValue: "",delay: 0.3)
     @EnvironmentObject var playState:PlayState
+    @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
     
     var body: some View {
         
-        ZStack {
+       
             VStack{
                 
-                SearchBarView(currentValue: $vm.currentValue).padding()
-                ScrollView(.vertical,showsIndicators: false) {
-                    
-                    LazyVStack(alignment:.center){
-                        Section {
-                            ForEach(vm.results,id:\.self.id){ (song:NewSong) in
-                                SongListItemView(song: song,accentColor: .primary).environmentObject(playState)
+                SearchBarView(currentValue: $vm.currentValue).padding(10)
+                ScrollViewReader { (proxy:ScrollViewProxy) in
+                    ScrollView(.vertical,showsIndicators: false) {
+                        
+                        LazyVStack(alignment:.center){
+                            Section {
+                                ForEach(vm.results,id:\.self.id){ (song:NewSong) in
+                                    SongListItemView(song: song,accentColor: .primary).environmentObject(playState)
+                                    
+                                }
                                 
                             }
-                            
+                        }.onChange(of: vm.debouncedValue) { newValue in
+                            vm.fetchSong(newValue)
                         }
-                    }.onChange(of: vm.debouncedValue) { newValue in
-                        vm.fetchSong(newValue)
+                        
+                        
+                    }.onTapGesture {
+                        UIApplication.shared.endEditing()
                     }
-                    
-                    
-                }.onTapGesture {
-                    UIApplication.shared.endEditing()
+                    .padding(5)
+               
                 }
+                
+               
+                
+                
+                
                 
                 
             }
-        }
+        
         
         
     }
-       
+    
 }
 
 struct SearchBarView: View {
@@ -55,37 +65,37 @@ struct SearchBarView: View {
     
     var body: some View {
         
-            HStack{
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor( currentValue.isEmpty ? .searchBaraccentColor : .primary)
-                
-                TextField("검색어를 입력해주세요",text: $currentValue)
-                    .foregroundColor(Color.primary)
-                    .disableAutocorrection(true) // 자동완성 끄기
-                
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.primary)
-                    .opacity(currentValue.isEmpty ? 0.0 : 1.0)
-                
-                    .onTapGesture {
-                        UIApplication.shared.endEditing()
-                        currentValue = ""
-                    }.frame(alignment: .trailing)
-                
-            }
-            .font(.headline)
-            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-            .background(
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(Color.searchBarBackground)
-                    .shadow(color: Color.primary.opacity(0.5), radius: 10, x: 0, y: 0)
-            )
+        HStack{
+            Image(systemName: "magnifyingglass")
+                .foregroundColor( currentValue.isEmpty ? .searchBaraccentColor : .primary)
             
+            TextField("검색어를 입력해주세요",text: $currentValue)
+                .foregroundColor(Color.primary)
+                .disableAutocorrection(true) // 자동완성 끄기
             
+            Image(systemName: "xmark.circle.fill")
+                .foregroundColor(.primary)
+                .opacity(currentValue.isEmpty ? 0.0 : 1.0)
+            
+                .onTapGesture {
+                    UIApplication.shared.endEditing()
+                    currentValue = ""
+                }.frame(alignment: .trailing)
+            
+        }
+        .font(.headline)
+        .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                .fill(Color.searchBarBackground)
+                .shadow(color: Color.primary.opacity(0.5), radius: 10, x: 0, y: 0)
+        )
+        
+        
         
         
     }
-       
+    
 }
 
 
@@ -119,6 +129,37 @@ extension SearchView{
             
         }
     }
+}
+
+extension SearchView{
+    final class KeyboardHeightHelper: ObservableObject {
+        @Published var keyboardHeight: CGFloat = 0
+        
+        init()
+        {
+            self.listenForKeyboardNotifications()
+        }
+        
+        
+        private func listenForKeyboardNotifications() {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification,
+                                                   object: nil,
+                                                   queue: .main) { (notification) in
+                guard let userInfo = notification.userInfo,
+                      let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                
+                self.keyboardHeight = keyboardRect.height
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification,
+                                                   object: nil,
+                                                   queue: .main) { (notification) in
+                self.keyboardHeight = 0
+            }
+        }
+    }
+    
+    
 }
 
 struct SearchVView_Previews: PreviewProvider {

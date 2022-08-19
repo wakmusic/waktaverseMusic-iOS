@@ -20,24 +20,28 @@ struct ArtistScreenView: View {
     
     
     var body: some View {
-       
-            ZStack {
-                Color.black
-                
-                
-                
-                ScrollView(.vertical,showsIndicators: false)
-                {
+        
+        ZStack {
+            Color.black
+            
+            
+            
+            ScrollView(.vertical,showsIndicators: false)
+            {
+                ScrollViewReader{ (proxy:ScrollViewProxy) in
+                    
+                    
                     ArtistHeaderVIew(artists: $viewModel.artists,selectedid: $viewModel.selectedid)
+                        .id("ArtistsHeader")
                         .overlay {
                             
                             VStack{
                                 Spacer()
-                                Text("BILLBOARDOO CHART").foregroundColor(.white).font(.system(size: window.size.height/40, weight: .light, design: .default)).padding(.top,UIDevice.current.hasNotch ? 150 :  100)
-                                Text("ARTISTS").foregroundColor(.white).font(.custom("LeferiPoint-Special", size: window.height/30)).bold()
-                                   // .padding(.top,UIDevice.current.hasNotch ? 30 : 50)
+                                Text("ARTIST").foregroundColor(.white).font(.system(size: device == . phone ? window.size.height/30 : window.size.height/35 , weight: .light, design: .default)).padding(.top,UIDevice.current.hasNotch ? 150 :  100)
+                                Text(viewModel.selectedid.uppercased()).foregroundColor(.white).font(.custom("LeferiPoint-Special", size:device == . phone ? window.size.height/25 : window.size.height/30 )).bold()
+                                // .padding(.top,UIDevice.current.hasNotch ? 30 : 50)
                                 Spacer()
-                              
+                                
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     
                                     LazyHGrid(rows: columns,alignment: device == .phone ? .top : .bottom,spacing: 0) {
@@ -49,11 +53,11 @@ struct ArtistScreenView: View {
                                     }
                                     
                                     
-                                }.frame(height: UIDevice.current.hasNotch ? window.height/5 : window.height/3)
+                                }.frame(height: device == .phone ? window.height/5 : window.height/7  )
                                 
-                              
+                                
                             }
-                           
+                            
                         }
                     
                     Spacer(minLength: UIDevice.current.hasNotch ? 100 : 50 )
@@ -74,26 +78,28 @@ struct ArtistScreenView: View {
                         }
                     }.onChange(of: viewModel.selectedid) { newValue in
                         viewModel.fetchSongList(newValue)
+                        
+                      
                     }
                     .animation(.ripple(), value: viewModel.currentShowChart)
                     
                     
                     
                     
-                 
-            
+                    
                     
                     
                     
                 }
-                
-                
             }
-
-        
-        
-            .ignoresSafeArea(.container, edges: .all)
             
+            
+        }
+        
+        
+        
+        .ignoresSafeArea(.container, edges: .all)
+        
         
     }
 }
@@ -110,19 +116,19 @@ struct ArtistHeaderVIew: View{
         KFImage(URL(string: "\(url)\(selectedid).jpg")!)
             .placeholder({
                 Image("bigholder")
-                .resizable()
-                .scaledToFill()
+                    .resizable()
+                    .scaledToFill()
             })
             .resizable()
             .scaledToFill()
             .overlay {
                 ZStack() {
                     LinearGradient(colors: [.clear,.black.opacity(0.9)], startPoint: .top, endPoint: .bottom)
-                   
+                    
                     
                 }
             }
-            
+        
         
         
         
@@ -160,7 +166,7 @@ struct SongListItemView: View {
             
             // -Play and List Button
             
-            Text(convertTimeStamp2(song.date)).foregroundColor(.white).font(.caption2).lineLimit(1)
+            Text(convertTimeStamp2(song.date)).foregroundColor(accentColor).font(.caption2).lineLimit(1)
             
             
             
@@ -250,7 +256,7 @@ struct ArtistPinnedHeader: View {
                 }
             }
         }.frame(width:UIScreen.main.bounds.width,height: UIDevice.current.hasNotch ? 130 :100).background(.black).padding(.bottom)
-       
+        
     }
 }
 
@@ -269,12 +275,12 @@ extension ArtistScreenView{
             fetchSongList("woowakgood")
         }
         
-       
+        
         
         func fetchArtist(){
             Repository.shared.fetchArtists().sink { completion in
                 
-               
+                
                 
             } receiveValue: { [weak self] (data:[Artist]) in
                 guard let self = self else {return}
@@ -282,10 +288,10 @@ extension ArtistScreenView{
                 self.artists = data.filter { (artist:Artist) in
                     artist.artistId != nil //더미데이터 제거
                 }
-               
+                
                 
             }.store(in: &subscription)
-         
+            
         }
         
         func fetchSongList(_ name:String)
@@ -295,11 +301,11 @@ extension ArtistScreenView{
             } receiveValue: { [weak self] (data:[NewSong]) in
                 guard let self = self else {return}
                 
-               
+                
                 
                 self.currentShowChart = data
             }.store(in: &subscription)
-
+            
         }
         
         
@@ -314,9 +320,9 @@ func convertTimeStamp2(_ time:Int) -> String{
     let month:String = convTime.substring(from: 2, to: 3)
     let day:String = convTime.substring(from: 4, to: 5)
     
-        
-   return "20\(year).\(month).\(day)"
-                        
+    
+    return "20\(year).\(month).\(day)"
+    
 }
 
 func castingFromNewSongToSimple(newSongList:[NewSong]) ->[SimpleSong]

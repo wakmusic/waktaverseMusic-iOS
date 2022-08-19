@@ -76,11 +76,11 @@ struct MainScreenView: View {
                     VStack(spacing:0){
                         switch router.screen{
                         case .home:
-                            HomeScreenView().environmentObject(playState).animation(.none)
+                            HomeScreenView().environmentObject(playState)
                         case .artists:
-                            ArtistScreenView().environmentObject(playState).animation(.none)
+                            ArtistScreenView().environmentObject(playState)
                         case .search:
-                            SearchView().environmentObject(playState).animation(.none).zIndex(1)
+                            SearchView().environmentObject(playState)
                         }
                         
                         
@@ -110,6 +110,7 @@ struct MainScreenView: View {
                         .frame(width: geometry.size.width, height: geometry.size.height/15)
                         .background(.ultraThinMaterial)
                         .shadow(radius: 2)
+                        
                     }
                     
                     Group{
@@ -188,7 +189,7 @@ struct MainScreenView: View {
                             }
                         }))
                 }
-            }//.ignoresSafeArea(.keyboard)
+            }
             
             
             

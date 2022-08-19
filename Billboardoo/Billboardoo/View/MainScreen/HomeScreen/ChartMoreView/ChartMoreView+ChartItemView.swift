@@ -33,27 +33,58 @@ struct ChartMoreView: View {
         {
             ScrollView(.vertical,showsIndicators: false)
             {
-                
-                HeaderView()
-                
-                
-                LazyVStack(alignment:.center,pinnedViews:[.sectionHeaders])
-                {
-                    Section {
-                        ForEach(viewModel.currentShowCharts.indices,id:\.self){ index in
+                ScrollViewReader{ (proxy:ScrollViewProxy) in
+                    
+                    
+                    HeaderView().id("ChartMoreViewHeader")
+                    
+                    
+                    LazyVStack(alignment:.center,pinnedViews:[.sectionHeaders])
+                    {
+                        Section {
+                            ForEach(viewModel.currentShowCharts.indices,id:\.self){ index in
+                                
+                                ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index])
+                            }
                             
-                            ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index])
                         }
                         
-                    }
-                
                     header: {
                         PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).background(Color("forcedBackground")).environmentObject(playState) //header 위로 올렸을 때 가리기 위함
                         
                     }
+                        
+                    }.animation(.ripple(), value: viewModel.currentShowCharts)
+                        .onChange(of: index, perform: { newValue in
+                            switch newValue{
+                            case 0:
+                                viewModel.fetchChart(.total)
+                                viewModel.fetchUpdateTime(.total)
+                            case 1:
+                                viewModel.fetchChart(.time)
+                                viewModel.fetchUpdateTime(.time)
+                                
+                            case 2:
+                                viewModel.fetchChart(.daily)
+                                viewModel.fetchUpdateTime(.daily)
+                                
+                            case 3:
+                                viewModel.fetchChart(.weekly)
+                                viewModel.fetchUpdateTime(.weekly)
+                            case 4:
+                                viewModel.fetchChart(.monthly)
+                                viewModel.fetchUpdateTime(.monthly)
+                            default:
+                                print("Default")
+                            }
+                            
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                proxy.scrollTo("ChartMoreViewHeader")
+                            }
+                            
+                        })
                     
-                }.animation(.ripple(), value: viewModel.currentShowCharts)
-                
+                }
             }.onAppear(perform: {
                 //초기에 이전 화면 정보와 같게 하기 위해
                 
@@ -81,35 +112,13 @@ struct ChartMoreView: View {
                     print("Default")
                 }
             })
-            .onChange(of: index, perform: { newValue in
-                switch newValue{
-                case 0:
-                    viewModel.fetchChart(.total)
-                    viewModel.fetchUpdateTime(.total)
-                case 1:
-                    viewModel.fetchChart(.time)
-                    viewModel.fetchUpdateTime(.time)
-                    
-                case 2:
-                    viewModel.fetchChart(.daily)
-                    viewModel.fetchUpdateTime(.daily)
-                    
-                case 3:
-                    viewModel.fetchChart(.weekly)
-                    viewModel.fetchUpdateTime(.weekly)
-                case 4:
-                    viewModel.fetchChart(.monthly)
-                    viewModel.fetchUpdateTime(.monthly)
-                default:
-                    print("Default")
-                }
-            })
+            
             .onDisappear(perform: {
                 Bindingindex = index //닫힐 때 저장된 인덱스 보냄
             })
             .coordinateSpace(name: "SCROLL")
             
-         
+            
         }.navigationBarBackButtonHidden(true) //백 버튼 없애고
             .navigationBarHidden(true) //Bar 제거
             .ignoresSafeArea(.container,edges:.vertical)
@@ -361,7 +370,7 @@ struct ImageButton: View {
         
         ZStack(alignment:.center) {
             
-        
+            
             Text(text).font(.system(size: device == .phone ? 15 : 20, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
             Image(imageSource)
                 .resizable()
@@ -436,7 +445,7 @@ func convertViews(_ views:Int) -> String // 조회수 변환 함수
 {
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
-
+    
     let result = numberFormatter.string(from: NSNumber(value: views))!
     
     return "\(result)회"
@@ -447,9 +456,9 @@ func convertViews(_ views:Int) -> String // 조회수 변환 함수
 func convertTimeStamp(_ time:Int) -> String{
     let dateFormater : DateFormatter = DateFormatter()
     dateFormater.dateFormat = "yyyy.MM.dd hh:mm"
-        
-   return dateFormater.string(from: Date(timeIntervalSince1970:TimeInterval(time)))
-                        
+    
+    return dateFormater.string(from: Date(timeIntervalSince1970:TimeInterval(time)))
+    
 }
 
 
@@ -471,7 +480,7 @@ func shuffle(playlist:inout [SimpleSong]){
     
     for i in 0..<playlist.count - 1 { // 0 ~ n-2
         let randomIndex = Int.random(in: i..<playlist.count)
-          
+        
         let temp = playlist[i]
         playlist[i] = playlist[randomIndex]
         playlist[randomIndex] = temp
