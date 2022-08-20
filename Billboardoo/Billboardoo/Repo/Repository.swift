@@ -157,7 +157,8 @@ class Repository{
     func fetchSearchWithKeyword(_ keyword:String) -> AnyPublisher<[NewSong],Error>
     {
         let url = "\(ApiCollections.searchTitleOrArtiest)\(keyword)"
-        return  AF.request(url)
+        let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! //한글로 인한 인코딩
+        return  AF.request(encodedUrl)
             .publishDecodable(type: [NewSong].self)
             .value()
             .mapError { (err:AFError) in

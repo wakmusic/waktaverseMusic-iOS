@@ -33,7 +33,6 @@ struct SearchView: View {
                                 
                             }
                         }.onChange(of: vm.debouncedValue) { newValue in
-                            print(newValue)
                             vm.fetchSong(newValue)
                         }
                         
