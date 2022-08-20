@@ -57,7 +57,7 @@ extension NewsMoreView{
                         .frame(width: 180, height: 120,alignment: .center)
                         .cornerRadius(10)
                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
-                    Text(data.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.title3).lineLimit(1)
+                    Text(data.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.system(size: 15, weight: .semibold, design: .default)).lineLimit(1)
                     
                 }.frame(width: 180)
             }

@@ -104,13 +104,13 @@ struct MainScreenView: View {
                         
                         // - MARK: TabBar
                         HStack{
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "homekit", assignedPage: .home,router: router)
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "home", assignedPage: .home,router: router)
                             
                             TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
                             
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "music.mic", assignedPage: .artists,router: router)
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "microphone", assignedPage: .artists,router: router)
                             
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "person.circle", assignedPage: .account,router: router)
+                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "person", assignedPage: .account,router: router)
                             
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/15)
@@ -238,8 +238,9 @@ struct TabBarIcon: View{
     
     var body: some View {
         VStack{
-            Image(systemName:systemIconName)
+            Image(systemIconName)
                 .resizable()
+                .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: height)
                 //.padding(.top,10)

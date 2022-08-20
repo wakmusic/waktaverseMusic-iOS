@@ -9,6 +9,9 @@ target 'Billboardoo' do
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
   pod 'NavigationBarColor'
+
+ #login sdk
+ pod 'naveridlogin-sdk-ios'
   
 target 'BillboardooTests' do
     inherit! :search_paths

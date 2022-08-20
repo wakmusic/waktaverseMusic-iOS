@@ -15,7 +15,7 @@ struct PlayListView: View {
     @EnvironmentObject var playState:PlayState
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
-    
+    var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     
     var body: some View {
         
@@ -42,7 +42,7 @@ struct PlayListView: View {
                                 if(editMode == true)
                                 {
                                     Spacer()
-                                    Image(systemName:"arrow.up.and.down").foregroundColor(Color.primary)
+                                    Image(systemName:"arrow.up.and.down").modifier(modifier)
                                     Spacer()
                                 }
                             }
@@ -130,6 +130,7 @@ struct ItemCell: View {
     @Binding var multipleSelection:Set<UUID> // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 드래그 된 아이템
     @EnvironmentObject var playState:PlayState
+    var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     
     
     
@@ -156,7 +157,8 @@ struct ItemCell: View {
                 } label: {
                     
                     Image(systemName:  multipleSelection.contains(song.id) ? "checkmark.circle.fill" : "circle") //멑티 셋 안에 해당 음악 id 있을 때 는 check 없으면 빈 circle
-                        .padding(.leading)
+                        .modifier(modifier)
+                      
                     
                 }
                 
@@ -172,7 +174,7 @@ struct ItemCell: View {
                 
                 
                 VStack(alignment:.leading){
-                    Text(song.title).font(.custom("PretendardVariable-Regular", size: 18)).bold()
+                    Text(song.title).modifier(PlayBarTitleModifier())
                     Text(song.artist).modifier(PlayBarArtistModifer())
                 }
                 Spacer()
@@ -187,7 +189,8 @@ struct ItemCell: View {
                     }
                 } label: {
                     Image(systemName: "play.fill")
-                        .padding(.leading)
+                        .modifier(modifier)
+                      
                 }.foregroundColor(Color.primary)
                 
             }
@@ -297,6 +300,8 @@ struct TopLeftControlView: View {
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
+    let device = UIDevice.current.userInterfaceIdiom
+    var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     
     var body: some View {
         HStack{
@@ -316,9 +321,9 @@ struct TopLeftControlView: View {
                     
                     
                     Label {
-                        Text("0").foregroundColor(Color.primary).font(.caption2)
+                        Text("0").font(.system(size:  device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
                     } icon: {
-                        Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle")
+                        Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle").font(.system(size:device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
                     }
 
                     
@@ -343,6 +348,8 @@ struct TopRightControlView: View {
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
+    let device = UIDevice.current.userInterfaceIdiom
+    var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @State var isShowAlert: Bool = false
     
     var body: some View{
@@ -356,7 +363,7 @@ struct TopRightControlView: View {
                 
                 
             } label: {
-                Image(systemName: "trash")
+                Image(systemName: "trash").font(.system(size:  device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
             }
             .alert("삭제하시겠습니까?", isPresented: $isShowAlert) {
                 
@@ -415,7 +422,7 @@ struct TopRightControlView: View {
                     multipleSelection.removeAll()// 완료 눌렀을 때 선택 셋 비우기
                 }
             } label: {
-                Text("완료")
+                Text("완료").font(.system(size:  device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
             }
         }
         

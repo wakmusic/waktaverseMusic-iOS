@@ -88,7 +88,7 @@ struct PlaybackFullScreenView: View {
                             
                             VStack(alignment: playState.isPlayerListViewPresented ? .leading : .center){ //리스트 보여주면 .leading
                                 Text(currentSong.title)
-                                    .font(.custom("PretendardVariable-Regular", size: 18)).bold()
+                                    .modifier(titleModifier)
                                 
                                 Text(currentSong.artist)
                                     .modifier(artistModifier)
@@ -170,7 +170,7 @@ struct PlayBar: View {
                 
             }label: {
                 Image(systemName: "music.note.list")
-                    .resizable()
+                    
                     .modifier(buttonModifier)
             }
             
@@ -182,7 +182,7 @@ struct PlayBar: View {
                 //토스트 메시지 필요
             } label: {
                 Image(systemName: "backward.fill")
-                    .resizable()
+                   
                     .modifier(buttonModifier)
                 
             }
@@ -197,7 +197,7 @@ struct PlayBar: View {
                 //토스트 메시지 필요
             } label: {
                 Image(systemName: "forward.fill")
-                    .resizable()
+                    
                     .modifier(buttonModifier)
                 
             }
@@ -216,7 +216,7 @@ struct PlayBar: View {
                 }
             } label: {
                 Image(systemName: isUnMute ? "speaker.wave.3.fill" : "speaker.slash.fill")
-                    .resizable()
+                    
                     .modifier(buttonModifier)
                 
             }

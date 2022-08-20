@@ -41,7 +41,6 @@ struct PlaybackBarView: View {
                         
                     }label: {
                         Image(systemName: "music.note.list")
-                            .resizable()
                             .modifier(buttonModifier)
                         
                         
@@ -49,7 +48,7 @@ struct PlaybackBarView: View {
                     
                     VStack(alignment:.leading){
                         Text(currentSong.title)
-                            .font(.custom("PretendardVariable-Regular", size: 18)).bold().lineLimit(1)
+                            .modifier(PlayBarTitleModifier())
                         
                         Text(currentSong.artist)
                             .modifier(PlayBarArtistModifer())
@@ -66,8 +65,7 @@ struct PlaybackBarView: View {
                             
                         } label: {
                             Image(systemName: "backward.fill")
-                                .resizable()
-                                .modifier(buttonModifier)
+                            .modifier(buttonModifier)
                             
                         }
                         
@@ -79,7 +77,7 @@ struct PlaybackBarView: View {
                             //토스트 메시지 필요
                         } label: {
                             Image(systemName: "forward.fill")
-                                .resizable()
+                                
                                 .modifier(buttonModifier)
                             
                         }

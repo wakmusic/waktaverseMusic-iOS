@@ -6,36 +6,55 @@
 //
 
 import SwiftUI
+import PopupView
 
-
-struct LoginView: View {
+struct LoginView: View  {
     let window = UIScreen.main.bounds
+    @State var showAelrt = false
     var body: some View {
         
         
-
-            VStack{
-                
-                LoginButton(text: "트위치계정 로그인", image: "twitch", textColor: .primary, buttonColor: .twitch,url: ApiCollections.tiwtch)
-                
-                LoginButton(text: "네이버계정 로그인", image: "naver", textColor: .primary, buttonColor:.naver,url:ApiCollections.naver)
-                
-                LoginButton(text: "구글아이디 로그인", image: "google", textColor: .primary, buttonColor:.normal,url:ApiCollections.google)
-
-               
-                
-            }.padding(.horizontal)
+        
+        VStack{
+            
+            LoginButton(text: "트위치계정 로그인", image: "twitch", textColor: .primary, buttonColor: .twitch,url: ApiCollections.tiwtch,showAlert:$showAelrt)
+                .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
+                    
+                    Button(role: .cancel) {
+                       
+                    } label: {
+                        Text("확인")
+                    }
+                }
+            
+            LoginButton(text: "네이버계정 로그인", image: "naver", textColor: .primary, buttonColor:.naver,url:ApiCollections.naver,showAlert:$showAelrt)
+                .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
+                    
+                    Button(role: .cancel) {
+                       
+                    } label: {
+                        Text("확인")
+                    }
+                }
+            
+            LoginButton(text: "구글아이디 로그인", image: "google", textColor: .primary, buttonColor:.normal,url:ApiCollections.google,showAlert:$showAelrt)
+                .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
+                    
+                    Button(role: .cancel) {
+                       
+                    } label: {
+                        Text("확인")
+                    }
+                }
+            
+            
+            
+        }.padding(.horizontal)
         
         
         
         
         
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
     }
 }
 
@@ -46,11 +65,13 @@ struct LoginButton: View {
     var textColor:Color
     var buttonColor:Color
     var url: String
+    @Binding var showAlert:Bool
     
     
     var body: some View {
-        NavigationLink{
-            CafeWebView(urlToLoad: url)
+        
+        Button {
+            showAlert = true
         } label: {
             Label {
                 Text(text)
@@ -61,19 +82,19 @@ struct LoginButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 20)
-                    
+                
             }
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding()
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .stroke(.gray, lineWidth: 1)
-                )
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(.gray, lineWidth: 1)
+            )
         }
         .background(buttonColor) // If you have this
         .cornerRadius(6)
-        }
-            
-        
+    }
+    
+    
 }
 

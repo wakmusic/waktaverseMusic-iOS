@@ -13,9 +13,7 @@ struct FullScreenTitleModifier: ViewModifier{
     
     func body(content: Content) -> some View {
         
-        content.font(.system(size: window.height/35, weight: .bold, design: .default))
-            .lineLimit(1) // 1줄 제한
-            .truncationMode(.tail) //뒤에짜리기
+        content.font(.custom("PretendardVariable-Bold", size: 25)).lineLimit(1)
         
     }
 }
@@ -25,9 +23,9 @@ struct FullScreenArtistModifer: ViewModifier{
     
     func body(content: Content) -> some View {
         
-        content.font(.system(size: window.height/45,design: .serif)).foregroundColor(.secondary)
+        content.font(.system(size: 20,design: .serif)).foregroundColor(.secondary)
             .lineLimit(1) // 1줄 제한
-            .truncationMode(.tail) //뒤에짜리기
+        
     }
 }
 
@@ -35,10 +33,9 @@ struct FullScreenTimeModifer: ViewModifier{
     let window = UIScreen.main.bounds
     
     func body(content: Content) -> some View {
-        
-        content.font(.system(size: window.height/48,design: .serif)).foregroundColor(Color.primary)
+        content.font(.custom("PretendardVariable-Bold", size: 20)).lineLimit(1).foregroundColor(Color.primary)
             .lineLimit(1) // 1줄 제한
-            .truncationMode(.tail) //뒤에짜리기
+         
     }
 }
 
@@ -50,9 +47,8 @@ struct PlayBarTitleModifier: ViewModifier{
     
     
     func body(content: Content) -> some View {
-        content.font(.system(size: window.height/40, weight: .bold, design: .default))
-            .lineLimit(1) // 1줄 제한
-            .truncationMode(.tail) //뒤에짜리기
+        content.font(.custom("PretendardVariable-Bold", size: 22)).lineLimit(1)
+        
     }
 }
 
@@ -61,9 +57,8 @@ struct PlayBarArtistModifer: ViewModifier{
     
     func body(content: Content) -> some View {
         
-        content.font(.system(size: window.height/45,weight: .semibold,design: .serif)).foregroundColor(.secondary)
-            .lineLimit(1) // 1줄 제한
-            .truncationMode(.tail) //뒤에짜리기
+        content.font(.system(size: 20,design: .serif)).foregroundColor(.secondary)
+            .lineLimit(1)
     }
 }
 

@@ -371,7 +371,7 @@ struct ImageButton: View {
         ZStack(alignment:.center) {
             
             
-            Text(text).font(.system(size: device == .phone ? 15 : 20, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
+            Text(text).font(.system(size: device == .phone ? 15 : 18, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
             Image(imageSource)
                 .resizable()
                 .frame(width: device == .phone ?  window.width/2.5 : window.width/6, height: device == .phone ? window.width/8 : window.width/18, alignment: .center)

@@ -65,6 +65,14 @@ struct HomeScreenView: View {
                     
                     NewsView().environmentObject(playState)
                     
+                    Spacer(minLength: 30)
+                    
+                    VStack(spacing:10){
+                        Text("(주)빌보두왁론주식회사").font(.caption).foregroundColor(.gray)
+                        Text("ⓒ Wak Entertainment Corp.").font(.caption).foregroundColor(.gray)
+                    }
+                    
+                    Spacer(minLength: 20)
                   
                     
                     
@@ -87,18 +95,21 @@ struct HomeScreenView: View {
 
 struct NavigationLogo: View {
     let window = UIScreen.main.bounds.size
+    let device = UIDevice.current.userInterfaceIdiom
     var body: some View {
         Image("mainLogoWhite")
             .resizable()
             .renderingMode(.template)
             .foregroundColor(Color.primary)
-            .frame(width: window.width*0.4, height: window.height*0.04)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: device == .phone ? window.width*0.5 : window.width*0.4, height: device == .phone ? window.width*0.3 : window.width*0.3)
         
     }
 }
 
 struct SettinButton:View {
     let window = UIScreen.main.bounds.size
+    
     //@ScaledMetric(relativeTo: .headline)
     //var scale: CGFloat =
     var body: some View{

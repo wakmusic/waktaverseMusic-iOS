@@ -17,23 +17,21 @@ struct PlayBarSongImageModifier:ViewModifier{
 
 struct PlayBarButtonImageModifier:ViewModifier{
     let window = UIScreen.main.bounds
-    
+    let device = UIDevice.current.userInterfaceIdiom
     func body(content: Content) -> some View {
         content
-            .scaledToFit() //원래 종횡비를 유지합니다 
-            .frame(width: window.width/20, height: window.width/20).foregroundColor(Color.primary)
+            .font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
             
     }
 }
 
 struct FullScreenButtonImageModifier:ViewModifier{
     let window = UIScreen.main.bounds
-    
+    let device = UIDevice.current.userInterfaceIdiom
     func body(content: Content) -> some View {
         content
-            .scaledToFit() //원래 종횡비를 유지합니다
-            .frame(width: window.width/15, height: window.width/15).foregroundColor(Color.primary)
-            .padding(.horizontal)
+            .font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+            .padding()
         
     }
 }

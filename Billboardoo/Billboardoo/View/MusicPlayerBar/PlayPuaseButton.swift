@@ -23,7 +23,7 @@ struct PlayPuaseButton: View {
             withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7))
             {
                 Image(systemName: playState.isPlaying == .playing ? "pause.fill" : "play.fill")
-                    .resizable()
+
                     .modifier(buttonModifier)
                 
             }
