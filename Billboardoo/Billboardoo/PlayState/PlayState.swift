@@ -72,7 +72,7 @@ class PlayState:ObservableObject {
                 try self.volume = result.get() // 초기 volumn 설정
             }
             catch{
-                print(error)
+               
             }
         }
     }
@@ -158,10 +158,10 @@ class PlayState:ObservableObject {
         if(isHave == -1) //없다면
         {
             self.playList.append(item)
-            print("\(self.currentPlayIndex) \(self.playList)")
+       
             return false
         }
-        print("\(self.currentPlayIndex) \(self.playList)")
+    
         return true
         
         

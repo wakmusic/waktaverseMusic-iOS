@@ -278,9 +278,9 @@ struct ProgressBar: View{
                         playState.currentProgress = time
                         playtime = playState.convertTimetoString(time)
                         endtime = playState.convertTimetoString(playState.endProgress)
-                        //print("\(playState.currentProgress)  \(playState.endProgress)")
+                       
                     case.failure(let err):
-                        print("currentProgress Error")
+                        print("\(#function) \(#line) Error 발생")
                     }
                 }
             }

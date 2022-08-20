@@ -419,15 +419,9 @@ extension ChartMoreView{
         
         func fetchUpdateTime(_ category:TopCategory)
         {
-            Repository.shared.fetchUpdateTimeStmap(category: category).sink { completion in
+            Repository.shared.fetchUpdateTimeStmap(category: category).sink { _ in
                 
-                switch completion
-                {
-                case .failure(let err):
-                    print("\(Date()) \(#file) \(#function) \(#line)")
-                case.finished:
-                    print("chart: \(category) update time  finish")
-                }
+               
                 
             } receiveValue: { [weak self] time in
                 

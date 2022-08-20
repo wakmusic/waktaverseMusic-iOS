@@ -29,21 +29,21 @@ struct SongCardView: View {
             
             
             Button {
-                print("Prev")
+                
             } label: {
                 Image(systemName: "backward.fill")
                 
             }
             
             Button {
-                print("Play!!")
+               
             } label: {
                 Image(systemName: "play.fill")
                 
             }
             
             Button {
-                print("Next")
+                
             } label: {
                 Image(systemName: "forward.fill")
                 

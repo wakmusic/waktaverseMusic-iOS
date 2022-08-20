@@ -135,7 +135,7 @@ extension NewSongOfTheMonthView{
                     
                 } receiveValue: { [weak self] (rawData:newMonthInfo) in
                     
-                    print(rawData.data.count)
+              
                     guard let self = self else {return}
                     
                     self.newSongs = rawData.data

@@ -83,15 +83,9 @@ extension NewsView{
         
         func fetchNews()
         {
-            Repository.shared.fetchNews().sink { completion in
+            Repository.shared.fetchNews().sink { (_) in
                 
-                switch completion{
-                case .failure(let err):
-                    print(" \(#file) \(#function) \(#line) \(err)")
-                    
-                case .finished:
-                    print(" \(#file) \(#function) \(#line) Finish")
-                }
+                
                 
             } receiveValue: { [weak self] (data:[NewsModel]) in
                 

@@ -237,32 +237,32 @@ struct MyDropDelegate : DropDelegate {
     
     // 드랍에서 벗어났을 때
     func dropExited(info: DropInfo) {
-        print("MyDropDelegate - dropExited() called")
+       
     }
 
     //드랍 처리 (드랍을 놓을 때 작동)
     func performDrop(info: DropInfo) -> Bool {
 
-        print("MyDropDelegate - performDrop() called")
+    
         return true
     }
 
     // 드랍 변경
     func dropUpdated(info: DropInfo) -> DropProposal? {
-        // print("MyDropDelegate - dropUpdated() called")
+      
         return nil
     }
 
     // 드랍 유효 여부
     func validateDrop(info: DropInfo) -> Bool {
-        print("MyDropDelegate - validateDrop() called")
+        
         return true
     }
     
     //드랍 시작
     
     func dropEntered(info: DropInfo) {
-        print("MyDropDelegate - dropEntered() called")
+     
         
         if editMode == false {return}
         
@@ -368,7 +368,7 @@ struct TopRightControlView: View {
             .alert("삭제하시겠습니까?", isPresented: $isShowAlert) {
                 
                 Button(role: .cancel) {
-                    print("Cancel")
+              
                 } label: {
                     Text("아니요")
                 }

@@ -28,7 +28,7 @@ struct InvisibleRefreshView: View {
                         case .success(let state):
                             if(playState.isPlaying != state) //만약 현재상태와 다를 때
                             {
-                                print(state)
+                              
                                 playState.isPlaying = state //state를 저장하고
                                 
                                 //노래할당이 끝난 후
