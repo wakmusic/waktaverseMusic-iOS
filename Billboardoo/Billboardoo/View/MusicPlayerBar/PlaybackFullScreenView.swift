@@ -110,7 +110,7 @@ struct PlaybackFullScreenView: View {
                         
                         
                         PlayBar(isUnMute: $isUnMute,editMode: $editMode).environmentObject(playState)
-                            .padding(.vertical,playState.isPlayerListViewPresented ? 40 : 60) //밑에서 띄우기
+                            .padding(.bottom,playState.isPlayerListViewPresented ? 40 : 60) //밑에서 띄우기
                             .padding(.horizontal)
                          
                         
@@ -248,20 +248,25 @@ struct ProgressBar: View{
             VStack {
                 
                 //Sldier 설정 및 바인딩
-                Slider(value:$playState.currentProgress,in: 0...playState.endProgress) { change in
-                    //onEditChanged
-                    if(change == false) //change == true는 slider를 건들기 시작할 때 false는 slider를 내려 놓을 때
-                    {
-                        playState.youTubePlayer.seek(to: playState.currentProgress, allowSeekAhead: true) //allowSeekAhead = true 서버로 요청
-                    }
-                }.onAppear {
-                    // 슬라이더 볼 사이즈 수정 
-                    let progressCircleConfig = UIImage.SymbolConfiguration(scale: .small)
-                    UISlider.appearance()
-                        .setThumbImage(UIImage(systemName: "circle.fill",
-                                               withConfiguration: progressCircleConfig), for: .normal)
+             
+                    Slider(value:$playState.currentProgress,in: 0...playState.endProgress) { change in
+                        //onEditChanged
+                        if(change == false) //change == true는 slider를 건들기 시작할 때 false는 slider를 내려 놓을 때
+                        {
+                            playState.youTubePlayer.seek(to: playState.currentProgress, allowSeekAhead: true) //allowSeekAhead = true 서버로 요청
+                        }
+                    }.onAppear {
+                        // 슬라이더 볼 사이즈 수정
+                        let progressCircleConfig = UIImage.SymbolConfiguration(scale: .small)
+                        UISlider.appearance()
+                            .setThumbImage(UIImage(systemName: "circle.fill",
+                                                   withConfiguration: progressCircleConfig), for: .normal)
                 }
-//                ProgressView(value: playState.currentProgress, total: 100)
+                
+                  
+                   
+               
+
                 
                 HStack{
                     

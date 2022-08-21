@@ -25,9 +25,16 @@ struct NewSongOfTheMonthView: View {
             
             VStack(alignment:.center)
             {
-                LazyHGrid(rows: rows, spacing: 10)
+                if(viewModel.newSongs.count == 0)
                 {
-                   TwoRowGrid
+                    HStack{ Text("이달의 신곡이 아직 없습니다.").modifier(PlayBarTitleModifier())}.frame(width:UIScreen.main.bounds.width)
+                }
+                
+                else{
+                    LazyHGrid(rows: rows, spacing: 10)
+                    {
+                        TwoRowGrid
+                    }
                 }
             }
             
@@ -68,35 +75,38 @@ extension NewSongOfTheMonthView{
         
         //viewModel.newSongs[0..<6] - > ArraySlice -> Array(Arraylice)
         //(viewModel.newSongs.count < 6 ? viewModel.newSongs: Array(viewModel.newSongs[0..<6])
+        
+        
+        
         ForEach(viewModel.newSongs,id:\.self.id){ song in
             
             VStack(){
-             
-             
-                    
-                    KFImage(URL(string: song.image)!)
-                        .resizable()
-                        .frame(width:100,height: 100)
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(10)
-                        .overlay {
-                            ZStack{
-                                Button {
-                                    let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-                                    if(playState.currentSong != simpleSong)
-                                    {
-                                        playState.currentSong =  simpleSong //강제 배정
-                                        playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
-                                        playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
-                                    }
-                                  
-                                } label: {
-                                    Image(systemName: "play.fill").foregroundColor(.white)
+                
+                
+                
+                KFImage(URL(string: song.image)!)
+                    .resizable()
+                    .frame(width:100,height: 100)
+                    .aspectRatio(contentMode: .fill)
+                    .cornerRadius(10)
+                    .overlay {
+                        ZStack{
+                            Button {
+                                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                                if(playState.currentSong != simpleSong)
+                                {
+                                    playState.currentSong =  simpleSong //강제 배정
+                                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
                                 }
-
-                            }.frame(width:85,height:85,alignment: .topTrailing)
-                        }
-                        .frame(width: 100, height: 100,alignment: .center)
+                                
+                            } label: {
+                                Image(systemName: "play.fill").foregroundColor(.white)
+                            }
+                            
+                        }.frame(width:85,height:85,alignment: .topTrailing)
+                    }
+                    .frame(width: 100, height: 100,alignment: .center)
                 
                 VStack(alignment:.leading) {
                     Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1).frame(width: 100,alignment:.leading)
@@ -118,7 +128,7 @@ extension NewSongOfTheMonthView{
         
         init()
         {
-            fetchNewSong()
+           fetchNewSong()
         }
         
         func fetchNewSong() {
@@ -135,13 +145,13 @@ extension NewSongOfTheMonthView{
                     
                 } receiveValue: { [weak self] (rawData:newMonthInfo) in
                     
-              
+                    
                     guard let self = self else {return}
                     
                     self.newSongs = rawData.data
-              
+                    
                 }.store(in: &subscription)
-
+            
         }
         
         
@@ -151,9 +161,9 @@ extension NewSongOfTheMonthView{
             let month:String = convTime.substring(from: 2, to: 3)
             let day:String = convTime.substring(from: 4, to: 5)
             
-                
-           return "20\(year).\(month).\(day)"
-                                
+            
+            return "20\(year).\(month).\(day)"
+            
         }
     }
     

@@ -16,6 +16,7 @@ struct BillboardooApp: App {
    
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
     var playState = PlayState.shared
+
     
     
     var body: some Scene {
@@ -25,6 +26,7 @@ struct BillboardooApp: App {
                 changeMode(isDarkMode: isDarkMode) //보여질 때 다크모드 확인 이벤트 등록
                 //네트워크 등록
             }
+            
 
             
             

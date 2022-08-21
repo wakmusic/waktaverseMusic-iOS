@@ -14,7 +14,7 @@ struct HomeScreenView: View {
     @ScaledMetric var scale: CGFloat = 15
     @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
     @EnvironmentObject var playState:PlayState
-    
+   
     
     init(){
         _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
@@ -95,6 +95,8 @@ struct HomeScreenView: View {
 
 struct NavigationLogo: View {
     let window = UIScreen.main.bounds.size
+    let width = min(UIScreen.main.bounds.size.width,UIScreen.main.bounds.height)
+    let height = max(UIScreen.main.bounds.size.width,UIScreen.main.bounds.height)
     let device = UIDevice.current.userInterfaceIdiom
     var body: some View {
         Image("mainLogoWhite")
@@ -102,29 +104,11 @@ struct NavigationLogo: View {
             .renderingMode(.template)
             .foregroundColor(Color.primary)
             .aspectRatio(contentMode: .fit)
-            .frame(width: device == .phone ? window.width*0.5 : window.width*0.4, height: device == .phone ? window.width*0.3 : window.width*0.3)
+            .frame(width: device == .phone ? width*0.5 : width*0.4, height: device == .phone ? width*0.3 : width*0.3)
         
     }
 }
 
-struct SettinButton:View {
-    let window = UIScreen.main.bounds.size
-    
-    //@ScaledMetric(relativeTo: .headline)
-    //var scale: CGFloat =
-    var body: some View{
-        
-        NavigationLink(destination: SettingScreenView(), label: {
-            Image(systemName: "gearshape.fill")
-                .resizable()
-                .scaledToFill()
-            //                .frame(width: window.width*scale, height: window.height*scale)
-                .foregroundColor(Color.primary)
-        })
-        
-        
-    }
-}
 
 
 

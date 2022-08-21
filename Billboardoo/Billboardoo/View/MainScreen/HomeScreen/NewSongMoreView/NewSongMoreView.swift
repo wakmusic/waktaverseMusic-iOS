@@ -24,24 +24,35 @@ struct NewSongMoreView: View {
     
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
+        
+        if(newsongs.count == 0)
+        {
+            VStack{
+                Text("이달의 신곡이 아직 없습니다.").modifier(PlayBarTitleModifier())
+            }.frame(width:.infinity,height: .infinity, alignment: .center)
             
-            VStack(alignment:.center)
-            {
+        }
+        else
+        {
+            ScrollView(.vertical, showsIndicators: false) {
                 
-                LazyVGrid(columns:columns)
-                {
-                   ThreeColumnsGrid
-                }
-                if(playState.nowPlayingSong != nil) // 플레이어 바 나올 때 그 만큼 올리기 위함
+                VStack(alignment:.center)
                 {
                     
-                    Spacer(minLength: 30)
+                    
+                    
+                    LazyVGrid(columns:columns)
+                    {
+                        ThreeColumnsGrid
+                    }
+                    
+                    
                 }
-            }
-            
-            
-        }.navigationTitle("이달의 신곡")
+                
+                
+            }.navigationTitle("이달의 신곡")
+        }
+       
     }
 }
 
@@ -51,34 +62,34 @@ extension NewSongMoreView{
         ForEach(newsongs,id:\.self.id){ song in
             
             VStack(alignment:.center){
-             
-             
-                    
-                    KFImage(URL(string: song.image)!)
-                        .resizable()
-                        .frame(width:100,height: 100)
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(10)
-                        .overlay {
-                            ZStack{
-                                Button {
-                                    let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-                                    
-                                    if(playState.currentSong != simpleSong)
-                                    {
-                                        playState.currentSong =  simpleSong //강제 배정
-                                        playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
-                                        playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
-                                    }
-                                    
-                                    
-                                } label: {
-                                    Image(systemName: "play.fill").foregroundColor(.white)
+                
+                
+                
+                KFImage(URL(string: song.image)!)
+                    .resizable()
+                    .frame(width:100,height: 100)
+                    .aspectRatio(contentMode: .fill)
+                    .cornerRadius(10)
+                    .overlay {
+                        ZStack{
+                            Button {
+                                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                                
+                                if(playState.currentSong != simpleSong)
+                                {
+                                    playState.currentSong =  simpleSong //강제 배정
+                                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
                                 }
-
-                            }.frame(width:85,height:85,alignment: .topTrailing)
-                        }
-                        .frame(width: 100, height: 100,alignment: .center)
+                                
+                                
+                            } label: {
+                                Image(systemName: "play.fill").foregroundColor(.white)
+                            }
+                            
+                        }.frame(width:85,height:85,alignment: .topTrailing)
+                    }
+                    .frame(width: 100, height: 100,alignment: .center)
                 
                 VStack(alignment:.leading) {
                     Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1)
@@ -98,10 +109,10 @@ extension NewSongMoreView{
         let month:String = convTime.substring(from: 2, to: 3)
         let day:String = convTime.substring(from: 4, to: 5)
         
-            
-       return "20\(year).\(month).\(day)"
-                            
+        
+        return "20\(year).\(month).\(day)"
+        
     }
-
+    
 }
 

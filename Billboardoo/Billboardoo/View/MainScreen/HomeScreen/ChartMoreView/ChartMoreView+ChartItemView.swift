@@ -158,7 +158,7 @@ struct HeaderView: View{
                         VStack{
                             //텍스트 크기를 proxy를 기준으로 변경
                             Text("BILLBOARDOO CHART").font(.system(size: proxy.size.height/5, weight: .light, design: .default))
-                            Text("HOT 100").font(.custom("LeferiPoint-Special", size: proxy.size.height/3)).bold()
+                            Text("HOT 100").font(.custom("GmarketSansTTFBold", size: proxy.size.height/3))
                         }
                         
                     }
@@ -365,6 +365,7 @@ struct ImageButton: View {
     var text:String
     var imageSource:String
     let device = UIDevice.current.userInterfaceIdiom
+    let standard = min(UIScreen.main.bounds.width,UIScreen.main.bounds.height)
     var body: some View{
         
         
@@ -374,11 +375,11 @@ struct ImageButton: View {
             Text(text).font(.system(size: device == .phone ? 15 : 18, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
             Image(imageSource)
                 .resizable()
-                .frame(width: device == .phone ?  window.width/2.5 : window.width/6, height: device == .phone ? window.width/8 : window.width/18, alignment: .center)
+                .frame(width: device == .phone ?  standard/2.5 : standard/6, height: device == .phone ? standard/8 : standard/18, alignment: .center)
                 .aspectRatio(contentMode: .fit)
                 .clipShape(Capsule())
             LinearGradient(colors: [.clear,.black.opacity(0.7)], startPoint: .leading, endPoint: .trailing).clipShape(Capsule())
-                .frame(width: device == .phone ?  window.width/2.5 : window.width/6, height: device == .phone ? window.width/8 : window.width/18)
+                .frame(width: device == .phone ?  standard/2.5 : standard/6, height: device == .phone ? standard/8 : standard/18)
             
             
         }

@@ -41,6 +41,7 @@ struct FiveRowSongGridView: View {
                         proxy.scrollTo(0)
                     }
                 }
+                
             }.padding()
                 
         }

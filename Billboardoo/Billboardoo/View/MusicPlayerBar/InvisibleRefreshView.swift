@@ -14,7 +14,7 @@ struct InvisibleRefreshView: View {
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     // every: 0.1초 , on: main스레드 ,
     //.common모드의 경우, 타이머가 다른 일반적인 이벤트와 나란히 실행하는 것을 허용 합니다 - 예를들어, 스크롤뷰에 있는 텍스트가 움직이는 경우입니다.
-    
+    @Environment(\.scenePhase) var scenePhase
     
     
     var body: some View {
@@ -26,9 +26,11 @@ struct InvisibleRefreshView: View {
                     playState.youTubePlayer.getPlaybackState { completion in
                         switch completion{
                         case .success(let state):
+                           
+                            
                             if(playState.isPlaying != state) //만약 현재상태와 다를 때
                             {
-                              
+                                print(state)
                                 playState.isPlaying = state //state를 저장하고
                                 
                                 //노래할당이 끝난 후
@@ -68,20 +70,7 @@ struct InvisibleRefreshView: View {
                         case .cued,.paused:
                             playState.youTubePlayer.cue(source: .url(nowPlayingSong.url))
                         }
-                        
-//                        if (playState.isPlaying == .playing || playState.isPlaying == .unstarted || playState.isPlaying == .ended || playState.isPlaying == .buffering){
-//                            
-//                            //playing , unstarted , ended 때만 load
-//                            
-//                            //만약 재새중에 옮겼다면  load
-//                            playState.youTubePlayer.load(source: .url(nowPlayingSong.url)) //바로 load
-//                        }
-//                        else //나머지는 cue
-//                        {
-//                            
-//                            playState.youTubePlayer.cue(source: .url(nowPlayingSong.url))
-//                        }
-//                        
+
                         
                     }
                     

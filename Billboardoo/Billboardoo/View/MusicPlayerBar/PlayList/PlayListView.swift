@@ -16,7 +16,7 @@ struct PlayListView: View {
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
     var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
-    
+    let device = UIDevice.current.userInterfaceIdiom
     var body: some View {
         
         if (playState.playList.count == 0)
@@ -42,7 +42,8 @@ struct PlayListView: View {
                                 if(editMode == true)
                                 {
                                     Spacer()
-                                    Image(systemName:"arrow.up.and.down").modifier(modifier)
+                                    Image(systemName:"arrow.up.and.down").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+                                        .padding(.vertical)
                                     Spacer()
                                 }
                             }
@@ -76,7 +77,7 @@ struct PlayListView: View {
                             }
                             else
                             {
-                                Text("Playlist").font(.title)
+                                Text("PLAYLIST").font(.title)
                             }
                             
                         
@@ -131,6 +132,7 @@ struct ItemCell: View {
     @State var draggedItem: SimpleSong? // 드래그 된 아이템
     @EnvironmentObject var playState:PlayState
     var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+    let device = UIDevice.current.userInterfaceIdiom
     
     
     
@@ -189,7 +191,8 @@ struct ItemCell: View {
                     }
                 } label: {
                     Image(systemName: "play.fill")
-                        .modifier(modifier)
+                        .font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+                        .padding(.vertical)
                       
                 }.foregroundColor(Color.primary)
                 

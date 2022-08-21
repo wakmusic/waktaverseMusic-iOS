@@ -42,6 +42,7 @@
 		D893201328AF7C2500A529BC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201228AF7C2500A529BC /* AccountView.swift */; };
 		D893201528AFD9D000A529BC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201428AFD9D000A529BC /* LoginView.swift */; };
 		D893201B28B0BB3000A529BC /* TwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201A28B0BB3000A529BC /* TwitchModel.swift */; };
+		D893202128B2772A00A529BC /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D893202028B2772A00A529BC /* GmarketSansTTFBold.ttf */; };
 		D896DF08289C1C450020C615 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D896DF07289C1C450020C615 /* PopupView */; };
 		D896DF0B289D17240020C615 /* VolumeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0A289D17240020C615 /* VolumeSheet.swift */; };
 		D896DF0E289D51070020C615 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0D289D51070020C615 /* Extensions.swift */; };
@@ -126,6 +127,7 @@
 		D893201228AF7C2500A529BC /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		D893201428AFD9D000A529BC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		D893201A28B0BB3000A529BC /* TwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitchModel.swift; sourceTree = "<group>"; };
+		D893202028B2772A00A529BC /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		D896DF0A289D17240020C615 /* VolumeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSheet.swift; sourceTree = "<group>"; };
 		D896DF0D289D51070020C615 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D896DF4B289E933B0020C615 /* ChartMoreView+ChartItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChartMoreView+ChartItemView.swift"; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		D896DF8B28A8FB220020C615 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				D893202028B2772A00A529BC /* GmarketSansTTFBold.ttf */,
 				D896DF9028A901EF0020C615 /* LeferiPointSpecial.ttf */,
 				D896DF8C28A8FBB00020C615 /* PretendardVariable.ttf */,
 			);
@@ -626,6 +629,7 @@
 				D87EDFA528859FE300999DE6 /* Preview Assets.xcassets in Resources */,
 				D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */,
 				D896DF8D28A8FBB00020C615 /* PretendardVariable.ttf in Resources */,
+				D893202128B2772A00A529BC /* GmarketSansTTFBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,6 +960,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Billboardoo/Info.plist;
@@ -964,7 +969,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -987,6 +992,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Billboardoo/Info.plist;
@@ -995,7 +1001,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

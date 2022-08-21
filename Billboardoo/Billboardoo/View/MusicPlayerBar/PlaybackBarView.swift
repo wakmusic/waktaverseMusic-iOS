@@ -52,7 +52,7 @@ struct PlaybackBarView: View {
                         
                         Text(currentSong.artist)
                             .modifier(PlayBarArtistModifer())
-                    }.padding(.vertical,2)
+                    }.padding(.vertical,10)
                     
                     
                     Spacer()
@@ -88,7 +88,7 @@ struct PlaybackBarView: View {
                     
                 }
                 .padding(.horizontal)
-                .background(.blue.opacity(0.5),in: RoundedRectangle(cornerRadius: 8))
+                .background(.thickMaterial)
                 
             }
 

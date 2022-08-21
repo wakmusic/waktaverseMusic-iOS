@@ -40,6 +40,7 @@ struct MainScreenView: View {
     //
     
     
+    
     init() {
         //UITabBar.appearance().unselectedItemTintColor = .gray
         //UITabBar.appearance().backgroundColor = .green 탭 바 배경 색
@@ -68,6 +69,9 @@ struct MainScreenView: View {
             
         
             GeometryReader{ geometry in
+                
+                let width = min(geometry.size.width,geometry.size.height)
+                let height = max(geometry.size.width,geometry.size.height)
                 ZStack(alignment:.center) {
                     YotubeView().environmentObject(playState)
                         .opacity(0)
@@ -104,13 +108,13 @@ struct MainScreenView: View {
                         
                         // - MARK: TabBar
                         HStack{
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "home", assignedPage: .home,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "home", assignedPage: .home,router: router)
                             
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
                             
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "microphone", assignedPage: .artists,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone", assignedPage: .artists,router: router)
                             
-                            TabBarIcon(width: geometry.size.width/5, height: geometry.size.height/28, systemIconName: "person", assignedPage: .account,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "person", assignedPage: .account,router: router)
                             
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height/15)
