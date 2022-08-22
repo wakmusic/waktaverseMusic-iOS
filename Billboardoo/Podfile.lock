@@ -1,6 +1,4 @@
 PODS:
-  - naveridlogin-sdk-ios (4.1.5)
-  - NavigationBarColor (0.1.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -9,26 +7,20 @@ PODS:
   - RxSwift (6.5.0)
 
 DEPENDENCIES:
-  - naveridlogin-sdk-ios
-  - NavigationBarColor
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
 
 SPEC REPOS:
   trunk:
-    - naveridlogin-sdk-ios
-    - NavigationBarColor
     - RxCocoa
     - RxRelay
     - RxSwift
 
 SPEC CHECKSUMS:
-  naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
-  NavigationBarColor: fbb2d80e4772c59bb55575572cf0499459db366e
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
 
-PODFILE CHECKSUM: b694958c01ce347e758f43a3714b4986a448b3b2
+PODFILE CHECKSUM: d0aa85c201c9e91ce2d5ca24976b598a028bac59
 
 COCOAPODS: 1.11.3

@@ -119,12 +119,12 @@ struct ChartHeader: View {
                 } label: {
                     Text("더보기").foregroundColor(.gray)
                 }.onAppear {
-                    for family: String in UIFont.familyNames {
-                                    print(family)
-                                    for names : String in UIFont.fontNames(forFamilyName: family){
-                                        print("=== \(names)")
-                                    }
-                                }
+//                    for family: String in UIFont.familyNames {
+//                                    print(family)
+//                                    for names : String in UIFont.fontNames(forFamilyName: family){
+//                                        print("=== \(names)")
+//                                    }
+//                                }
                 }
                 
                 

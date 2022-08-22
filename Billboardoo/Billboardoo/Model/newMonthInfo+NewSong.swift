@@ -20,7 +20,6 @@ struct NewSong: Codable,Identifiable,Equatable {
     let image: String
     let url: String
     let date: Int
-    let full: String
     
     
     static func == (lhs:Self,rhs:Self) -> Bool {
@@ -29,7 +28,7 @@ struct NewSong: Codable,Identifiable,Equatable {
     
     private enum CodingKeys: String,CodingKey {
         case song_id = "id"
-        case title,artist,image,url,date,full
+        case title,artist,image,url,date
         //case viewsOfficial = "views_official"
         
     }

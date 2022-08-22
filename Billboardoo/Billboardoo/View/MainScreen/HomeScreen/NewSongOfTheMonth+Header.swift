@@ -137,7 +137,7 @@ extension NewSongOfTheMonthView{
                     
                     switch completion{
                     case .failure(let err):
-                        print(" \(#file) \(#function) \(#line) \(err)")
+                        print(" \(#file) \(#function) \(#line) \(err.localizedDescription)")
                         
                     case .finished:
                         print(" \(#file) \(#function) \(#line) Finish")
@@ -145,7 +145,7 @@ extension NewSongOfTheMonthView{
                     
                 } receiveValue: { [weak self] (rawData:newMonthInfo) in
                     
-                    
+                   
                     guard let self = self else {return}
                     
                     self.newSongs = rawData.data

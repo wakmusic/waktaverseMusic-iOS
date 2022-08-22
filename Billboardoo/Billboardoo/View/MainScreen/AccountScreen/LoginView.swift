@@ -37,15 +37,7 @@ struct LoginView: View  {
                     }
                 }
             
-            LoginButton(text: "구글아이디 로그인", image: "google", textColor: .primary, buttonColor:.normal,url:ApiCollections.google,showAlert:$showAelrt)
-                .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
-                    
-                    Button(role: .cancel) {
-                       
-                    } label: {
-                        Text("확인")
-                    }
-                }
+           
             
             
             

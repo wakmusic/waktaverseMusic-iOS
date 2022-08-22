@@ -53,14 +53,14 @@ struct ArtistScreenView: View {
                                     }
                                     
                                     
-                                }.frame(height: device == .phone ? window.height/5 : window.height/7  )
+                                }.frame(height: device == .phone ? window.height/4 : window.height/7  )
                                 
                                 
                             }
                             
                         }
                     
-                    Spacer(minLength: UIDevice.current.hasNotch ? 100 : 50 )
+                    Spacer(minLength: UIDevice.current.hasNotch ? 80 : 50 )
                     
                     
                     LazyVStack(alignment:.center,pinnedViews: .sectionHeaders){

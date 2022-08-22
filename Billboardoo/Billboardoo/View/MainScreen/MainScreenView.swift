@@ -73,7 +73,7 @@ struct MainScreenView: View {
                 let width = min(geometry.size.width,geometry.size.height)
                 let height = max(geometry.size.width,geometry.size.height)
                 ZStack(alignment:.center) {
-                    YotubeView().environmentObject(playState)
+                    YoutubeView().environmentObject(playState)
                         .opacity(0)
                     InvisibleRefreshView()
                         .opacity(0)
@@ -107,7 +107,7 @@ struct MainScreenView: View {
                         
                         
                         // - MARK: TabBar
-                        HStack{
+                        HStack(alignment:.center){
                             TabBarIcon(width: width/5, height: height/28, systemIconName: "home", assignedPage: .home,router: router)
                             
                             TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
@@ -117,7 +117,7 @@ struct MainScreenView: View {
                             TabBarIcon(width: width/5, height: height/28, systemIconName: "person", assignedPage: .account,router: router)
                             
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height/15)
+                        .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
                         .background(.ultraThinMaterial)
                         .shadow(radius: 2)
                         
@@ -247,7 +247,6 @@ struct TabBarIcon: View{
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: height)
-                //.padding(.top,10)
             
         }
             .onTapGesture {
@@ -261,7 +260,7 @@ struct TabBarIcon: View{
 
 
 
-struct YotubeView: View {
+struct YoutubeView: View {
     @EnvironmentObject var playState: PlayState
     var body: some View {
         VStack{
