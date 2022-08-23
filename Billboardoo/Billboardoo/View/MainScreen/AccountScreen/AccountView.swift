@@ -16,14 +16,18 @@ struct AccountView: View {
             Form{
                 Section {
                     VStack(alignment: .leading) {
-                        NavigationLink {
-                            LoginView()
-                        } label: {
-                            HStack{
-                                Text("로그인 해주세요")
-                            }
-                            
-                        }
+                        Text("로그인 서비스는 현재 준비중입니다.")
+                        
+//                        NavigationLink {
+//                            LoginView()
+//                        } label: {
+//                            HStack{
+//                                Text("로그인 해주세요")
+//                            }
+//
+//                        }.onTapGesture {
+//                            print("Hello")
+//                        }
 
                     }
                 } header: {

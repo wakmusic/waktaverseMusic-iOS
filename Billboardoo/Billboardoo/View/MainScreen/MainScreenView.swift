@@ -67,7 +67,7 @@ struct MainScreenView: View {
             
             //- MARK: TabView
             
-        
+            
             GeometryReader{ geometry in
                 
                 let width = min(geometry.size.width,geometry.size.height)
@@ -108,13 +108,13 @@ struct MainScreenView: View {
                         
                         // - MARK: TabBar
                         HStack(alignment:.center){
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "home", assignedPage: .home,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "home",text: "Home", assignedPage: .home,router: router)
                             
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass", assignedPage: .search,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass",text:"Search", assignedPage: .search,router: router)
                             
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone", assignedPage: .artists,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone",text:"Artist",assignedPage: .artists,router: router)
                             
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "person", assignedPage: .account,router: router)
+                            TabBarIcon(width: width/5, height: height/28, systemIconName: "person",text: "Account",assignedPage: .account,router: router)
                             
                         }
                         .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
@@ -133,10 +133,10 @@ struct MainScreenView: View {
                             //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
                             // 위: - 아래 + , 좌우는  슬라이드 애니메이션을 넣지 않고 바꾼다
                         }
-                            
-                    
+                        
+                        
                     } //그룹
-                   
+                    
                     
                     //드래그 제스쳐를 updating
                     .simultaneousGesture(DragGesture().updating($gestureState, body: { value, state, transaction in
@@ -236,24 +236,35 @@ struct TabBarItem: View {
 
 struct TabBarIcon: View{
     let width, height: CGFloat
-    let systemIconName: String
+    let systemIconName,text: String
     let assignedPage:Screen
     @StateObject var router:TabRouter
     
     var body: some View {
-        VStack{
+        VStack(spacing:0){
+            
             Image(systemIconName)
                 .resizable()
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: height)
+                .padding(.top,10)
+                
+            Text(text).font(.footnote)
+            
+            
+            
+            
+            
+            
             
         }
-            .onTapGesture {
-                router.screen = assignedPage
-            }
         
-            .foregroundColor(router.screen == assignedPage ? Color.primary : .gray)
+        .onTapGesture {
+            router.screen = assignedPage
+        }
+        
+        .foregroundColor(router.screen == assignedPage ? Color.primary : .gray)
     }
 }
 
