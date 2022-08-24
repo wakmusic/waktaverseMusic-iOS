@@ -397,15 +397,9 @@ extension ChartMoreView{
         
         func fetchChart(_ category:TopCategory)
         {
-            Repository.shared.fetchTop100(category: category).sink { completion in
+            Repository.shared.fetchTop100(category: category).sink { _ in
                 
-                switch completion{
-                case .failure(let err):
-                    print("\(Date()) \(#file) \(#function) \(#line)")
-                case.finished:
-                    print("chart: \(category) finish")
-                    
-                }
+               
                 
             } receiveValue: { [weak self] (data:[RankedSong]) in
                 
