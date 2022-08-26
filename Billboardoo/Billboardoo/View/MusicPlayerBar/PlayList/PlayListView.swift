@@ -413,7 +413,7 @@ struct TopRightControlView: View {
                         
                     }
                 } label: {
-                    Text("에")
+                    Text("예")
                 }
                 
                 
