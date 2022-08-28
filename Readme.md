@@ -15,10 +15,10 @@
 <br>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Swift-v5-red?logo=swift" />
+    <img src="https://img.shields.io/badge/Swift-v5-orange?logo=swift" />
     <img src="https://img.shields.io/badge/Xcode-v13.4.1-blue?logo=Xcode" />
-    <img src="https://img.shields.io/badge/iOS-v15.5-black?logo=apple" />
-     <img src="https://img.shields.io/badge/git-v2.32.1-black?logo=Git" />
+    <img src="https://img.shields.io/badge/iOS-v15.5-orange?logo=apple" />
+     <img src="https://img.shields.io/badge/git-v2.32.1-orange?logo=Git" />
     <img src="https://img.shields.io/badge/Discord-gray?logo=Discord" />
     <img src="https://img.shields.io/badge/Notion-gray?logo=Notion" />
 </p>
@@ -39,8 +39,7 @@ https://github.com/exyte/PopupView
 
 <p align="center"> 
 
-<img src="https://img.shields.io/badge/Notion-gray?logo=Notion" />
-
+ <img src="https://img.shields.io/badge/Alamofire-blue"/> 
  <img src="https://img.shields.io/badge/YouTubePlayerKit
 -FF0000?logo=Youtube" /> 
  <img src="https://img.shields.io/badge/PopupView
