@@ -65,7 +65,7 @@ struct MainScreenView: View {
         else
         {
             
-            //- MARK: TabView
+           
             
             
             GeometryReader{ geometry in
@@ -239,6 +239,7 @@ struct TabBarIcon: View{
     let systemIconName,text: String
     let assignedPage:Screen
     @StateObject var router:TabRouter
+    let hasNotch:Bool = UIDevice.current.hasNotch
     
     var body: some View {
         VStack(spacing:0){
@@ -248,7 +249,8 @@ struct TabBarIcon: View{
                 .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: height)
-                .padding(.top,10)
+                .padding(.top,hasNotch ? 10 : 5 )
+                
                 
             Text(text).font(.footnote)
             
