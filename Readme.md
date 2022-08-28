@@ -29,16 +29,23 @@
 
 <br>
 
+<!--
+https://github.com/Alamofire/Alamofire
+
+https://github.com/SvenTiigi/YouTubePlayerKit
+
+https://github.com/exyte/PopupView
+-->
+
 <p align="center"> 
-<a href="https://github.com/Alamofire/Alamofire"> 
+
  <img src="https://img.shields.io/badge/Alamofire
--blue"/> </a>
-<a href="https://github.com/SvenTiigi/YouTubePlayerKit"> 
+-blue"/> 
+
  <img src="https://img.shields.io/badge/YouTubePlayerKit
--red?logo=Youtube" /> </a>
- <a href="https://github.com/exyte/PopupView"> 
+-FF0000?logo=Youtube" /> 
  <img src="https://img.shields.io/badge/PopupView
--purple"/> </a>
+-purple"/>
 </p>
 
 ---
