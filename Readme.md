@@ -30,18 +30,24 @@
 <br>
 
 <!--
-https://github.com/Alamofire/Alamofire
 
-https://github.com/SvenTiigi/YouTubePlayerKit
 
-https://github.com/exyte/PopupView
+
+
 -->
 
 <p align="center"> 
 
- <img src="https://img.shields.io/badge/Alamofire-blue"/> 
- <img src="https://img.shields.io/badge/YouTubePlayerKit-FF0000?logo=Youtube" /> 
- <img src="https://img.shields.io/badge/PopupView-purple"/>
+<a href ="https://github.com/Alamofire/Alamofire">
+<img src="https://img.shields.io/badge/Alamofire-blue"/> 
+</a>
+<a href="https://github.com/SvenTiigi/YouTubePlayerKit"> 
+<img src="https://img.shields.io/badge/YouTubePlayerKit-FF0000?logo=Youtube" />  
+</a>
+<a href ="https://github.com/exyte/PopupView"> 
+<img src="https://img.shields.io/badge/PopupView-purple"/> 
+</a>
+
 </p>
 
 ---
