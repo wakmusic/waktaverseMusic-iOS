@@ -20,7 +20,7 @@
     <img src="https://img.shields.io/badge/iOS-v15.5-black?logo=apple" />
      <img src="https://img.shields.io/badge/git-v2.32.1-black?logo=Git" />
     <img src="https://img.shields.io/badge/Discord-gray?logo=Discord" />
-    <a href="www.naver.com"> <img src="https://img.shields.io/badge/Notion-gray?logo=Notion" /> </a>
+    <img src="https://img.shields.io/badge/Notion-gray?logo=Notion" />
 </p>
 
 
@@ -35,7 +35,7 @@
 -blue"/> </a>
 <a href="https://github.com/SvenTiigi/YouTubePlayerKit"> 
  <img src="https://img.shields.io/badge/YouTubePlayerKit
--FF0000?logo=Youtube" /> </a>
+-red?logo=Youtube" /> </a>
  <a href="https://github.com/exyte/PopupView"> 
  <img src="https://img.shields.io/badge/PopupView
 -purple"/> </a>
