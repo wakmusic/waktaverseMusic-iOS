@@ -39,8 +39,7 @@ https://github.com/exyte/PopupView
 
 <p align="center"> 
 
- <img src="https://img.shields.io/badge/Alamofire
--blue"/> 
+<img src="https://img.shields.io/badge/Notion-gray?logo=Notion" />
 
  <img src="https://img.shields.io/badge/YouTubePlayerKit
 -FF0000?logo=Youtube" /> 
