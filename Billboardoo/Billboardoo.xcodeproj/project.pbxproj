@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */; };
-		748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */; };
+		D8086D6828BD335600D44F48 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6728BD335600D44F48 /* Alamofire */; };
+		D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6A28BD335D00D44F48 /* PopupView */; };
+		D8086D6E28BD336800D44F48 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6D28BD336800D44F48 /* Kingfisher */; };
+		D8086D7128BD337000D44F48 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D7028BD337000D44F48 /* YouTubePlayerKit */; };
 		D83578522888291F00459197 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83578512888291F00459197 /* SettingScreenView.swift */; };
 		D835785428891DAB00459197 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785328891DAB00459197 /* HomeScreenView.swift */; };
 		D835785628893EB300459197 /* RadioButtonGroup+ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup+ChartHeader.swift */; };
-		D84872282892606B00B508DC /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = D84872272892606B00B508DC /* YouTubePlayerKit */; };
 		D848724A2893ACE700B508DC /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872492893ACE700B508DC /* PlayState.swift */; };
 		D848724D2893B6A300B508DC /* PlaybackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848724C2893B6A300B508DC /* PlaybackBarView.swift */; };
 		D848724F2893BC8800B508DC /* PlaybackFullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */; };
@@ -22,8 +23,6 @@
 		D84872592895172D00B508DC /* TextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872582895172C00B508DC /* TextModifier.swift */; };
 		D848725B2895245800B508DC /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848725A2895245800B508DC /* ImageModifier.swift */; };
 		D848725E2897E30F00B508DC /* PlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848725D2897E30F00B508DC /* PlayListView.swift */; };
-		D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C2288FD5DB001FE8F4 /* Alamofire */; };
-		D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D869C2C5288FD5E3001FE8F4 /* Kingfisher */; };
 		D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86B5867288ADB29001110A5 /* FiveRowSongGridView.swift */; };
 		D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDF9D28859FE200999DE6 /* BillboardooApp.swift */; };
 		D87EDFA228859FE300999DE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D87EDFA128859FE300999DE6 /* Assets.xcassets */; };
@@ -42,7 +41,6 @@
 		D893201528AFD9D000A529BC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201428AFD9D000A529BC /* LoginView.swift */; };
 		D893201B28B0BB3000A529BC /* TwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201A28B0BB3000A529BC /* TwitchModel.swift */; };
 		D893202128B2772A00A529BC /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D893202028B2772A00A529BC /* GmarketSansTTFBold.ttf */; };
-		D896DF08289C1C450020C615 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D896DF07289C1C450020C615 /* PopupView */; };
 		D896DF0B289D17240020C615 /* VolumeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0A289D17240020C615 /* VolumeSheet.swift */; };
 		D896DF0E289D51070020C615 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF0D289D51070020C615 /* Extensions.swift */; };
 		D896DF4C289E933B0020C615 /* ChartMoreView+ChartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896DF4B289E933B0020C615 /* ChartMoreView+ChartItemView.swift */; };
@@ -64,7 +62,6 @@
 		D896DF9128A901EF0020C615 /* LeferiPointSpecial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D896DF9028A901EF0020C615 /* LeferiPointSpecial.ttf */; };
 		D896DF9228A901EF0020C615 /* LeferiPointSpecial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D896DF9028A901EF0020C615 /* LeferiPointSpecial.ttf */; };
 		D896DF9328A901EF0020C615 /* LeferiPointSpecial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D896DF9028A901EF0020C615 /* LeferiPointSpecial.ttf */; };
-		E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,10 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo_BillboardooUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		501220AE8D24BFC8DFEE2940 /* Pods-BillboardooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.release.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.release.xcconfig"; sourceTree = "<group>"; };
 		9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.debug.xcconfig"; sourceTree = "<group>"; };
-		9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BillboardooTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.debug.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,7 +139,6 @@
 		D896DF8C28A8FBB00020C615 /* PretendardVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PretendardVariable.ttf; sourceTree = "<group>"; };
 		D896DF9028A901EF0020C615 /* LeferiPointSpecial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LeferiPointSpecial.ttf; sourceTree = "<group>"; };
 		D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.release.xcconfig"; sourceTree = "<group>"; };
-		DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billboardoo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,11 +146,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D869C2C6288FD5E3001FE8F4 /* Kingfisher in Frameworks */,
-				42AD3471028C1C08A8064EA3 /* Pods_Billboardoo.framework in Frameworks */,
-				D896DF08289C1C450020C615 /* PopupView in Frameworks */,
-				D84872282892606B00B508DC /* YouTubePlayerKit in Frameworks */,
-				D869C2C3288FD5DB001FE8F4 /* Alamofire in Frameworks */,
+				D8086D6E28BD336800D44F48 /* Kingfisher in Frameworks */,
+				D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */,
+				D8086D7128BD337000D44F48 /* YouTubePlayerKit in Frameworks */,
+				D8086D6828BD335600D44F48 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +157,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0B28C9487C0F76D2903D510 /* Pods_BillboardooTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,23 +164,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				748EB2F2A5960AA224A2E805 /* Pods_Billboardoo_BillboardooUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE486293D9ACA901E888070E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DF3A8845011794D719C368FF /* Pods_Billboardoo.framework */,
-				242095C22DAC10C51E6561ED /* Pods_Billboardoo_BillboardooUITests.framework */,
-				9AD78DB6B16403DF4016DA40 /* Pods_BillboardooTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		D82041682820E5218334841D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,7 +295,6 @@
 				D87EDFBC28859FE300999DE6 /* BillboardooUITests */,
 				D87EDF9B28859FE200999DE6 /* Products */,
 				D82041682820E5218334841D /* Pods */,
-				BE486293D9ACA901E888070E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -504,7 +484,6 @@
 				D87EDF9628859FE200999DE6 /* Sources */,
 				D87EDF9728859FE200999DE6 /* Frameworks */,
 				D87EDF9828859FE200999DE6 /* Resources */,
-				576CE9FBCCCFA35A0C6C3A41 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -512,10 +491,10 @@
 			);
 			name = Billboardoo;
 			packageProductDependencies = (
-				D869C2C2288FD5DB001FE8F4 /* Alamofire */,
-				D869C2C5288FD5E3001FE8F4 /* Kingfisher */,
-				D84872272892606B00B508DC /* YouTubePlayerKit */,
-				D896DF07289C1C450020C615 /* PopupView */,
+				D8086D6728BD335600D44F48 /* Alamofire */,
+				D8086D6A28BD335D00D44F48 /* PopupView */,
+				D8086D6D28BD336800D44F48 /* Kingfisher */,
+				D8086D7028BD337000D44F48 /* YouTubePlayerKit */,
 			);
 			productName = Billboardoo;
 			productReference = D87EDF9A28859FE200999DE6 /* Billboardoo.app */;
@@ -548,7 +527,6 @@
 				D87EDFB528859FE300999DE6 /* Sources */,
 				D87EDFB628859FE300999DE6 /* Frameworks */,
 				D87EDFB728859FE300999DE6 /* Resources */,
-				7B06F2D8994389F10AE6DF89 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -593,10 +571,10 @@
 			);
 			mainGroup = D87EDF9128859FE200999DE6;
 			packageReferences = (
-				D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				D84872262892606B00B508DC /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
-				D896DF06289C1C450020C615 /* XCRemoteSwiftPackageReference "PopupView" */,
+				D8086D6628BD335600D44F48 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D8086D6928BD335D00D44F48 /* XCRemoteSwiftPackageReference "PopupView" */,
+				D8086D6C28BD336800D44F48 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D8086D6F28BD337000D44F48 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 			);
 			productRefGroup = D87EDF9B28859FE200999DE6 /* Products */;
 			projectDirPath = "";
@@ -663,40 +641,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		576CE9FBCCCFA35A0C6C3A41 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo/Pods-Billboardoo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo/Pods-Billboardoo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billboardoo/Pods-Billboardoo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B06F2D8994389F10AE6DF89 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		966C62CF649930642EA7DD21 /* [CP] Check Pods Manifest.lock */ = {
@@ -861,6 +805,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -878,7 +824,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -921,6 +867,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -950,6 +898,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 28NL63HBTJ;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Billboardoo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Billboardoo;
@@ -964,6 +914,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.Billboardoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -983,6 +934,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Billboardoo/Preview Content\"";
 				DEVELOPMENT_TEAM = 28NL63HBTJ;
 				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Billboardoo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Billboardoo;
@@ -997,6 +949,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = yongbeomkwak.Billboardoo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1123,15 +1076,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D84872262892606B00B508DC /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		D8086D6628BD335600D44F48 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -1139,15 +1084,7 @@
 				kind = branch;
 			};
 		};
-		D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		D896DF06289C1C450020C615 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+		D8086D6928BD335D00D44F48 /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView.git";
 			requirement = {
@@ -1155,28 +1092,44 @@
 				kind = branch;
 			};
 		};
+		D8086D6C28BD336800D44F48 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D8086D6F28BD337000D44F48 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D84872272892606B00B508DC /* YouTubePlayerKit */ = {
+		D8086D6728BD335600D44F48 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D84872262892606B00B508DC /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
-			productName = YouTubePlayerKit;
-		};
-		D869C2C2288FD5DB001FE8F4 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D869C2C1288FD5DB001FE8F4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = D8086D6628BD335600D44F48 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		D869C2C5288FD5E3001FE8F4 /* Kingfisher */ = {
+		D8086D6A28BD335D00D44F48 /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D869C2C4288FD5E3001FE8F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = D8086D6928BD335D00D44F48 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+		D8086D6D28BD336800D44F48 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8086D6C28BD336800D44F48 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		D896DF07289C1C450020C615 /* PopupView */ = {
+		D8086D7028BD337000D44F48 /* YouTubePlayerKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D896DF06289C1C450020C615 /* XCRemoteSwiftPackageReference "PopupView" */;
-			productName = PopupView;
+			package = D8086D6F28BD337000D44F48 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 

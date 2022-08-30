@@ -58,7 +58,7 @@ struct PlaybackFullScreenView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .padding()
                                     .scaleEffect(playState.isPlaying == .playing ? 0.8 : 0.6)
-                                    .shadow(color: .black.opacity(playState.isPlaying == .playing ? 0.2:0.0), radius: 30, x: -60, y: 60)
+                                    .shadow(color: .primary.opacity(0.2), radius: 30, x: -60, y: 60)
                                 //각 종 애니메이션
                             }
                             

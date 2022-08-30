@@ -6,9 +6,6 @@ target 'Billboardoo' do
   use_frameworks!
 
   # Pods for Billboardoo
-  pod 'RxSwift', '6.5.0'
-  pod 'RxCocoa', '6.5.0'
-
  #login sdk
   
 target 'BillboardooTests' do
@@ -21,3 +18,5 @@ target 'BillboardooTests' do
   end
 
 end
+
+
