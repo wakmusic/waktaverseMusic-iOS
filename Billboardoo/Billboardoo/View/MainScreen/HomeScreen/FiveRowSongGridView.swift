@@ -58,35 +58,37 @@ private extension FiveRowSongGridView {
         
         ForEach(nowChart.indices,id: \.self){ index in //여기서 id설정이 굉장히 중요하다. indices로 접근하기 때문에 속성의 id 말고 \.self를 사용함
             let song = nowChart[index]
-            ZStack{
-                HStack() {
-                    AlbumImageView(url: nowChart[index].image)
-                    RankView(now: index+1, last: nowChart[index].last)
+            
+            Button {
+                //FiveRowSong Grid에서는 재생 버튼 누르면 일단 load와 currentSong을 바꿈
+                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                if(playState.currentSong != simpleSong)
+                {
+                    playState.currentSong =  simpleSong //강제 배정
+                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+                }
+            } label: {
+                ZStack{
                     
                     
-                    //타이틀 , Artist 영역
-                    VStack() {
-                        Text("\(nowChart[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
-                        Text("\(nowChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
-                    }
-                    Button {
-                        //FiveRowSong Grid에서는 재생 버튼 누르면 일단 load와 currentSong을 바꿈
-                        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-                        if(playState.currentSong != simpleSong)
-                        {
-                            playState.currentSong =  simpleSong //강제 배정
-                            playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
-                            playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+                    HStack() {
+                        AlbumImageView(url: nowChart[index].image)
+                        RankView(now: index+1, last: nowChart[index].last)
+                        
+                        
+                        //타이틀 , Artist 영역
+                        VStack() {
+                            Text("\(nowChart[index].title)").font(.system(size:13)).frame(width:150,alignment: .leading)
+                            Text("\(nowChart[index].artist)").font(.system(size:11)).frame(width:150,alignment: .leading)
                         }
                         
                         
-                        
-                    } label: {
-                        Image(systemName: "play.fill").foregroundColor(Color.primary)
                     }
-                    
                 }
-            }
+            }.accentColor(.primary)
+
+            
         }
     }
 }

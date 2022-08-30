@@ -12,14 +12,11 @@ import Alamofire
 
 struct HomeScreenView: View {
     @ScaledMetric var scale: CGFloat = 15
-    @StateObject var viewModel:HomeScreenViewModel //StateObject로 선언 View에 종속하지않기위해
+    @StateObject var viewModel:HomeScreenViewModel = HomeScreenViewModel() //StateObject로 선언 View에 종속하지않기위해
     @EnvironmentObject var playState:PlayState
+    @Binding var musicCart:[SimpleSong]
    
     
-    init(){
-        _viewModel = StateObject.init(wrappedValue: HomeScreenViewModel())
-        
-    }
     
     
     
@@ -31,7 +28,7 @@ struct HomeScreenView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                  
                     
-                    RadioButtonGroup(selectedId:$viewModel.selectedIndex) { (_,_) in
+                    RadioButtonGroup(selectedId:$viewModel.selectedIndex,musicCart: $musicCart) { (_,_) in
                         
     
                     }.environmentObject(playState)

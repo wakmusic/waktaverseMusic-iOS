@@ -142,7 +142,6 @@ struct SongListItemView: View {
     
     var song:NewSong
     @EnvironmentObject var playState:PlayState
-    @State var showAlert = false
     var accentColor:Color
     var body: some View {
         
@@ -178,7 +177,7 @@ struct SongListItemView: View {
                 
                 
                 Button() {
-                    showAlert = playState.appendList(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
+                     playState.appendList(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
                 } label: {
                     Label {
                         Text("담기")
@@ -212,8 +211,6 @@ struct SongListItemView: View {
             
             Spacer()
             
-        }.alert("이미 재생목록에 포함되어있습니다.", isPresented: $showAlert) {
-            Text("확인")
         }.padding(.horizontal,5)
         
         

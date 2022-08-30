@@ -18,6 +18,7 @@ struct ChartMoreView: View {
     @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     @StateObject var viewModel:ChartViewModel = ChartViewModel()
+    @Binding var musicCart:[SimpleSong]
     
     
     
@@ -39,12 +40,12 @@ struct ChartMoreView: View {
                     HeaderView().id("ChartMoreViewHeader")
                     
                     
-                    LazyVStack(alignment:.center,pinnedViews:[.sectionHeaders])
+                    LazyVStack(alignment:.center,spacing: 3,pinnedViews:[.sectionHeaders])
                     {
                         Section {
                             ForEach(viewModel.currentShowCharts.indices,id:\.self){ index in
                                 
-                                ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index])
+                                ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index],musicCart: $musicCart)
                             }
                             
                         }
@@ -123,12 +124,13 @@ struct ChartMoreView: View {
             .navigationBarHidden(true) //Bar 제거
             .ignoresSafeArea(.container,edges:.vertical)
             .padding(.vertical,20) // 가리기 위한 패딩
-        
+            
         
             .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
                 
                 if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
                 {
+                    musicCart.removeAll() //카트 모두 비우기 , 탭바 나오게
                     self.presentationMode.wrappedValue.dismiss() //뒤로가기
                 }
                 
@@ -271,16 +273,13 @@ struct ChartItemView: View {
     var rank:Int
     var song:RankedSong
     @EnvironmentObject var playState:PlayState
-
+    @Binding var musicCart:[SimpleSong]
+    @State var isSelected:Bool = false
+    
     var body: some View {
+        let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
         
         
-        Button {
-            let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-            playState.currentSong = simpleSong//강제 배정
-            playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
-            playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
-        } label: {
             HStack{
                 RankView(now: rank, last: song.last)
                 
@@ -301,26 +300,35 @@ struct ChartItemView: View {
                 
                 // -Play and List Button
                 
-                Text(convertViews(song.views)).font(.caption2).lineLimit(1)
+                Text(convertViews(song.views)).font(.caption2).lineLimit(1).padding(.trailing,3)
                 
                 
                 
             }
-        }.foregroundColor(.primary)
-
+            .contentShape(Rectangle()) // 빈곳을 터치해도 탭 인식할 수 있게, 와 대박 ...
+            .onTapGesture {
+               
+                isSelected.toggle()
+                if(musicCart.contains(simpleSong))
+                {
+                    musicCart = musicCart.filter({$0 != simpleSong})
+                }
+                else
+                {
+                    musicCart.append(simpleSong)
+                }
+            }
+           
+        
+            .background( musicCart.contains(simpleSong) == true ? Color.tabBar : .clear)
+        .foregroundColor(.primary)
+        
         
         
         
     }
     
 }
-
-struct ChartItemVIew_Previews: PreviewProvider {
-    static var previews: some View {
-        ChartItemView(rank: 3, song: RankedSong(song_id: "fgSXAKsq-Vo", title: "리와인드", artist: "이세계아이돌", image:"https://i.imgur.com/pobpfa1.png", url: "https://youtu.be/fgSXAKsq-Vo", last: 2, views: 8557785)).environmentObject(PlayState())
-    }
-}
-
 
 
 
@@ -364,7 +372,7 @@ extension ChartMoreView{
         {
             Repository.shared.fetchTop100(category: category).sink { _ in
                 
-               
+                
                 
             } receiveValue: { [weak self] (data:[RankedSong]) in
                 
@@ -381,7 +389,7 @@ extension ChartMoreView{
         {
             Repository.shared.fetchUpdateTimeStmap(category: category).sink { _ in
                 
-               
+                
                 
             } receiveValue: { [weak self] time in
                 
@@ -440,3 +448,5 @@ func shuffle(playlist:inout [SimpleSong]){
         playlist[randomIndex] = temp
     }
 }
+
+

@@ -37,6 +37,7 @@ struct MainScreenView: View {
     @GestureState var gestureState = CGSize.zero
     @State var gestureStore = CGSize.zero
     @State var editMode:Bool = false //playbackFullScreen에서 수정모드, 수정모드가 true일 때는 드래그 모션 멈춤
+    @State var musicCart:[SimpleSong] = [SimpleSong] () // 리스트에서 클릭했을 때 템프 리스트
     //
     
     
@@ -65,7 +66,7 @@ struct MainScreenView: View {
         else
         {
             
-           
+            
             
             
             GeometryReader{ geometry in
@@ -81,7 +82,7 @@ struct MainScreenView: View {
                     VStack(spacing:0){
                         switch router.screen{
                         case .home:
-                            HomeScreenView().environmentObject(playState)
+                            HomeScreenView(musicCart: $musicCart).environmentObject(playState)
                         case .artists:
                             ArtistScreenView().environmentObject(playState)
                         case .search:
@@ -92,34 +93,103 @@ struct MainScreenView: View {
                         }
                         
                         
-                        
-                        PlaybackBarView(animation: animation,gestureStore:$gestureStore)
-                            .environmentObject(playState)
-                            .onTapGesture {
-                                //PlayBar를 터치하면  store의 height,width을 0으로 초기화
-                                gestureStore.height = 0
-                                gestureStore.width = 0
-                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    
-                                    playState.isPlayerViewPresented = true // Full Sreen 보이게
+                        if(musicCart.isEmpty)
+                        {
+                            VStack(spacing:0){
+                                PlaybackBarView(animation: animation,gestureStore:$gestureStore)
+                                    .environmentObject(playState)
+                                    .onTapGesture {
+                                        //PlayBar를 터치하면  store의 height,width을 0으로 초기화
+                                        gestureStore.height = 0
+                                        gestureStore.width = 0
+                                        withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                            
+                                            playState.isPlayerViewPresented = true // Full Sreen 보이게
+                                        }
+                                    }
+                                
+                                
+                                // - MARK: TabBar
+                                HStack(alignment:.center){
+                                    Spacer()
+                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "home",text: "Home", assignedPage: .home,router: router)
+                                    Spacer()
+                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass",text:"Search", assignedPage: .search,router: router)
+                                    Spacer()
+                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone",text:"Artist",assignedPage: .artists,router: router)
+                                    Spacer()
+                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "person",text: "Account",assignedPage: .account,router: router)
+                                    Spacer()
                                 }
+                                .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
+                                .background(.ultraThinMaterial)
+                                .shadow(radius: 2)
                             }
-                        
-                        
-                        // - MARK: TabBar
-                        HStack(alignment:.center){
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "home",text: "Home", assignedPage: .home,router: router)
-                            
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass",text:"Search", assignedPage: .search,router: router)
-                            
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone",text:"Artist",assignedPage: .artists,router: router)
-                            
-                            TabBarIcon(width: width/5, height: height/28, systemIconName: "person",text: "Account",assignedPage: .account,router: router)
+                           
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeIn)
+                                .zIndex(musicCart.isEmpty ? 2.0 : 1.0) //내려가는 애니메이션이 리스트 탭바와 겹치지 않기 위해
                             
                         }
-                        .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
-                        .background(.ultraThinMaterial)
-                        .shadow(radius: 2)
+                        else
+                        {
+                            // - MARK: 리스트 탭 바
+                            HStack(alignment: .center){
+                                
+                                Spacer()
+                                //재생 바
+                                Button {
+                                    let simpleSong = musicCart[0]
+                                    playState.currentSong =  simpleSong //강제 배정
+                                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                    playState.uniqueAppend(item: simpleSong)
+                                
+                                    
+                                    
+                                    for song in musicCart{
+                                        playState.appendList(item: song)
+                                    }
+                                   
+                                    
+                                    musicCart.removeAll()
+                                    
+                                } label: {
+                                    ListBarIcon(width: width/5, height: height/28, systemIconName: "play.fill",text: "재생")
+                                }.accentColor(.primary)
+                                Spacer()
+                                Button {
+                               
+                                    for song in musicCart{
+                                        playState.appendList(item: song)
+                                    }
+                                    
+                                    musicCart.removeAll()
+                                    
+                                } label: {
+                                    ListBarIcon(width: width/5, height: height/28, systemIconName: "plus",text: "담기")
+                                }.accentColor(.primary)
+                                Spacer()
+                                
+                                
+                              
+                                
+                            
+                                
+                                
+                                
+                            }.frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/14 : geometry.size.height/12 )
+                                .background(.ultraThinMaterial)
+                                .shadow(radius: 2)
+                                .transition(.move(edge: .bottom))
+                                .animation(.easeIn)
+                                .zIndex(!musicCart.isEmpty ? 2.0 : 1.0)//내려가는 애니메이션이 탭바와 겹치지 않기 위해
+                                
+                            
+                        }
+                        
+                        
+                        
+                        
                         
                     }
                     
@@ -234,6 +304,31 @@ struct TabBarItem: View {
     }
 }
 
+
+struct ListBarIcon: View{
+    let width, height: CGFloat
+    let systemIconName,text: String
+    let hasNotch:Bool = UIDevice.current.hasNotch
+    
+    var body: some View
+    {
+        VStack(spacing:5){
+            
+            Image(systemName: systemIconName)
+                .font(.title3)
+                .foregroundColor(.primary)
+                .padding(.top,hasNotch ? 10 : 5 )
+            
+            
+            Text(text).font(.footnote)
+        
+            
+        }.padding(.vertical)
+    }
+    
+    
+}
+
 struct TabBarIcon: View{
     let width, height: CGFloat
     let systemIconName,text: String
@@ -250,8 +345,8 @@ struct TabBarIcon: View{
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: height)
                 .padding(.top,hasNotch ? 10 : 5 )
-                
-                
+            
+            
             Text(text).font(.footnote)
             
             

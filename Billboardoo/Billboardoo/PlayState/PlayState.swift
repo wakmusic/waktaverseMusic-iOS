@@ -139,20 +139,16 @@ class PlayState:ObservableObject {
     
     }
     
-    func appendList(item:SimpleSong) -> Bool
+    func appendList(item:SimpleSong)
     {
         let isHave = isAlreadyHave(item)
         
         if(isHave == -1) //없다면
         {
             self.playList.append(item)
-       
-            return false
         }
     
-        return true
-        
-        
+   
         
     }
     

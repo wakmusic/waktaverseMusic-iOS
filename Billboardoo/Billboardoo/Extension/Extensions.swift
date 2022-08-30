@@ -70,6 +70,10 @@ extension Color {
     public static var naver:Color{
         return Color("naver")
     }
+    
+    public static var tabBar:Color{
+        return Color("TabBarBackground")
+    }
 
 }
 

@@ -62,7 +62,9 @@ struct RadioButtonGroup: View {
     
     //@State var selectedId:Int = 0 //현재 선택된 상태를 저장할 변수
     @Binding var selectedId:Int
+    @Binding var musicCart:[SimpleSong]
     let callback: ((Int,Int)) -> ()
+   
     
     func radioGroupCallback(id: Int) {
         callback((selectedId,id)) //콜백 (이전 선택,현재 선택) 을 튜블 형태로
@@ -71,7 +73,7 @@ struct RadioButtonGroup: View {
     
     
     var body: some View {
-        ChartHeader(chartIndex: $selectedId)
+        ChartHeader(chartIndex: $selectedId,musicCart: $musicCart)
         
         VStack(alignment: .leading) {
             HStack(spacing: 10) { //버튼간 간격
@@ -90,6 +92,7 @@ struct RadioButtonGroup: View {
 struct ChartHeader: View {
     
     @Binding var chartIndex:Int
+    @Binding var musicCart:[SimpleSong]
     @EnvironmentObject var playState:PlayState
     
     
@@ -115,7 +118,7 @@ struct ChartHeader: View {
                 Spacer()
                 
                 NavigationLink {
-                    ChartMoreView(Bindingindex: $chartIndex).environmentObject(playState)
+                    ChartMoreView(Bindingindex: $chartIndex,musicCart: $musicCart).environmentObject(playState)
                 } label: {
                     Text("더보기").foregroundColor(.gray)
                 }.onAppear {
