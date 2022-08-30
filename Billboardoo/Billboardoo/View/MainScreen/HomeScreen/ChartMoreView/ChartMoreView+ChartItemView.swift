@@ -271,79 +271,44 @@ struct ChartItemView: View {
     var rank:Int
     var song:RankedSong
     @EnvironmentObject var playState:PlayState
-    @State var showAlert = false
+
     var body: some View {
         
         
-        HStack{
-            RankView(now: rank, last: song.last)
-            
-            KFImage(URL(string: song.image))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width:45,height: 45)
-                .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
-            
-            VStack(alignment:.leading,spacing: 8)
-            {
-                Text(song.title).font(.caption2).bold().lineLimit(1)
-                Text(song.artist).font(.caption2).lineLimit(1)
-            }.frame(maxWidth: .infinity ,alignment: .leading)
-            
-            
-            
-            
-            // -Play and List Button
-            
-            Text(convertViews(song.views)).font(.caption2).lineLimit(1)
-            
-            
-            
-            
-            
-            
-            
-            Menu { //메뉴
+        Button {
+            let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+            playState.currentSong = simpleSong//강제 배정
+            playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
+            playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+        } label: {
+            HStack{
+                RankView(now: rank, last: song.last)
                 
+                KFImage(URL(string: song.image))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width:45,height: 45)
+                    .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
                 
-                Button(role:.cancel) {
-                    showAlert = playState.appendList(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
-                } label: {
-                    Label {
-                        Text("담기")
-                    } icon: {
-                        Image(systemName: "text.badge.plus")
-                    }
-                    
-                    
-                }
-                
-                Button {
-                    let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-                    playState.currentSong = simpleSong//강제 배정
-                    playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
-                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
-                } label: {
-                    Label {
-                        Text("재생")
-                    } icon: {
-                        Image(systemName: "play.fill")
-                    }
-                    
-                }
+                VStack(alignment:.leading,spacing: 8)
+                {
+                    Text(song.title).font(.caption2).bold().lineLimit(1)
+                    Text(song.artist).font(.caption2).lineLimit(1)
+                }.frame(maxWidth: .infinity ,alignment: .leading)
                 
                 
                 
-            } label: {
-                Image(systemName: "ellipsis").font(.title2)
-            }.foregroundColor(Color.primary)
-            
-            
-            Spacer()
-            
-        }.alert("이미 재생목록에 포함되어있습니다.", isPresented: $showAlert) {
-            Text("확인")
-        }
+                
+                // -Play and List Button
+                
+                Text(convertViews(song.views)).font(.caption2).lineLimit(1)
+                
+                
+                
+            }
+        }.foregroundColor(.primary)
+
+        
         
         
     }
