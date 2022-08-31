@@ -134,55 +134,88 @@ struct MainScreenView: View {
                         else
                         {
                             // - MARK: 리스트 탭 바
-                            HStack(alignment: .center){
-                                
-                                Spacer()
-                                //재생 바
-                                Button {
-                                    let simpleSong = musicCart[0]
-                                    playState.currentSong =  simpleSong //강제 배정
-                                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
-                                    playState.uniqueAppend(item: simpleSong)
-                                
-                                    
-                                    
-                                    for song in musicCart{
-                                        playState.appendList(item: song)
-                                    }
-                                   
-                                    
-                                    musicCart.removeAll()
-                                    
-                                } label: {
-                                    ListBarIcon(width: width/5, height: height/28, systemIconName: "play.fill",text: "재생")
-                                }.accentColor(.primary)
-                                Spacer()
-                                Button {
-                               
-                                    for song in musicCart{
-                                        playState.appendList(item: song)
-                                    }
-                                    
-                                    musicCart.removeAll()
-                                    
-                                } label: {
-                                    ListBarIcon(width: width/5, height: height/28, systemIconName: "plus",text: "담기")
-                                }.accentColor(.primary)
-                                Spacer()
-                                
-                                
-                              
-                                
                             
+                                HStack(alignment: .center){
+                                 
+                                    ZStack{
+                                        Circle()
+                                            .foregroundColor(.white)
+                                            .frame(width: geometry.size.width/13, height: geometry.size.width/13)
+                                            .shadow(radius: 4)
+                                        
+                                        Image(systemName: "circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: geometry.size.width/13-6, height: geometry.size.width/13-6)
+                                            .foregroundColor(.wak)
+                                            .overlay(Text("\(musicCart.count)").font(.caption2).foregroundColor(.white))
+                                    }
+                                    .offset(x:3,y:-geometry.size.height/10/3)
+                                    
+                                    //재생 바
+                                    Spacer()
+                                    Button {
+                                        let simpleSong = musicCart[0]
+                                        playState.currentSong =  simpleSong //강제 배정
+                                        playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                        playState.uniqueAppend(item: simpleSong)
+                                    
+                                        
+                                        
+                                        for song in musicCart{
+                                            playState.appendList(item: song)
+                                        }
+                                       
+                                        
+                                        musicCart.removeAll()
+                                        
+                                    } label: {
+                                        ListBarIcon(width: width/5, height: height/28, systemIconName: "play.fill",text: "재생")
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    //카운팅
+                                  
+                                    
+                                  
+                                        
+                                    Button {
+                                        musicCart.removeAll()
+                                    } label: {
+                                        ListBarIcon(width: width/5, height: height/28, systemIconName: "trash",text: "전체선택 해제")
+                                    }
+
+                                    
+                                    
+                                    
+                                    
+                                    Spacer()
+                                    Button {
+                                   
+                                        for song in musicCart{
+                                            playState.appendList(item: song)
+                                        }
+                                        
+                                        musicCart.removeAll()
+                                        
+                                    } label: {
+                                        ListBarIcon(width: width/5, height: height/28, systemIconName: "plus",text: "담기")
+                                    }
+                                    Spacer()
+                                    
+                                }.frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/14 : geometry.size.height/12 )
+                                    .background(Color.wak)
+                                    .shadow(radius: 2)
+                                    .transition(.move(edge: .bottom))
+                                    .animation(.easeIn)
+                                .zIndex(!musicCart.isEmpty ? 2.0 : 1.0)
                                 
                                 
                                 
-                            }.frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/14 : geometry.size.height/12 )
-                                .background(.ultraThinMaterial)
-                                .shadow(radius: 2)
-                                .transition(.move(edge: .bottom))
-                                .animation(.easeIn)
-                                .zIndex(!musicCart.isEmpty ? 2.0 : 1.0)//내려가는 애니메이션이 탭바와 겹치지 않기 위해
+                            //내려가는 애니메이션이 탭바와 겹치지 않기 위해
+                            
+                           
                                 
                             
                         }
@@ -312,18 +345,18 @@ struct ListBarIcon: View{
     
     var body: some View
     {
-        VStack(spacing:5){
+        VStack(spacing:3){
             
             Image(systemName: systemIconName)
                 .font(.title3)
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .padding(.top,hasNotch ? 10 : 5 )
             
             
-            Text(text).font(.footnote)
+            Text(text).font(.footnote).foregroundColor(.white)
         
             
-        }.padding(.vertical)
+        }.padding(.vertical,10)
     }
     
     

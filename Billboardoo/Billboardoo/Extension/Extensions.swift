@@ -74,6 +74,10 @@ extension Color {
     public static var tabBar:Color{
         return Color("TabBarBackground")
     }
+    
+    public static var wak:Color{
+        return Color("WaktaverseColor")
+    }
 
 }
 
