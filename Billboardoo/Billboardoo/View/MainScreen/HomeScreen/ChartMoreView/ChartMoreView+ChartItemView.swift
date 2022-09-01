@@ -4,11 +4,11 @@
 //
 //  Created by yongbeomkwak on 2022/08/06.
 //
-
 import SwiftUI
 import Combine
 import Kingfisher
 import Foundation
+import ScalingHeaderScrollView
 
 
 struct ChartMoreView: View {
@@ -19,7 +19,7 @@ struct ChartMoreView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     @StateObject var viewModel:ChartViewModel = ChartViewModel()
     @Binding var musicCart:[SimpleSong]
-    
+    let window = UIScreen.main.bounds
     
     
     // MARK: For Smooth Sliding Effect
@@ -30,63 +30,72 @@ struct ChartMoreView: View {
     
     var body: some View {
         
-        VStack
+        ZStack(alignment:.topLeading)
         {
-            ScrollView(.vertical,showsIndicators: false)
-            {
-                ScrollViewReader{ (proxy:ScrollViewProxy) in
-                    
-                    
-                    HeaderView().id("ChartMoreViewHeader")
-                    
-                    
-                    LazyVStack(alignment:.center,spacing: 3,pinnedViews:[.sectionHeaders])
-                    {
-                        Section {
-                            ForEach(viewModel.currentShowCharts.indices,id:\.self){ index in
-                                
-                                ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index],musicCart: $musicCart)
-                            }
-                            
-                        }
+            
+            ScalingHeaderScrollView {
+                ZStack{
+                    Color("forcedBackground")
+                    VStack{
+                        HeaderView().coordinateSpace(name: "HeaderView") //height/8
                         
-                    header: {
-                        PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).background(Color("forcedBackground")).environmentObject(playState) //header 위로 올렸을 때 가리기 위함
+                        PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).environmentObject(playState).coordinateSpace(name: "PinnedHeaderView") //header 위로 올렸을 때 가리기 위함
                         
                     }
-                        
-                    }.animation(.ripple(), value: viewModel.currentShowCharts)
-                        .onChange(of: index, perform: { newValue in
-                            switch newValue{
-                            case 0:
-                                viewModel.fetchChart(.total)
-                                viewModel.fetchUpdateTime(.total)
-                            case 1:
-                                viewModel.fetchChart(.time)
-                                viewModel.fetchUpdateTime(.time)
-                                
-                            case 2:
-                                viewModel.fetchChart(.daily)
-                                viewModel.fetchUpdateTime(.daily)
-                                
-                            case 3:
-                                viewModel.fetchChart(.weekly)
-                                viewModel.fetchUpdateTime(.weekly)
-                            case 4:
-                                viewModel.fetchChart(.monthly)
-                                viewModel.fetchUpdateTime(.monthly)
-                            default:
-                                print("Default")
-                            }
-                            
-                            withAnimation(.easeInOut(duration: 0.5)) {
-                                proxy.scrollTo("ChartMoreViewHeader")
-                            }
-                            
-                        })
+                    
                     
                 }
-            }.onAppear(perform: {
+                
+            } content: {
+                LazyVStack(spacing:3)
+                {
+                    
+                    ForEach(viewModel.currentShowCharts.indices,id:\.self){ index in
+                        
+                        ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index],musicCart: $musicCart)
+                    }
+                    
+                }.animation(.ripple(), value: viewModel.currentShowCharts)
+                    .onChange(of: index, perform: { newValue in
+                        switch newValue{
+                        case 0:
+                            viewModel.fetchChart(.total)
+                            viewModel.fetchUpdateTime(.total)
+                        case 1:
+                            viewModel.fetchChart(.time)
+                            viewModel.fetchUpdateTime(.time)
+                            
+                        case 2:
+                            viewModel.fetchChart(.daily)
+                            viewModel.fetchUpdateTime(.daily)
+                            
+                        case 3:
+                            viewModel.fetchChart(.weekly)
+                            viewModel.fetchUpdateTime(.weekly)
+                        case 4:
+                            viewModel.fetchChart(.monthly)
+                            viewModel.fetchUpdateTime(.monthly)
+                        default:
+                            print("Default")
+                        }
+                        
+                        
+                        
+                    })
+            }
+            .height(min: window.height/4, max: window.height/2.5)
+            
+            //- MARK: 스크롤
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            .onAppear(perform: {
                 //초기에 이전 화면 정보와 같게 하기 위해
                 
                 index = Bindingindex
@@ -117,14 +126,14 @@ struct ChartMoreView: View {
             .onDisappear(perform: {
                 Bindingindex = index //닫힐 때 저장된 인덱스 보냄
             })
-            .coordinateSpace(name: "SCROLL")
+            
             
             
         }.navigationBarBackButtonHidden(true) //백 버튼 없애고
             .navigationBarHidden(true) //Bar 제거
-            .ignoresSafeArea(.container,edges:.vertical)
-            .padding(.vertical,20) // 가리기 위한 패딩
-            
+        //.ignoresSafeArea(.container,edges:.vertical)
+            .padding(1) //safeArea 방지
+        
         
             .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
                 
@@ -143,33 +152,26 @@ struct ChartMoreView: View {
 
 struct HeaderView: View{
     
+    let height = UIScreen.main.bounds.size.height
+    
     var body: some View{
         
-        GeometryReader{ proxy in
-            let minY = proxy.frame(in: .named("SCROLL")).minY //SCROLL 프레임의 최소Y(가장 위쪽 Y좌표)
-            let size = proxy.size
-            let hegith = (size.height+minY)
-            Image("mainChartLogo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width:size.width,height:hegith,alignment: .center)
-                .opacity(0.3)
-                .overlay(content: {
-                    ZStack(alignment:.center)
-                    {
-                        VStack{
-                            //텍스트 크기를 proxy를 기준으로 변경
-                            Text("BILLBOARDOO CHART").font(.system(size: proxy.size.height/5, weight: .light, design: .default))
-                            Text("HOT 100").font(.custom("GmarketSansTTFBold", size: proxy.size.height/3))
-                        }
-                        
+        Image("mainChartLogo")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(height:height/8)
+            .opacity(0.3)
+            .overlay(content: {
+                ZStack(alignment:.center)
+                {
+                    VStack{
+                        //텍스트 크기를 proxy를 기준으로 변경
+                        Text("BILLBOARDOO CHART").font(.system(size: height/30, weight: .light, design: .default))
+                        Text("HOT 100").font(.custom("GmarketSansTTFBold", size: height/21))
                     }
-                })
-            //.offset(y:-minY)
-            
-            
-        }
-        .frame(height:UIScreen.main.bounds.height/7) //frame 전체의 /6
+                    
+                }
+            })
     }
 }
 
@@ -181,86 +183,102 @@ struct PinnedHeaderView:View{
     @EnvironmentObject var playState:PlayState
     @Binding var chart:[RankedSong]
     @Binding var updateTime:Int
+    let window = UIScreen.main.bounds.size
     
     var body: some View{
         
         let types: [String] = ["누적","시간","일간","주간","월간"]
-        VStack(spacing:10) {
-            ScrollView(.horizontal,showsIndicators: false)
-            {
+        
+
                 
-                // - MARK: TAB bar
-                HStack(spacing:5)
-                {
-                    ForEach(types.indices, id: \.self){ idx in
-                        
-                        VStack(spacing:12){
+        VStack(spacing:10) {
+                    // - MARK: TAB bar
+                    HStack(spacing:5)
+                    {
+                        ForEach(types.indices, id: \.self){ idx in
                             
-                            Text(types[idx])
-                                .font(.system(size: 15)) //
-                                .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
-                            
-                            ZStack{ //움직이는 막대기
-                                if (selectedIndex == idx) {
-                                    RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary).matchedGeometryEffect(id: "TAB", in: animation)
-                                    
-                                }
-                                else{
-                                    RoundedRectangle(cornerRadius: 4 , style:  .continuous) .fill(.clear)
-                                    
-                                }
-                            }
-                            
-                            .frame(height:4 )
-                        }
-                        .frame(width:UIScreen.main.bounds.width/6) // 중간에 넣기위해 width를 6등ㅂ으로
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            withAnimation(){
-                                if(selectedIndex != idx)
-                                {
-                                    
-                                    selectedIndex = idx
+                            VStack(spacing:12){
+                                
+                                Text(types[idx])
+                                    .font(.system(size: 15)) //
+                                    .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
+                                
+                                ZStack{ //움직이는 막대기
+                                    if (selectedIndex == idx) {
+                                        RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary).matchedGeometryEffect(id: "TAB", in: animation)
+                                        
+                                    }
+                                    else{
+                                        RoundedRectangle(cornerRadius: 4 , style:  .continuous) .fill(.clear)
+                                        
+                                    }
                                 }
                                 
+                                .frame(height:4)
+                            }
+                            .frame(width:window.width/6) // 중간에 넣기위해 width를 6등분
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                withAnimation(){
+                                    if(selectedIndex != idx)
+                                    {
+                                        
+                                        selectedIndex = idx
+                                    }
+                                    
+                                }
                             }
                         }
                     }
+                    
+                    // - MARK: 셔플 및 전체 듣기
+                    HStack(spacing:0){
+                        
+                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar, imageSource: "play.fill")
+                        .onTapGesture {
+                                playState.playList.removeAll() //전부 지운후
+                                playState.youTubePlayer.stop() // stop
+                                playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
+                                playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                                playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                                playState.youTubePlayer.play()
+                                
+                                
+                            }
+                        Spacer()
+                        
+                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "셔플 재생", color: .tabBar, imageSource: "shuffle")
+                            .onTapGesture {
+                                
+                                playState.playList.removeAll() //전부 지운후
+                                playState.youTubePlayer.stop() // stop
+                                playState.playList = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
+                                
+                                shuffle(playlist: &playState.playList)  //셔플 시킨 후
+                                
+                                playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                                playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                                playState.youTubePlayer.play()
+                                
+                            }
+                        
+                        
+                        
+                    }.padding(.horizontal)
+                    
+                    HStack{
+                        Spacer()
+                        Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
+                        Text(convertTimeStamp(updateTime)).font(.caption)
+                        
+                    }.padding(.trailing,5)
                 }
-            }
-            // - MARK: 셔플 및 전체 듣기
-            HStack{
-                ImageButton(text: "셔플 재생", imageSource: "angelGosegu").onTapGesture {
-                    playState.playList.removeAll() //전부 지운후
-                    playState.youTubePlayer.stop() // stop
-                    playState.playList = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
-                    
-                    shuffle(playlist: &playState.playList)  //셔플 시킨 후
-                    
-                    playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
-                    playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                    playState.youTubePlayer.play()
-                    
-                }
-                ImageButton(text: "100곡 전체 듣기", imageSource: "jingboy").onTapGesture {
-                    playState.playList.removeAll() //전부 지운후
-                    playState.youTubePlayer.stop() // stop
-                    playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
-                    playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
-                    playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                    playState.youTubePlayer.play()
-                    
-                    
-                }
-            }.padding(.top)
+        .frame(height:window.height/6)
+    
+
             
-            HStack{
-                Spacer()
-                Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
-                Text(convertTimeStamp(updateTime)).font(.caption)
-                
-            }
-        }.padding(.bottom).padding(.horizontal)
+        
+        
         
     }
 }
@@ -280,47 +298,47 @@ struct ChartItemView: View {
         let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
         
         
-            HStack{
-                RankView(now: rank, last: song.last)
-                
-                KFImage(URL(string: song.image))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width:45,height: 45)
-                    .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
-                
-                VStack(alignment:.leading,spacing: 8)
-                {
-                    Text(song.title).font(.caption2).bold().lineLimit(1)
-                    Text(song.artist).font(.caption2).lineLimit(1)
-                }.frame(maxWidth: .infinity ,alignment: .leading)
-                
-                
-                
-                
-                // -Play and List Button
-                
-                Text(convertViews(song.views)).font(.caption2).lineLimit(1).padding(.trailing,3)
-                
-                
-                
+        HStack{
+            RankView(now: rank, last: song.last)
+            
+            KFImage(URL(string: song.image))
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width:45,height: 45)
+                .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
+            
+            VStack(alignment:.leading,spacing: 8)
+            {
+                Text(song.title).font(.caption2).bold().lineLimit(1)
+                Text(song.artist).font(.caption2).lineLimit(1)
+            }.frame(maxWidth: .infinity ,alignment: .leading)
+            
+            
+            
+            
+            // -Play and List Button
+            
+            Text(convertViews(song.views)).font(.caption2).lineLimit(1).padding(.trailing,5)
+            
+            
+            
+        }
+        .contentShape(Rectangle()) // 빈곳을 터치해도 탭 인식할 수 있게, 와 대박 ...
+        .onTapGesture {
+            
+            isSelected.toggle()
+            if(musicCart.contains(simpleSong))
+            {
+                musicCart = musicCart.filter({$0 != simpleSong})
             }
-            .contentShape(Rectangle()) // 빈곳을 터치해도 탭 인식할 수 있게, 와 대박 ...
-            .onTapGesture {
-               
-                isSelected.toggle()
-                if(musicCart.contains(simpleSong))
-                {
-                    musicCart = musicCart.filter({$0 != simpleSong})
-                }
-                else
-                {
-                    musicCart.append(simpleSong)
-                }
+            else
+            {
+                musicCart.append(simpleSong)
             }
-           
+        }
         
-            .background( musicCart.contains(simpleSong) == true ? Color.tabBar : .clear)
+        
+        .background( musicCart.contains(simpleSong) == true ? Color.tabBar : .clear)
         .foregroundColor(.primary)
         
         
@@ -328,6 +346,28 @@ struct ChartItemView: View {
         
     }
     
+}
+
+
+struct RoundedRectangleButton: View{
+    
+    let width,height:CGFloat
+    let text:String
+    let color:Color
+    let imageSource:String
+    
+    var body: some View{
+        
+        HStack{
+            Image(systemName: imageSource).font(.caption)
+            Text(text).font(.caption).bold()
+        }
+        .foregroundColor(.primary)
+        .frame(width:width,height: height)
+        .padding(.vertical,3)
+        .padding(.horizontal,5)
+        .background(RoundedRectangle(cornerRadius: 5).fill(color))
+    }
 }
 
 
@@ -448,5 +488,3 @@ func shuffle(playlist:inout [SimpleSong]){
         playlist[randomIndex] = temp
     }
 }
-
-

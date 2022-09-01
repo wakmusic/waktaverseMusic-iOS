@@ -36,6 +36,7 @@
 		D87EDFD02887D67F00999DE6 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFCF2887D67F00999DE6 /* MainScreenView.swift */; };
 		D87EDFD32887DA3900999DE6 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD22887DA3900999DE6 /* Repository.swift */; };
 		D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87EDFD72887DAB900999DE6 /* ApiCollections.swift */; };
+		D8922EA628BFA73300C15FAE /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */; };
 		D893200C28AB8BD500A529BC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893200B28AB8BD500A529BC /* SearchView.swift */; };
 		D893201328AF7C2500A529BC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201228AF7C2500A529BC /* AccountView.swift */; };
 		D893201528AFD9D000A529BC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201428AFD9D000A529BC /* LoginView.swift */; };
@@ -150,6 +151,7 @@
 				D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */,
 				D8086D7128BD337000D44F48 /* YouTubePlayerKit in Frameworks */,
 				D8086D6828BD335600D44F48 /* Alamofire in Frameworks */,
+				D8922EA628BFA73300C15FAE /* ScalingHeaderScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +497,7 @@
 				D8086D6A28BD335D00D44F48 /* PopupView */,
 				D8086D6D28BD336800D44F48 /* Kingfisher */,
 				D8086D7028BD337000D44F48 /* YouTubePlayerKit */,
+				D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */,
 			);
 			productName = Billboardoo;
 			productReference = D87EDF9A28859FE200999DE6 /* Billboardoo.app */;
@@ -575,6 +578,7 @@
 				D8086D6928BD335D00D44F48 /* XCRemoteSwiftPackageReference "PopupView" */,
 				D8086D6C28BD336800D44F48 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D8086D6F28BD337000D44F48 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				D8922EA428BFA73300C15FAE /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 			);
 			productRefGroup = D87EDF9B28859FE200999DE6 /* Products */;
 			projectDirPath = "";
@@ -1108,6 +1112,14 @@
 				kind = branch;
 			};
 		};
+		D8922EA428BFA73300C15FAE /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1130,6 +1142,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D8086D6F28BD337000D44F48 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
 			productName = YouTubePlayerKit;
+		};
+		D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8922EA428BFA73300C15FAE /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
+			productName = ScalingHeaderScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
