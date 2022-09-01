@@ -84,9 +84,9 @@ struct MainScreenView: View {
                         case .home:
                             HomeScreenView(musicCart: $musicCart).environmentObject(playState)
                         case .artists:
-                            ArtistScreenView().environmentObject(playState)
+                            ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
                         case .search:
-                            SearchView().environmentObject(playState)
+                            SearchView(musicCart: $musicCart).environmentObject(playState)
                             
                         case .account:
                             AccountView()

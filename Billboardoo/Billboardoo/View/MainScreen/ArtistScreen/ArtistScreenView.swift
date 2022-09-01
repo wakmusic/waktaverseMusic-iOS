@@ -8,95 +8,88 @@
 import SwiftUI
 import Combine
 import Kingfisher
+import ScalingHeaderScrollView
 
 struct ArtistScreenView: View {
     
     let columns:[GridItem] = [GridItem(.fixed(20),spacing: 20)]
     let window = UIScreen.main.bounds
     let device = UIDevice.current.userInterfaceIdiom
+    let hasNotch = UIDevice.current.hasNotch
     
     @StateObject var viewModel = ArtistScreenViewModel()
     @EnvironmentObject var playState:PlayState
+    @Binding var musicCart:[SimpleSong]
+    @State var scrollToTop:Bool = false
+    
     
     
     var body: some View {
         
-        ZStack {
-            Color.black
+        
+        ZStack(alignment: .top){
             
-            
-            
-            ScrollView(.vertical,showsIndicators: false)
-            {
-                ScrollViewReader{ (proxy:ScrollViewProxy) in
+            ScalingHeaderScrollView {
+                ZStack{
+                    Color("forcedBackground")
                     
-                    
-                    ArtistHeaderVIew(artists: $viewModel.artists,selectedid: $viewModel.selectedid)
-                        .id("ArtistsHeader")
-                        .overlay {
-                            
-                            VStack{
-                                Spacer()
-                                Text("ARTIST").foregroundColor(.white).font(.system(size: device == . phone ? window.size.height/30 : window.size.height/35 , weight: .light, design: .default)).padding(.top,UIDevice.current.hasNotch ? 150 :  100)
-                                Text(viewModel.selectedid.uppercased()).foregroundColor(.white).font(.custom("LeferiPoint-Special", size:device == . phone ? window.size.height/25 : window.size.height/30 )).bold()
-                                // .padding(.top,UIDevice.current.hasNotch ? 30 : 50)
-                                Spacer()
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    
-                                    LazyHGrid(rows: columns,alignment: device == .phone ? .top : .bottom,spacing: 0) {
-                                        ForEach(viewModel.artists,id:\.self.id){ artist in
-                                            
-                                            CardView(artist: artist,selectedId: $viewModel.selectedid)
-                                            
-                                        }
-                                    }
-                                    
-                                    
-                                }.frame(height: device == .phone ? window.height/4 : window.height/7  )
-                                
-                                
-                            }
-                            
-                        }
-                    
-                    Spacer(minLength: UIDevice.current.hasNotch ? 80 : 50 )
-                    
-                    
-                    LazyVStack(alignment:.center,pinnedViews: .sectionHeaders){
-                        Section {
-                            ForEach(viewModel.currentShowChart,id:\.self.id){ (song:NewSong) in
-                                SongListItemView(song: song,accentColor: .white).environmentObject(playState)
-                                
-                            }
-                            
-                        } header: {
-                            
-                            ArtistPinnedHeader(chart: $viewModel.currentShowChart).environmentObject(playState)
-                            
-                            
-                        }
-                    }.onChange(of: viewModel.selectedid) { newValue in
-                        viewModel.fetchSongList(newValue)
+                    VStack(spacing:0){
+                        ArtistHeaderVIew(artists: $viewModel.artists,selectedid: $viewModel.selectedid)
                         
-                      
+                            .overlay {
+                                
+                                VStack{
+                                    Text("ARTIST").foregroundColor(.white).font(.system(size: device == . phone ? window.size.height/30 : window.size.height/35 , weight: .light, design: .default)).padding(.top,UIDevice.current.hasNotch ? 150 :  100)
+                                    Text(viewModel.selectedid.uppercased()).foregroundColor(.white).font(.custom("LeferiPoint-Special", size:device == . phone ? window.size.height/25 : window.size.height/30 )).bold()
+                                    // .padding(.top,UIDevice.current.hasNotch ? 30 : 50)
+                                    Spacer()
+                                    
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        
+                                        LazyHGrid(rows: columns,alignment: device == .phone ? .top : .bottom,spacing: 10) {
+                                            ForEach(viewModel.artists,id:\.self.id){ artist in
+                                                
+                                                CardView(artist: artist,selectedId: $viewModel.selectedid)
+                                                
+                                            }
+                                        }
+                                        
+                                        
+                                    }.frame(height: device == .phone ? window.height/4 : window.height/7  )
+                                    
+                                    
+                                }
+                                
+                            }
+                       
+                        ArtistPinnedHeader(chart: $viewModel.currentShowChart).environmentObject(playState)
                     }
-                    .animation(.ripple(), value: viewModel.currentShowChart)
+                }
+            } content: {
+                LazyVStack(spacing: 0){
                     
+                    ForEach(viewModel.currentShowChart,id:\.self.id){ (song:NewSong) in
+                        ArtistSongListItemView(song: song,accentColor: .primary,musicCart: $musicCart).environmentObject(playState)
+                        
+                    }
                     
-                    
-                    
-                    
-                    
+                
+                }.onChange(of: viewModel.selectedid) { newValue in
+                    viewModel.fetchSongList(newValue)
+                    scrollToTop = true
                     
                     
                 }
+                .animation(.ripple(), value: viewModel.currentShowChart)
+                
             }
+            
+            .height(min: hasNotch == true ?  window.height/8 : window.height/13, max: window.height/2.5)
+            .scrollToTop(resetScroll: $scrollToTop)
+            
             
             
         }
-        
-        
         
         .ignoresSafeArea(.container, edges: .all)
         
@@ -110,6 +103,7 @@ struct ArtistHeaderVIew: View{
     @Binding var selectedid:String
     let window = UIScreen.main.bounds
     let url = "https://billboardoo.com/artist/image/big/"
+    let hasNotch:Bool = UIDevice.current.hasNotch
     var body: some View{
         
         
@@ -128,6 +122,7 @@ struct ArtistHeaderVIew: View{
                     
                 }
             }
+            
         
         
         
@@ -137,28 +132,38 @@ struct ArtistHeaderVIew: View{
 }
 
 
-struct SongListItemView: View {
+struct ArtistSongListItemView: View {
     
     
     var song:NewSong
     @EnvironmentObject var playState:PlayState
     var accentColor:Color
+    @Binding var musicCart:[SimpleSong]
     var body: some View {
+        let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
         
         
         HStack{
             
-            KFImage(URL(string: song.image))
+            KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
+                .placeholder({
+                    Image("placeHolder")
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                        .transition(.opacity.combined(with: .scale))
+                })
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width:45,height: 45)
                 .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
+                .padding(.leading,5)
             
             VStack(alignment:.leading,spacing: 8)
             {
                 Text(song.title).foregroundColor(accentColor).font(.caption2).bold().lineLimit(1)
                 Text(song.artist).foregroundColor(accentColor).font(.caption2).lineLimit(1)
             }.frame(maxWidth: .infinity ,alignment: .leading)
+            
             
             
             
@@ -173,45 +178,29 @@ struct SongListItemView: View {
             
             
             
-            Menu { //메뉴
-                
-                
-                Button() {
-                     playState.appendList(item: SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url))
-                } label: {
-                    Label {
-                        Text("담기")
-                    } icon: {
-                        Image(systemName: "text.badge.plus").foregroundColor(.white).font(.title2)
-                    }
-                    
-                    
-                }
-                
-                Button {
-                    let simpleSong = SimpleSong(song_id:song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-                    playState.currentSong = simpleSong//강제 배정
-                    playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
-                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
-                } label: {
-                    Label {
-                        Text("재생")
-                    } icon: {
-                        Image(systemName: "play.fill")
-                    }
-                    
-                }
-                
-                
-                
-            } label: {
-                Image(systemName: "ellipsis").foregroundColor(accentColor)
-            }.foregroundColor(Color.primary)
             
             
             Spacer()
             
-        }.padding(.horizontal,5)
+        }
+        .padding(.vertical,5)
+        
+        .contentShape(Rectangle()) // 빈곳을 터치해도 탭 인식할 수 있게, 와 대박 ...
+        .onTapGesture {
+            
+            if(musicCart.contains(simpleSong))
+            {
+                musicCart = musicCart.filter({$0 != simpleSong})
+            }
+            else
+            {
+                musicCart.append(simpleSong)
+            }
+        }
+        
+        
+        .background(musicCart.contains(simpleSong) == true ? Color.tabBar : .clear)
+        
         
         
     }
@@ -222,37 +211,43 @@ struct ArtistPinnedHeader: View {
     
     @EnvironmentObject var playState:PlayState
     @Binding var chart:[NewSong]
+    let window = UIScreen.main.bounds.size
+    
     
     var body: some View{
-        VStack(spacing:10){
-            
-            
-            
+        
             HStack{
-                ImageButton(text: "셔플 재생", imageSource: "angelGosegu").onTapGesture {
-                    playState.playList.removeAll() //전부 지운후
-                    playState.youTubePlayer.stop() // stop
-                    playState.playList = castingFromNewSongToSimple(newSongList: chart) // 현재 해당 chart로 덮어쓰고
-                    
-                    shuffle(playlist: &playState.playList)  //셔플 시킨 후
-                    
-                    playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
-                    playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                    playState.youTubePlayer.play()
-                    
-                }
-                ImageButton(text: "전체 듣기", imageSource: "jingboy").onTapGesture {
-                    playState.playList.removeAll() //전부 지운후
-                    playState.youTubePlayer.stop() // stop
-                    playState.playList = castingFromNewSongToSimple(newSongList: chart)  // 현재 해당 chart로 덮어쓰고
-                    playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
-                    playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                    playState.youTubePlayer.play()
-                    
-                    
-                }
+                Spacer()
+                RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar ,textColor: .primary, imageSource: "play.fill")
+                    .onTapGesture {
+                        playState.playList.removeAll() //전부 지운후
+                        playState.youTubePlayer.stop() // stop
+                        playState.playList = castingFromNewSongToSimple(newSongList: chart)  // 현재 해당 chart로 덮어쓰고
+                        playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                        playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                        playState.youTubePlayer.play()
+                        
+                        
+                    }
+                Spacer()
+                
+                RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "셔플 재생", color:.tabBar,textColor: .primary, imageSource: "shuffle")
+                    .onTapGesture {
+                        
+                        playState.playList.removeAll() //전부 지운후
+                        playState.youTubePlayer.stop() // stop
+                        playState.playList = castingFromNewSongToSimple(newSongList: chart) // 현재 해당 chart로 덮어쓰고
+                        
+                        shuffle(playlist: &playState.playList)  //셔플 시킨 후
+                        
+                        playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                        playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                        playState.youTubePlayer.play()
+                        
+                    }
+                Spacer()
             }
-        }.frame(width:UIScreen.main.bounds.width,height: UIDevice.current.hasNotch ? 130 :100).background(.black).padding(.bottom)
+            .frame(height:window.height/8)
         
     }
 }
@@ -335,8 +330,4 @@ func castingFromNewSongToSimple(newSongList:[NewSong]) ->[SimpleSong]
 }
 
 
-struct ArtistScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        ArtistScreenView()
-    }
-}
+

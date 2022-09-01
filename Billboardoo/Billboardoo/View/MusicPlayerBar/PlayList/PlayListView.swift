@@ -168,7 +168,7 @@ struct ItemCell: View {
             
             HStack{
                 
-                KFImage(URL(string: song.image)!)
+                KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
                     .resizable()
                     .frame(width:50,height: 50)
                     .aspectRatio(contentMode: .fit)

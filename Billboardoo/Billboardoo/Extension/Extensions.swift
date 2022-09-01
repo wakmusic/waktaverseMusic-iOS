@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 
 extension String {
@@ -25,6 +26,11 @@ extension String {
         
         // 파싱
         return String(self[startIndex ..< endIndex])
+    }
+    
+    func convertFullThumbNailImageUrl() -> String
+    {
+        return self.replacingOccurrences(of: "hqdefault", with: "maxresdefault")
     }
 }
 

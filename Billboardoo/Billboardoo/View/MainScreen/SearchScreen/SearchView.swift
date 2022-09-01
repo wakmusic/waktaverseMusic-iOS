@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Kingfisher
 
 struct SearchView: View {
     
@@ -14,6 +15,7 @@ struct SearchView: View {
     @StateObject private var vm = SearchViewModel(initalValue: "",delay: 0.3)
     @EnvironmentObject var playState:PlayState
     @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
+    @Binding var musicCart:[SimpleSong]
     
     var body: some View {
         
@@ -131,6 +133,68 @@ extension SearchView{
     }
 }
 
+struct SongListItemView: View {
+    
+    
+    var song:NewSong
+    @EnvironmentObject var playState:PlayState
+    var accentColor:Color
+    var body: some View {
+        
+        
+        HStack{
+            
+            KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
+                .placeholder({
+                    Image("placeHolder")
+                        .resizable()
+                        .frame(width: 45, height: 45)
+                        .transition(.opacity.combined(with: .scale))
+                })
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width:45,height: 45)
+                .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
+            
+            VStack(alignment:.leading,spacing: 8)
+            {
+                Text(song.title).foregroundColor(accentColor).font(.caption2).bold().lineLimit(1)
+                Text(song.artist).foregroundColor(accentColor).font(.caption2).lineLimit(1)
+            }.frame(maxWidth: .infinity ,alignment: .leading)
+            
+            
+            
+            
+            
+            // -Play and List Button
+            
+            Text(convertTimeStamp2(song.date)).foregroundColor(accentColor).font(.caption2).lineLimit(1)
+            
+            
+            
+            
+            
+            
+            
+           
+            
+            Spacer()
+            
+        }.contentShape(Rectangle()).padding(.horizontal,5).onTapGesture {
+            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+            if(playState.currentSong != simpleSong)
+            {
+                playState.currentSong =  simpleSong //강제 배정
+                playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+            }
+        }
+        
+        
+    }
+    
+}
+
 extension SearchView{
     final class KeyboardHeightHelper: ObservableObject {
         @Published var keyboardHeight: CGFloat = 0
@@ -162,17 +226,6 @@ extension SearchView{
     
 }
 
-struct SearchVView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        Group{
-            SearchView().previewLayout(.sizeThatFits)
-                .preferredColorScheme(.light)
-            
-            SearchView().previewLayout(.sizeThatFits)
-                .preferredColorScheme(.dark)
-        }
-    }
-}
+
 
 

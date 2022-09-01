@@ -98,7 +98,7 @@ struct AlbumImageView: View {
     
     var url:String
     var body: some View {
-        KFImage(URL(string: url)!)
+        KFImage(URL(string: url.convertFullThumbNailImageUrl())!)
             .cancelOnDisappear(true)
             .placeholder {
                 Image("placeHolder")

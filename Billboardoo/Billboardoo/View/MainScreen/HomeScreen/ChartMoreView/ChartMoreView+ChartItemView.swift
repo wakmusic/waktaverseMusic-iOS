@@ -20,6 +20,7 @@ struct ChartMoreView: View {
     @StateObject var viewModel:ChartViewModel = ChartViewModel()
     @Binding var musicCart:[SimpleSong]
     let window = UIScreen.main.bounds
+    @State var scrollToTop:Bool = false
     
     
     // MARK: For Smooth Sliding Effect
@@ -36,7 +37,7 @@ struct ChartMoreView: View {
             ScalingHeaderScrollView {
                 ZStack{
                     Color("forcedBackground")
-                    VStack{
+                    VStack(spacing:25){
                         HeaderView().coordinateSpace(name: "HeaderView") //height/8
                         
                         PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).environmentObject(playState).coordinateSpace(name: "PinnedHeaderView") //header 위로 올렸을 때 가리기 위함
@@ -79,11 +80,12 @@ struct ChartMoreView: View {
                             print("Default")
                         }
                         
-                        
+                        scrollToTop = true
                         
                     })
             }
             .height(min: window.height/4, max: window.height/2.5)
+            .scrollToTop(resetScroll: $scrollToTop)
             
             //- MARK: 스크롤
             
@@ -191,7 +193,7 @@ struct PinnedHeaderView:View{
         
 
                 
-        VStack(spacing:10) {
+        VStack(spacing:20) {
                     // - MARK: TAB bar
                     HStack(spacing:5)
                     {
@@ -234,7 +236,7 @@ struct PinnedHeaderView:View{
                     // - MARK: 셔플 및 전체 듣기
                     HStack(spacing:0){
                         
-                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar, imageSource: "play.fill")
+                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar, textColor: .primary,imageSource: "play.fill")
                         .onTapGesture {
                                 playState.playList.removeAll() //전부 지운후
                                 playState.youTubePlayer.stop() // stop
@@ -247,7 +249,7 @@ struct PinnedHeaderView:View{
                             }
                         Spacer()
                         
-                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "셔플 재생", color: .tabBar, imageSource: "shuffle")
+                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "셔플 재생", color: .tabBar,textColor: .primary, imageSource: "shuffle")
                             .onTapGesture {
                                 
                                 playState.playList.removeAll() //전부 지운후
@@ -301,11 +303,18 @@ struct ChartItemView: View {
         HStack{
             RankView(now: rank, last: song.last)
             
-            KFImage(URL(string: song.image))
+            KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
+                .placeholder({
+                    Image("placeHolder")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .transition(.opacity.combined(with: .scale))
+                })
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width:45,height: 45)
                 .clipShape(RoundedRectangle(cornerRadius: 10,style: .continuous))
+                .padding(.vertical,5)
             
             VStack(alignment:.leading,spacing: 8)
             {
@@ -353,8 +362,9 @@ struct RoundedRectangleButton: View{
     
     let width,height:CGFloat
     let text:String
-    let color:Color
+    let color,textColor:Color
     let imageSource:String
+    
     
     var body: some View{
         
@@ -362,7 +372,7 @@ struct RoundedRectangleButton: View{
             Image(systemName: imageSource).font(.caption)
             Text(text).font(.caption).bold()
         }
-        .foregroundColor(.primary)
+        .foregroundColor(textColor)
         .frame(width:width,height: height)
         .padding(.vertical,3)
         .padding(.horizontal,5)
@@ -372,33 +382,7 @@ struct RoundedRectangleButton: View{
 
 
 
-struct ImageButton: View {
-    
-    let window = UIScreen.main.bounds
-    var text:String
-    var imageSource:String
-    let device = UIDevice.current.userInterfaceIdiom
-    let standard = min(UIScreen.main.bounds.width,UIScreen.main.bounds.height)
-    var body: some View{
-        
-        
-        ZStack(alignment:.center) {
-            
-            
-            Text(text).font(.system(size: device == .phone ? 15 : 18, weight: .black, design: .rounded)).foregroundColor(.white).zIndex(2.0)
-            Image(imageSource)
-                .resizable()
-                .frame(width: device == .phone ?  standard/2.5 : standard/6, height: device == .phone ? standard/8 : standard/18, alignment: .center)
-                .aspectRatio(contentMode: .fit)
-                .clipShape(Capsule())
-            LinearGradient(colors: [.clear,.black.opacity(0.7)], startPoint: .leading, endPoint: .trailing).clipShape(Capsule())
-                .frame(width: device == .phone ?  standard/2.5 : standard/6, height: device == .phone ? standard/8 : standard/18)
-            
-            
-        }
-        
-    }
-}
+
 
 extension ChartMoreView{
     
@@ -457,7 +441,7 @@ func convertViews(_ views:Int) -> String // 조회수 변환 함수
 
 func convertTimeStamp(_ time:Int) -> String{
     let dateFormater : DateFormatter = DateFormatter()
-    dateFormater.dateFormat = "yyyy.MM.dd hh:mm"
+    dateFormater.dateFormat = "yyyy.MM.dd HH:mm" // HH -> 오후까지
     
     return dateFormater.string(from: Date(timeIntervalSince1970:TimeInterval(time)))
     
@@ -478,8 +462,7 @@ func castingFromRankedToSimple(rankedList:[RankedSong]) ->[SimpleSong]
 
 
 func shuffle(playlist:inout [SimpleSong]){
-    
-    
+
     for i in 0..<playlist.count - 1 { // 0 ~ n-2
         let randomIndex = Int.random(in: i..<playlist.count)
         

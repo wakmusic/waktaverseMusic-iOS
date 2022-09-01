@@ -20,7 +20,7 @@ struct CardView: View {
         
       
            
-            VStack()
+        VStack(spacing:0)
             {
                 KFImage(URL(string: "\(url)\(artist.artistId!).png")!)
                     .placeholder({
@@ -34,21 +34,20 @@ struct CardView: View {
                     //.frame(maxWidth:.infinity,maxHeight: .infinity)
                     .shadow(color: Color(hexcode: artist.color!), radius: 8, x: 0, y: 3)
                     .shadow(color: Color(hexcode: artist.color!), radius: 2, x: 0, y: 1)
-                
-                Text(artist.name!).font(.title3).foregroundColor(.white).lineLimit(1)
-            }.onTapGesture {
+                    
+                Text(artist.name!).font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 20 : 25)).foregroundColor(.white).lineLimit(1)
+            }
+            .padding(.top,10)
+            .frame(width:device == .phone ? window.width/4 : window.width/7 ,height:device == .phone ? window.width/4 : window.width/10)
+            .onTapGesture {
                 
                     selectedId = artist.artistId!
                 
                 
             }
-            
         
-       
-            .frame(width:device == .phone ? window.width/6 : window.width/7 ,height:device == .phone ? window.height/8 : window.height/10)
-        .padding(.horizontal,10)
-        .padding(.vertical,30)
         .scaleEffect(selectedId == artist.artistId ? 1 : 0.8)
+        
         
         
         

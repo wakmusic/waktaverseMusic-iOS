@@ -23,7 +23,7 @@ class ApiCollections{
     
     // - MARK: new Songs
     static let newWeekly: String = "https://billboardoo.com/api/charts/new/weekly" //이주의 신곡
-    static let newMonthly: String = "https://billboardoo.com/api/charts/new/monthly" //이달의 신곡
+    static let newMonthly: String =  "https://billboardoo.com/api/charts/new/monthly" //이달의 신곡
     
     // - MARK: monthly, yearly
     static let monthly: String = "https://billboardoo.com/api/charts/new/monthly/" //월별 노래

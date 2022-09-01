@@ -19,13 +19,16 @@ struct NewsView: View {
 
     
     var body: some View {
-        NewsHeader(news: $viewModel.news).environmentObject(playState)
-        Divider()
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHGrid(rows: rows,spacing: 30) { //뉴스간 거리
-               OneGridRow
-            }.padding(.horizontal)
+        VStack(spacing:3){
+            NewsHeader(news: $viewModel.news).environmentObject(playState)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: rows,spacing: 30) { //뉴스간 거리
+                   OneGridRow
+                }.padding(.horizontal)
+            }
         }
+        
     }
 }
 
@@ -127,7 +130,8 @@ struct NewsHeader: View {
                 
                 
             }
-        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+            Divider()
+        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
     }
 }
 

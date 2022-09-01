@@ -60,12 +60,12 @@ extension NewSongMoreView{
     var ThreeColumnsGrid: some View{
         
         ForEach(newsongs,id:\.self.id){ song in
-            
+            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
             VStack(alignment:.center){
                 
                 
                 
-                KFImage(URL(string: song.image)!)
+                KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
                     .resizable()
                     .frame(width:100,height: 100)
                     .aspectRatio(contentMode: .fill)
@@ -73,7 +73,7 @@ extension NewSongMoreView{
                     .overlay {
                         ZStack{
                             Button {
-                                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                             
                                 
                                 if(playState.currentSong != simpleSong)
                                 {
@@ -97,7 +97,11 @@ extension NewSongMoreView{
                     Text(convertTimeStamp(song.date)).font(.caption2).foregroundColor(.gray).lineLimit(1)
                 }.frame(width: 100)
                 
-            }.padding()
+            }.padding().onTapGesture {
+                playState.currentSong =  simpleSong //강제 배정
+                playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+            }
             
         }
         

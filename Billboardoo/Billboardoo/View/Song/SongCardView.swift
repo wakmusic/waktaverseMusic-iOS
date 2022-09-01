@@ -15,7 +15,7 @@ struct SongCardView: View {
         let currentSong =  playState.nowPlayingSong
         HStack{
             
-            KFImage(URL(string: currentSong!.image)!).resizable()
+            KFImage(URL(string: currentSong!.image.convertFullThumbNailImageUrl())!).resizable()
                 .frame(width: 50, height: 50)
             
             VStack(alignment:.leading){

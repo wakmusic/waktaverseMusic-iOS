@@ -79,12 +79,12 @@ extension NewSongOfTheMonthView{
         
         
         ForEach(viewModel.newSongs,id:\.self.id){ song in
-            
+            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
             VStack(){
                 
                 
                 
-                KFImage(URL(string: song.image)!)
+                KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
                     .resizable()
                     .frame(width:100,height: 100)
                     .aspectRatio(contentMode: .fill)
@@ -92,7 +92,7 @@ extension NewSongOfTheMonthView{
                     .overlay {
                         ZStack{
                             Button {
-                                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                                
                                 if(playState.currentSong != simpleSong)
                                 {
                                     playState.currentSong =  simpleSong //강제 배정
@@ -114,7 +114,15 @@ extension NewSongOfTheMonthView{
                     Text(viewModel.convertTimeStamp(song.date)).font(.caption2).lineLimit(1).foregroundColor(.gray).frame(width: 100,alignment:.leading)
                 }.frame(width: 100)
                 
-            }.padding()
+            }.padding().onTapGesture {
+               
+                if(playState.currentSong != simpleSong)
+                {
+                    playState.currentSong =  simpleSong //강제 배정
+                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+                }
+            }
             
         }
         

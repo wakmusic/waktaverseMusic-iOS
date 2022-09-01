@@ -51,7 +51,7 @@ struct PlaybackFullScreenView: View {
                             
                             else
                             {
-                                KFImage(URL(string: currentSong.image)!)
+                                KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
                                     .resizable()
                                     .frame(width:standardLen*0.5,height: standardLen*0.5)
                                     .aspectRatio(contentMode: .fit)
@@ -71,7 +71,7 @@ struct PlaybackFullScreenView: View {
                         HStack{
                             
                             if playState.isPlayerListViewPresented { //ListView가 켜지면 작은 썸네일 보이게
-                                KFImage(URL(string: currentSong.image)!)
+                                KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
                                     .resizable()
                                     .frame(width:standardLen*0.1,height: standardLen*0.1)
                                     .aspectRatio(contentMode: .fit)
