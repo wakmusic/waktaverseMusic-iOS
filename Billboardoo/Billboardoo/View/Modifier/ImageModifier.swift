@@ -20,7 +20,7 @@ struct PlayBarButtonImageModifier:ViewModifier{
     let device = UIDevice.current.userInterfaceIdiom
     func body(content: Content) -> some View {
         content
-            .font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+            .font(.system(size:  device == .phone  ? 25 : 30)).foregroundColor(Color.primary)
             
     }
 }
@@ -30,7 +30,7 @@ struct FullScreenButtonImageModifier:ViewModifier{
     let device = UIDevice.current.userInterfaceIdiom
     func body(content: Content) -> some View {
         content
-            .font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+            .font(.system(size:  device == .phone  ? 25 : 30)).foregroundColor(Color.primary)
             .padding()
         
     }

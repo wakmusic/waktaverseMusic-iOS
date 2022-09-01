@@ -14,7 +14,6 @@ struct PlaybackFullScreenView: View {
     
     var animation: Namespace.ID //화면전환을 위한 애니메이션 Identify
     @EnvironmentObject var playState:PlayState
-    @State var isUnMute:Bool = true
     @Binding var editMode:Bool
     var titleModifier = FullScreenTitleModifier()
     var artistModifier = FullScreenArtistModifer()
@@ -51,66 +50,58 @@ struct PlaybackFullScreenView: View {
                             
                             else
                             {
+                                Spacer()
                                 KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
                                     .resizable()
-                                    .frame(width:standardLen*0.5,height: standardLen*0.5)
+                                    .frame(width:standardLen*0.4,height: standardLen*0.4)
                                     .aspectRatio(contentMode: .fit)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .padding()
-                                    .scaleEffect(playState.isPlaying == .playing ? 0.8 : 0.6)
+                                    .scaleEffect(0.8)
                                     .shadow(color: .primary.opacity(0.2), radius: 30, x: -60, y: 60)
                                 //각 종 애니메이션
-                            }
-                            
-                            
-                        }
-                        
-                        
-                        
-                        
-                        HStack{
-                            
-                            if playState.isPlayerListViewPresented { //ListView가 켜지면 작은 썸네일 보이게
-                                KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
-                                    .resizable()
-                                    .frame(width:standardLen*0.1,height: standardLen*0.1)
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .padding(.horizontal)
-                                    
-                                    
-                                    
-                            }
-                          
-                            //  이미지 와 함께 중앙정렬 -> PlayList 꾸미러 가자
-                            
-                            
-                            
-                            VStack(alignment: playState.isPlayerListViewPresented ? .leading : .center){ //리스트 보여주면 .leading
-                                Text(currentSong.title)
-                                    .modifier(titleModifier)
                                 
-                                Text(currentSong.artist)
-                                    .modifier(artistModifier)
+                                VStack(alignment: .center){ //리스트 보여주면 .leading
+                                    Text(currentSong.title)
+                                        .modifier(titleModifier)
+                                    
+                                    Text(currentSong.artist)
+                                        .modifier(artistModifier)
+                                }
                             }
                             
+                            
                         }
-                        .padding(.trailing, playState.isPlayerListViewPresented ? standardLen*0.1 : 0) //리스트 보여줄 때는 이미지 width만큼 padding
-                        .padding(.bottom,30)
+                        
+                        
+                        
+                        
+                     
+                            
+                          
+                        
+                            
+                            
+                          
+                            
+                
+                       
                         
                         
                         
                         
                         Spacer(minLength: 0)
+                        
+                        
+                   
+                        
                         
                         ProgressBar().padding(.horizontal)
                         
-                        Spacer(minLength: 0)
                         
-                        
-                        
-                        PlayBar(isUnMute: $isUnMute,editMode: $editMode).environmentObject(playState)
-                            .padding(.bottom,playState.isPlayerListViewPresented ? 40 : 60) //밑에서 띄우기
+                
+                        PlayBar(editMode: $editMode).environmentObject(playState)
+                            .padding(.bottom,40) //밑에서 띄우기
                             .padding(.horizontal)
                          
                         
@@ -152,15 +143,14 @@ struct PlayBar: View {
     
     var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @EnvironmentObject var playState:PlayState
-    @Binding var isUnMute:Bool
     @Binding var editMode:Bool
     
     var body: some View {
-        HStack
+        HStack()
         {
-            
+          
             Button {  //리스트 버튼을 누를 경우 animation과 같이 toggle
-                withAnimation(Animation.spring(response: 0.3, dampingFraction: 0.85)) {
+                withAnimation(.easeInOut) {
                     playState.isPlayerListViewPresented.toggle()
                     if(playState.isPlayerListViewPresented == false) //만약 리스트 꺼지면 editmode 역시 자동으로 꺼짐
                     {
@@ -173,9 +163,9 @@ struct PlayBar: View {
                     
                     .modifier(buttonModifier)
             }
+         
+           Spacer()
             
-            
-            Spacer()
             
             Button {
                 playState.backWard()
@@ -187,8 +177,11 @@ struct PlayBar: View {
                 
             }
             
+            Spacer()
+            
             PlayPuaseButton().environmentObject(playState)
             
+            Spacer()
             
             
             
@@ -205,21 +198,17 @@ struct PlayBar: View {
             Spacer()
             
             Button {
-                isUnMute.toggle()
-                if(isUnMute)
-                {
-                    playState.youTubePlayer.unmute()
-                }
-                else
-                {
-                    playState.youTubePlayer.mute()
-                }
+                
+                //토스트 메시지 필요
             } label: {
-                Image(systemName: isUnMute ? "speaker.wave.3.fill" : "speaker.slash.fill")
+                Image(systemName: "heart.fill")
                     
                     .modifier(buttonModifier)
-                
             }
+          
+            
+        
+           
             
             
             
