@@ -244,7 +244,7 @@ struct ProgressBar: View{
     
     var body: some View{
         
-        if let currentSong = playState.nowPlayingSong {
+        if playState.nowPlayingSong != nil {
             VStack {
                 
                 //Sldier 설정 및 바인딩
@@ -284,7 +284,7 @@ struct ProgressBar: View{
                         playtime = playState.convertTimetoString(time)
                         endtime = playState.convertTimetoString(playState.endProgress)
                        
-                    case.failure(let err):
+                    case.failure(_):
                         print("\(#function) \(#line) Error 발생")
                     }
                 }

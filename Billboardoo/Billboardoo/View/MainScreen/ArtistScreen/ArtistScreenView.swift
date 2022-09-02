@@ -84,7 +84,7 @@ struct ArtistScreenView: View {
                 
             }
             
-            .height(min: hasNotch == true ?  window.height/8 : window.height/13, max: window.height/2.5)
+            .height(min: hasNotch == true ?  window.height/8 : window.height/10, max: hasNotch == true ? window.height/2.5 : window.height/2.3)
             .scrollToTop(resetScroll: $scrollToTop)
             
             
@@ -212,7 +212,7 @@ struct ArtistPinnedHeader: View {
     @EnvironmentObject var playState:PlayState
     @Binding var chart:[NewSong]
     let window = UIScreen.main.bounds.size
-    
+    let hasNotch = UIDevice.current.hasNotch
     
     var body: some View{
         
@@ -247,7 +247,8 @@ struct ArtistPinnedHeader: View {
                     }
                 Spacer()
             }
-            .frame(height:window.height/8)
+            .frame(height:window.height/7)
+            .offset(y: hasNotch == true ? 20 : 0)
         
     }
 }

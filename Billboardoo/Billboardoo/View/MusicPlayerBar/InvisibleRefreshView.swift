@@ -45,7 +45,7 @@ struct InvisibleRefreshView: View {
                                     case .success(let time):
                                         playState.endProgress = time
                                         
-                                    case .failure(let err):
+                                    case .failure(_):
                                         playState.endProgress = 0.0
                                     }
                                 }

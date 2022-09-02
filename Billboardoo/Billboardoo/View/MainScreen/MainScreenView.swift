@@ -38,6 +38,7 @@ struct MainScreenView: View {
     @State var gestureStore = CGSize.zero
     @State var editMode:Bool = false //playbackFullScreen에서 수정모드, 수정모드가 true일 때는 드래그 모션 멈춤
     @State var musicCart:[SimpleSong] = [SimpleSong] () // 리스트에서 클릭했을 때 템프 리스트
+    
     //
     
     
@@ -92,135 +93,135 @@ struct MainScreenView: View {
                             AccountView()
                         }
                         
-                        
-                        if(musicCart.isEmpty)
-                        {
-                            VStack(spacing:0){
-                                PlaybackBarView(animation: animation,gestureStore:$gestureStore)
-                                    .environmentObject(playState)
-                                    .onTapGesture {
-                                        //PlayBar를 터치하면  store의 height,width을 0으로 초기화
-                                        gestureStore.height = 0
-                                        gestureStore.width = 0
-                                        withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                            
-                                            playState.isPlayerViewPresented = true // Full Sreen 보이게
+                        Group{
+                            if(musicCart.isEmpty)
+                            {
+                                VStack(spacing:0){
+                                    PlaybackBarView(animation: animation,gestureStore:$gestureStore)
+                                        .environmentObject(playState)
+                                        .onTapGesture {
+                                            //PlayBar를 터치하면  store의 height,width을 0으로 초기화
+                                            gestureStore.height = 0
+                                            gestureStore.width = 0
+                                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                                
+                                                playState.isPlayerViewPresented = true // Full Sreen 보이게
+                                            }
                                         }
-                                    }
-                                
-                                
-                                // - MARK: TabBar
-                                HStack(alignment:.center){
-                                    Spacer()
-                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "home",text: "Home", assignedPage: .home,router: router)
-                                    Spacer()
-                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass",text:"Search", assignedPage: .search,router: router)
-                                    Spacer()
-                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone",text:"Artist",assignedPage: .artists,router: router)
-                                    Spacer()
-                                    TabBarIcon(width: width/5, height: height/28, systemIconName: "person",text: "Account",assignedPage: .account,router: router)
-                                    Spacer()
-                                }
-                                
-                                .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
-                                .background(.ultraThinMaterial)
-                                
-                                .shadow(radius: 2)
-                               
-                            }
-                           
-                                .transition(.move(edge: .bottom))
-                                .animation(.easeIn)
-                                .zIndex(musicCart.isEmpty ? 2.0 : 1.0) //내려가는 애니메이션이 리스트 탭바와 겹치지 않기 위해
-                            
-                        }
-                        else
-                        {
-                            // - MARK: 리스트 탭 바
-                            
-                                HStack(alignment: .center){
-                                 
-                                    ZStack{
-                                        Circle()
-                                            .foregroundColor(.white)
-                                            .frame(width: geometry.size.width/13, height: geometry.size.width/13)
-                                            .shadow(radius: 4)
-                                        
-                                        Image(systemName: "circle.fill")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: geometry.size.width/13-6, height: geometry.size.width/13-6)
-                                            .foregroundColor(.wak)
-                                            .overlay(Text("\(musicCart.count)").font(.caption2).foregroundColor(.white))
-                                    }
-                                    .offset(x:3,y:-geometry.size.height/10/3)
                                     
-                                    //재생 바
-                                    Spacer()
-                                    Button {
-                                        let simpleSong = musicCart[0]
-                                        playState.currentSong =  simpleSong //강제 배정
-                                        playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
-                                        playState.uniqueAppend(item: simpleSong)
                                     
-                                        
-                                        
-                                        for song in musicCart{
-                                            playState.appendList(item: song)
-                                        }
-                                       
-                                        
-                                        musicCart.removeAll()
-                                        
-                                    } label: {
-                                        ListBarIcon(width: width/5, height: height/28, systemIconName: "play.fill",text: "재생")
+                                    // - MARK: TabBar
+                                    HStack(alignment:.center){
+                                        Spacer()
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "home",text: "Home", assignedPage: .home,router: router)
+                                        Spacer()
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass",text:"Search", assignedPage: .search,router: router)
+                                        Spacer()
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone",text:"Artist",assignedPage: .artists,router: router)
+                                        Spacer()
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "person",text: "Account",assignedPage: .account,router: router)
+                                        Spacer()
                                     }
                                     
-                                    Spacer()
+                                    .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
+                                    .background(.ultraThinMaterial)
                                     
-                                    //카운팅
-                                  
-                                    
-                                  
-                                        
-                                    Button {
-                                        musicCart.removeAll()
-                                    } label: {
-                                        ListBarIcon(width: width/5, height: height/28, systemIconName: "trash",text: "전체선택 해제")
-                                    }
-
-                                    
-                                    
-                                    
-                                    
-                                    Spacer()
-                                    Button {
-                                   
-                                        for song in musicCart{
-                                            playState.appendList(item: song)
-                                        }
-                                        
-                                        musicCart.removeAll()
-                                        
-                                    } label: {
-                                        ListBarIcon(width: width/5, height: height/28, systemIconName: "plus",text: "담기")
-                                    }
-                                    Spacer()
-                                    
-                                }.frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/14 : geometry.size.height/12 )
-                                    .background(Color.wak)
                                     .shadow(radius: 2)
+                                   
+                                }
+                                .onAppear(perform: {
+                                    print("Hello")
+                                })
                                     .transition(.move(edge: .bottom))
-                                .zIndex(!musicCart.isEmpty ? 2.0 : 1.0)
+                                    .animation(.easeOut,value:musicCart.count)
+                                    .zIndex(musicCart.isEmpty ? 2.0 : 1.0) //내려가는 애니메이션이 리스트 탭바와 겹치지 않기 위해
                                 
+                            }
+                            else
+                            {
+                                // - MARK: 리스트 탭 바
                                 
+                                    HStack(alignment: .center){
+                                     
+                                        ZStack{
+                                            Circle()
+                                                .foregroundColor(.white)
+                                                .frame(width: geometry.size.width/13, height: geometry.size.width/13)
+                                                .shadow(radius: 4)
+                                            
+                                            Image(systemName: "circle.fill")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: geometry.size.width/13-6, height: geometry.size.width/13-6)
+                                                .foregroundColor(.wak)
+                                                .overlay(Text("\(musicCart.count)").font(.caption2).foregroundColor(.white))
+                                        }
+                                        .offset(x:3,y:-geometry.size.height/10/3)
+                                        
+                                        //재생 바
+                                        Spacer()
+                                        Button {
+                                            let simpleSong = musicCart[0]
+                                            playState.currentSong =  simpleSong //강제 배정
+                                            playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                                            playState.uniqueAppend(item: simpleSong)
+                                        
+                                            
+                                            
+                                            for song in musicCart{
+                                                playState.appendList(item: song)
+                                            }
+                                           
+                                            
+                                            musicCart.removeAll()
+                                            
+                                        } label: {
+                                            ListBarIcon(width: width/5, height: height/28, systemIconName: "play.fill",text: "재생")
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        //카운팅
+                                      
+                                        
+                                      
+                                            
+                                        Button {
+                                            musicCart.removeAll()
+                                        } label: {
+                                            ListBarIcon(width: width/5, height: height/28, systemIconName: "trash",text: "전체선택 해제")
+                                        }
+                                        Spacer()
+                                        Button {
+                                       
+                                            for song in musicCart{
+                                                playState.appendList(item: song)
+                                            }
+                                            
+                                            musicCart.removeAll()
+                                            
+                                        } label: {
+                                            ListBarIcon(width: width/5, height: height/28, systemIconName: "plus",text: "담기")
+                                        }
+                                        Spacer()
+                                        
+                                    }.frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/14 : geometry.size.height/12 )
+                                        .background(Color.wak)
+                                        .shadow(radius: 2)
+                                        .transition(.move(edge: .bottom))
+                                        .animation(.easeOut,value:musicCart.count)
+                                        .zIndex(!musicCart.isEmpty ? 2.0 : 1.0)
+                                    
+                                    
+                                    
+                                //내려가는 애니메이션이 탭바와 겹치지 않기 위해
                                 
-                            //내려가는 애니메이션이 탭바와 겹치지 않기 위해
-                            
-                           
+                               
+                                    
                                 
-                            
-                        }
+                            }
+                        }.animation(.easeInOut,value:$musicCart.isEmpty) // 탭바 두개를 한번에 묶어 에니메이션 적용
+                       
                         
                         
                         
@@ -415,7 +416,7 @@ struct YoutubeView: View {
                     ProgressView()
                 case .ready:
                     EmptyView()
-                case .error(let error):
+                case .error(_):
                     Text(verbatim: "YouTube player couldn't be loaded")
                 }
             }.frame(width: 0, height: 0)
