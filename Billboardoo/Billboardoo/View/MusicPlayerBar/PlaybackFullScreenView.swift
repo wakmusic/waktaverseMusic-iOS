@@ -52,6 +52,13 @@ struct PlaybackFullScreenView: View {
                             {
                                 Spacer()
                                 KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
+                                    .placeholder({
+                                        Image("placeHolder")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: standardLen*0.4, height: standardLen*0.4)
+                                            .transition(.opacity.combined(with: .scale))
+                                    })
                                     .resizable()
                                     .frame(width:standardLen*0.4,height: standardLen*0.4)
                                     .aspectRatio(contentMode: .fit)
@@ -144,6 +151,7 @@ struct PlayBar: View {
     var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @EnvironmentObject var playState:PlayState
     @Binding var editMode:Bool
+    @State var isLike:Bool = false
     
     var body: some View {
         HStack()
@@ -198,10 +206,13 @@ struct PlayBar: View {
             Spacer()
             
             Button {
-                
+                withAnimation(.easeInOut)
+                {
+                    isLike.toggle()
+                }
                 //토스트 메시지 필요
             } label: {
-                Image(systemName: "heart.fill")
+                Image(systemName:  isLike == true ? "heart.fill" : "heart")
                     
                     .modifier(buttonModifier)
             }

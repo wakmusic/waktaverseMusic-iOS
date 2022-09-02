@@ -106,11 +106,12 @@ struct AlbumImageView: View {
                     .frame(width: 40, height: 40)
                     .transition(.opacity.combined(with: .scale))
             }
+        
             .onSuccess { result in
                 
             }
-            .onFailure { err in
-                print("Error: ,\(err)")
+            .onFailure { _ in
+                
             }
         
             .resizable()

@@ -84,7 +84,7 @@ struct ChartMoreView: View {
                         
                     })
             }
-            .height(min: window.height/4, max: window.height/2.5)
+            .height(min: window.height/3.8, max: window.height/2.5)
             .scrollToTop(resetScroll: $scrollToTop)
             
             //- MARK: 스크롤
@@ -374,7 +374,7 @@ struct RoundedRectangleButton: View{
         }
         .foregroundColor(textColor)
         .frame(width:width,height: height)
-        .padding(.vertical,3)
+        .padding(.vertical,5)
         .padding(.horizontal,5)
         .background(RoundedRectangle(cornerRadius: 5).fill(color))
     }

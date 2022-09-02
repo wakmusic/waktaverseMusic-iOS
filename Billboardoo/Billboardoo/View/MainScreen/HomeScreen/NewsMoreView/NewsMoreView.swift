@@ -15,7 +15,9 @@ struct NewsMoreView: View {
     
     @EnvironmentObject var playState:PlayState
     @Binding var news:[NewsModel]
-    let columns:[GridItem] = Array(repeating: GridItem(.fixed(180),spacing: 20), count: Int(UIScreen.main.bounds.width)/180)
+    let columns:[GridItem] = Array(repeating: GridItem(.flexible()), count: Int(UIScreen.main.bounds.width)/180)
+    @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     
     //GridItem 크기 130을 기기의 가로크기로 나눈 몫 개수로 다이나믹하게 보여줌
     
@@ -24,20 +26,37 @@ struct NewsMoreView: View {
     
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            
-            VStack(alignment:.center)
-            {
+        ZStack{
+            ScrollView(.vertical, showsIndicators: false) {
                 
-                LazyVGrid(columns:columns)
+                VStack(alignment:.center)
                 {
-                    ThreeColumnsGrid
+                    
+                    LazyVGrid(columns:columns)
+                    {
+                        ThreeColumnsGrid
+                    }
                 }
-            }
 
-            
-        }.navigationTitle("NEWS")
+                
+            }
+        }
+        
+        .navigationTitle("NEWS")
             .navigationBarTitleDisplayMode(.large)
+        .background()
+        .highPriorityGesture((DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+            
+            if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
+            {
+                self.presentationMode.wrappedValue.dismiss() //뒤로가기
+            }
+            
+            
+        }))) //부모 제스쳐가 먼져 ( swipe 하여 나가는게 NavigationLink의 클릭 이벤트 보다 우선)
+      
+          
+
     }
 }
 
@@ -59,8 +78,9 @@ extension NewsMoreView{
                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
                     Text(data.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.system(size: 15, weight: .semibold, design: .default)).lineLimit(1)
                     
-                }.frame(width: 180)
-            }
+                }
+            }.frame(width: 180)
+                
             
             
             

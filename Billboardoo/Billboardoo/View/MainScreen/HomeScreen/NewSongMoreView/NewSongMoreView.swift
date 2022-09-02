@@ -15,7 +15,9 @@ struct NewSongMoreView: View {
     
     @EnvironmentObject var playState:PlayState
     @Binding var newsongs:[NewSong]
-    let columns:[GridItem] = Array(repeating: GridItem(.fixed(130)), count: Int(UIScreen.main.bounds.width)/130)
+    @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
+    let columns:[GridItem] = Array(repeating: GridItem(.flexible(),spacing: 0), count: 2)
     
     //GridItem 크기 130을 기기의 가로크기로 나눈 몫 개수로 다이나믹하게 보여줌
     
@@ -29,79 +31,100 @@ struct NewSongMoreView: View {
         {
             VStack{
                 Text("이달의 신곡이 아직 없습니다.").modifier(PlayBarTitleModifier())
-            }.frame(width:.infinity,height: .infinity, alignment: .center)
-            
+            }.frame(maxWidth:.infinity,maxHeight: .infinity)
+                .background() //전체 영역을 건드리기 위해
+                .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+                    
+                  
+                    if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
+                    {
+                        self.presentationMode.wrappedValue.dismiss() //뒤로가기
+                    }
+                    
+                    
+                }))
         }
         else
         {
             ScrollView(.vertical, showsIndicators: false) {
                 
-                VStack(alignment:.center)
-                {
                     
                     
                     
-                    LazyVGrid(columns:columns)
+                    LazyVGrid(columns:columns,spacing: 0)
                     {
                         ThreeColumnsGrid
                     }
                     
-                    
-                }
+    
                 
                 
             }.navigationTitle("이달의 신곡")
+                .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
+                    
+                    
+                    if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
+                    {
+                        self.presentationMode.wrappedValue.dismiss() //뒤로가기
+                    }
+                    
+                    
+                }))
         }
-       
+        
     }
 }
 
 extension NewSongMoreView{
+    
+   
     var ThreeColumnsGrid: some View{
         
         ForEach(newsongs,id:\.self.id){ song in
+            let width = UIScreen.main.bounds.width/2.5
             let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
             VStack(alignment:.center){
                 
                 
                 
                 KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
+                    .placeholder({
+                        Image("placeHolder")
+                            .resizable()
+                            .frame(width: width, height: width)
+                            .transition(.opacity.combined(with: .scale))
+                    })
                     .resizable()
-                    .frame(width:100,height: 100)
+                    .frame(width:width,height: width)
                     .aspectRatio(contentMode: .fill)
                     .cornerRadius(10)
                     .overlay {
-                        ZStack{
-                            Button {
-                             
-                                
-                                if(playState.currentSong != simpleSong)
-                                {
-                                    playState.currentSong =  simpleSong //강제 배정
-                                    playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
-                                    playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
-                                }
-                                
-                                
-                            } label: {
-                                Image(systemName: "play.fill").foregroundColor(.white)
-                            }
-                            
-                        }.frame(width:85,height:85,alignment: .topTrailing)
+                        Button {
+                            playState.currentSong =  simpleSong //강제 배정
+                            playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
+                            playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
+                        } label: {
+                            Image(systemName: "play.fill")
+                                .resizable()
+                                .frame(width:width/8,height:width/8)
+                                .foregroundColor(.white)
+                        }
+
                     }
-                    .frame(width: 100, height: 100,alignment: .center)
+                  
                 
                 VStack(alignment:.leading) {
-                    Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1)
-                    Text(song.artist).font(.caption).lineLimit(1)
-                    Text(convertTimeStamp(song.date)).font(.caption2).foregroundColor(.gray).lineLimit(1)
-                }.frame(width: 100)
+                    Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1).frame(width:width,alignment:.leading)
+                    Text(song.artist).font(.caption).lineLimit(1).frame(width:width,alignment:.leading)
+                    Text(convertTimeStamp(song.date)).font(.caption2).foregroundColor(.gray).lineLimit(1).frame(width:width,alignment:.leading)
+                }.frame(width: width)
                 
-            }.padding().onTapGesture {
+            }.padding(.vertical,5).onTapGesture {
                 playState.currentSong =  simpleSong //강제 배정
                 playState.youTubePlayer.load(source: .url(simpleSong.url)) //강제 재생
                 playState.uniqueAppend(item: simpleSong) //현재 누른 곡 담기
             }
+            
             
         }
         

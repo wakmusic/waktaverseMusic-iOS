@@ -121,9 +121,12 @@ struct MainScreenView: View {
                                     TabBarIcon(width: width/5, height: height/28, systemIconName: "person",text: "Account",assignedPage: .account,router: router)
                                     Spacer()
                                 }
+                                
                                 .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
                                 .background(.ultraThinMaterial)
+                                
                                 .shadow(radius: 2)
+                               
                             }
                            
                                 .transition(.move(edge: .bottom))
@@ -208,7 +211,6 @@ struct MainScreenView: View {
                                     .background(Color.wak)
                                     .shadow(radius: 2)
                                     .transition(.move(edge: .bottom))
-                                    .animation(.easeIn)
                                 .zIndex(!musicCart.isEmpty ? 2.0 : 1.0)
                                 
                                 

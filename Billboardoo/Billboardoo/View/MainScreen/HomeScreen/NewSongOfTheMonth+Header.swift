@@ -85,6 +85,12 @@ extension NewSongOfTheMonthView{
                 
                 
                 KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
+                    .placeholder {
+                        Image("placeHolder")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .transition(.opacity.combined(with: .scale))
+                    }
                     .resizable()
                     .frame(width:100,height: 100)
                     .aspectRatio(contentMode: .fill)

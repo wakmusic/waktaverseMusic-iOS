@@ -16,6 +16,12 @@ struct SongCardView: View {
         HStack{
             
             KFImage(URL(string: currentSong!.image.convertFullThumbNailImageUrl())!).resizable()
+                .placeholder({
+                    Image("placeHolder")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .transition(.opacity.combined(with: .scale))
+                })
                 .frame(width: 50, height: 50)
             
             VStack(alignment:.leading){
