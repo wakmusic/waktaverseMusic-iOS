@@ -31,13 +31,13 @@ struct CardView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .mask(Circle())
-                    //.frame(maxWidth:.infinity,maxHeight: .infinity)
-                    .shadow(color: Color(hexcode: artist.color!), radius: 8, x: 0, y: 3)
-                    .shadow(color: Color(hexcode: artist.color!), radius: 2, x: 0, y: 1)
                     
-                Text(artist.name!).font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 20 : 25)).foregroundColor(.white).lineLimit(1)
+                    .shadow(color: Color(hexcode: artist.color!), radius: 6, x: 0, y: 7)
+                    .shadow(color: Color(hexcode: artist.color!), radius: 2, x: 0, y: -1)
+                    
+                Text(artist.name!).font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 25)).foregroundColor(.primary).lineLimit(1)
             }
-            .padding(.top,10)
+            .padding(.top,5)
             .frame(width:device == .phone ? window.width/4 : window.width/7 ,height:device == .phone ? window.width/4 : window.width/10)
             .onTapGesture {
                 
@@ -46,7 +46,8 @@ struct CardView: View {
                 
             }
         
-        .scaleEffect(selectedId == artist.artistId ? 1 : 0.8)
+            .scaleEffect(selectedId == artist.artistId ? 0.9 : 0.8)
+            .animation(.easeInOut, value: selectedId)
         
         
         

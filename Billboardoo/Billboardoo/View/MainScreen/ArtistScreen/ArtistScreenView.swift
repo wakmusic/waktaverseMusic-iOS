@@ -84,7 +84,7 @@ struct ArtistScreenView: View {
                 
             }
             
-            .height(min: hasNotch == true ?  window.height/8 : window.height/10, max: hasNotch == true ? window.height/2.5 : window.height/2.3)
+            .height(min: hasNotch == true ?  window.height/6 : window.height/8, max: hasNotch == true ? window.height/2 : window.height/2)
             .scrollToTop(resetScroll: $scrollToTop)
             
             
@@ -117,7 +117,7 @@ struct ArtistHeaderVIew: View{
             .scaledToFill()
             .overlay {
                 ZStack() {
-                    LinearGradient(colors: [.clear,.black.opacity(0.9)], startPoint: .top, endPoint: .bottom)
+                    LinearGradient(colors: [.clear,.normal.opacity(1)], startPoint: .top, endPoint: .bottom)
                     
                     
                 }
@@ -208,25 +208,67 @@ struct ArtistSongListItemView: View {
 }
 
 struct ArtistPinnedHeader: View {
-    
+    @State var selectedIndex:Int = 0
     @EnvironmentObject var playState:PlayState
     @Binding var chart:[NewSong]
     let window = UIScreen.main.bounds.size
     let hasNotch = UIDevice.current.hasNotch
+  
+    
+    let sorting:[String] = ["최신순","인기순","오래된 순"]
     
     var body: some View{
         
+        VStack(alignment:.leading,spacing:3){
+            
+            HStack(spacing:5)
+            {
+                ForEach(sorting.indices, id: \.self){ idx in
+                    
+                    VStack(spacing:12){
+                        
+                        Text(sorting[idx])
+                            .font(.system(size: 15)) //
+                            .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
+                        
+                        ZStack{ //움직이는 막대기
+                            if (selectedIndex == idx) {
+                                RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary)
+                                
+                            }
+                            else{
+                                RoundedRectangle(cornerRadius: 4 , style:  .continuous) .fill(.clear)
+                                
+                            }
+                        }
+                        
+                        .frame(height:4)
+                    }
+                    .frame(width:window.width/4) // 중간에 넣기위해 width를 6등분
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(){
+                            if(selectedIndex != idx)
+                            {
+                                
+                                selectedIndex = idx
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            
+            
             HStack{
                 Spacer()
                 RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar ,textColor: .primary, imageSource: "play.fill")
                     .onTapGesture {
                         playState.playList.removeAll() //전부 지운후
-                        playState.youTubePlayer.stop() // stop
                         playState.playList = castingFromNewSongToSimple(newSongList: chart)  // 현재 해당 chart로 덮어쓰고
                         playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                         playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                        playState.youTubePlayer.play()
-                        
+                      
                         
                     }
                 Spacer()
@@ -235,21 +277,23 @@ struct ArtistPinnedHeader: View {
                     .onTapGesture {
                         
                         playState.playList.removeAll() //전부 지운후
-                        playState.youTubePlayer.stop() // stop
                         playState.playList = castingFromNewSongToSimple(newSongList: chart) // 현재 해당 chart로 덮어쓰고
-                        
                         shuffle(playlist: &playState.playList)  //셔플 시킨 후
-                        
                         playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                         playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                        playState.youTubePlayer.play()
+                        
                         
                     }
                 Spacer()
             }
-            .frame(height:window.height/7)
-            .offset(y: hasNotch == true ? 20 : 0)
-        
+            
+            //.offset(y: hasNotch == true ? 20 : 0)
+            
+            
+
+    
+            
+        }.frame(height:window.height/5)
     }
 }
 

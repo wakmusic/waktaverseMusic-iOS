@@ -64,12 +64,7 @@ struct InvisibleRefreshView: View {
                     {
                         playState.currentSong = nowPlayingSong //곡 을 변경 후
                         
-                        switch playState.isPlaying{
-                        case .unstarted,.buffering,.ended,.playing:
-                            playState.youTubePlayer.load(source: .url(nowPlayingSong.url)) //바로 load
-                        case .cued,.paused:
-                            playState.youTubePlayer.cue(source: .url(nowPlayingSong.url))
-                        }
+                        playState.youTubePlayer.load(source: .url(nowPlayingSong.url)) //바로 load
 
                         
                     }
