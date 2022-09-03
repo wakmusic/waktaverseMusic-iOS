@@ -286,20 +286,7 @@ struct MainScreenView: View {
                                 }
                             }
                             
-                            //위에서 꺼지는 작업이 아닐 때
-                            //width가  (왼->오) + (backWard)
-                            //width가. (오->왼) - (forWard)
-                            if tranlationWidth > 100 {
-                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    playState.backWard()
-                                }
-                            }
-                            
-                            if tranlationWidth < -100 {
-                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    playState.forWard()
-                                }
-                            }
+                           
                         }))
                 }
             }

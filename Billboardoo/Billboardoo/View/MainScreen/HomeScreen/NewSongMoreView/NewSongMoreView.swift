@@ -15,7 +15,6 @@ struct NewSongMoreView: View {
     
     @EnvironmentObject var playState:PlayState
     @Binding var newsongs:[NewSong]
-    @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     let columns:[GridItem] = Array(repeating: GridItem(.flexible(),spacing: 0), count: 2)
     
@@ -33,15 +32,11 @@ struct NewSongMoreView: View {
                 Text("이달의 신곡이 아직 없습니다.").modifier(PlayBarTitleModifier())
             }.frame(maxWidth:.infinity,maxHeight: .infinity)
                 .background() //전체 영역을 건드리기 위해
-                .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                    
-                  
+                .gesture(DragGesture().onEnded({ value in
                     if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
                     {
                         self.presentationMode.wrappedValue.dismiss() //뒤로가기
                     }
-                    
-                    
                 }))
         }
         else
@@ -60,15 +55,11 @@ struct NewSongMoreView: View {
                 
                 
             }.navigationTitle("이달의 신곡")
-                .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                    
-                    
+                .gesture(DragGesture().onEnded({ value in
                     if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
                     {
                         self.presentationMode.wrappedValue.dismiss() //뒤로가기
                     }
-                    
-                    
                 }))
         }
         

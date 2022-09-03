@@ -15,7 +15,6 @@ struct ChartMoreView: View {
     @State var index:Int = 0 //애니메이션 때문에 ChartMoreView에서는 index 사용 후 Disapper에서 BindingIndex로 값 전달
     @Binding var Bindingindex:Int
     @EnvironmentObject var playState:PlayState
-    @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     @StateObject var viewModel:ChartViewModel = ChartViewModel()
     @Binding var musicCart:[SimpleSong]
@@ -48,7 +47,7 @@ struct ChartMoreView: View {
                 }
                 
             } content: {
-                LazyVStack(spacing:3)
+                LazyVStack(spacing:0)
                 {
                     
                     ForEach(viewModel.currentShowCharts.indices,id:\.self){ index in
@@ -137,15 +136,11 @@ struct ChartMoreView: View {
             .padding(1) //safeArea 방지
         
         
-            .gesture(DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-                
+            .gesture(DragGesture().onEnded({ value in
                 if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
                 {
-                    musicCart.removeAll() //카트 모두 비우기 , 탭바 나오게
                     self.presentationMode.wrappedValue.dismiss() //뒤로가기
                 }
-                
-                
             }))
         
     }
@@ -191,90 +186,90 @@ struct PinnedHeaderView:View{
         
         let types: [String] = ["누적","시간","일간","주간","월간"]
         
-
-                
+        
+        
         VStack(spacing:20) {
-                    // - MARK: TAB bar
-                    HStack(spacing:5)
-                    {
-                        ForEach(types.indices, id: \.self){ idx in
-                            
-                            VStack(spacing:12){
+            // - MARK: TAB bar
+            HStack(spacing:5)
+            {
+                ForEach(types.indices, id: \.self){ idx in
+                    
+                    VStack(spacing:12){
+                        
+                        Text(types[idx])
+                            .font(.system(size: 15)) //
+                            .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
+                        
+                        ZStack{ //움직이는 막대기
+                            if (selectedIndex == idx) {
+                                RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary).matchedGeometryEffect(id: "TAB", in: animation)
                                 
-                                Text(types[idx])
-                                    .font(.system(size: 15)) //
-                                    .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
-                                
-                                ZStack{ //움직이는 막대기
-                                    if (selectedIndex == idx) {
-                                        RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary).matchedGeometryEffect(id: "TAB", in: animation)
-                                        
-                                    }
-                                    else{
-                                        RoundedRectangle(cornerRadius: 4 , style:  .continuous) .fill(.clear)
-                                        
-                                    }
-                                }
-                                
-                                .frame(height:4)
                             }
-                            .frame(width:window.width/6) // 중간에 넣기위해 width를 6등분
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                withAnimation(){
-                                    if(selectedIndex != idx)
-                                    {
-                                        
-                                        selectedIndex = idx
-                                    }
-                                    
-                                }
+                            else{
+                                RoundedRectangle(cornerRadius: 4 , style:  .continuous) .fill(.clear)
+                                
                             }
                         }
+                        
+                        .frame(height:4)
                     }
-                    
-                    // - MARK: 셔플 및 전체 듣기
-                    HStack(spacing:0){
-                        
-                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar, textColor: .primary,imageSource: "play.fill")
-                        .onTapGesture {
-                                playState.playList.removeAll() //전부 지운후
-                                playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
-                                playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                                playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
-                               
+                    .frame(width:window.width/6) // 중간에 넣기위해 width를 6등분
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(){
+                            if(selectedIndex != idx)
+                            {
                                 
-                                
+                                selectedIndex = idx
                             }
-                        Spacer()
-                        
-                        RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "셔플 재생", color: .tabBar,textColor: .primary, imageSource: "shuffle")
-                            .onTapGesture {
-                                
-                                playState.playList.removeAll() //전부 지운후
-                                playState.playList = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
-                                shuffle(playlist: &playState.playList)  //셔플 시킨 후
-                                playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
-                                playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
-                                
-                                
-                            }
-                        
-                        
-                        
-                    }.padding(.horizontal)
-                    
-                    HStack{
-                        Spacer()
-                        Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
-                        Text(convertTimeStamp(updateTime)).font(.caption)
-                        
-                    }.padding(.trailing,5)
+                            
+                        }
+                    }
                 }
-        .frame(height:window.height/6)
-    
-
+            }
             
+            // - MARK: 셔플 및 전체 듣기
+            HStack(spacing:0){
+                
+                RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "전체 재생", color: .tabBar, textColor: .primary,imageSource: "play.fill")
+                    .onTapGesture {
+                        playState.playList.removeAll() //전부 지운후
+                        playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
+                        playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                        playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                        
+                        
+                        
+                    }
+                Spacer()
+                
+                RoundedRectangleButton(width: window.width/2.5, height: window.width/15, text: "셔플 재생", color: .tabBar,textColor: .primary, imageSource: "shuffle")
+                    .onTapGesture {
+                        
+                        playState.playList.removeAll() //전부 지운후
+                        playState.playList = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
+                        shuffle(playlist: &playState.playList)  //셔플 시킨 후
+                        playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                        playState.youTubePlayer.load(source: .url(chart[0].url)) //첫번째 곡 재생
+                        
+                        
+                    }
+                
+                
+                
+            }.padding(.horizontal)
+            
+            HStack{
+                Spacer()
+                Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
+                Text(convertTimeStamp(updateTime)).font(.caption)
+                
+            }.padding(.trailing,5)
+        }
+        .frame(height:window.height/6)
+        
+        
+        
         
         
         
@@ -458,7 +453,7 @@ func castingFromRankedToSimple(rankedList:[RankedSong]) ->[SimpleSong]
 
 
 func shuffle(playlist:inout [SimpleSong]){
-
+    
     for i in 0..<playlist.count - 1 { // 0 ~ n-2
         let randomIndex = Int.random(in: i..<playlist.count)
         

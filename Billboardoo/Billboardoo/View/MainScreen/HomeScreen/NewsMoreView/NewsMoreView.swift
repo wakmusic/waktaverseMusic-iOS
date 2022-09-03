@@ -16,7 +16,6 @@ struct NewsMoreView: View {
     @EnvironmentObject var playState:PlayState
     @Binding var news:[NewsModel]
     let columns:[GridItem] = Array(repeating: GridItem(.flexible()), count: Int(UIScreen.main.bounds.width)/180)
-    @GestureState private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     
     //GridItem 크기 130을 기기의 가로크기로 나눈 몫 개수로 다이나믹하게 보여줌
@@ -37,26 +36,23 @@ struct NewsMoreView: View {
                         ThreeColumnsGrid
                     }
                 }
-
+                
                 
             }
         }
         
         .navigationTitle("NEWS")
-            .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.large)
         .background()
-        .highPriorityGesture((DragGesture().updating($dragOffset, body: { (value, state, transaction) in
-            
+        .highPriorityGesture(DragGesture().onEnded({ value in
             if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
             {
                 self.presentationMode.wrappedValue.dismiss() //뒤로가기
             }
-            
-            
-        }))) //부모 제스쳐가 먼져 ( swipe 하여 나가는게 NavigationLink의 클릭 이벤트 보다 우선)
-      
-          
-
+        })) //부모 제스쳐가 먼져 ( swipe 하여 나가는게 NavigationLink의 클릭 이벤트 보다 우선)
+        
+        
+        
     }
 }
 
@@ -80,7 +76,7 @@ extension NewsMoreView{
                     
                 }
             }.frame(width: 180)
-                
+            
             
             
             

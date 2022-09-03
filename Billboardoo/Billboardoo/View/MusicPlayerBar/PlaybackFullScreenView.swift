@@ -16,6 +16,7 @@ struct PlaybackFullScreenView: View {
     @EnvironmentObject var playState:PlayState
     var titleModifier = FullScreenTitleModifier()
     var artistModifier = FullScreenArtistModifer()
+    @GestureState  private var dragOffset = CGSize.zero // 스와이프하여 뒤로가기를 위해
     
     
     let window = UIScreen.main.bounds
@@ -65,6 +66,27 @@ struct PlaybackFullScreenView: View {
                                     .padding()
                                     .scaleEffect(0.8)
                                     .shadow(color: .primary.opacity(0.2), radius: 30, x: -60, y: 60)
+                                    .gesture(DragGesture().onEnded({ value in
+                                        
+                                        //위에서 꺼지는 작업이 아닐 때
+                                        //width가  (왼->오) + (backWard)
+                                        //width가. (오->왼) - (forWard)
+                                        
+                                        let tranlationWidth = value.translation.width
+                                        
+                                        if tranlationWidth > 100 {
+                                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                                playState.backWard()
+                                            }
+                                        }
+                                        
+                                        if tranlationWidth < -100 {
+                                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                                playState.forWard()
+                                            }
+                                        }
+                                        
+                                    }))
                                     
                                 //각 종 애니메이션
                                 

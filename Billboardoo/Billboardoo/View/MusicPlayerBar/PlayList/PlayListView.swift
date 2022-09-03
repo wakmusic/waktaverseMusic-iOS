@@ -35,6 +35,7 @@ struct PlayListView: View {
                             playState.isPlayerListViewPresented = false
                            
                         }
+                
                     }
                     
                     
@@ -42,7 +43,12 @@ struct PlayListView: View {
                     if let song = playState.currentSong{
                         VStack(alignment:.leading){
                             Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 20)).foregroundColor(.primary).bold()
-                            NowPlaySongView(song: song)
+                            HStack{
+                                NowPlaySongView(song: song)
+                                Spacer()
+                                
+                            }
+                            
                                 
                                 .animation(.easeIn, value: playState.currentSong)
                         }.padding(.leading,10)
