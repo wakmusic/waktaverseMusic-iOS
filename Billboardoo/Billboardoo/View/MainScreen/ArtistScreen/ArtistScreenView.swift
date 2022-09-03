@@ -21,6 +21,8 @@ struct ArtistScreenView: View {
     @EnvironmentObject var playState:PlayState
     @Binding var musicCart:[SimpleSong]
     @State var scrollToTop:Bool = false
+    @State var selectedIndex:Int = 0
+    
     
     
     
@@ -62,7 +64,7 @@ struct ArtistScreenView: View {
                                 
                             }
                        
-                        ArtistPinnedHeader(chart: $viewModel.currentShowChart).environmentObject(playState)
+                        ArtistPinnedHeader(selectedIndex: $selectedIndex,chart: $viewModel.currentShowChart,scrollToTop: $scrollToTop).environmentObject(playState)
                     }
                 }
             } content: {
@@ -77,6 +79,7 @@ struct ArtistScreenView: View {
                 }.onChange(of: viewModel.selectedid) { newValue in
                     viewModel.fetchSongList(newValue)
                     scrollToTop = true
+                    selectedIndex = 0 // 아티스트 변경시 최신순으로
                     
                     
                 }
@@ -84,7 +87,7 @@ struct ArtistScreenView: View {
                 
             }
             
-            .height(min: hasNotch == true ?  window.height/6 : window.height/8, max: hasNotch == true ? window.height/2 : window.height/2)
+            .height(min: hasNotch == true ?  window.height/5 : window.height/6, max: hasNotch == true ? window.height/2 : window.height/2)
             .scrollToTop(resetScroll: $scrollToTop)
             
             
@@ -208,18 +211,20 @@ struct ArtistSongListItemView: View {
 }
 
 struct ArtistPinnedHeader: View {
-    @State var selectedIndex:Int = 0
+    @Binding var selectedIndex:Int
     @EnvironmentObject var playState:PlayState
     @Binding var chart:[NewSong]
     let window = UIScreen.main.bounds.size
     let hasNotch = UIDevice.current.hasNotch
+    @Namespace var animation
+    @Binding var scrollToTop:Bool
   
     
     let sorting:[String] = ["최신순","인기순","오래된 순"]
     
     var body: some View{
         
-        VStack(alignment:.leading,spacing:3){
+        VStack(alignment:.leading,spacing:10){
             
             HStack(spacing:5)
             {
@@ -233,7 +238,8 @@ struct ArtistPinnedHeader: View {
                         
                         ZStack{ //움직이는 막대기
                             if (selectedIndex == idx) {
-                                RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary)
+                                RoundedRectangle(cornerRadius: 4 , style:  .continuous).fill( Color.primary).matchedGeometryEffect(id: "FILLTERTAB", in: animation)
+                                
                                 
                             }
                             else{
@@ -241,17 +247,47 @@ struct ArtistPinnedHeader: View {
                                 
                             }
                         }
-                        
+                       
                         .frame(height:4)
+                        .padding(.horizontal)
                     }
-                    .frame(width:window.width/4) // 중간에 넣기위해 width를 6등분
+                    .frame(width:window.width/3) // 중간에 넣기위해 width를 6등분
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        withAnimation(){
+                        
+                        withAnimation(.easeInOut){ // 처음에 불러왔을 때는 최신 순 이므로 selectedIndex = 0 그리고 ripple 말고 tranistion 이용
+                            
+                           
+                            
                             if(selectedIndex != idx)
                             {
-                                
                                 selectedIndex = idx
+                                switch(selectedIndex){
+                                
+                                case 0:
+                                    chart.sort {
+                                        $0.date > $1.date // 최신 순 (뒤에가 작은게 참) 최신순일 수록 값이 큼
+                                    }
+                                
+                                case 1:
+                                    chart.sort {
+                                        $0.views > $1.views // 인기순
+                                    }
+                                    
+                                case 2:
+                                    chart.sort {
+                                        $0.date < $1.date // 오래된 순 (뒤에가 큰게 참)
+                                    }
+                                    
+                                default:
+                                    print("현재 선택된 필터 값\(selectedIndex)")
+                                    
+                                }
+                                scrollToTop = true
+                                
+                                
+                                
+                               
                             }
                             
                         }

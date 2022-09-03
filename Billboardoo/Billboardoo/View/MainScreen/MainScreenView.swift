@@ -36,7 +36,7 @@ struct MainScreenView: View {
     // PlayBar Slide 애니메이션을 위한 상태
     @GestureState var gestureState = CGSize.zero
     @State var gestureStore = CGSize.zero
-    @State var editMode:Bool = false //playbackFullScreen에서 수정모드, 수정모드가 true일 때는 드래그 모션 멈춤
+   
     @State var musicCart:[SimpleSong] = [SimpleSong] () // 리스트에서 클릭했을 때 템프 리스트
     
     //
@@ -231,7 +231,7 @@ struct MainScreenView: View {
                     
                     Group{
                         if playState.isPlayerViewPresented {
-                            PlaybackFullScreenView(animation: animation,editMode: $editMode)
+                            PlaybackFullScreenView(animation: animation)
                             
                                 .environmentObject(playState)
                                 .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
@@ -249,18 +249,15 @@ struct MainScreenView: View {
                         
                         
                         
-                        if value.translation.height > 0 && !editMode { // 아래로 드래그 하면 ,저장
-                            //offset 방지 editMode가 false여야 저장
+                        if value.translation.height > 0 { // 아래로 드래그 하면 ,저장
+                           
                             state.height = value.translation.height
                         }
                     })
                         .onEnded({ value in //드래그가 끝났을 때
                             
                             
-                            if(editMode) //editMode가 켜져있으면 막음
-                            {
-                                return
-                            }
+                          
                             let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
                             
                             
@@ -290,17 +287,17 @@ struct MainScreenView: View {
                             }
                             
                             //위에서 꺼지는 작업이 아닐 때
-                            //width가  (왼->오) + (forWard)
-                            //width가. (오->왼) - (backWard)
+                            //width가  (왼->오) + (backWard)
+                            //width가. (오->왼) - (forWard)
                             if tranlationWidth > 100 {
                                 withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    playState.forWard()
+                                    playState.backWard()
                                 }
                             }
                             
                             if tranlationWidth < -100 {
                                 withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    playState.backWard()
+                                    playState.forWard()
                                 }
                             }
                         }))
