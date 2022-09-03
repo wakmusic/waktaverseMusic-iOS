@@ -33,7 +33,7 @@ struct ArtistScreenView: View {
             
             ScalingHeaderScrollView {
                 ZStack{
-                    Color("forcedBackground")
+                    Color.forced
                     
                     VStack(spacing:0){
                         ArtistHeaderVIew(artists: $viewModel.artists,selectedid: $viewModel.selectedid)

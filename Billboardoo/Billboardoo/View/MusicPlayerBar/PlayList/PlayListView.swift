@@ -19,56 +19,83 @@ struct PlayListView: View {
     var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     let device = UIDevice.current.userInterfaceIdiom
     let height = UIScreen.main.bounds.size.height
+    let hasNotch = UIDevice.current.hasNotch
     var body: some View {
         
         
         ZStack{
+            Color.forced
+            
             ScalingHeaderScrollView {
                 
-                VStack(alignment:.leading,spacing:3){
-                   
+                VStack(alignment:.leading,spacing:0){
+                    Spacer()
+                    Image(systemName: "xmark").font(.title).foregroundColor(.primary).padding(EdgeInsets(top: hasNotch ? 50 : 10, leading: 10, bottom: 0, trailing: 0)).onTapGesture {
+                        withAnimation(.easeInOut) {
+                            playState.isPlayerListViewPresented = false
+                           
+                        }
+                    }
                     
-                    Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 20)).foregroundColor(.primary).bold()
-                    NowPlaySongView(song: playState.currentSong!)
-                        .animation(.easeIn, value: playState.currentSong)
-                }.padding(.horizontal).frame(alignment:.top).background(.red)
+                    
+                    Spacer()
+                    if let song = playState.currentSong{
+                        VStack(alignment:.leading){
+                            Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 20)).foregroundColor(.primary).bold()
+                            NowPlaySongView(song: song)
+                                
+                                .animation(.easeIn, value: playState.currentSong)
+                        }.padding(.leading,10)
+                    }
+                    
+                    Spacer()
+                    HStack{
+                        TopLeftControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
+                        Spacer()
+                        TopRightControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing,10)
+                    }
+                    
+                    Spacer()
+                    
+                    
+                }.frame(height:height/3).background( Color.forced)
                 
                 
                
                 
             } content: {
-                LazyVStack{
+                LazyVStack(){
                     
-                    
-                    
-                    ForEach(playState.playList,id: \.self.id) { song in
-                        
-                        HStack{
+                
+                        ForEach(playState.playList,id: \.self.id) { song in
+                            
+                           
                             ItemCell(song: song, multipleSelection: $multipleSelection).environmentObject(playState)
+                                
+                                
+                            .background(song.song_id == playState.currentSong?.song_id ? Color("SelectedSongBgColor") : .clear)
                             
                             
+                            
+                            
+                            // - MARK: 드래그 앤 드랍으로 옮기기
+                            .onDrag{
+                                self.draggedItem = song //드래그 된 아이템 저장
+                                return NSItemProvider(item: nil, typeIdentifier: song.title)
+                            }
+                            
+                            .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, playList:$playState.playList, draggedItem: $draggedItem))
                             
                             
                         }
-                        .background(song.song_id == playState.currentSong?.song_id ? Color("SelectedSongBgColor") : .clear)
-                        
-                        
-                        
-                        
-                        // - MARK: 드래그 앤 드랍으로 옮기기
-                        .onDrag{
-                            self.draggedItem = song //드래그 된 아이템 저장
-                            return NSItemProvider(item: nil, typeIdentifier: song.title)
-                        }
-                        
-                        .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, playList:$playState.playList, draggedItem: $draggedItem))
-                        
-                        
-                    }
+                    
+
+                    
+                    
                 }
             }
-            .height(min: height/4,max:height/4)
-            .background(.green)
+            .height(min: height/3,max:height/3)
+           
             
         }.padding(.top,1)
         
@@ -122,9 +149,9 @@ struct ItemCell: View {
             } label: {
                 
                 Image(systemName:  multipleSelection.contains(song.id) ? "checkmark.circle.fill" : "circle") //멑티 셋 안에 해당 음악 id 있을 때 는 check 없으면 빈 circle
-                    .modifier(modifier)
+                    .font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
                 
-                
+                    .padding(.leading,10)
             }
             
             
@@ -139,6 +166,10 @@ struct ItemCell: View {
                 }
                 Spacer()
                 
+                Image(systemName: "line.3.horizontal").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+                
+                    .padding(.trailing,10)
+                
                 
                 
                 
@@ -151,6 +182,12 @@ struct ItemCell: View {
             
             
             
+        }
+        .contentShape(Rectangle()) //행 전체 클릭시 바로 재생되기 위해
+        .onTapGesture {
+            playState.currentSong = song
+            playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
+                playState.currentPlayIndex = playState.playList.firstIndex(of: song) ?? 0
         }
         
         
@@ -255,7 +292,7 @@ struct NowPlaySongView: View {
             
             
             VStack(alignment:.leading){
-                Text(song.title).modifier(PlayBarTitleModifier()).foregroundColor(.red)
+                Text(song.title).modifier(PlayBarTitleModifier())
                 Text(song.artist).modifier(PlayBarArtistModifer())
             }
             Spacer()
@@ -296,18 +333,18 @@ struct TopLeftControlView: View {
                 
                 
                 Label {
-                    Text("0").font(.system(size:  device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
+                    Text("\(multipleSelection.count)").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
                 } icon: {
-                    Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle").font(.system(size:device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
+                    Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary).padding(.leading,10)
                 }
                 
                 
             }
             
-            //Text("전체").font(.caption2)
+         
             
             
-            Text("\(multipleSelection.count)").font(.title2).foregroundColor(Color.primary)
+           
         }
         
         
@@ -338,7 +375,7 @@ struct TopRightControlView: View {
                 
                 
             } label: {
-                Image(systemName: "trash").font(.system(size:  device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
+                Image(systemName: "trash").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary).padding(.trailing,10)
             }
             .alert("삭제하시겠습니까?", isPresented: $isShowAlert) {
                 
@@ -390,13 +427,7 @@ struct TopRightControlView: View {
                 
                 
             }
-            Button {
-                withAnimation(.spring()) {
-                    multipleSelection.removeAll()// 완료 눌렀을 때 선택 셋 비우기
-                }
-            } label: {
-                Text("완료").font(.system(size:  device == .phone  ? 15 : 20)).foregroundColor(Color.primary)
-            }
+           
         }
         
     }

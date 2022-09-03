@@ -84,6 +84,10 @@ extension Color {
     public static var wak:Color{
         return Color("WaktaverseColor")
     }
+    
+    public static var forced:Color {
+        return Color("forcedBackground")
+    }
 
 }
 

@@ -36,7 +36,7 @@ struct ChartMoreView: View {
             
             ScalingHeaderScrollView {
                 ZStack{
-                    Color("forcedBackground")
+                    Color.forced
                     VStack(spacing:25){
                         HeaderView().coordinateSpace(name: "HeaderView") //height/8
                         
