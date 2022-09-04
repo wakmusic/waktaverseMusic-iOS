@@ -87,7 +87,7 @@ struct ArtistScreenView: View {
                 
             }
             
-            .height(min: hasNotch == true ?  window.height/5 : window.height/6, max: hasNotch == true ? window.height/2 : window.height/2)
+            .height(min: hasNotch == true ?  window.height/5 : window.height/5, max: hasNotch == true ? window.height/2 : window.height/1.8)
             .scrollToTop(resetScroll: $scrollToTop)
             
             
@@ -224,7 +224,7 @@ struct ArtistPinnedHeader: View {
     
     var body: some View{
         
-        VStack(alignment:.leading,spacing:10){
+        VStack(alignment:.leading,spacing: hasNotch ? 30 :10){
             
             HStack(spacing:5)
             {

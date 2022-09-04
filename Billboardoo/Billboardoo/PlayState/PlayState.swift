@@ -19,7 +19,6 @@ class PlayState:ObservableObject {
     
     @Published var currentPlayIndex:Int
     @Published var isPlaying:YouTubePlayer.PlaybackState // 커스텀이 아닌 실제 State로 변경
-    @Published var volume:Int = 0
     @Published var playList:[SimpleSong]
     @Published var currentProgress: Double = 0
     @Published var endProgress:Double = 0

@@ -91,6 +91,8 @@ struct MainScreenView: View {
                             
                         case .account:
                             AccountView()
+                            
+                            
                         }
                         
                         Group{
@@ -129,9 +131,7 @@ struct MainScreenView: View {
                                     .shadow(radius: 2)
                                    
                                 }
-                                .onAppear(perform: {
-                                    print("Hello")
-                                })
+                               
                                     .transition(.move(edge: .bottom))
                                     .animation(.easeOut,value:musicCart.count)
                                     .zIndex(musicCart.isEmpty ? 2.0 : 1.0) //내려가는 애니메이션이 리스트 탭바와 겹치지 않기 위해
@@ -379,6 +379,7 @@ struct TabBarIcon: View{
         
         .onTapGesture {
             router.screen = assignedPage
+            
         }
         
         .foregroundColor(router.screen == assignedPage ? Color.primary : .gray)
@@ -401,7 +402,7 @@ struct YoutubeView: View {
                 case .ready:
                     EmptyView()
                 case .error(_):
-                    Text(verbatim: "YouTube player couldn't be loaded")
+                    EmptyView()
                 }
             }.frame(width: 0, height: 0)
         }

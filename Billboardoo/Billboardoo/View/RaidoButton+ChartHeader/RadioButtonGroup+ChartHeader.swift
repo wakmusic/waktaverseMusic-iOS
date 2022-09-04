@@ -121,13 +121,6 @@ struct ChartHeader: View {
                     ChartMoreView(Bindingindex: $chartIndex,musicCart: $musicCart).environmentObject(playState)
                 } label: {
                     Text("더보기").foregroundColor(.gray)
-                }.onAppear {
-//                    for family: String in UIFont.familyNames {
-//                                    print(family)
-//                                    for names : String in UIFont.fontNames(forFamilyName: family){
-//                                        print("=== \(names)")
-//                                    }
-//                                }
                 }
                 
                 

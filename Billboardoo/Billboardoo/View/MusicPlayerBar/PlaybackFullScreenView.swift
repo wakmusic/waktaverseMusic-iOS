@@ -154,9 +154,7 @@ struct PlaybackFullScreenView: View {
                     
             )
             }
-//            .popup(isPresented: $showVolume, type: .toast, position: .bottom, animation: .easeOut, autohideIn: nil, dragToDismiss: false, closeOnTap: false, closeOnTapOutside: true, backgroundColor:.black.opacity(0.4)) {
-//                VolumeSheet().environmentObject(playState)
-//            }
+
             
             
             
