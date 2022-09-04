@@ -139,6 +139,7 @@ struct ChartMoreView: View {
             .gesture(DragGesture().onEnded({ value in
                 if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
                 {
+                    musicCart.removeAll()
                     self.presentationMode.wrappedValue.dismiss() //뒤로가기
                 }
             }))

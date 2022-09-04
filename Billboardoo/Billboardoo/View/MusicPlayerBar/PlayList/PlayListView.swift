@@ -298,7 +298,7 @@ struct NowPlaySongView: View {
             
             
             VStack(alignment:.leading){
-                Text(song.title).modifier(PlayBarTitleModifier())
+                Text(song.title).modifier(PlayBarTitleModifier()).foregroundColor(.wak)
                 Text(song.artist).modifier(PlayBarArtistModifer())
             }
             Spacer()

@@ -275,7 +275,7 @@ struct ProgressBar: View{
                         }
                     }.onAppear {
                         // 슬라이더 볼 사이즈 수정
-                        let progressCircleConfig = UIImage.SymbolConfiguration(scale: .small)
+                        let progressCircleConfig = UIImage.SymbolConfiguration(scale: .medium)
                         UISlider.appearance()
                             .setThumbImage(UIImage(systemName: "circle.fill",
                                                    withConfiguration: progressCircleConfig), for: .normal)
