@@ -35,9 +35,10 @@ struct CardView: View {
                     .shadow(color: Color(hexcode: artist.color!), radius: 6, x: 0, y: 7)
                     .shadow(color: Color(hexcode: artist.color!), radius: 2, x: 0, y: -1)
                     
-                Text(artist.name!).font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 18 : 25)).foregroundColor(.primary).lineLimit(1)
+                Text(artist.name!).font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 25)).foregroundColor(.primary).lineLimit(1)
+                    .padding(.bottom,10)
             }
-            .padding(.top,5)
+            
             .frame(width:device == .phone ? window.width/4 : window.width/7 ,height:device == .phone ? window.width/4 : window.width/10)
             .onTapGesture {
                 

@@ -87,7 +87,7 @@ struct ArtistScreenView: View {
                 
             }
             
-            .height(min: hasNotch == true ?  window.height/5 : window.height/5, max: hasNotch == true ? window.height/2 : window.height/1.8)
+            .height(min: hasNotch == true ?  window.height/4.5 : window.height/5, max: hasNotch == true ? window.height/2 : window.height/1.8)
             .scrollToTop(resetScroll: $scrollToTop)
             
             
@@ -230,7 +230,7 @@ struct ArtistPinnedHeader: View {
             {
                 ForEach(sorting.indices, id: \.self){ idx in
                     
-                    VStack(spacing:12){
+                    VStack(spacing:10){
                         
                         Text(sorting[idx])
                             .font(.system(size: 15)) //
@@ -253,6 +253,7 @@ struct ArtistPinnedHeader: View {
                     }
                     .frame(width:window.width/3) // 중간에 넣기위해 width를 6등분
                     .contentShape(Rectangle())
+                    .padding(.top)
                     .onTapGesture {
                         
                         withAnimation(.easeInOut){ // 처음에 불러왔을 때는 최신 순 이므로 selectedIndex = 0 그리고 ripple 말고 tranistion 이용

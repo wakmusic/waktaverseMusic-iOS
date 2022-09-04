@@ -20,6 +20,7 @@ struct ChartMoreView: View {
     @Binding var musicCart:[SimpleSong]
     let window = UIScreen.main.bounds
     @State var scrollToTop:Bool = false
+    let hasNotch:Bool = UIDevice.current.hasNotch
     
     
     // MARK: For Smooth Sliding Effect
@@ -36,8 +37,8 @@ struct ChartMoreView: View {
             ScalingHeaderScrollView {
                 ZStack{
                     Color.forced
-                    VStack(spacing:25){
-                        HeaderView().coordinateSpace(name: "HeaderView") //height/8
+                    VStack(spacing: hasNotch ? 30 : 30){
+                        HeaderView()
                         
                         PinnedHeaderView(selectedIndex: $index,chart:$viewModel.currentShowCharts,updateTime: $viewModel.updateTime).environmentObject(playState).coordinateSpace(name: "PinnedHeaderView") //header 위로 올렸을 때 가리기 위함
                         
@@ -83,7 +84,7 @@ struct ChartMoreView: View {
                         
                     })
             }
-            .height(min: window.height/3.8, max: window.height/2.5)
+            .height(min: hasNotch ? window.height/4 : window.height/4, max: hasNotch ? window.height/2.5 : window.height/2.3)
             .scrollToTop(resetScroll: $scrollToTop)
             
             //- MARK: 스크롤
@@ -157,7 +158,7 @@ struct HeaderView: View{
         Image("mainChartLogo")
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(height:height/8)
+            .frame(height:height/6)
             .opacity(0.3)
             .overlay(content: {
                 ZStack(alignment:.center)
@@ -166,7 +167,7 @@ struct HeaderView: View{
                         //텍스트 크기를 proxy를 기준으로 변경
                         Text("BILLBOARDOO CHART").font(.system(size: height/30, weight: .light, design: .default))
                         Text("HOT 100").font(.custom("GmarketSansTTFBold", size: height/21))
-                    }
+                    }.padding(.top,10)
                     
                 }
             })
@@ -267,7 +268,7 @@ struct PinnedHeaderView:View{
                 
             }.padding(.trailing,5)
         }
-        .frame(height:window.height/6)
+        .frame(height:window.height/7)
         
         
         
