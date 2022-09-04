@@ -40,7 +40,6 @@
 <a href ="https://github.com/exyte/PopupView"> 
 <img src="https://img.shields.io/badge/PopupView-purple"/> 
 </a>
-
 </a>
 <a href ="https://github.com/exyte/ScalingHeaderScrollView"> 
 <img src="https://img.shields.io/badge/ScalingHeaderScrollView-blue"/> 
