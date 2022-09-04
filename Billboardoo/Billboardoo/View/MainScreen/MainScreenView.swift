@@ -249,12 +249,17 @@ struct MainScreenView: View {
                         
                         
                         
-                        if value.translation.height > 0 { // 아래로 드래그 하면 ,저장
+                        if value.translation.height > 0 && !playState.isPlayerListViewPresented { // 아래로 드래그 하면 ,저장 //리스트 켜졌을 때 offset 방지
                            
                             state.height = value.translation.height
                         }
                     })
                         .onEnded({ value in //드래그가 끝났을 때
+                            
+                            if(playState.isPlayerListViewPresented) //리스트 켜졌을 때 커짐 방지
+                            {
+                                return
+                            }
                             
                             
                           
