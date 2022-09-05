@@ -83,7 +83,8 @@ struct ArtistScreenView: View {
                     
                     
                 }
-                .animation(.ripple(), value: viewModel.currentShowChart)
+                .transition(.move(edge: .leading).combined(with: .opacity))
+                .animation(.easeInOut, value: viewModel.currentShowChart)
                 
             }
             

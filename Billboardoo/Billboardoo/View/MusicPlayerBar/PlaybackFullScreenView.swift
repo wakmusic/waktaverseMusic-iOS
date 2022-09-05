@@ -28,132 +28,155 @@ struct PlaybackFullScreenView: View {
         {
             //if let artwork = bringAlbumImage(url: currentSong.image)
             
-            ZStack{
-                HStack(alignment:.top){
-                    VStack() {
-                        
-                        //Spacer(minLength: 0)
-                        /*
-                         .aspectRatio(contentMode: .fit) == scaledToFit() ⇒ 이미지의 비율을 유지 + 이미지의 전체를 보여준다.
-                         .aspectRatio(contentMode: .fill) ⇒ 이미지의 비율을 유지 + 이미지가 잘리더라도 꽉채움
-                         */
-                        //                    Image(uiImage: artwork)
-                        
-                        
-                        Group{ //그룹으로 묶어 조건적으로 보여준다.
-                            if playState.isPlayerListViewPresented {
-                                
-                                PlayListView().environmentObject(playState).padding(.top,UIDevice.current.hasNotch ? 30 : 0) //notch에 따라 패팅 top 줌 (
-                                
-                                    
-                            }
+            NavigationView {
+                ZStack{
+                    HStack(alignment:.top){
+                        VStack() {
                             
-                            else
-                            {
-                                Spacer()
-                                KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
-                                    .placeholder({
-                                        Image("placeHolder")
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: standardLen*0.4, height: standardLen*0.4)
-                                            .transition(.opacity.combined(with: .scale))
-                                    })
-                                    .resizable()
-                                    .frame(width:standardLen*0.4,height: standardLen*0.4)
-                                    .aspectRatio(contentMode: .fit)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .padding()
-                                    .scaleEffect(0.8)
-                                    .shadow(color: .primary.opacity(0.2), radius: 30, x: -60, y: 60)
-                                    .gesture(DragGesture().onEnded({ value in
-                                        
-                                        //위에서 꺼지는 작업이 아닐 때
-                                        //width가  (왼->오) + (backWard)
-                                        //width가. (오->왼) - (forWard)
-                                        
-                                        let tranlationWidth = value.translation.width
-                                        
-                                        if tranlationWidth > 100 {
-                                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                                playState.backWard()
-                                            }
-                                        }
-                                        
-                                        if tranlationWidth < -100 {
-                                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                                playState.forWard()
-                                            }
-                                        }
-                                        
-                                    }))
+                            //Spacer(minLength: 0)
+                            /*
+                             .aspectRatio(contentMode: .fit) == scaledToFit() ⇒ 이미지의 비율을 유지 + 이미지의 전체를 보여준다.
+                             .aspectRatio(contentMode: .fill) ⇒ 이미지의 비율을 유지 + 이미지가 잘리더라도 꽉채움
+                             */
+                            //                    Image(uiImage: artwork)
+                            
+                            
+                            Group{ //그룹으로 묶어 조건적으로 보여준다.
+                                if playState.isPlayerListViewPresented {
                                     
-                                //각 종 애니메이션
-                                
-                                VStack(alignment: .center){ //리스트 보여주면 .leading
-                                    Text(currentSong.title)
-                                        .modifier(titleModifier)
+                                    PlayListView().environmentObject(playState).padding(.top,UIDevice.current.hasNotch ? 30 : 0) //notch에 따라 패팅 top 줌 (
                                     
-                                    Text(currentSong.artist)
-                                        .modifier(artistModifier)
+                                        
                                 }
+                                
+                                else
+                                {
+                                    Spacer()
+                                    KFImage(URL(string: currentSong.image.convertFullThumbNailImageUrl())!)
+                                        .placeholder({
+                                            Image("placeHolder")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: standardLen*0.4, height: standardLen*0.4)
+                                                .transition(.opacity.combined(with: .scale))
+                                        })
+                                        .resizable()
+                                        .frame(width:standardLen*0.4,height: standardLen*0.4)
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .padding()
+                                        .scaleEffect(0.8)
+                                        .shadow(color: .primary.opacity(0.2), radius: 30, x: -60, y: 60)
+                                        .gesture(DragGesture().onEnded({ value in
+                                            
+                                            //위에서 꺼지는 작업이 아닐 때
+                                            //width가  (왼->오) + (backWard)
+                                            //width가. (오->왼) - (forWard)
+                                            
+                                            let tranlationWidth = value.translation.width
+                                            
+                                            if tranlationWidth > 100 {
+                                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                                    playState.backWard()
+                                                }
+                                            }
+                                            
+                                            if tranlationWidth < -100 {
+                                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
+                                                    playState.forWard()
+                                                }
+                                            }
+                                            
+                                        }))
+                                        
+                                    //각 종 애니메이션
+                                    
+                                    VStack(alignment: .center){ //리스트 보여주면 .leading
+                                        Text(currentSong.title)
+                                            .modifier(titleModifier)
+                                        
+                                        Text(currentSong.artist)
+                                            .modifier(artistModifier)
+                                    }
+                                }
+                                
+                                
                             }
                             
+                            
+                            
+                            
+                         
+                                
+                              
+                            
+                                
+                                
+                              
+                                
+                    
+                           
+                            
+                            
+                            
+                            
+                            Spacer(minLength: 0)
+                            
+                            
+                       
+                            
+                            
+                            ProgressBar().padding(.horizontal)
+                            
+                            
+                    
+                            PlayBar().environmentObject(playState)
+                                .padding(.bottom,20) //밑에서 띄우기
+                                .padding(.horizontal)
+                             
+                            
+                            
+                            
+                            
+                        }.frame(width:window.width) // notch 없는 것들 오른쪽 치우침 방지..
+                    }
+                    
+                    
+                    .background(
+                     
+                        
+                        //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
+                        //                        .saturation(0.5) //포화도
+                        //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
+                        //                        .edgesIgnoringSafeArea(.all)
+                        
+                        // playList 백그라운드 색 해결 못해서 주석 ..
+                        //.ultraThinMaterial
+                        
+                )
+                }
+                .navigationTitle("PLAYLIST")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        if(playState.isPlayerListViewPresented)
+                        {
+                            Image(systemName: "xmark").font(.title2).foregroundColor(.primary)
+                    
+                                .onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    playState.isPlayerListViewPresented = false
+                                   
+                                }
+                        
+                            }
                             
                         }
-                        
-                        
-                        
-                        
-                     
-                            
-                          
-                        
-                            
-                            
-                          
-                            
-                
-                       
-                        
-                        
-                        
-                        
-                        Spacer(minLength: 0)
-                        
-                        
-                   
-                        
-                        
-                        ProgressBar().padding(.horizontal)
-                        
-                        
-                
-                        PlayBar().environmentObject(playState)
-                            .padding(.bottom,20) //밑에서 띄우기
-                            .padding(.horizontal)
-                         
-                        
-                        
-                        
-                        
-                    }.frame(width:window.width) // notch 없는 것들 오른쪽 치우침 방지..
+                    }
                 }
-                
-                
-                .background(
-                 
-                    
-                    //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
-                    //                        .saturation(0.5) //포화도
-                    //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
-                    //                        .edgesIgnoringSafeArea(.all)
-                    
-                    // playList 백그라운드 색 해결 못해서 주석 ..
-                    //.ultraThinMaterial
-                    
-            )
-            }
+            }//Navi
+            
+            
 
             
             

@@ -20,56 +20,58 @@ struct PlayListView: View {
     let device = UIDevice.current.userInterfaceIdiom
     let height = UIScreen.main.bounds.size.height
     let hasNotch = UIDevice.current.hasNotch
+    let div:CGFloat = 3.3
+    let notchDiv:CGFloat = 3.5
     var body: some View {
         
         
-        ZStack{
+        ZStack(){
             Color.forced
             
             ScalingHeaderScrollView {
                 
-                VStack(alignment:.leading,spacing:0){
-                    Spacer()
-                    Image(systemName: "xmark").font(.title).foregroundColor(.primary).padding(EdgeInsets(top: hasNotch ? 50 : 10, leading: 10, bottom: 0, trailing: 0)).onTapGesture {
-                        withAnimation(.easeInOut) {
-                            playState.isPlayerListViewPresented = false
-                           
-                        }
-                
-                    }
+               
                     
-                    
-                    Spacer()
+
+                   
                     if let song = playState.currentSong{
                         VStack(alignment:.leading){
-                            Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 20)).foregroundColor(.primary).bold()
-                            HStack{
-                                NowPlaySongView(song: song)
+                         
+                            VStack(alignment:.leading,spacing:10) {
                                 Spacer()
-                                
+                                Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold()
+                                HStack{
+                                    NowPlaySongView(song: song)
+                                    Spacer()
+                                    
+                                }
                             }
                             
-                                
-                                .animation(.easeIn, value: playState.currentSong)
-                        }.padding(.leading,10)
+                            .padding(.leading,10)
+                            .animation(.easeIn, value: playState.currentSong)
+                      
+                            
+                            Spacer()
+                        HStack{
+                            TopLeftControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
+                            Spacer()
+                            TopRightControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing,10)
+                        }
+                            
+                     
+                            
+                        }  .frame(height:hasNotch ? height/notchDiv : height/div).background(Color.forced)
                     }
                     
-                    Spacer()
-                    HStack{
-                        TopLeftControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
-                        Spacer()
-                        TopRightControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing,10)
-                    }
+            
+              
                     
-                    Spacer()
-                    
-                    
-                }.frame(height:height/3).background( Color.forced)
                 
                 
                
                 
             } content: {
+              
                 LazyVStack(){
                     
                 
@@ -100,7 +102,8 @@ struct PlayListView: View {
                     
                 }
             }
-            .height(min: height/3,max:height/3)
+            .height(min: hasNotch ? height/notchDiv : height/div,max:hasNotch ? height/notchDiv : height/div)
+            //.ignoresSafeArea(edges: .vertical)
            
             
         }.padding(.top,1)
@@ -280,6 +283,8 @@ struct MyDropDelegate : DropDelegate {
 
 struct NowPlaySongView: View {
     let song:SimpleSong
+    let width = UIScreen.main.bounds.width
+    let div:CGFloat = 8
     
     var body: some View{
         HStack
@@ -288,11 +293,11 @@ struct NowPlaySongView: View {
                 .placeholder({
                     Image("placeHolder")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width:width/div,height: width/div)
                         .transition(.opacity.combined(with: .scale))
                 })
                 .resizable()
-                .frame(width:50,height: 50)
+                .frame(width:width/div,height: width/div)
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
