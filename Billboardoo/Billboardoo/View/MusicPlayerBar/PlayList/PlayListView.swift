@@ -25,7 +25,7 @@ struct PlayListView: View {
     var body: some View {
         
         
-        ZStack(alignment:.center){
+        ZStack(alignment:.top){
             Color.forced
             
             VStack{
