@@ -25,98 +25,83 @@ struct PlayListView: View {
     var body: some View {
         
         
-        ZStack(){
+        ZStack(alignment:.center){
             Color.forced
             
-            ScalingHeaderScrollView {
-                
-               
-                    
-
-                   
-                    if let song = playState.currentSong{
-                        VStack(alignment:.leading){
-                         
-                            VStack(alignment:.leading,spacing:10) {
+            VStack{
+                if let song = playState.currentSong{
+                    VStack(alignment:.leading){
+                        
+                       
+                          
+                            Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading,10)
+                            HStack{
+                                NowPlaySongView(song: song)
                                 Spacer()
-                                Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold()
-                                HStack{
-                                    NowPlaySongView(song: song)
-                                    Spacer()
-                                    
-                                }
-                            }
-                            
-                            .padding(.leading,10)
-                            .animation(.easeIn, value: playState.currentSong)
-                      
-                            
-                            Spacer()
+                                
+                            }.padding(.leading,10)
+                        
+                        
+                       
+                        .animation(.easeIn, value: playState.currentSong)
+                        
+                        
+                        Spacer()
                         HStack{
                             TopLeftControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
                             Spacer()
                             TopRightControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing,10)
                         }
-                            
-                     
-                            
-                        }  .frame(height:hasNotch ? height/notchDiv : height/div).background(Color.forced)
-                    }
-                    
-            
-              
-                    
+                        
+                        
+                        
+                    }.frame(height:height/6,alignment: .top)
+                }
                 
-                
-               
-                
-            } content: {
-              
-                LazyVStack(){
-                    
-                
+                ScrollView(.vertical, showsIndicators: true) {
+                    LazyVStack(){
+                        
+                        
                         ForEach(playState.playList,id: \.self.id) { song in
                             
-                           
+                            
                             ItemCell(song: song, multipleSelection: $multipleSelection).environmentObject(playState)
-                                
-                                
-                            .background(song.song_id == playState.currentSong?.song_id ? Color("SelectedSongBgColor") : .clear)
+                            
+                            
+                                .background(song.song_id == playState.currentSong?.song_id ? Color("SelectedSongBgColor") : .clear)
                             
                             
                             
                             
                             // - MARK: 드래그 앤 드랍으로 옮기기
-                            .onDrag{
-                                self.draggedItem = song //드래그 된 아이템 저장
-                                return NSItemProvider(item: nil, typeIdentifier: song.title)
-                            }
+                                .onDrag{
+                                    self.draggedItem = song //드래그 된 아이템 저장
+                                    return NSItemProvider(item: nil, typeIdentifier: song.title)
+                                }
                             
-                            .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, playList:$playState.playList, draggedItem: $draggedItem))
+                                .onDrop(of:[song.title] , delegate: MyDropDelegate(currentItem: song, currentIndex:$playState.currentPlayIndex, playList:$playState.playList, draggedItem: $draggedItem))
                             
                             
                         }
-                    
-
-                    
-                    
+                        
+                        
+                        
+                        
+                    }
                 }
             }
-            .height(min: hasNotch ? height/notchDiv : height/div,max:hasNotch ? height/notchDiv : height/div)
-            //.ignoresSafeArea(edges: .vertical)
-           
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
         }.padding(.top,1)
-        
-        
-        
-        
-        
-        
-        
-        
     }
-    
     
     
     
@@ -196,7 +181,7 @@ struct ItemCell: View {
         .onTapGesture {
             playState.currentSong = song
             playState.youTubePlayer.load(source: .url(song.url)) //강제 재생
-                playState.currentPlayIndex = playState.playList.firstIndex(of: song) ?? 0
+            playState.currentPlayIndex = playState.playList.firstIndex(of: song) ?? 0
         }
         
         
@@ -352,10 +337,10 @@ struct TopLeftControlView: View {
                 
             }
             
-         
             
             
-           
+            
+            
         }
         
         
@@ -438,7 +423,7 @@ struct TopRightControlView: View {
                 
                 
             }
-           
+            
         }
         
     }
