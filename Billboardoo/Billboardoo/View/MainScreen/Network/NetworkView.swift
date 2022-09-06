@@ -10,6 +10,7 @@ import SwiftUI
 struct NetworkView: View {
     
     let window = UIScreen.main.bounds.size
+    
     var body: some View {
         ZStack{
             Color.forced
@@ -30,7 +31,7 @@ struct NetworkView: View {
                 Button {
                     guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
                     if UIApplication.shared.canOpenURL(url) {
-                        UIApplication.shared.open(url)
+                        UIApplication.shared.open(url,options: [:],completionHandler: nil)
                     }
                 } label: {
                     Text("네트워크 확인")

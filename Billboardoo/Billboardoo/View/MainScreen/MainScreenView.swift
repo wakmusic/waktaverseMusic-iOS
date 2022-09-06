@@ -241,9 +241,9 @@ struct MainScreenView: View {
                     Group{
                         if playState.isPlayerViewPresented {
                             PlaybackFullScreenView(animation: animation)
-                            
                                 .environmentObject(playState)
                                 .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
+                            
                             //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
                             //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
                             // 위: - 아래 + , 좌우는  슬라이드 애니메이션을 넣지 않고 바꾼다
@@ -251,6 +251,7 @@ struct MainScreenView: View {
                         
                         
                     } //그룹
+                    .zIndex(playState.isPlayerViewPresented == true ? 2.0 : 1.0) // 플레이어 켜질때 와 커질때 animation을 위해 
                     
                     
                     //드래그 제스쳐를 updating

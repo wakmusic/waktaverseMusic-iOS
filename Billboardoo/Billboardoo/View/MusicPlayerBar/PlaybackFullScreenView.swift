@@ -66,7 +66,6 @@ struct PlaybackFullScreenView: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                         .padding()
                                         .scaleEffect(0.8)
-                                        .shadow(color: .primary.opacity(0.2), radius: 30, x: -60, y: 60)
                                         .gesture(DragGesture().onEnded({ value in
                                             
                                             //위에서 꺼지는 작업이 아닐 때
@@ -103,22 +102,7 @@ struct PlaybackFullScreenView: View {
                                 
                             }
                             
-                            
-                            
-                            
-                         
-                                
-                              
-                            
-                                
-                                
-                              
-                                
-                    
-                           
-                            
-                            
-                            
+     
                             
                             Spacer(minLength: 0)
                             
@@ -166,6 +150,18 @@ struct PlaybackFullScreenView: View {
                                 .onTapGesture {
                                 withAnimation(.easeInOut) {
                                     playState.isPlayerListViewPresented = false
+                                   
+                                }
+                        
+                            }
+                            
+                        }
+                        else
+                        { //플레이어 끄기
+                            Image(systemName: "chevron.down").font(.title2).foregroundColor(.primary)
+                                .onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    playState.isPlayerViewPresented = false
                                    
                                 }
                         
