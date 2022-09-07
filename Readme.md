@@ -58,6 +58,11 @@
 
 <br>
 
+
+<img src ="https://user-images.githubusercontent.com/48616183/188809731-813b53c8-99e3-47ec-86f3-c7a35d468178.jpg">
+
+<br>
+
 ## 앱 구조
 
 <img src ="https://user-images.githubusercontent.com/48616183/187061499-3fabecc6-e12c-4a2d-85e4-329cb74f2443.jpg">
@@ -67,8 +72,7 @@
 ### 앞으로 올려야할 것 
 
 1. 가이드영상 링크 걸기
-2. 미리보기 스크린 샷 
-3. 앱 스토어 올라간 사진
+2. 앱 스토어 올라간 사진
 
 
 

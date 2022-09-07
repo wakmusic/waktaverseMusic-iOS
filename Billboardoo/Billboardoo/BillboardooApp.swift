@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import UIKit
+import Foundation
+import AVFoundation
 
 @main
 struct BillboardooApp: App {
    
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
+    //@UIApplicationDelegateAdaptor var delegate: BillboardooDelegate
     var playState = PlayState.shared
 
     
@@ -29,7 +33,11 @@ struct BillboardooApp: App {
             
         }
     }
+ 
+
 }
+
+
 
 
 func changeMode(isDarkMode:Bool)

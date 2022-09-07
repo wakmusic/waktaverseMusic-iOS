@@ -7,6 +7,8 @@
 
 import SwiftUI
 import YouTubePlayerKit
+import AVFAudio
+import AVFoundation
 
 enum Screen{
     case home
@@ -91,6 +93,7 @@ struct MainScreenView: View {
                             switch router.screen{
                             case .home:
                                 HomeScreenView(musicCart: $musicCart).environmentObject(playState)
+                        
                             case .artists:
                                 ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
                             case .search:
