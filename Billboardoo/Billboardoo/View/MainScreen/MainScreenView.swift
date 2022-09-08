@@ -42,6 +42,7 @@ struct MainScreenView: View {
     
     @State var musicCart:[SimpleSong] = [SimpleSong] () // 리스트에서 클릭했을 때 템프 리스트
     
+    
     //
     
     
@@ -115,6 +116,8 @@ struct MainScreenView: View {
                                         .environmentObject(playState)
                                         .onTapGesture {
                                             //PlayBar를 터치하면  store의 height,width을 0으로 초기화
+                                            UIApplication.shared.endEditing()
+                                          
                                             gestureStore.height = 0
                                             gestureStore.width = 0
                                             withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {

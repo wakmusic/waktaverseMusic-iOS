@@ -16,6 +16,8 @@ struct SearchView: View {
     @EnvironmentObject var playState:PlayState
     @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
     @Binding var musicCart:[SimpleSong]
+
+    
     
     var body: some View {
         
@@ -40,8 +42,11 @@ struct SearchView: View {
                         
                         
                     }.onTapGesture {
+                        
                         UIApplication.shared.endEditing()
+                        
                     }
+                
                     .padding(5)
                
                 }
@@ -52,6 +57,8 @@ struct SearchView: View {
                 
                 
                 
+            }.onDisappear {
+                print("DISS")
             }
         
         
