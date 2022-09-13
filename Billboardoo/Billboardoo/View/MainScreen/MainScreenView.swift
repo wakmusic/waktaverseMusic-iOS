@@ -313,14 +313,6 @@ struct MainScreenView: View {
             }
             
             
-            
-            
-            
-            
-            
-            
-            
-            
         }
         
     }
