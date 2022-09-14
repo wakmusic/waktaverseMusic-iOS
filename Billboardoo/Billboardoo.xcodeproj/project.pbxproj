@@ -15,8 +15,7 @@
 		D835785428891DAB00459197 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785328891DAB00459197 /* HomeScreenView.swift */; };
 		D835785628893EB300459197 /* RadioButtonGroup+ChartHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835785528893EB300459197 /* RadioButtonGroup+ChartHeader.swift */; };
 		D848724A2893ACE700B508DC /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872492893ACE700B508DC /* PlayState.swift */; };
-		D848724D2893B6A300B508DC /* PlaybackBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848724C2893B6A300B508DC /* PlaybackBarView.swift */; };
-		D848724F2893BC8800B508DC /* PlaybackFullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */; };
+		D848724F2893BC8800B508DC /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848724E2893BC8800B508DC /* MiniPlayer.swift */; };
 		D84872522893C2F600B508DC /* SongCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872512893C2F600B508DC /* SongCardView.swift */; };
 		D84872542893FC8600B508DC /* InvisibleRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872532893FC8600B508DC /* InvisibleRefreshView.swift */; };
 		D84872562894101400B508DC /* PlayPuaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84872552894101400B508DC /* PlayPuaseButton.swift */; };
@@ -40,6 +39,8 @@
 		D8922EA928C4CC1B00C15FAE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8922EA828C4CC1B00C15FAE /* NetworkManager.swift */; };
 		D8922EAB28C4CE3800C15FAE /* NetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8922EAA28C4CE3800C15FAE /* NetworkView.swift */; };
 		D8922EAD28C8704100C15FAE /* BillboardooDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8922EAC28C8704100C15FAE /* BillboardooDelegate.swift */; };
+		D8922EB028D0C3F500C15FAE /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8922EAF28D0C3F500C15FAE /* VideoPlayerViewModel.swift */; };
+		D8922EB228D2126100C15FAE /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8922EB128D2126100C15FAE /* BlurView.swift */; };
 		D893200C28AB8BD500A529BC /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893200B28AB8BD500A529BC /* SearchView.swift */; };
 		D893201328AF7C2500A529BC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201228AF7C2500A529BC /* AccountView.swift */; };
 		D893201528AFD9D000A529BC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D893201428AFD9D000A529BC /* LoginView.swift */; };
@@ -95,8 +96,7 @@
 		D835785328891DAB00459197 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		D835785528893EB300459197 /* RadioButtonGroup+ChartHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RadioButtonGroup+ChartHeader.swift"; sourceTree = "<group>"; };
 		D84872492893ACE700B508DC /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
-		D848724C2893B6A300B508DC /* PlaybackBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackBarView.swift; sourceTree = "<group>"; };
-		D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackFullScreenView.swift; sourceTree = "<group>"; };
+		D848724E2893BC8800B508DC /* MiniPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
 		D84872512893C2F600B508DC /* SongCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCardView.swift; sourceTree = "<group>"; };
 		D84872532893FC8600B508DC /* InvisibleRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvisibleRefreshView.swift; sourceTree = "<group>"; };
 		D84872552894101400B508DC /* PlayPuaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPuaseButton.swift; sourceTree = "<group>"; };
@@ -122,6 +122,8 @@
 		D8922EA828C4CC1B00C15FAE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D8922EAA28C4CE3800C15FAE /* NetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkView.swift; sourceTree = "<group>"; };
 		D8922EAC28C8704100C15FAE /* BillboardooDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillboardooDelegate.swift; sourceTree = "<group>"; };
+		D8922EAF28D0C3F500C15FAE /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
+		D8922EB128D2126100C15FAE /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		D893200B28AB8BD500A529BC /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		D893201228AF7C2500A529BC /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		D893201428AFD9D000A529BC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -251,9 +253,9 @@
 		D848722528912A4C00B508DC /* MusicPlayerBar */ = {
 			isa = PBXGroup;
 			children = (
-				D848724C2893B6A300B508DC /* PlaybackBarView.swift */,
+				D8922EAE28D0C3DB00C15FAE /* ViewModel */,
 				D848725C2897E30000B508DC /* PlayList */,
-				D848724E2893BC8800B508DC /* PlaybackFullScreenView.swift */,
+				D848724E2893BC8800B508DC /* MiniPlayer.swift */,
 				D84872532893FC8600B508DC /* InvisibleRefreshView.swift */,
 				D84872552894101400B508DC /* PlayPuaseButton.swift */,
 			);
@@ -370,6 +372,7 @@
 				D835785B288A660C00459197 /* RaidoButton+ChartHeader */,
 				D8357859288A65C000459197 /* LaunchScreen */,
 				D8357857288A658F00459197 /* MainScreen */,
+				D8922EB128D2126100C15FAE /* BlurView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -403,6 +406,14 @@
 				D8922EAA28C4CE3800C15FAE /* NetworkView.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		D8922EAE28D0C3DB00C15FAE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D8922EAF28D0C3F500C15FAE /* VideoPlayerViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D893200928AB8BA500A529BC /* SearchScreen */ = {
@@ -711,7 +722,7 @@
 				D896DF7828A630F80020C615 /* NewsView+Header.swift in Sources */,
 				D86B5868288ADB29001110A5 /* FiveRowSongGridView.swift in Sources */,
 				D896DF8128A6700C0020C615 /* CafeWebView.swift in Sources */,
-				D848724F2893BC8800B508DC /* PlaybackFullScreenView.swift in Sources */,
+				D848724F2893BC8800B508DC /* MiniPlayer.swift in Sources */,
 				D848725B2895245800B508DC /* ImageModifier.swift in Sources */,
 				D87EDFD82887DAB900999DE6 /* ApiCollections.swift in Sources */,
 				D896DF8428A69EAC0020C615 /* ArtistScreenView.swift in Sources */,
@@ -725,14 +736,15 @@
 				D87EDFA728859FE300999DE6 /* Persistence.swift in Sources */,
 				D84872522893C2F600B508DC /* SongCardView.swift in Sources */,
 				D848724A2893ACE700B508DC /* PlayState.swift in Sources */,
+				D8922EB028D0C3F500C15FAE /* VideoPlayerViewModel.swift in Sources */,
 				D896DF7E28A65B780020C615 /* NewsMoreView.swift in Sources */,
 				D896DF7A28A6399F0020C615 /* NewsModel.swift in Sources */,
 				D893200C28AB8BD500A529BC /* SearchView.swift in Sources */,
-				D848724D2893B6A300B508DC /* PlaybackBarView.swift in Sources */,
 				D83578522888291F00459197 /* SettingScreenView.swift in Sources */,
 				D835785428891DAB00459197 /* HomeScreenView.swift in Sources */,
 				D896DF0E289D51070020C615 /* Extensions.swift in Sources */,
 				D896DF6F28A4D5D20020C615 /* NewSongOfTheMonth+Header.swift in Sources */,
+				D8922EB228D2126100C15FAE /* BlurView.swift in Sources */,
 				D87EDFAA28859FE300999DE6 /* Billboardoo.xcdatamodeld in Sources */,
 				D835785628893EB300459197 /* RadioButtonGroup+ChartHeader.swift in Sources */,
 				D87EDF9E28859FE200999DE6 /* BillboardooApp.swift in Sources */,

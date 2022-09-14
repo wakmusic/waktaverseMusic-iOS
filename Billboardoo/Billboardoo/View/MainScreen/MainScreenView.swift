@@ -33,14 +33,14 @@ struct MainScreenView: View {
     @State var isLoading: Bool = true
     @StateObject var router:TabRouter = TabRouter()
     @StateObject var networkManager = NetworkManager()
+    @StateObject var player = VideoPlayerViewModel()
     @EnvironmentObject var playState: PlayState
     @Namespace var animation
-    
-    // PlayBar Slide 애니메이션을 위한 상태
-    @GestureState var gestureState = CGSize.zero
-    @State var gestureStore = CGSize.zero
+    @GestureState var gestureOffset:CGFloat = 0
+  
     
     @State var musicCart:[SimpleSong] = [SimpleSong] () // 리스트에서 클릭했을 때 템프 리스트
+   
     
     
     //
@@ -78,9 +78,10 @@ struct MainScreenView: View {
                 
                 let width = min(geometry.size.width,geometry.size.height)
                 let height = max(geometry.size.width,geometry.size.height)
-                ZStack(alignment:.center) {
-                    YoutubeView().environmentObject(playState)
-                        .opacity(0)
+                let tabHeight = UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13
+                ZStack(alignment:.bottom) {
+//                    YoutubeView().environmentObject(playState)
+//                        .opacity(0)
                     InvisibleRefreshView()
                         .opacity(0)
                     
@@ -94,37 +95,37 @@ struct MainScreenView: View {
                             switch router.screen{
                             case .home:
                                 HomeScreenView(musicCart: $musicCart).environmentObject(playState)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
                         
                             case .artists:
                                 ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
                             case .search:
                                 SearchView(musicCart: $musicCart).environmentObject(playState)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
                                 
                             case .account:
                                 AccountView()
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?  tabHeight : 0)
                                 
                                 
                             }
                         }
+                        
+                            
+                                
+                                
+                                
+                        
+                       
                         
                         
                         Group{
                             if(musicCart.isEmpty)
                             {
                                 VStack(spacing:0){
-                                    PlaybackBarView(animation: animation,gestureStore:$gestureStore)
-                                        .environmentObject(playState)
-                                        .onTapGesture {
-                                            //PlayBar를 터치하면  store의 height,width을 0으로 초기화
-                                            UIApplication.shared.endEditing()
-                                          
-                                            gestureStore.height = 0
-                                            gestureStore.width = 0
-                                            withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                                
-                                                playState.isPlayerViewPresented = true // Full Sreen 보이게
-                                            }
-                                        }
+                                    
+                                   
                                     
                                     
                                     // - MARK: TabBar
@@ -140,10 +141,10 @@ struct MainScreenView: View {
                                         Spacer()
                                     }
                                     
-                                    .frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13)
-                                    .background(.ultraThinMaterial)
+                                    .frame(width: geometry.size.width, height: tabHeight)
+                                    .background(Color.tabBar)
                                     
-                                    .shadow(radius: 2)
+                                    
                                     
                                 }
                                 
@@ -171,7 +172,7 @@ struct MainScreenView: View {
                                             .foregroundColor(.wak)
                                             .overlay(Text("\(musicCart.count)").font(.caption2).foregroundColor(.white))
                                     }
-                                    .offset(x:3,y:-geometry.size.height/10/3)
+                                    .offset(x:3,y:-geometry.size.height/10/8)
                                     
                                     //재생 바
                                     Spacer()
@@ -220,7 +221,7 @@ struct MainScreenView: View {
                                     }
                                     Spacer()
                                     
-                                }.frame(width: geometry.size.width, height: UIDevice.current.hasNotch ?  geometry.size.height/14 : geometry.size.height/12 )
+                                }.frame(width: geometry.size.width, height: tabHeight)
                                     .background(Color.wak)
                                     .shadow(radius: 2)
                                     .transition(.move(edge: .bottom))
@@ -244,89 +245,31 @@ struct MainScreenView: View {
                         
                     }
                     
-                    Group{
-                        if playState.isPlayerViewPresented {
-                            PlaybackFullScreenView(animation: animation)
-                                .environmentObject(playState)
-                                .offset(CGSize(width:0,height: gestureState.height + gestureStore.height))
-                            
-                            //ofset을 이용하여 슬라이드 에니메이션 효과를 준다
-                            //현재는   simultaneousGesture를 에서 height만 바뀌어서  위아래 슬라이드 효과만 준다.
-                            // 위: - 아래 + , 좌우는  슬라이드 애니메이션을 넣지 않고 바꾼다
-                        }
-                        
-                        
-                    } //그룹
-                    .zIndex(playState.isPlayerViewPresented == true ? 2.0 : 1.0) // 플레이어 켜질때 와 커질때 animation을 위해 
-                    
-                    
-                    //드래그 제스쳐를 updating
-                    .simultaneousGesture(DragGesture().updating($gestureState, body: { value, state, transaction in
-                        
-                        
-                        
-                        if value.translation.height > 0 && !playState.isPlayerListViewPresented { // 아래로 드래그 하면 ,저장 //리스트 켜졌을 때 offset 방지
-                            
-                            state.height = value.translation.height
-                        }
-                    })
-                        .onEnded({ value in //드래그가 끝났을 때
-                            
-                            if(playState.isPlayerListViewPresented) //리스트 켜졌을 때 커짐 방지
-                            {
-                                return
-                            }
-                            
-                            
-                            
-                            let translationHeight = max(value.translation.height,value.predictedEndTranslation.height * 0.2)
-                            
-                            
-                            let tranlationWidth = max(value.translation.width, value.predictedEndTranslation.width * 0.2)
-                            
-                            
-                            
-                            if translationHeight > 0 { //0보다 위면 그냥 트랙킹만
-                                gestureStore.height = translationHeight
-                            }
-                            
-                            if tranlationWidth > 0 {
-                                gestureStore.width = tranlationWidth
-                            }
-                            
-                            if translationHeight > 100 { //50보다 아래로 드래그 했으면 FullSreen 꺼짐
-                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    
-                                    
-                                    playState.isPlayerViewPresented = false
-                                    playState.isPlayerListViewPresented  = false  //꺼질 때 list화면 도 같이
-                                }
-                            } else { //50 보다 작으면 다시 화면 꽉 채우게
-                                withAnimation(Animation.spring(response: 0.7, dampingFraction: 0.85)) {
-                                    gestureStore.height = 0
-                                }
-                            }
-                            
-                            
-                        }))
-                }
+                    if(playState.nowPlayingSong != nil)
+                    {
+                        MiniPlayer(animation:animation)
+
+                            .environmentObject(playState)
+                            .environmentObject(player)
+                            .transition(.move(edge: .bottom))
+                            .offset(y: player.isMiniPlayer ? -tabHeight : 0)
+                            //miniPlayer 일 때 offset 아니면 그냥 적용
+                    }
+
+                }//Z
             }
             
             
         }
         
     }
+    
+
 }
 
 
 
-//- MARK: Preview
 
-struct MainScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreenView().environmentObject(PlayState())
-    }
-}
 
 //- MARK: Function
 
@@ -417,13 +360,13 @@ struct YoutubeView: View {
                 // for the current `YouTubePlayer.State`
                 switch state {
                 case .idle:
-                    ProgressView()
+                    EmptyView()
                 case .ready:
                     EmptyView()
                 case .error(_):
                     EmptyView()
                 }
-            }.frame(width: 0, height: 0)
+            }
         }
     }
 }

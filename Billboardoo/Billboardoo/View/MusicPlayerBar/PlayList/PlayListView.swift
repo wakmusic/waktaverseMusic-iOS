@@ -14,10 +14,12 @@ struct PlayListView: View {
     
     
     @EnvironmentObject var playState:PlayState
+    @EnvironmentObject var player:VideoPlayerViewModel
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
     var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     let device = UIDevice.current.userInterfaceIdiom
+    let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.size.height
     let hasNotch = UIDevice.current.hasNotch
     let div:CGFloat = 3.3
@@ -32,6 +34,15 @@ struct PlayListView: View {
                 if let song = playState.currentSong{
                     VStack(alignment:.leading){
                         
+                        Image(systemName: "xmark").font(.title).foregroundColor(.primary)
+                
+                            .onTapGesture {
+                            withAnimation(.easeInOut) {
+                                player.isPlayerListViewPresented = false
+                               
+                            }
+                    
+                            }.padding(EdgeInsets(top: 0, leading: 5, bottom: 10, trailing: 0))
                        
                           
                             Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading,10)
@@ -46,16 +57,16 @@ struct PlayListView: View {
                         .animation(.easeIn, value: playState.currentSong)
                         
                         
-                        Spacer()
+                        
                         HStack{
                             TopLeftControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState)
                             Spacer()
                             TopRightControlView(playList: $playState.playList,currentIndex: $playState.currentPlayIndex,multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing,10)
-                        }
+                        }//.frame(width:width)
                         
                         
                         
-                    }.frame(height:height/6,alignment: .top)
+                    }
                 }
                 
                 ScrollView(.vertical, showsIndicators: true) {
@@ -101,6 +112,7 @@ struct PlayListView: View {
             
             
         }.padding(.top,1)
+            
     }
     
     
@@ -160,9 +172,9 @@ struct ItemCell: View {
                 }
                 Spacer()
                 
-                Image(systemName: "line.3.horizontal").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+                Image(systemName: "line.3.horizontal").font(.system(size:  device == .phone  ? 20 : 25)).foregroundColor(Color.primary).padding(.trailing,5)
                 
-                    .padding(.trailing,10)
+                    
                 
                 
                 
@@ -356,6 +368,7 @@ struct TopRightControlView: View {
     @Binding var currentIndex:Int
     @Binding var multipleSelection:Set<UUID>
     @EnvironmentObject var playState:PlayState
+    @EnvironmentObject var player:VideoPlayerViewModel
     let device = UIDevice.current.userInterfaceIdiom
     var modifier:FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @State var isShowAlert: Bool = false
@@ -389,8 +402,8 @@ struct TopRightControlView: View {
                         {
                             playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
-                            playState.isPlayerViewPresented = false // Fullscrren 끄고
-                            playState.isPlayerListViewPresented = false //리스트창 끄고
+                            player.isMiniPlayer = true // Fullscrren 끄고
+                            player.isPlayerListViewPresented = false //리스트창 끄고
                             playState.youTubePlayer.stop() //youtubePlayer Stop
                             playState.currentSong = nil // 현재 재생 노래 비어둠
                         }

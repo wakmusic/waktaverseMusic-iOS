@@ -51,14 +51,6 @@ struct SearchView: View {
                
                 }
                 
-               
-                
-                
-                
-                
-                
-            }.onDisappear {
-                print("DISS")
             }
         
         
