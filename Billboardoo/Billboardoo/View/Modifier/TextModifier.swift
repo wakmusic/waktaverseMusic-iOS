@@ -51,7 +51,7 @@ struct PlayBarTitleModifier: ViewModifier{
     
     
     func body(content: Content) -> some View {
-        content.font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 18 : 25)).lineLimit(1)
+        content.font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 15 : 25)).lineLimit(1)
         
     }
 }
@@ -62,7 +62,7 @@ struct PlayBarArtistModifer: ViewModifier{
     
     func body(content: Content) -> some View {
         
-        content.font(.custom("PretendardVariable-Regular",size:device ==  . phone ? 15 : 28)).foregroundColor(.secondary)
+        content.font(.custom("PretendardVariable-Regular",size:device ==  . phone ? 13 : 28)).foregroundColor(.secondary)
             .lineLimit(1)
     }
 }

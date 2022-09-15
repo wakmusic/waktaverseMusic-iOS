@@ -28,7 +28,7 @@ struct PlayListView: View {
         
         
         ZStack(alignment:.top){
-            Color.forced
+            BlurView()
             
             VStack{
                 if let song = playState.currentSong{
@@ -42,7 +42,7 @@ struct PlayListView: View {
                                
                             }
                     
-                            }.padding(EdgeInsets(top: 0, leading: 5, bottom: 10, trailing: 0))
+                            }.padding(EdgeInsets(top: 10, leading: hasNotch ? 10 : 5, bottom: 10, trailing: 0))
                        
                           
                             Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size:  device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading,10)

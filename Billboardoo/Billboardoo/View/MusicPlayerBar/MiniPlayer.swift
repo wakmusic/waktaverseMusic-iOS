@@ -25,12 +25,15 @@ struct MiniPlayer: View {
     var body: some View {
         let window = UIScreen.main.bounds
         let standardLen = window.width > window.height ? window.width : window.height
-        
+        let miniWidth:CGFloat = window.width * 0.3
+        let miniHeight:CGFloat = (miniWidth*9)/16
+        let defaultHeight:CGFloat = (window.width * 9)/16
+        let hasNotch:Bool = UIDevice.current.hasNotch
         if let currentSong = playState.nowPlayingSong
         {
             
             
-            VStack() {
+            VStack(spacing:player.isMiniPlayer ? 0 : nil) {
                 
                 //Spacer(minLength: 0)
                 /*
@@ -39,16 +42,27 @@ struct MiniPlayer: View {
                  */
                 //
               
-                if(!player.isMiniPlayer)
+               
+                if(!player.isMiniPlayer && !player.isPlayerListViewPresented)
                 {
-                    Spacer()
+                    if(window.height <= 600)
+                    {
+                        Spacer(minLength: window.height*0.2)
+                    }
+                    else
+                    {
+                        Spacer(minLength: window.height*0.3)
+                    }
+                   
+                    
                 }
+         
                 
                 HStack(){
                     
-                    YoutubeView().environmentObject(playState).frame(maxWidth:player.isMiniPlayer ? 120 : player.isPlayerListViewPresented ? 0 : .infinity ,maxHeight: player.isMiniPlayer ? 80 : player.isPlayerListViewPresented ? 0 : standardLen * 0.3 )
+                    YoutubeView().environmentObject(playState).frame(maxWidth:player.isMiniPlayer ? miniWidth : player.isPlayerListViewPresented ? 0 : window.width ,maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight )
                     
-                    if(player.isMiniPlayer)
+                    if(player.isMiniPlayer) //미니 플레이어 시 보여질 컨트롤러
                     {
                         VStack(alignment: .leading){ //리스트 보여주면 .leading
                             Text(currentSong.title)
@@ -72,12 +86,12 @@ struct MiniPlayer: View {
                     }
                     
                     
-                }.frame(maxWidth: player.isPlayerListViewPresented ? 0 : .infinity,maxHeight: player.isMiniPlayer ? 80 : player.isPlayerListViewPresented ? 0 : standardLen * 0.3,alignment: .leading)
+                }.frame(maxWidth: player.isPlayerListViewPresented ? 0 : window.width,maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight ,alignment: .leading)
                 
                 
                 
                 
-             /*   VStack{
+                VStack{
                     Group{ //그룹으로 묶어 조건적으로 보여준다.
                         
                         if player.isPlayerListViewPresented {
@@ -116,14 +130,15 @@ struct MiniPlayer: View {
                     
                     
                     PlayBar().environmentObject(playState)
-                        .padding(.bottom,20) //밑에서 띄우기
+                        .padding(.bottom,hasNotch ? 40 :  20) //밑에서 띄우기
                         .padding(.horizontal)
-                }*/
+                }.frame(width: player.isMiniPlayer ? 0 : window.width , height: player.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
+                    .opacity(player.isMiniPlayer ? 0 : 1)
                 
                 
 
                 
-            }.frame(maxHeight: player.isMiniPlayer ? 80 : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
+            }.frame(maxHeight: player.isMiniPlayer ? miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
             
             
             
@@ -131,29 +146,22 @@ struct MiniPlayer: View {
                 
                 VStack(spacing:0)
                 {
-                    if(player.isMiniPlayer)
-                    {
-                        BlurView()
-                    }
-                    else
-                    {
-                        Color.forced
-                    }
-                    Divider()
+                   
+                    BlurView()
+                        .onTapGesture {
+                            withAnimation(.spring())
+                            {
+                                player.isMiniPlayer = false
+                                
+                            }
+                        }
+                   
                 }
-                    .onTapGesture {
-                        withAnimation(.spring()){player.isMiniPlayer.toggle()}
-                    }
-                    .ignoresSafeArea()
-                //                    Rectangle().foregroundColor(Color(artwork.averageColor ?? .clear)) //평균 색깔 출후 바탕에 적용
-                //                        .saturation(0.5) //포화도
-                //                        .background(.ultraThinMaterial) // 백그라운드는 blur 처리
-                //                        .edgesIgnoringSafeArea(.all)
-                
-                // playList 백그라운드 색 해결 못해서 주석 ..
-                //.ultraThinMaterial
                 
             )
+            .edgesIgnoringSafeArea(.all)
+            .offset(y:player.offset)
+            .gesture(DragGesture().onEnded(onEnded(value:)).onChanged(onChanged(value:)))
             
             
             
@@ -167,7 +175,26 @@ struct MiniPlayer: View {
         
     }
     
+    func onChanged(value: DragGesture.Value)
+    {
+        if value.translation.height > 0 && !player.isMiniPlayer {
+            player.offset = value.translation.height
+        }
+    }
     
+    func onEnded(value: DragGesture.Value)
+    {
+        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.95, blendDuration: 0.96))
+        {
+            
+            if value.translation.height > window.height/3
+            {
+                player.isMiniPlayer  = true
+                player.isPlayerListViewPresented = false
+            }
+            player.offset = 0
+        }
+    }
 }
 
 
