@@ -69,7 +69,7 @@ struct HomeScreenView: View {
                         Text("ⓒ Wak Entertainment Corp.").font(.caption).foregroundColor(.gray)
                         Image("youtube")
                             .resizable()
-                            .frame(width: width/2, height: width/10)
+                            .frame(width: width/2, height: width/12)
                             .scaledToFill()
                             
                     }
