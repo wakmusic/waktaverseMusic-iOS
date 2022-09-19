@@ -15,7 +15,7 @@ struct HomeScreenView: View {
     @StateObject var viewModel:HomeScreenViewModel = HomeScreenViewModel() //StateObject로 선언 View에 종속하지않기위해
     @EnvironmentObject var playState:PlayState
     @Binding var musicCart:[SimpleSong]
-   
+    let width = UIScreen.main.bounds.width
     
     
     
@@ -67,6 +67,11 @@ struct HomeScreenView: View {
                     VStack(spacing:10){
                         Text("(주)빌보두왁론주식회사").font(.caption).foregroundColor(.gray)
                         Text("ⓒ Wak Entertainment Corp.").font(.caption).foregroundColor(.gray)
+                        Image("youtube")
+                            .resizable()
+                            .frame(width: width/2, height: width/10)
+                            .scaledToFill()
+                            
                     }
                     
                     Spacer(minLength: 20)
