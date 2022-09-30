@@ -63,11 +63,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		501220AE8D24BFC8DFEE2940 /* Pods-BillboardooTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.release.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.release.xcconfig"; sourceTree = "<group>"; };
-		9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.debug.xcconfig"; sourceTree = "<group>"; };
-		A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.release.xcconfig"; sourceTree = "<group>"; };
-		B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BillboardooTests.debug.xcconfig"; path = "Target Support Files/Pods-BillboardooTests/Pods-BillboardooTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; path = "Target Support Files/Pods-Billboardoo-BillboardooUITests/Pods-Billboardoo-BillboardooUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D80F42F528E6DD1000C4A485 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D80F42F728E6DD1000C4A485 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D80F42F828E6DD1000C4A485 /* WaktaverseMusicApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaktaverseMusicApp.swift; sourceTree = "<group>"; };
@@ -118,7 +113,6 @@
 		D80F433F28E6DD1000C4A485 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D80F434128E6DD1000C4A485 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* WaktaverseMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaktaverseMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billboardoo.release.xcconfig"; path = "Target Support Files/Pods-Billboardoo/Pods-Billboardoo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -401,25 +395,11 @@
 			path = Repo;
 			sourceTree = "<group>";
 		};
-		D82041682820E5218334841D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */,
-				D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */,
-				C8F22D0EF6152EDD2F4D5623 /* Pods-Billboardoo-BillboardooUITests.debug.xcconfig */,
-				A81CB3640A13FF6059BF2738 /* Pods-Billboardoo-BillboardooUITests.release.xcconfig */,
-				B709F4FDA4D7FB215D3274B7 /* Pods-BillboardooTests.debug.xcconfig */,
-				501220AE8D24BFC8DFEE2940 /* Pods-BillboardooTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		D87EDF9128859FE200999DE6 = {
 			isa = PBXGroup;
 			children = (
 				D80F42F328E6DD1000C4A485 /* WaktaverseMusic */,
 				D87EDF9B28859FE200999DE6 /* Products */,
-				D82041682820E5218334841D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -438,7 +418,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D87EDFC328859FE300999DE6 /* Build configuration list for PBXNativeTarget "WaktaverseMusic" */;
 			buildPhases = (
-				966C62CF649930642EA7DD21 /* [CP] Check Pods Manifest.lock */,
 				D87EDF9628859FE200999DE6 /* Sources */,
 				D87EDF9728859FE200999DE6 /* Frameworks */,
 				D87EDF9828859FE200999DE6 /* Resources */,
@@ -513,31 +492,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		966C62CF649930642EA7DD21 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Billboardoo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D87EDF9628859FE200999DE6 /* Sources */ = {
@@ -713,7 +667,6 @@
 		};
 		D87EDFC428859FE300999DE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9626574B195645EA9476A036 /* Pods-Billboardoo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -749,7 +702,6 @@
 		};
 		D87EDFC528859FE300999DE6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D911C26463B02A5D23937718 /* Pods-Billboardoo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
