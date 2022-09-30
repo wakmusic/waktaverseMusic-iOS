@@ -90,6 +90,10 @@ Packages
 xcuserdata
 *.xcodeproj
 
+# OSX Temp
+.DS_Store
+.AppleDouble
+.LSOverride
 
 ### Xcode ###
 
