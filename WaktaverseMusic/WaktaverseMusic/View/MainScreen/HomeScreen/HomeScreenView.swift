@@ -9,33 +9,26 @@ import SwiftUI
 import Combine
 import Alamofire
 
-
 struct HomeScreenView: View {
     @ScaledMetric var scale: CGFloat = 15
-    @StateObject var viewModel:HomeScreenViewModel = HomeScreenViewModel() //StateObject로 선언 View에 종속하지않기위해
-    @EnvironmentObject var playState:PlayState
-    @Binding var musicCart:[SimpleSong]
+    @StateObject var viewModel: HomeScreenViewModel = HomeScreenViewModel() // StateObject로 선언 View에 종속하지않기위해
+    @EnvironmentObject var playState: PlayState
+    @Binding var musicCart: [SimpleSong]
     let width = UIScreen.main.bounds.width
-    
-    
 
     var body: some View {
-        ZStack(alignment: .leading)
-        {
+        ZStack(alignment: .leading) {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
-                 
-                    
-                    RadioButtonGroup(selectedId:$viewModel.selectedIndex,musicCart: $musicCart) { (_,_) in
-                        
-    
+
+                    RadioButtonGroup(selectedId: $viewModel.selectedIndex, musicCart: $musicCart) { (_, _) in
+
                     }.environmentObject(playState)
-                    
-                    FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) //nowChart 넘겨주기
+
+                    FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) // nowChart 넘겨주기
                         .onChange(of: viewModel.selectedIndex) { newValue in
-                            
-                            
-                            switch newValue{
+
+                            switch newValue {
                             case 0:
                                 viewModel.fetchTop20(category: .total)
                             case 1:
@@ -46,57 +39,50 @@ struct HomeScreenView: View {
                                 viewModel.fetchTop20(category: .weekly)
                             case 4:
                                 viewModel.fetchTop20(category: .monthly)
-                            default :
+                            default:
                                 viewModel.fetchTop20(category: .total)
                             }
-                            
-                                
+
                         }
                         .animation(.easeInOut, value: viewModel.nowChart)
-                    
-                  
-                    
+
                     NewSongOfTheMonthView().environmentObject(playState)
-                    
+
                     NewsView().environmentObject(playState)
-                    
+
                     Spacer(minLength: 30)
-                    
-                    VStack(spacing:10){
+
+                    VStack(spacing: 10) {
                         Text("(주)빌보두왁론주식회사").font(.caption).foregroundColor(.gray)
                         Text("ⓒ Wak Entertainment Corp.").font(.caption).foregroundColor(.gray)
                         /*Image("youtube")
                             .resizable()
                             .frame(width: width/2, height: width/12)
                             .scaledToFill()*/
-                            
+
                     }
-                    
+
                     Spacer(minLength: 20)
-                  
-                    
-                    
-                    
-                } //ScrollView
+
+                } // ScrollView
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                         NavigationLogo()
                     }
-                   
+
                 }
-                
-            }.navigationViewStyle(.stack) //Naivi
-            
-            
+
+            }.navigationViewStyle(.stack) // Naivi
+
         }
     }
 }
 
 struct NavigationLogo: View {
     let window = UIScreen.main.bounds.size
-    let width = min(UIScreen.main.bounds.size.width,UIScreen.main.bounds.height)
-    let height = max(UIScreen.main.bounds.size.width,UIScreen.main.bounds.height)
+    let width = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.height)
+    let height = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.height)
     let device = UIDevice.current.userInterfaceIdiom
     var body: some View {
         Image("mainLogoWhite")
@@ -105,43 +91,33 @@ struct NavigationLogo: View {
             .foregroundColor(Color.primary)
             .aspectRatio(contentMode: .fit)
             .frame(width: device == .phone ? width*0.5 : width*0.4, height: device == .phone ? width*0.3 : width*0.3)
-        
+
     }
 }
 
+extension HomeScreenView {
 
-
-
-
-
-extension HomeScreenView{
-    
-    final class HomeScreenViewModel:ObservableObject{
-        @Published var selectedIndex:Int = 0
-        @Published var nowChart:[RankedSong] = [RankedSong]()
+    final class HomeScreenViewModel: ObservableObject {
+        @Published var selectedIndex: Int = 0
+        @Published var nowChart: [RankedSong] = [RankedSong]()
         var subscription = Set<AnyCancellable>()
-        
-        init()
-        {
-            fetchTop20(category: .total) //초기화  chart는 누적으로 지정
+
+        init() {
+            fetchTop20(category: .total) // 초기화  chart는 누적으로 지정
         }
-        
-        func fetchTop20(category:TopCategory)
-        {
+
+        func fetchTop20(category: TopCategory) {
             Repository.shared.fetchTop20(category: category)
-                .sink { completion in
-                    
-                    
-                } receiveValue: { [weak self] (datas:[RankedSong]) in
-                    
+                .sink { _ in
+
+                } receiveValue: { [weak self] (datas: [RankedSong]) in
+
                     guard let self = self else {return}
-                    
-                    self.nowChart = datas  //chart 갱신
-                    
+
+                    self.nowChart = datas  // chart 갱신
+
                 }.store(in: &subscription)
         }
-        
-        
-        
+
     }
 }

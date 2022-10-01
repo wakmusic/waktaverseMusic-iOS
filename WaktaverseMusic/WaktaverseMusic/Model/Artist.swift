@@ -7,25 +7,24 @@
 
 import Foundation
 
-struct Artist: Codable,Identifiable, Equatable {
+struct Artist: Codable, Identifiable, Equatable {
     let id = UUID()
-    let artistId, name,color: String?
+    let artistId, name, color: String?
     let artistGroup: ArtistGroup?
 
-    //let card: String
-    //let big: String
-    //let youtube, twitch,String?
-    
-    static func == (lhs:Self,rhs:Self) -> Bool {
+    // let card: String
+    // let big: String
+    // let youtube, twitch,String?
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.artistId == rhs.artistId
     }
-    
-    private enum CodingKeys: String,CodingKey {
+
+    private enum CodingKeys: String, CodingKey {
         case artistId = "id"
-        case name,color
+        case name, color
         case artistGroup = "group"
-       
-        
+
     }
 
 }

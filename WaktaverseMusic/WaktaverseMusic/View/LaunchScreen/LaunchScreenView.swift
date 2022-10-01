@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LaunchScreenView: View {
-    
+
     let window = UIScreen.main.bounds.size
     var body: some View {
         //        ZStack(alignment: .center) {
@@ -17,29 +17,18 @@ struct LaunchScreenView: View {
         //                        .edgesIgnoringSafeArea(.all)
         //            Image("mainLogoWhite")
         //        }
-        
-        
-        
+
         ZStack {
             Color.black
             Image("LaunchImage")
                 .resizable()
                 .aspectRatio(contentMode: .fit).padding(.horizontal)
-                //.frame(width:window.width/10,height:window.height/10)
-               
-            
-                
+                // .frame(width:window.width/10,height:window.height/10)
+
         }
         .ignoresSafeArea()
-        
-  
 
-       
-        
-        
-        
-        
-        //애니메이션 삽입
+        // 애니메이션 삽입
     }
 }
 

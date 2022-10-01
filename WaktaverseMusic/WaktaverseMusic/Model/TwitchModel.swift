@@ -7,19 +7,18 @@
 
 import Foundation
 
-struct TwitchModel: Codable,Identifiable, Equatable {
+struct TwitchModel: Codable, Identifiable, Equatable {
     let id = UUID()
-    let twitchId,display_name,profile_image_url,provider:String
-    
-    static func == (lhs:Self,rhs:Self) -> Bool {
+    let twitchId, display_name, profile_image_url, provider: String
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.twitchId == rhs.twitchId
     }
-    
-    private enum CodingKeys: String,CodingKey {
+
+    private enum CodingKeys: String, CodingKey {
         case twitchId = "id"
-        case display_name,profile_image_url,provider
-       
-        
+        case display_name, profile_image_url, provider
+
     }
 
 }

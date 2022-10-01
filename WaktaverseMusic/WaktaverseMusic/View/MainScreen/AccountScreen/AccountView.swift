@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct AccountView: View {
-    
-    
+
     var body: some View {
-        NavigationView{
-            
-            Form{
+        NavigationView {
+
+            Form {
                 Section {
                     VStack(alignment: .leading) {
                         Text("로그인 서비스는 현재 준비중입니다.")
-                        
+
 //                        NavigationLink {
 //                            LoginView()
 //                        } label: {
@@ -33,14 +32,14 @@ struct AccountView: View {
                 } header: {
                     Text("내 계정").font(.headline).foregroundColor(.gray)
                 }
-                
+
                 Section {
                     VStack(alignment: .leading) {
                         NavigationLink {
                             SettingScreenView()
                         } label: {
                             Text("화면 설정")
-                            
+
                         }
 
                     }
@@ -48,16 +47,12 @@ struct AccountView: View {
                     Text("환경설정").font(.headline).foregroundColor(.gray)
                 }
 
-                
-                
             }
-                
-            
-    
+
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
         }
-        
+
         .navigationViewStyle(.stack)
     }
 }

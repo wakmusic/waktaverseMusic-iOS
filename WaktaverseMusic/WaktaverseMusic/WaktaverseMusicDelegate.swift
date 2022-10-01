@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class WaktaverseMusicDelegate: NSObject, UIApplicationDelegate{
+class WaktaverseMusicDelegate: NSObject, UIApplicationDelegate {
     var window: UIWindow?
 
        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,23 +17,23 @@ class WaktaverseMusicDelegate: NSObject, UIApplicationDelegate{
        }
 
        func sceneDidDisconnect(_ scene: UIScene) {
-         
+
        }
 
        func sceneDidBecomeActive(_ scene: UIScene) {
-         
+
        }
 
        func sceneWillResignActive(_ scene: UIScene) {
-         
+
        }
 
        func sceneWillEnterForeground(_ scene: UIScene) {
-         
+
        }
 
        func sceneDidEnterBackground(_ scene: UIScene) {
-        
+
        }
-    
+
 }

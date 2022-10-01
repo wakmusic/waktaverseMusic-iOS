@@ -9,150 +9,103 @@ import Foundation
 import Combine
 import YouTubePlayerKit
 
+class PlayState: ObservableObject {
 
-
-
-
-class PlayState:ObservableObject {
-    
     static let shared = PlayState()
-    
-    @Published var currentPlayIndex:Int //현재 재생중인 노래 인덱스 번호
-    @Published var playList:[SimpleSong]
+
+    @Published var currentPlayIndex: Int // 현재 재생중인 노래 인덱스 번호
+    @Published var playList: [SimpleSong]
     @Published var currentProgress: Double = 0
-    @Published var endProgress:Double = 0
-    @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay:false,showControls: false,showRelatedVideos: false))
-    @Published var isPlaying:YouTubePlayer.PlaybackState // 커스텀이 아닌 실제 State로 변경
-    @Published var currentSong:SimpleSong? = nil
-    
-    
-    
+    @Published var endProgress: Double = 0
+    @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay: false, showControls: false, showRelatedVideos: false))
+    @Published var isPlaying: YouTubePlayer.PlaybackState // 커스텀이 아닌 실제 State로 변경
+    @Published var currentSong: SimpleSong?
+
     var nowPlayingSong: SimpleSong? {
-        
+
         get {
-            if playList.count == 0
-            {
+            if playList.count == 0 {
                 return nil
             }
             return playList[currentPlayIndex]
         }
-        
+
     }
-    
-    func convertTimetoString(_ dtime:Double) ->String{
-        
+
+    func convertTimetoString(_ dtime: Double) -> String {
+
         let convertInt = lround(dtime)-1 >= 0 ? lround(dtime)-1 : 0
-        
-        let min:String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
-        
-        let sec:String = "\(convertInt%60)".count == 1 ? "0\(convertInt%60)" : "\(convertInt%60)"
-        
+
+        let min: String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
+
+        let sec: String = "\(convertInt%60)".count == 1 ? "0\(convertInt%60)" : "\(convertInt%60)"
+
         return min+sec
-        
-        
+
     }
-    
-    
-    
-    init()
-    {
+
+    init() {
         self.currentPlayIndex = 0
         self.isPlaying = .unstarted
         self.playList = [SimpleSong]()
-        
+
     }
-    
-    func forWard(){
-        
-        
-        
-        
-        if(self.currentPlayIndex ==  playList.count-1)
-        {
+
+    func forWard() {
+
+        if self.currentPlayIndex ==  playList.count-1 {
             self.currentPlayIndex = 0
-        }
-        else
-        {
+        } else {
             self.currentPlayIndex += 1
         }
-        
-        
-        
-        
-        
+
     }
-    
-    func backWard(){
-        
-        
-        
-        if(self.currentPlayIndex ==  0)
-        {
+
+    func backWard() {
+
+        if self.currentPlayIndex ==  0 {
             self.currentPlayIndex = playList.count-1
-        }
-        else
-        {
+        } else {
             self.currentPlayIndex -= 1
         }
-        
-        
-        
+
     }
-    
-    func isAlreadyHave(_ item:SimpleSong) -> Int
-    {
-        
-    
-        for (index,song) in playList.enumerated() { //이미 재생목록에 있으면  추가안함
-            
-            if(song==item)
-            {
+
+    func isAlreadyHave(_ item: SimpleSong) -> Int {
+
+        for (index, song) in playList.enumerated() { // 이미 재생목록에 있으면  추가안함
+
+            if song==item {
                 return index
             }
         }
-        
-        
-        
+
         return -1
     }
-    
-    func uniqueAppend(item:SimpleSong){
-        
+
+    func uniqueAppend(item: SimpleSong) {
+
         let isHave = isAlreadyHave(item)
-        if(isHave == -1)
-        {
+        if isHave == -1 {
             self.playList.append(item)
-            self.currentPlayIndex = self.playList.count - 1 //index 가장 뒤로 옮김
-        }
-        else
-        {
+            self.currentPlayIndex = self.playList.count - 1 // index 가장 뒤로 옮김
+        } else {
             self.currentPlayIndex = isHave
         }
         currentSong = item
-    
-        
-        //없으면 추가
-        
-    
+
+        // 없으면 추가
+
     }
-    
-    func appendList(item:SimpleSong)
-    {
+
+    func appendList(item: SimpleSong) {
         let isHave = isAlreadyHave(item)
-        
-        if(isHave == -1) //없다면
+
+        if(isHave == -1) // 없다면
         {
             self.playList.append(item)
         }
-    
-   
-        
+
     }
-    
-    
-    
-    
-    
-    
-    
+
 }

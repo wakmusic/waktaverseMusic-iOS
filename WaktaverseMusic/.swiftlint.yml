@@ -1,0 +1,7 @@
+disabled_rules: # 비활성화 규칙
+  - line_length
+  
+included: # 포함할 파일
+  # - WaktaverseMusic/View/LaunchScreen/LaunchScreenView.swift
+excluded: # 제외할 파일
+  # - WaktaverseMusic/View/LaunchScreen/LaunchScreenView.swift

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D6B7A2C28E7E99C00EBCCFA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1D6B7A2B28E7E99C00EBCCFA /* .swiftlint.yml */; };
 		D8086D6828BD335600D44F48 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6728BD335600D44F48 /* Alamofire */; };
 		D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6A28BD335D00D44F48 /* PopupView */; };
 		D8086D6E28BD336800D44F48 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6D28BD336800D44F48 /* Kingfisher */; };
@@ -63,6 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D6B7A2B28E7E99C00EBCCFA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D80F42F528E6DD1000C4A485 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D80F42F728E6DD1000C4A485 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D80F42F828E6DD1000C4A485 /* WaktaverseMusicApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaktaverseMusicApp.swift; sourceTree = "<group>"; };
@@ -135,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				D80F42F428E6DD1000C4A485 /* Extension */,
-				D80F42F628E6DD1000C4A485 /* Util */,
 				D80F42F728E6DD1000C4A485 /* Persistence.swift */,
 				D80F42F828E6DD1000C4A485 /* WaktaverseMusicApp.swift */,
 				D80F42F928E6DD1000C4A485 /* Assets.xcassets */,
@@ -158,13 +159,6 @@
 				D80F42F528E6DD1000C4A485 /* Extensions.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		D80F42F628E6DD1000C4A485 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		D80F42FA28E6DD1000C4A485 /* PlayState */ = {
@@ -398,6 +392,7 @@
 		D87EDF9128859FE200999DE6 = {
 			isa = PBXGroup;
 			children = (
+				1D6B7A2B28E7E99C00EBCCFA /* .swiftlint.yml */,
 				D80F42F328E6DD1000C4A485 /* WaktaverseMusic */,
 				D87EDF9B28859FE200999DE6 /* Products */,
 			);
@@ -421,6 +416,7 @@
 				D87EDF9628859FE200999DE6 /* Sources */,
 				D87EDF9728859FE200999DE6 /* Frameworks */,
 				D87EDF9828859FE200999DE6 /* Resources */,
+				1DF64D5D28E7E29E009623E5 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -483,6 +479,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D6B7A2C28E7E99C00EBCCFA /* .swiftlint.yml in Resources */,
 				D80F437028E6DD1000C4A485 /* PretendardVariable.ttf in Resources */,
 				D80F436F28E6DD1000C4A485 /* LeferiPointSpecial.ttf in Resources */,
 				D80F434728E6DD1000C4A485 /* Preview Assets.xcassets in Resources */,
@@ -492,6 +489,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DF64D5D28E7E29E009623E5 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D87EDF9628859FE200999DE6 /* Sources */ = {

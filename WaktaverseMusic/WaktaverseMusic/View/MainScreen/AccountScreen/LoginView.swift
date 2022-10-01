@@ -8,60 +8,49 @@
 import SwiftUI
 import PopupView
 
-struct LoginView: View  {
+struct LoginView: View {
     let window = UIScreen.main.bounds
     @State var showAelrt = false
     var body: some View {
-        
-        
-        
-        VStack{
-            
-            LoginButton(text: "트위치계정 로그인", image: "twitch", textColor: .primary, buttonColor: .twitch,url: ApiCollections.tiwtch,showAlert:$showAelrt)
+
+        VStack {
+
+            LoginButton(text: "트위치계정 로그인", image: "twitch", textColor: .primary, buttonColor: .twitch, url: ApiCollections.tiwtch, showAlert: $showAelrt)
                 .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
-                    
+
                     Button(role: .cancel) {
-                       
+
                     } label: {
                         Text("확인")
                     }
                 }
-            
-            LoginButton(text: "네이버계정 로그인", image: "naver", textColor: .primary, buttonColor:.naver,url:ApiCollections.naver,showAlert:$showAelrt)
+
+            LoginButton(text: "네이버계정 로그인", image: "naver", textColor: .primary, buttonColor: .naver, url: ApiCollections.naver, showAlert: $showAelrt)
                 .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
-                    
+
                     Button(role: .cancel) {
-                       
+
                     } label: {
                         Text("확인")
                     }
                 }
-            
-           
-            
-            
-            
+
         }.padding(.horizontal)
-        
-        
-        
-        
-        
+
     }
 }
 
 struct LoginButton: View {
-    
-    var text:String
-    var image:String
-    var textColor:Color
-    var buttonColor:Color
+
+    var text: String
+    var image: String
+    var textColor: Color
+    var buttonColor: Color
     var url: String
-    @Binding var showAlert:Bool
-    
-    
+    @Binding var showAlert: Bool
+
     var body: some View {
-        
+
         Button {
             showAlert = true
         } label: {
@@ -74,7 +63,7 @@ struct LoginButton: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 20)
-                
+
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
@@ -86,7 +75,5 @@ struct LoginButton: View {
         .background(buttonColor) // If you have this
         .cornerRadius(6)
     }
-    
-    
-}
 
+}

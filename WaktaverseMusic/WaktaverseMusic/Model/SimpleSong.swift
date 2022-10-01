@@ -7,22 +7,22 @@
 
 import Foundation
 
-struct SimpleSong : Codable , Identifiable, Equatable{
+struct SimpleSong: Codable, Identifiable, Equatable {
     let id = UUID()
     let song_id: String
     let title: String
     let artist: String
     let image: String
     let url: String
-    
-    static func == (lhs:Self,rhs:Self) -> Bool {
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.song_id == rhs.song_id
     }
-    
-    private enum CodingKeys: String,CodingKey {
+
+    private enum CodingKeys: String, CodingKey {
         case song_id = "id"
-        case title,artist,image,url
-        //case viewsOfficial = "views_official"
-        
+        case title, artist, image, url
+        // case viewsOfficial = "views_official"
+
     }
 }

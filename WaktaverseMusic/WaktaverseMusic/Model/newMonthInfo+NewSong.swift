@@ -13,23 +13,22 @@ struct newMonthInfo: Codable {
 }
 
 // MARK: - Datum
-struct NewSong: Codable,Identifiable,Equatable {
-    
+struct NewSong: Codable, Identifiable, Equatable {
+
     let id = UUID()
-    let song_id,title, artist: String
+    let song_id, title, artist: String
     let image: String
     let url: String
-    let date,views: Int
-    
-    
-    static func == (lhs:Self,rhs:Self) -> Bool {
+    let date, views: Int
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.song_id == rhs.song_id
     }
-    
-    private enum CodingKeys: String,CodingKey {
+
+    private enum CodingKeys: String, CodingKey {
         case song_id = "id"
-        case title,artist,image,url,date,views
-        //case viewsOfficial = "views_official"
-        
+        case title, artist, image, url, date, views
+        // case viewsOfficial = "views_official"
+
     }
 }
