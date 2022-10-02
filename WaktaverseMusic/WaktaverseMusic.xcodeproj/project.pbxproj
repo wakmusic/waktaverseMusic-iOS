@@ -68,7 +68,6 @@
 		D80F436D28E6DD1000C4A485 /* PlayPuaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */; };
 		D80F437128E6DD1000C4A485 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433E28E6DD1000C4A485 /* ApiCollections.swift */; };
 		D80F437228E6DD1000C4A485 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433F28E6DD1000C4A485 /* Repository.swift */; };
-		D80F437628E9911F00C4A485 /* ChartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F437528E9911F00C4A485 /* ChartHeaderView.swift */; };
 		D80F437828E9919300C4A485 /* HeaderViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F437728E9919300C4A485 /* HeaderViews.swift */; };
 		D8922EA628BFA73300C15FAE /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */; };
 /* End PBXBuildFile section */
@@ -133,7 +132,6 @@
 		D80F433E28E6DD1000C4A485 /* ApiCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
 		D80F433F28E6DD1000C4A485 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D80F434128E6DD1000C4A485 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D80F437528E9911F00C4A485 /* ChartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderView.swift; sourceTree = "<group>"; };
 		D80F437728E9919300C4A485 /* HeaderViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViews.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* WaktaverseMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaktaverseMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -335,7 +333,6 @@
 				D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */,
 				D80F431F28E6DD1000C4A485 /* NewsView.swift */,
 				D80F431828E6DD1000C4A485 /* NewsMoreView.swift */,
-				D80F437528E9911F00C4A485 /* ChartHeaderView.swift */,
 				D80F437728E9919300C4A485 /* HeaderViews.swift */,
 			);
 			path = HomeView;
@@ -529,7 +526,6 @@
 				D80F434E28E6DD1000C4A485 /* RankedSong.swift in Sources */,
 				D80F436428E6DD1000C4A485 /* ImageModifier.swift in Sources */,
 				D80F436828E6DD1000C4A485 /* RadioButtonGroup.swift in Sources */,
-				D80F437628E9911F00C4A485 /* ChartHeaderView.swift in Sources */,
 				7B1D20B328E950AC006F67C6 /* URL.swift in Sources */,
 				D80F436A28E6DD1000C4A485 /* PlayListView.swift in Sources */,
 				D80F437228E6DD1000C4A485 /* Repository.swift in Sources */,
