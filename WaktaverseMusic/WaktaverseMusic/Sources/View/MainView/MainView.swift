@@ -10,25 +10,10 @@ import YouTubePlayerKit
 import AVFAudio
 import AVFoundation
 
-enum Screen {
-    case home
-    case artists
-    case search
-    case account
-}
-
-final class TabRouter: ObservableObject { // Tab State관련 클래스
-    @Published var screen: Screen = .home
-
-    func change(to screen: Screen) {
-        self.screen = screen
-    }
-}
-
-struct MainScreenView: View {
+struct MainView: View {
 
     @State var isLoading: Bool = true
-    @StateObject var router: TabRouter = TabRouter()
+    @StateObject var viewModel: MainViewModel = MainViewModel()
     @StateObject var networkManager = NetworkManager()
     @StateObject var player = VideoPlayerViewModel()
     @EnvironmentObject var playState: PlayState
@@ -36,8 +21,6 @@ struct MainScreenView: View {
     @GestureState var gestureOffset: CGFloat = 0
 
     @State var musicCart: [SimpleSong] = [SimpleSong]() // 리스트에서 클릭했을 때 템프 리스트
-
-    //
 
     init() {
         // UITabBar.appearance().unselectedItemTintColor = .gray
@@ -48,7 +31,6 @@ struct MainScreenView: View {
     var body: some View {
 
         if isLoading {
-
             LaunchScreenView().onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     withAnimation { isLoading.toggle() }
@@ -72,7 +54,7 @@ struct MainScreenView: View {
                         if !networkManager.isConnected {
                             NetworkView()
                         } else {
-                            switch router.screen {
+                            switch viewModel.currentTab {
                             case .home:
                                 HomeView(musicCart: $musicCart).environmentObject(playState)
                                     .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
@@ -98,13 +80,13 @@ struct MainScreenView: View {
                                     // - MARK: TabBar
                                     HStack(alignment: .center) {
                                         Spacer()
-                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "home", text: "Home", assignedPage: .home, router: router)
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "home", text: "Home", assignedPage: .home, viewModel: viewModel)
                                         Spacer()
-                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass", text: "Search", assignedPage: .search, router: router)
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "magnifyingglass", text: "Search", assignedPage: .search, viewModel: viewModel)
                                         Spacer()
-                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone", text: "Artist", assignedPage: .artists, router: router)
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "microphone", text: "Artist", assignedPage: .artists, viewModel: viewModel)
                                         Spacer()
-                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "person", text: "Account", assignedPage: .account, router: router)
+                                        TabBarIcon(width: width/5, height: height/28, systemIconName: "person", text: "Account", assignedPage: .account, viewModel: viewModel)
                                         Spacer()
                                     }
 
@@ -112,7 +94,6 @@ struct MainScreenView: View {
                                     .background(Color.tabBar)
 
                                 }
-
                                 .transition(.move(edge: .bottom))
                                 .animation(.easeOut, value: musicCart.count)
                                 .zIndex(musicCart.isEmpty ? 2.0 : 1.0) // 내려가는 애니메이션이 리스트 탭바와 겹치지 않기 위해
@@ -188,7 +169,7 @@ struct MainScreenView: View {
                                 // 내려가는 애니메이션이 탭바와 겹치지 않기 위해
 
                             }
-                        }.animation(.easeInOut, value: $musicCart.isEmpty) // 탭바 두개를 한번에 묶어 에니메이션 적용
+                        }.animation(.easeInOut, value: musicCart.isEmpty) // 탭바 두개를 한번에 묶어 에니메이션 적용
 
                     }
 
@@ -247,8 +228,8 @@ struct ListBarIcon: View {
 struct TabBarIcon: View {
     let width, height: CGFloat
     let systemIconName, text: String
-    let assignedPage: Screen
-    @StateObject var router: TabRouter
+    let assignedPage: Tab
+    @ObservedObject var viewModel: MainViewModel
     let hasNotch: Bool = UIDevice.current.hasNotch
 
     var body: some View {
@@ -266,11 +247,9 @@ struct TabBarIcon: View {
         }
 
         .onTapGesture {
-            router.screen = assignedPage
-
+            viewModel.change(to: assignedPage)
         }
-
-        .foregroundColor(router.screen == assignedPage ? Color.primary : .gray)
+        .foregroundColor(assignedPage.isSame(viewModel.currentTab) ? Color.primary : .gray)
     }
 }
 

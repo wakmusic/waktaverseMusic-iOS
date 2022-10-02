@@ -9,6 +9,6 @@ import Foundation
 
 extension Const {
     struct String {
-        
+
     }
 }

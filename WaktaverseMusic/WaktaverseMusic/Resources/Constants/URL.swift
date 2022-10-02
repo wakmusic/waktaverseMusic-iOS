@@ -11,9 +11,9 @@ extension Const {
     struct URL {
         // base URL
         static let baseURL = "https://billboardoo.com"
-        
+
         static let api = "/api"
         static let auth = "/auth"
-        
+
     }
 }

@@ -156,7 +156,7 @@ struct ArtistSongListItemView: View {
 
         .contentShape(Rectangle()) // 빈곳을 터치해도 탭 인식할 수 있게, 와 대박 ...
         .onTapGesture {
-
+            print("tap")
             if musicCart.contains(simpleSong) {
                 musicCart = musicCart.filter({$0 != simpleSong})
             } else {

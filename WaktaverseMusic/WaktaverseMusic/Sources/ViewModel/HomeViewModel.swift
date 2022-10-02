@@ -8,6 +8,26 @@
 import Foundation
 import Combine
 
+protocol HomeViewModelInput {
+    // 라디오버튼
+
+    // 더보기
+
+    // 음악 재생
+
+    // 이달의신곡 더보기
+
+    // 이달의신곡 재생
+
+    // 뉴스 더보기
+
+    //
+}
+
+protocol HomeViewModelOutput {
+
+}
+
 final class HomeViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     @Published var nowChart: [RankedSong] = [RankedSong]()

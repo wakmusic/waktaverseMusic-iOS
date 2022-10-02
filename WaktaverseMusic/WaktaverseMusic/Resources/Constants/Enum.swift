@@ -12,3 +12,9 @@ enum ScreenSize {
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.size.height
 }
+
+enum Tab {
+    case home, artists, search, account
+
+    func isSame(_ at: Tab) -> Bool { self == at }
+}

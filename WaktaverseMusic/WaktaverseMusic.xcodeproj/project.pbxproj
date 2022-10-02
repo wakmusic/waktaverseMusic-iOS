@@ -22,6 +22,7 @@
 		7B1D20AF28E95054006F67C6 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20AE28E95054006F67C6 /* Const.swift */; };
 		7B1D20B128E9506F006F67C6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20B028E9506F006F67C6 /* String.swift */; };
 		7B1D20B328E950AC006F67C6 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20B228E950AC006F67C6 /* URL.swift */; };
+		7B1D20B528E97AE4006F67C6 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20B428E97AE4006F67C6 /* MainViewModel.swift */; };
 		D8086D6828BD335600D44F48 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6728BD335600D44F48 /* Alamofire */; };
 		D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6A28BD335D00D44F48 /* PopupView */; };
 		D8086D6E28BD336800D44F48 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6D28BD336800D44F48 /* Kingfisher */; };
@@ -54,7 +55,7 @@
 		D80F435E28E6DD1000C4A485 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432128E6DD1000C4A485 /* CardView.swift */; };
 		D80F435F28E6DD1000C4A485 /* ArtistScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432228E6DD1000C4A485 /* ArtistScreenView.swift */; };
 		D80F436028E6DD1000C4A485 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432428E6DD1000C4A485 /* SettingScreenView.swift */; };
-		D80F436128E6DD1000C4A485 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432528E6DD1000C4A485 /* MainScreenView.swift */; };
+		D80F436128E6DD1000C4A485 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432528E6DD1000C4A485 /* MainView.swift */; };
 		D80F436228E6DD1000C4A485 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432628E6DD1000C4A485 /* BlurView.swift */; };
 		D80F436328E6DD1000C4A485 /* TextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432828E6DD1000C4A485 /* TextModifier.swift */; };
 		D80F436428E6DD1000C4A485 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432928E6DD1000C4A485 /* ImageModifier.swift */; };
@@ -87,6 +88,7 @@
 		7B1D20AE28E95054006F67C6 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		7B1D20B028E9506F006F67C6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		7B1D20B228E950AC006F67C6 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		7B1D20B428E97AE4006F67C6 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D80F42F528E6DD1000C4A485 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D80F42F828E6DD1000C4A485 /* WaktaverseMusicApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaktaverseMusicApp.swift; sourceTree = "<group>"; };
 		D80F42F928E6DD1000C4A485 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -115,7 +117,7 @@
 		D80F432128E6DD1000C4A485 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D80F432228E6DD1000C4A485 /* ArtistScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistScreenView.swift; sourceTree = "<group>"; };
 		D80F432428E6DD1000C4A485 /* SettingScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingScreenView.swift; sourceTree = "<group>"; };
-		D80F432528E6DD1000C4A485 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		D80F432528E6DD1000C4A485 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D80F432628E6DD1000C4A485 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		D80F432828E6DD1000C4A485 /* TextModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
 		D80F432928E6DD1000C4A485 /* ImageModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		7B1D209428E93E70006F67C6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				7B1D20B428E97AE4006F67C6 /* MainViewModel.swift */,
 				7B1D209528E941D3006F67C6 /* HomeViewModel.swift */,
 				7B1D209728E94297006F67C6 /* SearchViewModel.swift */,
 				7B1D20A628E94E2B006F67C6 /* ArtistViewModel.swift */,
@@ -280,7 +283,7 @@
 		D80F430C28E6DD1000C4A485 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				D80F432528E6DD1000C4A485 /* MainScreenView.swift */,
+				D80F432528E6DD1000C4A485 /* MainView.swift */,
 				D80F431528E6DD1000C4A485 /* HomeView */,
 				D80F431028E6DD1000C4A485 /* SearchView */,
 				D80F432028E6DD1000C4A485 /* ArtistView */,
@@ -513,6 +516,7 @@
 				D80F435728E6DD1000C4A485 /* NewSongOfTheMonth+Header.swift in Sources */,
 				7B1D20AF28E95054006F67C6 /* Const.swift in Sources */,
 				7B1D20A728E94E2B006F67C6 /* ArtistViewModel.swift in Sources */,
+				7B1D20B528E97AE4006F67C6 /* MainViewModel.swift in Sources */,
 				7B1D209628E941D3006F67C6 /* HomeViewModel.swift in Sources */,
 				D80F436028E6DD1000C4A485 /* SettingScreenView.swift in Sources */,
 				D80F434E28E6DD1000C4A485 /* RankedSong.swift in Sources */,
@@ -527,7 +531,7 @@
 				7B1D209C28E9445A006F67C6 /* Enum.swift in Sources */,
 				D80F435628E6DD1000C4A485 /* NetworkManager.swift in Sources */,
 				D80F434B28E6DD1000C4A485 /* newMonthInfo+NewSong.swift in Sources */,
-				D80F436128E6DD1000C4A485 /* MainScreenView.swift in Sources */,
+				D80F436128E6DD1000C4A485 /* MainView.swift in Sources */,
 				D80F436628E6DD1000C4A485 /* CafeWebView.swift in Sources */,
 				D80F435028E6DD1000C4A485 /* TwitchModel.swift in Sources */,
 				D80F435228E6DD1000C4A485 /* LoginView.swift in Sources */,
