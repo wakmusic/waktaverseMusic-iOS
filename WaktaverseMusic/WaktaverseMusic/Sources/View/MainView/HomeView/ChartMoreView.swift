@@ -273,7 +273,7 @@ struct ChartItemView: View {
 
             // -Play and List Button
 
-            Text(convertViews(song.views)).font(.caption2).lineLimit(1).padding(.trailing, 5)
+            Text(song.views.convertViews()).font(.caption2).lineLimit(1).padding(.trailing, 5)
 
         }
         .contentShape(Rectangle()) // 빈곳을 터치해도 탭 인식할 수 있게, 와 대박 ...
@@ -291,81 +291,6 @@ struct ChartItemView: View {
         .foregroundColor(.primary)
 
     }
-
-}
-
-struct RoundedRectangleButton: View {
-
-    let width, height: CGFloat
-    let text: String
-    let color, textColor: Color
-    let imageSource: String
-
-    var body: some View {
-
-        HStack {
-            Image(systemName: imageSource).font(.caption)
-            Text(text).font(.caption).bold()
-        }
-        .foregroundColor(textColor)
-        .frame(width: width, height: height)
-        .padding(.vertical, 5)
-        .padding(.horizontal, 5)
-        .background(RoundedRectangle(cornerRadius: 5).fill(color))
-    }
-}
-
-extension ChartMoreView {
-
-    final class ChartViewModel: ObservableObject {
-        @Published var currentShowCharts: [RankedSong] = [RankedSong]()
-        @Published var updateTime: Int = 0
-        var subscription = Set<AnyCancellable>()
-
-        func fetchChart(_ category: TopCategory) {
-            Repository.shared.fetchTop100(category: category).sink { _ in
-
-            } receiveValue: { [weak self] (data: [RankedSong]) in
-
-                guard let self = self else {return}
-
-                self.currentShowCharts = data
-
-            }.store(in: &subscription)
-
-        }
-
-        func fetchUpdateTime(_ category: TopCategory) {
-            Repository.shared.fetchUpdateTimeStmap(category: category).sink { _ in
-
-            } receiveValue: { [weak self] time in
-
-                guard let self = self else {return}
-
-                print("updateTime", time)
-                self.updateTime = time
-            }.store(in: &subscription)
-
-        }
-    }
-}
-
-func convertViews(_ views: Int) -> String // 조회수 변환 함수
-{
-    let numberFormatter = NumberFormatter()
-    numberFormatter.numberStyle = .decimal
-
-    let result = numberFormatter.string(from: NSNumber(value: views))!
-
-    return "\(result)회"
-
-}
-
-func convertTimeStamp(_ time: Int) -> String {
-    let dateFormater: DateFormatter = DateFormatter()
-    dateFormater.dateFormat = "yyyy.MM.dd HH:mm" // HH -> 오후까지
-
-    return dateFormater.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
 
 }
 

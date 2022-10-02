@@ -72,15 +72,4 @@ extension NewsMoreView {
         }
 
     }
-
-    func convertTimeStamp(_ time: Int) -> String {
-        let convTime: String = String(time)
-        let year: String = convTime.substring(from: 0, to: 1)
-        let month: String = convTime.substring(from: 2, to: 3)
-        let day: String = convTime.substring(from: 4, to: 5)
-
-        return "20\(year).\(month).\(day)"
-
-    }
-
 }

@@ -51,6 +51,14 @@ extension Int {
         return "20\(year).\(month).\(day)"
 
     }
+
+    func convertViews() -> String {// 조회수 변환 함수
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let result = numberFormatter.string(from: NSNumber(value: self))!
+
+        return "\(result)회"
+    }
 }
 
 extension Color {

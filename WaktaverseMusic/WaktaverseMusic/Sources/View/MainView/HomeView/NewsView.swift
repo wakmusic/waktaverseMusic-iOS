@@ -14,7 +14,7 @@ struct NewsView: View {
 
     private let rows = [GridItem(.fixed(220))] // row 높이
     @EnvironmentObject var playState: PlayState
-    @StateObject var viewModel = NewsViewModel()
+    @ObservedObject var viewModel: HomeViewModel
      //https://billboardoo.com/news/thumbnail/2022022.png
 
     var body: some View {
@@ -27,13 +27,6 @@ struct NewsView: View {
                 }.padding(.horizontal)
             }
         }
-
-    }
-}
-
-struct NewsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewsView()
 
     }
 }
@@ -63,29 +56,4 @@ extension NewsView {
         }
 
     }
-
-    final class NewsViewModel: ObservableObject {
-
-        @Published var news: [NewsModel] = [NewsModel]()
-        var subscription = Set<AnyCancellable>()
-
-        init() {
-
-            fetchNews()
-        }
-
-        func fetchNews() {
-            Repository.shared.fetchNews().sink { (_) in
-
-            } receiveValue: { [weak self] (data: [NewsModel]) in
-
-                guard let self = self else {return}
-
-                self.news = data
-
-            }.store(in: &subscription)
-
-        }
-    }
-
 }

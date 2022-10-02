@@ -14,7 +14,7 @@ import Kingfisher
 struct NewSongOfTheMonthView: View {
 
     @EnvironmentObject var playState: PlayState
-    @StateObject var viewModel: HomeViewModel = HomeViewModel()
+    @ObservedObject var viewModel: HomeViewModel
 
     private let rows = [GridItem(.fixed(150), spacing: 10), GridItem(.fixed(150), spacing: 10)]
 
@@ -94,11 +94,5 @@ extension NewSongOfTheMonthView {
 
         }
 
-    }
-}
-
-struct NewSongOfTheMonth_Previews: PreviewProvider {
-    static var previews: some View {
-        NewSongOfTheMonthView().environmentObject(PlayState())
     }
 }

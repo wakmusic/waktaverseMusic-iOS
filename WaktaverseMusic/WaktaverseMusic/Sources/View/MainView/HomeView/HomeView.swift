@@ -32,9 +32,9 @@ struct HomeView: View {
                         }
                         .animation(.easeInOut, value: viewModel.nowChart)
 
-                    NewSongOfTheMonthView().environmentObject(playState)
+                    NewSongOfTheMonthView(viewModel: viewModel).environmentObject(playState)
 
-                    NewsView().environmentObject(playState)
+                    NewsView(viewModel: viewModel).environmentObject(playState)
 
                     Spacer(minLength: 30)
 
