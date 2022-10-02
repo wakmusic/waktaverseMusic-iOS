@@ -24,31 +24,15 @@ struct HomeView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     ChartHeaderView(chartIndex: $index, musicCart: $musicCart)
                     RadioButtonView(selectedId: $index, musicCart: $musicCart) { (_, _) in
-                    
+
                     }.environmentObject(playState)
 
                     FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) // nowChart 넘겨주기
-                        .onChange(of: index) { newValue in
-
-                            switch newValue {
-                            case 0:
-                                viewModel.fetchTop20(category: .total)
-                            case 1:
-                                viewModel.fetchTop20(category: .time)
-                            case 2:
-                                viewModel.fetchTop20(category: .daily)
-                            case 3:
-                                viewModel.fetchTop20(category: .weekly)
-                            case 4:
-                                viewModel.fetchTop20(category: .monthly)
-                            default:
-                                viewModel.fetchTop20(category: .total)
-                            }
-
+                        .onChange(of: index) { newIndex in
+                            viewModel.didChangeNowChart(index: newIndex)
                         }
                         .animation(.easeInOut, value: viewModel.nowChart)
-                    
-                    
+
                     NewSongOfTheMonthView().environmentObject(playState)
 
                     NewsView().environmentObject(playState)

@@ -50,4 +50,21 @@ final class HomeViewModel: ObservableObject {
             }.store(in: &subscription)
     }
 
+    func didChangeNowChart(index: Int) {
+        switch index {
+        case 0:
+            fetchTop20(category: .total)
+        case 1:
+            fetchTop20(category: .time)
+        case 2:
+            fetchTop20(category: .daily)
+        case 3:
+            fetchTop20(category: .weekly)
+        case 4:
+            fetchTop20(category: .monthly)
+        default:
+            fetchTop20(category: .total)
+        }
+    }
+
 }
