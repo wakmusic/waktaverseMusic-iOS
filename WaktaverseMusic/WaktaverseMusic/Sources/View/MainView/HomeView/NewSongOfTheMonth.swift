@@ -14,7 +14,7 @@ import Kingfisher
 struct NewSongOfTheMonthView: View {
 
     @EnvironmentObject var playState: PlayState
-    @StateObject var viewModel: NewSongOfTheMonthViewModel = NewSongOfTheMonthViewModel()
+    @StateObject var viewModel: HomeViewModel = HomeViewModel()
 
     private let rows = [GridItem(.fixed(150), spacing: 10), GridItem(.fixed(150), spacing: 10)]
 
@@ -80,7 +80,7 @@ extension NewSongOfTheMonthView {
                 VStack(alignment: .leading) {
                     Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1).frame(width: 100, alignment: .leading)
                     Text(song.artist).font(.caption).lineLimit(1).frame(width: 100, alignment: .leading)
-                    Text(viewModel.convertTimeStamp(song.date)).font(.caption2).lineLimit(1).foregroundColor(.gray).frame(width: 100, alignment: .leading)
+                    Text(song.date.convertTimeStamp()).font(.caption2).lineLimit(1).foregroundColor(.gray).frame(width: 100, alignment: .leading)
                 }.frame(width: 100)
 
             }.padding().onTapGesture {
@@ -95,50 +95,6 @@ extension NewSongOfTheMonthView {
         }
 
     }
-
-    final class NewSongOfTheMonthViewModel: ObservableObject {
-
-        var subscription = Set<AnyCancellable>()
-
-        @Published var newSongs: [NewSong] = [NewSong]()
-
-        init() {
-           fetchNewSong()
-        }
-
-        func fetchNewSong() {
-            Repository.shared.fetchNewMonthSong()
-                .sink { completion in
-
-                    switch completion {
-                    case .failure(let err):
-                        print(" \(#file) \(#function) \(#line) \(err.localizedDescription)")
-
-                    case .finished:
-                        print(" \(#file) \(#function) \(#line) Finish")
-                    }
-
-                } receiveValue: { [weak self] (rawData: newMonthInfo) in
-
-                    guard let self = self else {return}
-
-                    self.newSongs = rawData.data
-
-                }.store(in: &subscription)
-
-        }
-
-        func convertTimeStamp(_ time: Int) -> String {
-            let convTime: String = String(time)
-            let year: String = convTime.substring(from: 0, to: 1)
-            let month: String = convTime.substring(from: 2, to: 3)
-            let day: String = convTime.substring(from: 4, to: 5)
-
-            return "20\(year).\(month).\(day)"
-
-        }
-    }
-
 }
 
 struct NewSongOfTheMonth_Previews: PreviewProvider {
