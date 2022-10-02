@@ -16,17 +16,19 @@ struct HomeView: View {
     @Binding var musicCart: [SimpleSong]
     let width = UIScreen.main.bounds.width
 
+    @State var index: Int = 0
+
     var body: some View {
         ZStack(alignment: .leading) {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
-
-                    RadioButtonGroup(selectedId: $viewModel.selectedIndex, musicCart: $musicCart) { (_, _) in
-
+                    ChartHeaderView(chartIndex: $index, musicCart: $musicCart)
+                    RadioButtonView(selectedId: $index, musicCart: $musicCart) { (_, _) in
+                    
                     }.environmentObject(playState)
 
                     FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) // nowChart 넘겨주기
-                        .onChange(of: viewModel.selectedIndex) { newValue in
+                        .onChange(of: index) { newValue in
 
                             switch newValue {
                             case 0:
@@ -45,7 +47,8 @@ struct HomeView: View {
 
                         }
                         .animation(.easeInOut, value: viewModel.nowChart)
-
+                    
+                    
                     NewSongOfTheMonthView().environmentObject(playState)
 
                     NewsView().environmentObject(playState)

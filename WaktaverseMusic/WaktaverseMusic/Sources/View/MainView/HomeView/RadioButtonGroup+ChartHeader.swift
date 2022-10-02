@@ -11,18 +11,18 @@ import SwiftUI
 struct RadioButton: View {
     let id: Int
     let title: String
-    let callback: (Int) -> Void
+     let callback: (Int) -> Void
     let selectedId: Int
     init(
         title: String,
         id: Int,
-        callback: @escaping (Int) -> Void,
+         callback: @escaping (Int) -> Void,
         selectedID: Int
     ) {
         self.title = title
         self.id = id
         self.selectedId = selectedID
-        self.callback = callback
+         self.callback = callback
     }
 
     var body: some View {
@@ -30,7 +30,6 @@ struct RadioButton: View {
         Button {
 
             self.callback(id)
-
         } label: {
 
             Text(title).font(.custom("PretendardVariable-Regular", size: 15)).padding(.vertical, 2).padding(.horizontal, 6) // 자간 간격 4 만큼
@@ -50,10 +49,9 @@ struct RadioButton: View {
 }
 
 // - MARK: Group
-struct RadioButtonGroup: View {
+struct RadioButtonView: View {
     let items: [String] = ["누적", "시간", "일간", "주간", "월간"]
 
-    // @State var selectedId:Int = 0 //현재 선택된 상태를 저장할 변수
     @Binding var selectedId: Int
     @Binding var musicCart: [SimpleSong]
     let callback: ((Int, Int)) -> Void
@@ -64,8 +62,6 @@ struct RadioButtonGroup: View {
     }
 
     var body: some View {
-        ChartHeader(chartIndex: $selectedId, musicCart: $musicCart)
-
         VStack(alignment: .leading) {
             HStack(spacing: 10) { // 버튼간 간격
 
@@ -79,7 +75,7 @@ struct RadioButtonGroup: View {
 
 }
 
-struct ChartHeader: View {
+struct ChartHeaderView: View {
 
     @Binding var chartIndex: Int
     @Binding var musicCart: [SimpleSong]
