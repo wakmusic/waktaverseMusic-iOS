@@ -39,7 +39,7 @@ struct NewSongMoreView: View {
             ScrollView(.vertical, showsIndicators: false) {
 
                     LazyVGrid(columns: columns, spacing: 0) {
-                        ThreeColumnsGrid
+                        TwoColumnsGrid
                     }
 
             }.navigationTitle("이달의 신곡")
@@ -56,7 +56,7 @@ struct NewSongMoreView: View {
 
 extension NewSongMoreView {
 
-    var ThreeColumnsGrid: some View {
+    var TwoColumnsGrid: some View {
 
         ForEach(newsongs, id: \.self.id) { song in
             let width = UIScreen.main.bounds.width/2.5
