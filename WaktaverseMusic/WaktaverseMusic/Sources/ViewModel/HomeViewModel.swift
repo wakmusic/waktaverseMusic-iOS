@@ -31,10 +31,13 @@ protocol HomeViewModelOutput {
 final class HomeViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     @Published var nowChart: [RankedSong] = [RankedSong]()
+    @Published var newSongs: [NewSong] = [NewSong]()
+
     var subscription = Set<AnyCancellable>()
 
     init() {
         fetchTop20(category: .total) // 초기화  chart는 누적으로 지정
+        fetchNewSong()
     }
 
     func fetchTop20(category: TopCategory) {
@@ -46,6 +49,27 @@ final class HomeViewModel: ObservableObject {
                 guard let self = self else {return}
 
                 self.nowChart = datas  // chart 갱신
+
+            }.store(in: &subscription)
+    }
+
+    func fetchNewSong() {
+        Repository.shared.fetchNewMonthSong()
+            .sink { completion in
+
+                switch completion {
+                case .failure(let err):
+                    print(" \(#file) \(#function) \(#line) \(err.localizedDescription)")
+
+                case .finished:
+                    print(" \(#file) \(#function) \(#line) Finish")
+                }
+
+            } receiveValue: { [weak self] (rawData: newMonthInfo) in
+
+                guard let self = self else {return}
+
+                self.newSongs = rawData.data
 
             }.store(in: &subscription)
     }

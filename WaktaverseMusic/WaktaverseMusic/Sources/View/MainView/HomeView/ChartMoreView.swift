@@ -10,6 +10,7 @@ import Kingfisher
 import Foundation
 import ScalingHeaderScrollView
 
+// MARK: 차트 더보기를 눌렀을 때 나오는 뷰 입니다.
 struct ChartMoreView: View {
     @State var index: Int = 0 // 애니메이션 때문에 ChartMoreView에서는 index 사용 후 Disapper에서 BindingIndex로 값 전달
     @Binding var Bindingindex: Int
@@ -229,7 +230,7 @@ struct PinnedHeaderView: View {
             HStack {
                 Spacer()
                 Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
-                Text(convertTimeStamp(updateTime)).font(.caption)
+                Text(updateTime.convertTimeStamp()).font(.caption)
 
             }.padding(.trailing, 5)
         }
@@ -341,6 +342,7 @@ extension ChartMoreView {
 
                 guard let self = self else {return}
 
+                print("updateTime", time)
                 self.updateTime = time
             }.store(in: &subscription)
 

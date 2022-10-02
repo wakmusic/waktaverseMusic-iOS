@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import Kingfisher
 
+// MARK: 이달의 신곡 더보기를 눌렀을 때 나오는 뷰 입니다.
 struct NewSongMoreView: View {
 
     @EnvironmentObject var playState: PlayState

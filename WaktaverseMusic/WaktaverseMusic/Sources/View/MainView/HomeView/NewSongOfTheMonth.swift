@@ -10,6 +10,7 @@ import Foundation
 import Combine
 import Kingfisher
 
+// MARK: 이달의 신곡 뷰 입니다.
 struct NewSongOfTheMonthView: View {
 
     @EnvironmentObject var playState: PlayState

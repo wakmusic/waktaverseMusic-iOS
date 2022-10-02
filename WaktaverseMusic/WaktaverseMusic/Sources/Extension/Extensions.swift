@@ -32,6 +32,17 @@ extension String {
     }
 }
 
+extension Int {
+    func convertTimeStamp() -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let dateString = formatter.string(from: date)
+
+        return dateString
+    }
+}
+
 extension Color {
 
     init(hexcode: String) {
