@@ -80,7 +80,7 @@ extension NewSongOfTheMonthView {
                 VStack(alignment: .leading) {
                     Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1).frame(width: 100, alignment: .leading)
                     Text(song.artist).font(.caption).lineLimit(1).frame(width: 100, alignment: .leading)
-                    Text(song.date.convertReleaseTime()).font(.caption2).lineLimit(1).foregroundColor(.gray).frame(width: 100, alignment: .leading)
+                    Text(song.date.convertTimeStamp()).font(.caption2).lineLimit(1).foregroundColor(.gray).frame(width: 100, alignment: .leading)
                 }.frame(width: 100)
 
             }.padding().onTapGesture {

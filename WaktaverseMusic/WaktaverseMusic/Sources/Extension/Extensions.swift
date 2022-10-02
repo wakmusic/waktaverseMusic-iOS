@@ -33,22 +33,13 @@ extension String {
 }
 
 extension Int {
-    func convertUpdatedTime() -> String {
+    func convertTimeStamp() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(self))
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy.MM.dd HH:mm"
         let dateString = formatter.string(from: date)
 
         return dateString
-    }
-
-    func convertReleaseTime() -> String {
-        let convTime: String = String(self)
-        let year: String = convTime.substring(from: 0, to: 1)
-        let month: String = convTime.substring(from: 2, to: 3)
-        let day: String = convTime.substring(from: 4, to: 5)
-
-        return "20\(year).\(month).\(day)"
     }
 }
 
