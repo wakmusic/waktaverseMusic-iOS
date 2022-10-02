@@ -49,7 +49,7 @@
 		D80F435828E6DD1000C4A485 /* NewsMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431828E6DD1000C4A485 /* NewsMoreView.swift */; };
 		D80F435928E6DD1000C4A485 /* NewSongMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */; };
 		D80F435A28E6DD1000C4A485 /* ChartMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */; };
-		D80F435B28E6DD1000C4A485 /* FiveRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431D28E6DD1000C4A485 /* FiveRowSongGridView.swift */; };
+		D80F435B28E6DD1000C4A485 /* FourRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431D28E6DD1000C4A485 /* FourRowSongGridView.swift */; };
 		D80F435C28E6DD1000C4A485 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431E28E6DD1000C4A485 /* HomeView.swift */; };
 		D80F435D28E6DD1000C4A485 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431F28E6DD1000C4A485 /* NewsView.swift */; };
 		D80F435E28E6DD1000C4A485 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432128E6DD1000C4A485 /* CardView.swift */; };
@@ -112,7 +112,7 @@
 		D80F431828E6DD1000C4A485 /* NewsMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMoreView.swift; sourceTree = "<group>"; };
 		D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSongMoreView.swift; sourceTree = "<group>"; };
 		D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartMoreView.swift; sourceTree = "<group>"; };
-		D80F431D28E6DD1000C4A485 /* FiveRowSongGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiveRowSongGridView.swift; sourceTree = "<group>"; };
+		D80F431D28E6DD1000C4A485 /* FourRowSongGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourRowSongGridView.swift; sourceTree = "<group>"; };
 		D80F431E28E6DD1000C4A485 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D80F431F28E6DD1000C4A485 /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		D80F432128E6DD1000C4A485 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 			children = (
 				D80F431E28E6DD1000C4A485 /* HomeView.swift */,
 				D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */,
-				D80F431D28E6DD1000C4A485 /* FiveRowSongGridView.swift */,
+				D80F431D28E6DD1000C4A485 /* FourRowSongGridView.swift */,
 				D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */,
 				D80F431628E6DD1000C4A485 /* NewSongOfTheMonth.swift */,
 				D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */,
@@ -516,7 +516,7 @@
 			files = (
 				D80F436C28E6DD1000C4A485 /* MiniPlayer.swift in Sources */,
 				D80F437828E9919300C4A485 /* HeaderViews.swift in Sources */,
-				D80F435B28E6DD1000C4A485 /* FiveRowSongGridView.swift in Sources */,
+				D80F435B28E6DD1000C4A485 /* FourRowSongGridView.swift in Sources */,
 				D80F435728E6DD1000C4A485 /* NewSongOfTheMonth.swift in Sources */,
 				7B1D20AF28E95054006F67C6 /* Const.swift in Sources */,
 				7B1D20A728E94E2B006F67C6 /* ArtistViewModel.swift in Sources */,

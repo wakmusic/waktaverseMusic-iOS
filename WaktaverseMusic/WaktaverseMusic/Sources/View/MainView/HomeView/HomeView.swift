@@ -27,7 +27,7 @@ struct HomeView: View {
 
                     }.environmentObject(playState)
 
-                    FiveRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) // nowChart 넘겨주기
+                    FourRowSongGridView(nowChart: $viewModel.nowChart).environmentObject(playState) // nowChart 넘겨주기
                         .onChange(of: index) { newIndex in
                             viewModel.didChangeNowChart(index: newIndex)
                         }

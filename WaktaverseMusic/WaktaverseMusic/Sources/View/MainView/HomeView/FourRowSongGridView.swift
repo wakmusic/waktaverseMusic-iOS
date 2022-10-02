@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct FiveRowSongGridView: View {
+struct FourRowSongGridView: View {
 
     private let rows = [GridItem(.fixed(40), spacing: 10), // fixed 행 크기 ,spacing, 행간의 거리
                         GridItem(.fixed(40), spacing: 10),
@@ -25,7 +25,7 @@ struct FiveRowSongGridView: View {
 
                 VStack(alignment: .leading) {
                     LazyHGrid(rows: rows, spacing: 30) { // GridItem 형태와, 요소간 옆 거리
-                        fiveRowSongGridItemViews.environmentObject(playState).id(0)
+                        FourRowSongGridItemViews.environmentObject(playState).id(0)
                     }
                 }
                 .onChange(of: nowChart) { _ in
@@ -41,9 +41,9 @@ struct FiveRowSongGridView: View {
 
 }
 
-private extension FiveRowSongGridView {
+private extension FourRowSongGridView {
 
-    var fiveRowSongGridItemViews: some View {
+    var FourRowSongGridItemViews: some View {
 
         ForEach(nowChart.indices, id: \.self) { index in // 여기서 id설정이 굉장히 중요하다. indices로 접근하기 때문에 속성의 id 말고 \.self를 사용함
             let song = nowChart[index]
