@@ -14,7 +14,6 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel = HomeViewModel() // StateObject로 선언 View에 종속하지않기위해
     @EnvironmentObject var playState: PlayState
     @Binding var musicCart: [SimpleSong]
-    let width = UIScreen.main.bounds.width
 
     @State var index: Int = 0
 
