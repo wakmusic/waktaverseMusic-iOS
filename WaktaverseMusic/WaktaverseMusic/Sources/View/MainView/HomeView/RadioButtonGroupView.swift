@@ -49,7 +49,7 @@ struct RadioButton: View {
 }
 
 // - MARK: Group
-struct RadioButtonView: View {
+struct RadioButtonGroupView: View {
     let items: [String] = ["누적", "시간", "일간", "주간", "월간"]
 
     @Binding var selectedId: Int

@@ -23,7 +23,7 @@ struct HomeView: View {
             NavigationView {
                 ScrollView(.vertical, showsIndicators: false) {
                     ChartHeaderView(chartIndex: $index, musicCart: $musicCart)
-                    RadioButtonView(selectedId: $index, musicCart: $musicCart) { (_, _) in
+                    RadioButtonGroupView(selectedId: $index, musicCart: $musicCart) { (_, _) in
 
                     }.environmentObject(playState)
 

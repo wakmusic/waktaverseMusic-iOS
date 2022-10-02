@@ -60,7 +60,7 @@
 		D80F436328E6DD1000C4A485 /* TextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432828E6DD1000C4A485 /* TextModifier.swift */; };
 		D80F436428E6DD1000C4A485 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432928E6DD1000C4A485 /* ImageModifier.swift */; };
 		D80F436628E6DD1000C4A485 /* CafeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432C28E6DD1000C4A485 /* CafeWebView.swift */; };
-		D80F436828E6DD1000C4A485 /* RadioButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433028E6DD1000C4A485 /* RadioButtonGroup.swift */; };
+		D80F436828E6DD1000C4A485 /* RadioButtonGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */; };
 		D80F436928E6DD1000C4A485 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433328E6DD1000C4A485 /* VideoPlayerViewModel.swift */; };
 		D80F436A28E6DD1000C4A485 /* PlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433528E6DD1000C4A485 /* PlayListView.swift */; };
 		D80F436B28E6DD1000C4A485 /* InvisibleRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433628E6DD1000C4A485 /* InvisibleRefreshView.swift */; };
@@ -123,7 +123,7 @@
 		D80F432828E6DD1000C4A485 /* TextModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
 		D80F432928E6DD1000C4A485 /* ImageModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
 		D80F432C28E6DD1000C4A485 /* CafeWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeWebView.swift; sourceTree = "<group>"; };
-		D80F433028E6DD1000C4A485 /* RadioButtonGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonGroup.swift; sourceTree = "<group>"; };
+		D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonGroupView.swift; sourceTree = "<group>"; };
 		D80F433328E6DD1000C4A485 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		D80F433528E6DD1000C4A485 /* PlayListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListView.swift; sourceTree = "<group>"; };
 		D80F433628E6DD1000C4A485 /* InvisibleRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvisibleRefreshView.swift; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				D80F431E28E6DD1000C4A485 /* HomeView.swift */,
-				D80F433028E6DD1000C4A485 /* RadioButtonGroup.swift */,
+				D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */,
 				D80F431D28E6DD1000C4A485 /* FiveRowSongGridView.swift */,
 				D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */,
 				D80F431628E6DD1000C4A485 /* NewSongOfTheMonth.swift */,
@@ -525,7 +525,7 @@
 				D80F436028E6DD1000C4A485 /* SettingScreenView.swift in Sources */,
 				D80F434E28E6DD1000C4A485 /* RankedSong.swift in Sources */,
 				D80F436428E6DD1000C4A485 /* ImageModifier.swift in Sources */,
-				D80F436828E6DD1000C4A485 /* RadioButtonGroup.swift in Sources */,
+				D80F436828E6DD1000C4A485 /* RadioButtonGroupView.swift in Sources */,
 				7B1D20B328E950AC006F67C6 /* URL.swift in Sources */,
 				D80F436A28E6DD1000C4A485 /* PlayListView.swift in Sources */,
 				D80F437228E6DD1000C4A485 /* Repository.swift in Sources */,
