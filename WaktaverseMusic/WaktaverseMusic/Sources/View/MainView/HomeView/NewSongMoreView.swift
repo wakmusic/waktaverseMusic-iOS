@@ -91,7 +91,7 @@ extension NewSongMoreView {
                 VStack(alignment: .leading) {
                     Text(song.title).font(.system(size: 13, weight: .semibold, design: Font.Design.default)).lineLimit(1).frame(width: width, alignment: .leading)
                     Text(song.artist).font(.caption).lineLimit(1).frame(width: width, alignment: .leading)
-                    Text(convertTimeStamp(song.date)).font(.caption2).foregroundColor(.gray).lineLimit(1).frame(width: width, alignment: .leading)
+                    Text(song.date.convertReleaseTime()).font(.caption2).foregroundColor(.gray).lineLimit(1).frame(width: width, alignment: .leading)
                 }.frame(width: width)
 
             }.padding(.vertical, 5).onTapGesture {
@@ -103,15 +103,4 @@ extension NewSongMoreView {
         }
 
     }
-
-    func convertTimeStamp(_ time: Int) -> String {
-        let convTime: String = String(time)
-        let year: String = convTime.substring(from: 0, to: 1)
-        let month: String = convTime.substring(from: 2, to: 3)
-        let day: String = convTime.substring(from: 4, to: 5)
-
-        return "20\(year).\(month).\(day)"
-
-    }
-
 }

@@ -147,7 +147,7 @@ struct ArtistSongListItemView: View {
 
             // -Play and List Button
 
-            Text(convertTimeStamp2(song.date)).foregroundColor(accentColor).font(.caption2).lineLimit(1)
+            Text(song.date.convertReleaseTime()).foregroundColor(accentColor).font(.caption2).lineLimit(1)
 
             Spacer()
 
@@ -274,16 +274,6 @@ struct ArtistPinnedHeader: View {
 
         }.frame(height: ScreenSize.height/5)
     }
-}
-
-func convertTimeStamp2(_ time: Int) -> String {
-    let convTime: String = String(time)
-    let year: String = convTime.substring(from: 0, to: 1)
-    let month: String = convTime.substring(from: 2, to: 3)
-    let day: String = convTime.substring(from: 4, to: 5)
-
-    return "20\(year).\(month).\(day)"
-
 }
 
 func castingFromNewSongToSimple(newSongList: [NewSong]) -> [SimpleSong] {

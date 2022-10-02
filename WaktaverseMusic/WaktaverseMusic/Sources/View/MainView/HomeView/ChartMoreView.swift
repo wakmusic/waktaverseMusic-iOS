@@ -230,7 +230,7 @@ struct PinnedHeaderView: View {
             HStack {
                 Spacer()
                 Image(systemName: "checkmark").foregroundColor(Color.primary).font(.caption)
-                Text(updateTime.convertTimeStamp()).font(.caption)
+                Text(updateTime.convertUpdatedTime()).font(.caption)
 
             }.padding(.trailing, 5)
         }

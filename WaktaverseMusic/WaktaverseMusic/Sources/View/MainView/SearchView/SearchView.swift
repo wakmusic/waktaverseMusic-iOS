@@ -116,7 +116,7 @@ struct SongListItemView: View {
 
             // -Play and List Button
 
-            Text(convertTimeStamp2(song.date)).foregroundColor(accentColor).font(.caption2).lineLimit(1)
+            Text(song.date.convertReleaseTime()).foregroundColor(accentColor).font(.caption2).lineLimit(1)
 
             Spacer()
 
