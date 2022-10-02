@@ -89,26 +89,3 @@ extension NewsView {
     }
 
 }
-
-struct NewsHeader: View {
-
-    @Binding var news: [NewsModel]
-
-    var body: some View {
-
-        VStack(alignment: .leading, spacing: 5) {
-            HStack {
-                Text("NEWS").font(.system(size: 35, weight: .bold, design: .rounded)).foregroundColor(Color.primary)
-                Spacer()
-
-                NavigationLink {
-                    NewsMoreView(news: $news)
-                } label: {
-                    Text("더보기").foregroundColor(.gray)
-                }
-
-            }
-            Divider()
-        }.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
-    }
-}
