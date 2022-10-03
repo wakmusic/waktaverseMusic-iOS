@@ -9,83 +9,38 @@ import Foundation
 import Combine
 import Alamofire
 
-enum TopCategory {
-
-    case total
-    case time
-    case daily
-    case weekly
-    case monthly
+enum TopCategory: String {
+    case total, hourly, daily, weekly, monthly
 }
 
 class Repository {
     static let shared: Repository = Repository() // 싱글톤 패턴
 
-    func fetchTop20(category: TopCategory) -> AnyPublisher<[RankedSong], Error> // 메인 화면에 20개만
-    {
-        var url: String
-        switch category {
-        case .total:
-            url = ApiCollections.totalTop100
-        case .time:
-            url = ApiCollections.timeTop100
-        case .daily:
-            url = ApiCollections.dailyTop100
-        case .weekly:
-            url = ApiCollections.weaklyTop100
-        case .monthly:
-            url = ApiCollections.monthlyTop100
+    /// category 차트 상위 limit 개의 곡 정보를 불러옵니다.
+    /// - Parameter category: 차트 카테고리
+    /// - Parameter limit: 불러올 갯수
+    /// - Returns: [RankedSong]
+    func fetchTopRankedSong(category: TopCategory, limit: Int = 100) -> AnyPublisher<[RankedSong], Error> {
+        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue + "/" + String(limit)
 
-        }
-        url = url.replacingOccurrences(of: "100", with: "20") // 100을 20개로
         return AF.request(url)
-            .publishDecodable(type: [RankedSong].self) // SimpleSong 타입으로 decoding
-            .value() //  return:  AnyPublisher<[SimpleViwer], AFError>
-            .mapError { (err: AFError) in
-                return err as Error
-            }
-            .eraseToAnyPublisher() // UnWraaping
-    }
-
-    func fetchTop100(category: TopCategory) -> AnyPublisher<[RankedSong], Error> {
-        let url: String
-        switch category {
-        case .total:
-            url = ApiCollections.totalTop100
-        case .time:
-            url = ApiCollections.timeTop100
-        case .daily:
-            url = ApiCollections.dailyTop100
-        case .weekly:
-            url = ApiCollections.weaklyTop100
-        case .monthly:
-            url = ApiCollections.monthlyTop100
-        }
-        return AF.request(url)
-            .publishDecodable(type: [RankedSong].self)
-            .value()
-            .mapError { (err: AFError) in
+            .validate(statusCode: 200..<300)
+            .publishDecodable(type: [RankedSong].self) // RankedSong 타입으로 decoding
+            .value() // return: AnyPublisher<[RankedSong], AFError>
+            .mapError { (err: Error) in
                 return err as Error
             }
             .eraseToAnyPublisher()
     }
 
+    /// category 차트의 새로고침 타임스탬프를 불러옵니다.
+    /// - Parameter category: 차트 카테고리
+    /// - Returns: Int ex) 1664787831
     func fetchUpdateTimeStmap(category: TopCategory) -> AnyPublisher<Int, Error> {
-        let url: String
-        switch category {
-        case .total:
-            url = ApiCollections.chartUpdateTotal
-        case .time:
-            url = ApiCollections.chartUpdateHourly
-        case .daily:
-            url = ApiCollections.chartUpdateDaily
-        case .weekly:
-            url = ApiCollections.chartUpdateWeekly
-        case .monthly:
-            url = ApiCollections.chartUpdateMonthly
-        }
+        let url = "https://billboardoo.com" + Const.URL.api + Const.URL.charts + "/" + Const.URL.update + "/" + category.rawValue
 
         return AF.request(url)
+            .validate(statusCode: 200..<300)
             .publishDecodable(type: Int.self)
             .value()
             .mapError { (err: AFError) in
@@ -94,10 +49,13 @@ class Repository {
             .eraseToAnyPublisher()
     }
 
+    /// 이달의 신곡 정보들을 불러옵니다.
+    /// - Returns: newMonthInfo
     func fetchNewMonthSong() -> AnyPublisher<newMonthInfo, Error> {
         let url = ApiCollections.newMonthly
 
         return AF.request(url)
+            .validate(statusCode: 200..<300)
             .publishDecodable(type: newMonthInfo.self)
             .value()
             .mapError { (err: AFError) in
@@ -106,11 +64,13 @@ class Repository {
             .eraseToAnyPublisher()
     }
 
+    /// 뉴스 정보를 불러옵니다.
+    /// - Returns: [NewsModel]
     func fetchNews() -> AnyPublisher<[NewsModel], Error> {
-
         let url = ApiCollections.news
 
         return AF.request(url)
+            .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewsModel].self)
             .value()
             .mapError { (err: AFError) in
@@ -119,10 +79,13 @@ class Repository {
             .eraseToAnyPublisher()
     }
 
+    /// 아티스트 정보들을 불러옵니다.
+    /// - Returns: [Artist]
     func fetchArtists() -> AnyPublisher<[Artist], Error> {
-        let url = ApiCollections.artiest
+        let url = ApiCollections.artist
 
         return AF.request(url)
+            .validate(statusCode: 200..<300)
             .publishDecodable(type: [Artist].self)
             .value()
             .mapError { (err: AFError) in
@@ -130,10 +93,12 @@ class Repository {
             }
             .eraseToAnyPublisher()
     }
-
+    
     func fetchSearchSongsList(_ name: String) -> AnyPublisher<[NewSong], Error> {
         let url = "\(ApiCollections.albums)\(name)"
-        return  AF.request(url)
+
+        return AF.request(url)
+            .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewSong].self)
             .value()
             .mapError { (err: AFError) in
@@ -141,11 +106,13 @@ class Repository {
             }
             .eraseToAnyPublisher()
     }
-
+    
     func fetchSearchWithKeyword(_ keyword: String) -> AnyPublisher<[NewSong], Error> {
         let url = "\(ApiCollections.searchTitleOrArtiest)\(keyword)"
+
         let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! // 한글로 인한 인코딩
         return  AF.request(encodedUrl)
+            .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewSong].self)
             .value()
             .mapError { (err: AFError) in
