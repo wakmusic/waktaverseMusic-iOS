@@ -43,36 +43,36 @@ final class HomeViewModel: ObservableObject {
     }
 
     func fetchTop20(category: TopCategory) {
-        Repository.shared.fetchTop20(category: category)
-            .sink { _ in
+        Repository.shared.fetchTopRankedSong(category: category, limit: 20)
+            .sink { completion in
+                switch completion {
+                case .failure(let err):
+                    print(#file, #function, #line, err.localizedDescription)
+
+                case .finished:
+                    print(#function, "Finish")
+                }
 
             } receiveValue: { [weak self] (datas: [RankedSong]) in
-
                 guard let self = self else {return}
-
                 self.nowChart = datas  // chart 갱신
-
             }.store(in: &subscription)
     }
 
     func fetchNewSong() {
         Repository.shared.fetchNewMonthSong()
             .sink { completion in
-
                 switch completion {
                 case .failure(let err):
-                    print(" \(#file) \(#function) \(#line) \(err.localizedDescription)")
+                    print(#file, #function, #line, err.localizedDescription)
 
                 case .finished:
-                    print(" \(#file) \(#function) \(#line) Finish")
+                    print(#function, "Finish")
                 }
 
             } receiveValue: { [weak self] (rawData: newMonthInfo) in
-
                 guard let self = self else {return}
-
                 self.newSongs = rawData.data
-
             }.store(in: &subscription)
     }
 
@@ -80,11 +80,8 @@ final class HomeViewModel: ObservableObject {
         Repository.shared.fetchNews().sink { (_) in
 
         } receiveValue: { [weak self] (data: [NewsModel]) in
-
             guard let self = self else {return}
-
             self.news = data
-
         }.store(in: &subscription)
     }
 }
@@ -95,7 +92,7 @@ extension HomeViewModel {
         case 0:
             fetchTop20(category: .total)
         case 1:
-            fetchTop20(category: .time)
+            fetchTop20(category: .hourly)
         case 2:
             fetchTop20(category: .daily)
         case 3:

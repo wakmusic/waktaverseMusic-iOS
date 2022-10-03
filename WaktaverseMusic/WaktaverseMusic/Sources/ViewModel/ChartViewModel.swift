@@ -14,25 +14,32 @@ final class ChartViewModel: ObservableObject {
     var subscription = Set<AnyCancellable>()
 
     func fetchChart(_ category: TopCategory) {
-        Repository.shared.fetchTop100(category: category).sink { _ in
+        Repository.shared.fetchTopRankedSong(category: category).sink { completion in
+            switch completion {
+            case .failure(let err):
+                print(#file, #function, #line, err.localizedDescription)
 
+            case .finished:
+                print(#function, "Finish")
+            }
         } receiveValue: { [weak self] (data: [RankedSong]) in
-
             guard let self = self else {return}
-
             self.currentShowCharts = data
-
         }.store(in: &subscription)
 
     }
 
     func fetchUpdateTime(_ category: TopCategory) {
-        Repository.shared.fetchUpdateTimeStmap(category: category).sink { _ in
+        Repository.shared.fetchUpdateTimeStmap(category: category).sink { completion in
+            switch completion {
+            case .failure(let err):
+                print(#file, #function, #line, err.localizedDescription)
 
+            case .finished:
+                print(#function, "Finish")
+            }
         } receiveValue: { [weak self] time in
-
             guard let self = self else {return}
-
             self.updateTime = time
         }.store(in: &subscription)
 
