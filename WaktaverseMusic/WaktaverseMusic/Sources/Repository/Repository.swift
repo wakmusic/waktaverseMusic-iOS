@@ -93,9 +93,12 @@ class Repository {
             }
             .eraseToAnyPublisher()
     }
-    
+
+    /// 해당 아티스트의 곡 정보들을 불러옵니다.
+    /// - Parameter name: 아티스트의 이름
+    /// - Returns [NewSong]
     func fetchSearchSongsList(_ name: String) -> AnyPublisher<[NewSong], Error> {
-        let url = "\(ApiCollections.albums)\(name)"
+        let url = ApiCollections.albums + name
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
@@ -106,11 +109,14 @@ class Repository {
             }
             .eraseToAnyPublisher()
     }
-    
-    func fetchSearchWithKeyword(_ keyword: String) -> AnyPublisher<[NewSong], Error> {
-        let url = "\(ApiCollections.searchTitleOrArtiest)\(keyword)"
 
+    /// keyword로 검색한 곡 정보들을 불러옵니다.
+    /// - Parameter keyword: 검색한 내용
+    /// - Returns [NewSong]
+    func fetchSearchWithKeyword(_ keyword: String) -> AnyPublisher<[NewSong], Error> {
+        let url = ApiCollections.searchTitleOrArtiest + keyword
         let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! // 한글로 인한 인코딩
+        
         return  AF.request(encodedUrl)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewSong].self)
