@@ -10,10 +10,11 @@ import Foundation
 extension Const {
     struct URL {
         // base URL
-        static let baseURL = "https://billboardoo.com"
+        static let base = "https://wakmusic.xyz"
 
         static let api = "/api"
         static let auth = "/auth"
-
+        static let charts = "/charts"
+        static let update = "update"
     }
 }

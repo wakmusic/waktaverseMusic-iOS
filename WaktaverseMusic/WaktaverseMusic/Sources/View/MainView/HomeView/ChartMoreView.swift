@@ -54,8 +54,8 @@ struct ChartMoreView: View {
                             viewModel.fetchChart(.total)
                             viewModel.fetchUpdateTime(.total)
                         case 1:
-                            viewModel.fetchChart(.time)
-                            viewModel.fetchUpdateTime(.time)
+                            viewModel.fetchChart(.hourly)
+                            viewModel.fetchUpdateTime(.hourly)
 
                         case 2:
                             viewModel.fetchChart(.daily)
@@ -90,8 +90,8 @@ struct ChartMoreView: View {
                     viewModel.fetchChart(.total)
                     viewModel.fetchUpdateTime(.total)
                 case 1:
-                    viewModel.fetchChart(.time)
-                    viewModel.fetchUpdateTime(.time)
+                    viewModel.fetchChart(.hourly)
+                    viewModel.fetchUpdateTime(.hourly)
 
                 case 2:
                     viewModel.fetchChart(.daily)
