@@ -23,14 +23,14 @@ struct InvisibleRefreshView: View {
                     playState.youTubePlayer.getPlaybackState { completion in
                         switch completion {
                         case .success(let state):
-                            if(playState.isPlaying != state) { // 만약 현재상태와 다를 때
+                            if playState.isPlaying != state { // 만약 현재상태와 다를 때
                                 playState.isPlaying = state // state를 저장하고
-                                
+
                                 // 노래할당이 끝난 후
-                                if(state == .ended) { // 만약 끝났을 때 다음 곡으로 넘겨준다.
+                                if state == .ended { // 만약 끝났을 때 다음 곡으로 넘겨준다.
                                     playState.forWard()
                                 }
-                                
+
                                 playState.youTubePlayer.getDuration { completion in
                                     switch completion {
                                     case .success(let time):
