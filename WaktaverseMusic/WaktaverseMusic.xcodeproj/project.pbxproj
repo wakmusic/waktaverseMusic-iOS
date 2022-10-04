@@ -66,7 +66,6 @@
 		D80F436828E6DD1000C4A485 /* RadioButtonGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */; };
 		D80F436928E6DD1000C4A485 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433328E6DD1000C4A485 /* VideoPlayerViewModel.swift */; };
 		D80F436A28E6DD1000C4A485 /* PlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433528E6DD1000C4A485 /* PlayListView.swift */; };
-		D80F436B28E6DD1000C4A485 /* InvisibleRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433628E6DD1000C4A485 /* InvisibleRefreshView.swift */; };
 		D80F436C28E6DD1000C4A485 /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433728E6DD1000C4A485 /* MiniPlayer.swift */; };
 		D80F436D28E6DD1000C4A485 /* PlayPuaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */; };
 		D80F437128E6DD1000C4A485 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433E28E6DD1000C4A485 /* ApiCollections.swift */; };
@@ -132,7 +131,6 @@
 		D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonGroupView.swift; sourceTree = "<group>"; };
 		D80F433328E6DD1000C4A485 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		D80F433528E6DD1000C4A485 /* PlayListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListView.swift; sourceTree = "<group>"; };
-		D80F433628E6DD1000C4A485 /* InvisibleRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvisibleRefreshView.swift; sourceTree = "<group>"; };
 		D80F433728E6DD1000C4A485 /* MiniPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
 		D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPuaseButton.swift; sourceTree = "<group>"; };
 		D80F433E28E6DD1000C4A485 /* ApiCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
@@ -385,7 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				D80F433528E6DD1000C4A485 /* PlayListView.swift */,
-				D80F433628E6DD1000C4A485 /* InvisibleRefreshView.swift */,
 				D80F433728E6DD1000C4A485 /* MiniPlayer.swift */,
 				D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */,
 				D80F432628E6DD1000C4A485 /* BlurView.swift */,
@@ -580,7 +577,6 @@
 				D80F434428E6DD1000C4A485 /* WaktaverseMusicApp.swift in Sources */,
 				D80F435C28E6DD1000C4A485 /* HomeView.swift in Sources */,
 				D80F436328E6DD1000C4A485 /* TextModifier.swift in Sources */,
-				D80F436B28E6DD1000C4A485 /* InvisibleRefreshView.swift in Sources */,
 				D80F435328E6DD1000C4A485 /* AccountView.swift in Sources */,
 				D80F434D28E6DD1000C4A485 /* SimpleSong.swift in Sources */,
 				D80F435E28E6DD1000C4A485 /* CardView.swift in Sources */,

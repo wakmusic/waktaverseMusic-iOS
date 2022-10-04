@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import YouTubePlayerKit
 
-class PlayState: ObservableObject {
+final class PlayState: ObservableObject {
 
     static let shared = PlayState()
 
@@ -20,6 +20,8 @@ class PlayState: ObservableObject {
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay: false, showControls: false, showRelatedVideos: false))
     @Published var isPlaying: YouTubePlayer.PlaybackState // 커스텀이 아닌 실제 State로 변경
     @Published var currentSong: SimpleSong?
+
+    var subscription = Set<AnyCancellable>()
 
     var nowPlayingSong: SimpleSong? {
         get {
@@ -41,6 +43,22 @@ class PlayState: ObservableObject {
         self.isPlaying = .unstarted
         self.playList = [SimpleSong]()
 
+        youTubePlayer.playbackStatePublisher.sink { [weak self] state in
+            guard let self = self else { return }
+            if self.isPlaying != state { // 만약 현재상태와 다를 때
+                self.isPlaying = state // state를 저장하고
+
+                // 노래할당이 끝난 후
+                if state == .ended { // 만약 끝났을 때 다음 곡으로 넘겨준다.
+                    self.forWard()
+                }
+            }
+        }.store(in: &subscription)
+
+        youTubePlayer.durationPublisher.sink { [weak self] time in
+            guard let self = self else { return }
+            self.endProgress = time
+        }.store(in: &subscription)
     }
 
     func forWard() {
@@ -49,7 +67,7 @@ class PlayState: ObservableObject {
         } else {
             self.currentPlayIndex += 1
         }
-
+        play()
     }
 
     func backWard() {
@@ -58,7 +76,15 @@ class PlayState: ObservableObject {
         } else {
             self.currentPlayIndex -= 1
         }
+        play()
+    }
 
+    private func play() {
+        guard let nowPlayingSong = self.nowPlayingSong else { return }
+        if self.currentSong != nowPlayingSong { // 값이 다를경우
+            self.currentSong = nowPlayingSong // 곡 을 변경 후
+            self.youTubePlayer.load(source: .url(nowPlayingSong.url)) // 바로 load
+        }
     }
 
     private func uniqueIndex(of item: SimpleSong) -> Int {
