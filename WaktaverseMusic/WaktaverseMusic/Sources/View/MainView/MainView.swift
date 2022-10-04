@@ -180,8 +180,17 @@ struct MainView: View {
                             .environmentObject(playState)
                             .environmentObject(player)
                             .transition(.move(edge: .bottom))
-                            .offset(y: player.isMiniPlayer ? viewModel.keyboardHeight != .zero ? 0 :  -tabHeight : 0)
-                            // miniPlayer 일 때 offset 아니면 그냥 적용
+                            .offset(y: player.isMiniPlayer
+                                    ?viewModel.keyboardHeight != .zero
+                                    ? 0 :  -tabHeight : 0)
+                            /*
+                                1.미니 플레이어 켜질 때
+                                    a. 키보드가 올라왔으면 0 (키보드 바로위에 붙히기 위해서)
+                                    b. 키보드가 없으면 탭바 만큼 띄우기
+                             
+                                2. 미니 플레이어가 꺼져있으면
+                                    offset 0
+                            */
                     }
 
                 }// Z
