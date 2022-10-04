@@ -20,47 +20,36 @@ struct InvisibleRefreshView: View {
         Text(" ")
             .onReceive(timer) { _ in
                 if let nowPlayingSong = playState.nowPlayingSong { // 트랙킹 다를 경우 .load
-
                     playState.youTubePlayer.getPlaybackState { completion in
                         switch completion {
                         case .success(let state):
-
-                            if(playState.isPlaying != state) // 만약 현재상태와 다를 때
-                            {
+                            if(playState.isPlaying != state) { // 만약 현재상태와 다를 때
                                 playState.isPlaying = state // state를 저장하고
-
+                                
                                 // 노래할당이 끝난 후
-                                if(state == .ended) // 만약 끝났을 때 다음 곡으로 넘겨준다.
-                                {
+                                if(state == .ended) { // 만약 끝났을 때 다음 곡으로 넘겨준다.
                                     playState.forWard()
                                 }
-
+                                
                                 playState.youTubePlayer.getDuration { completion in
-
                                     switch completion {
                                     case .success(let time):
                                         playState.endProgress = time
-
                                     case .failure:
                                         playState.endProgress = 0.0
                                     }
                                 }
-
                             }
 
                         case.failure(let err):
                             print(err)
-
                         }
 
                     }
 
-                    if playState.currentSong != nowPlayingSong // 값이 다를경우
-                    {
+                    if playState.currentSong != nowPlayingSong { // 값이 다를경우
                         playState.currentSong = nowPlayingSong // 곡 을 변경 후
-
                         playState.youTubePlayer.load(source: .url(nowPlayingSong.url)) // 바로 load
-
                     }
 
                 }
