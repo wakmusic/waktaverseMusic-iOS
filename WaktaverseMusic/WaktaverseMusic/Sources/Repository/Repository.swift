@@ -37,7 +37,7 @@ class Repository {
     /// - Parameter category: 차트 카테고리
     /// - Returns: Int ex) 1664787831
     func fetchUpdateTimeStmap(category: TopCategory) -> AnyPublisher<Int, Error> {
-        let url = "https://billboardoo.com" + Const.URL.api + Const.URL.charts + "/" + Const.URL.update + "/" + category.rawValue
+        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + Const.URL.update + "/" + category.rawValue
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
