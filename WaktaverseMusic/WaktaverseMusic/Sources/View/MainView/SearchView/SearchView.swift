@@ -13,7 +13,6 @@ struct SearchView: View {
 
     @StateObject private var viewModel: SearchViewModel = SearchViewModel(initalValue: "", delay: 0.3)
     @EnvironmentObject var playState: PlayState
-    @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
     @Binding var musicCart: [SimpleSong]
 
     var body: some View {
@@ -24,10 +23,10 @@ struct SearchView: View {
                 ScrollViewReader { (_: ScrollViewProxy) in
                     ScrollView(.vertical, showsIndicators: false) {
 
-                        LazyVStack(alignment: .center) {
+                        LazyVStack(alignment: .center, spacing: 0) {
                             Section {
                                 ForEach(viewModel.results, id: \.self.id) { (song: NewSong) in
-                                    SongListItemView(song: song, accentColor: .primary).environmentObject(playState)
+                                    SongListItemView(song: song, accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
 
                                 }
 
@@ -93,7 +92,10 @@ struct SongListItemView: View {
     var song: NewSong
     @EnvironmentObject var playState: PlayState
     var accentColor: Color
+    @Binding var musicCart: [SimpleSong]
+
     var body: some View {
+        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
 
         HStack {
 
@@ -121,42 +123,16 @@ struct SongListItemView: View {
             Spacer()
 
         }.contentShape(Rectangle()).padding(.horizontal, 5).onTapGesture {
-            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-            if playState.currentSong != simpleSong {
-                playState.currentSong =  simpleSong // 강제 배정
-                playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
-                playState.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
+
+            if musicCart.contains(simpleSong) {
+                musicCart = musicCart.filter({$0 != simpleSong})
+            } else {
+                musicCart.append(simpleSong)
             }
         }
 
-    }
+        .background(musicCart.contains(simpleSong) == true ? Color.tabBar : .clear)
 
-}
-
-extension SearchView {
-    final class KeyboardHeightHelper: ObservableObject {
-        @Published var keyboardHeight: CGFloat = 0
-
-        init() {
-            self.listenForKeyboardNotifications()
-        }
-
-        private func listenForKeyboardNotifications() {
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification,
-                                                   object: nil,
-                                                   queue: .main) { (notification) in
-                guard let userInfo = notification.userInfo,
-                      let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-
-                self.keyboardHeight = keyboardRect.height
-            }
-
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification,
-                                                   object: nil,
-                                                   queue: .main) { (_) in
-                self.keyboardHeight = 0
-            }
-        }
     }
 
 }

@@ -112,7 +112,7 @@ struct MiniPlayer: View {
                         .onTapGesture {
                             withAnimation(.spring()) {
                                 player.isMiniPlayer = false
-
+                                UIApplication.shared.endEditing() // 키보드 닫기
                             }
                         }
 
