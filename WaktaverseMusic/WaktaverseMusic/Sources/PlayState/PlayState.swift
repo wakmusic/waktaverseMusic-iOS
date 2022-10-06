@@ -82,12 +82,6 @@ final class PlayState: ObservableObject {
         currentSong = item
     }
 
-    func appendList(item: SimpleSong) {
-        if !playList.contains(item) { // 재생목록에 없으면
-            self.playList.append(item) // 재생목록에 추가
-        }
-    }
-
 }
 
 extension PlayState {

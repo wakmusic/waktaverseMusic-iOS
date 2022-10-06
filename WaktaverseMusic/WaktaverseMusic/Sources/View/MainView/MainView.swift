@@ -117,15 +117,17 @@ struct MainView: View {
                                         // 재생 바
                                         Spacer()
                                         Button {
-                                            let simpleSong = musicCart[0]
-                                            playState.currentSong =  simpleSong // 강제 배정
-                                            playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
-                                            playState.uniqueAppend(item: simpleSong)
-
-                                            for song in musicCart {
-                                                playState.appendList(item: song)
+                                            // 1. 첫번째 선택 곡 즉시 재생
+                                            let firstSong = musicCart.first!
+                                            playState.currentSong =  firstSong
+                                            playState.youTubePlayer.load(source: .url(firstSong.url))
+                                            
+                                            // 2. 재생목록에 없는 곡들은 재생목록에 추가
+                                            musicCart.forEach { song in
+                                                if !playState.playList.contains(song) {
+                                                    playState.playList.append(song)
+                                                }
                                             }
-
                                             musicCart.removeAll()
 
                                         } label: {
@@ -143,13 +145,13 @@ struct MainView: View {
                                         }
                                         Spacer()
                                         Button {
-
-                                            for song in musicCart {
-                                                playState.appendList(item: song)
+                                            // 재생목록에 없는 곡들은 재생목록에 추가
+                                            musicCart.forEach { song in
+                                                if !playState.playList.contains(song) {
+                                                    playState.playList.append(song)
+                                                }
                                             }
-
                                             musicCart.removeAll()
-
                                         } label: {
                                             ListBarIcon(width: width/5, height: height/28, systemIconName: "plus", text: "담기")
                                         }
