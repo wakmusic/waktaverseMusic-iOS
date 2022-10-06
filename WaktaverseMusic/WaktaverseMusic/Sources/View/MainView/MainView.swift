@@ -44,11 +44,6 @@ struct MainView: View {
                 let height = max(geometry.size.width, geometry.size.height)
                 let tabHeight = UIDevice.current.hasNotch ?  geometry.size.height/15 : geometry.size.height/13
                 ZStack(alignment: .bottom) {
-//                    YoutubeView().environmentObject(playState)
-//                        .opacity(0)
-                    InvisibleRefreshView()
-                        .opacity(0)
-
                     VStack(spacing: 0) {
 
                         if !networkManager.isConnected {
