@@ -15,7 +15,7 @@ final class PlayState: ObservableObject {
     @Published var playList = PlayList()
     @Published var progress = PlayProgress()
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay: false, showControls: false, showRelatedVideos: false))
-    @Published var isPlaying: YouTubePlayer.PlaybackState  = .unstarted // 재생상태에 따라 변화
+    @Published var isPlaying: YouTubePlayer.PlaybackState  = .unstarted // YouTubePlayer의 재생상태에 따라 변화
     @Published var currentSong: SimpleSong?
 
     var subscription = Set<AnyCancellable>()
@@ -39,6 +39,21 @@ final class PlayState: ObservableObject {
         }.store(in: &subscription)
     }
 
+}
+
+// MARK: YouTubePlayer 컨트롤과 관련된 메소드들을 모아놓은 익스텐션입니다.
+extension PlayState {
+
+    func play() {
+        guard let currentSong = currentSong else { return }
+        self.youTubePlayer.load(source: .url(currentSong.url)) // 바로 load
+    }
+
+    func play(at item: SimpleSong?) {
+        currentSong = item
+        play()
+    }
+
     func forWard() {
         if self.playList.isLast { // 맨 뒤면
             self.playList.currentPlayIndex = 0 // 첫 번째로 이동
@@ -59,18 +74,9 @@ final class PlayState: ObservableObject {
         play()
     }
 
-    func play() {
-        guard let currentSong = currentSong else { return }
-        self.youTubePlayer.load(source: .url(currentSong.url)) // 바로 load
-    }
-
-    func play(at item: SimpleSong?) {
-        currentSong = item
-        play()
-    }
-
 }
 
+// MARK: 커스텀 타입들을 모아놓은 익스텐션입니다.
 extension PlayState {
     public class PlayList: ObservableObject {
         @Published var list: [SimpleSong]
