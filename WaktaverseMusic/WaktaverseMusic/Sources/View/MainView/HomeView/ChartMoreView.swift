@@ -207,9 +207,9 @@ struct PinnedHeaderView: View {
                 RoundedRectangleButton(width: ScreenSize.width/2.5, height: ScreenSize.width/15, text: "전체 재생", color: .tabBar, textColor: .primary, imageSource: "play.fill")
                     .onTapGesture {
                         playState.playList.removeAll() // 전부 지운후
-                        playState.playList = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
+                        playState.playList.list = castingFromRankedToSimple(rankedList: chart)  // 현재 해당 chart로 덮어쓰고
                         playState.youTubePlayer.load(source: .url(chart[0].url)) // 첫번째 곡 재생
-                        playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                        playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
 
                     }
                 Spacer()
@@ -218,9 +218,9 @@ struct PinnedHeaderView: View {
                     .onTapGesture {
 
                         playState.playList.removeAll() // 전부 지운후
-                        playState.playList = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
-                        shuffle(playlist: &playState.playList)  // 셔플 시킨 후
-                        playState.currentPlayIndex = 0 // 인덱스 0으로 맞춤
+                        playState.playList.list = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
+                        shuffle(playlist: &playState.playList.list)  // 셔플 시킨 후
+                        playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                         playState.youTubePlayer.load(source: .url(chart[0].url)) // 첫번째 곡 재생
 
                     }
