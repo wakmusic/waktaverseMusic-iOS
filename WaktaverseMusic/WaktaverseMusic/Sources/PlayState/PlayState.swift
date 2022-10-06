@@ -13,8 +13,7 @@ final class PlayState: ObservableObject {
 
     static let shared = PlayState()
     @Published var playList = PlayList()
-    @Published var currentProgress: Double = 0
-    @Published var endProgress: Double = 0
+    @Published var progress = PlayProgress()
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay: false, showControls: false, showRelatedVideos: false))
     @Published var isPlaying: YouTubePlayer.PlaybackState  = .unstarted // 재생상태에 따라 변화
     @Published var currentSong: SimpleSong?
@@ -36,7 +35,7 @@ final class PlayState: ObservableObject {
 
         youTubePlayer.durationPublisher.sink { [weak self] time in
             guard let self = self else { return }
-            self.endProgress = time
+            self.progress.endProgress = time
         }.store(in: &subscription)
     }
 
@@ -120,5 +119,10 @@ extension PlayState {
             return list.contains(item)
         }
 
+    }
+
+    public struct PlayProgress {
+        var currentProgress: Double = 0
+        var endProgress: Double = 0
     }
 }

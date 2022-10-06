@@ -225,10 +225,10 @@ struct ProgressBar: View {
         if playState.currentSong != nil {
             VStack {
                 // Sldier 설정 및 바인딩
-                Slider(value: $playState.currentProgress, in: 0...playState.endProgress) { change in
+                Slider(value: $playState.progress.currentProgress, in: 0...playState.progress.endProgress) { change in
                     // onEditChanged
                     if change == false { // change == true는 slider를 건들기 시작할 때 false는 slider를 내려 놓을 때
-                        playState.youTubePlayer.seek(to: playState.currentProgress, allowSeekAhead: true) // allowSeekAhead = true 서버로 요청
+                        playState.youTubePlayer.seek(to: playState.progress.currentProgress, allowSeekAhead: true) // allowSeekAhead = true 서버로 요청
                     }
                 }.onAppear {
                     // 슬라이더 볼 사이즈 수정
@@ -248,9 +248,9 @@ struct ProgressBar: View {
                 playState.youTubePlayer.getCurrentTime { completion in
                     switch completion {
                     case .success(let time):
-                        playState.currentProgress = time
+                        playState.progress.currentProgress = time
                         playtime = time.convertTimetoString()
-                        endtime = playState.endProgress.convertTimetoString()
+                        endtime = playState.progress.endProgress.convertTimetoString()
 
                     case.failure:
                         print("\(#function) \(#line) Error 발생")
