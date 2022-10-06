@@ -12,19 +12,16 @@ import YouTubePlayerKit
 final class PlayState: ObservableObject {
 
     static let shared = PlayState()
-    @Published var playList: PlayList
+    @Published var playList = PlayList()
     @Published var currentProgress: Double = 0
     @Published var endProgress: Double = 0
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay: false, showControls: false, showRelatedVideos: false))
-    @Published var isPlaying: YouTubePlayer.PlaybackState // 커스텀이 아닌 실제 State로 변경
+    @Published var isPlaying: YouTubePlayer.PlaybackState  = .unstarted // 재생상태에 따라 변화
     @Published var currentSong: SimpleSong?
 
     var subscription = Set<AnyCancellable>()
 
     init() {
-        self.isPlaying = .unstarted
-        self.playList = PlayList()
-
         youTubePlayer.playbackStatePublisher.sink { [weak self] state in
             guard let self = self else { return }
             if self.isPlaying != state { // 만약 현재상태와 다를 때
