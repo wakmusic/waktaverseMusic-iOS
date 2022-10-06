@@ -249,8 +249,8 @@ struct ProgressBar: View {
                     switch completion {
                     case .success(let time):
                         playState.currentProgress = time
-                        playtime = playState.convertTimetoString(time)
-                        endtime = playState.convertTimetoString(playState.endProgress)
+                        playtime = time.convertTimetoString()
+                        endtime = playState.endProgress.convertTimetoString()
 
                     case.failure:
                         print("\(#function) \(#line) Error 발생")

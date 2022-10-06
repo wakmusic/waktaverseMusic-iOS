@@ -21,16 +21,7 @@ final class PlayState: ObservableObject {
 
     var subscription = Set<AnyCancellable>()
 
-    func convertTimetoString(_ dtime: Double) -> String {
-        let convertInt = lround(dtime)-1 >= 0 ? lround(dtime)-1 : 0
-        let min: String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
-        let sec: String = "\(convertInt%60)".count == 1 ? "0\(convertInt%60)" : "\(convertInt%60)"
-
-        return min+sec
-    }
-
     init() {
-        // self.currentPlayIndex = 0
         self.isPlaying = .unstarted
         self.playList = PlayList()
 
