@@ -119,9 +119,8 @@ struct MainView: View {
                                         Button {
                                             // 1. 첫번째 선택 곡 즉시 재생
                                             let firstSong = musicCart.first!
-                                            playState.currentSong =  firstSong
-                                            playState.youTubePlayer.load(source: .url(firstSong.url))
-                                            
+                                            playState.play(at: firstSong)
+
                                             // 2. 재생목록에 없는 곡들은 재생목록에 추가
                                             musicCart.forEach { song in
                                                 if !playState.playList.contains(song) {

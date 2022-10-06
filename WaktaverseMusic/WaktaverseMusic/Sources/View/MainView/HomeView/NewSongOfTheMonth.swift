@@ -62,13 +62,8 @@ extension NewSongOfTheMonthView {
                     .overlay {
                         ZStack {
                             Button {
-
-                                if playState.currentSong != simpleSong {
-                                    playState.currentSong =  simpleSong // 강제 배정
-                                    playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
-                                    playState.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
-                                }
-
+                                playState.play(at: simpleSong)
+                                playState.playList.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
                             } label: {
                                 Image(systemName: "play.fill").foregroundColor(.white)
                             }
@@ -84,12 +79,8 @@ extension NewSongOfTheMonthView {
                 }.frame(width: 100)
 
             }.padding().onTapGesture {
-
-                if playState.currentSong != simpleSong {
-                    playState.currentSong =  simpleSong // 강제 배정
-                    playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
-                    playState.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
-                }
+                playState.play(at: simpleSong)
+                playState.playList.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
             }
 
         }
