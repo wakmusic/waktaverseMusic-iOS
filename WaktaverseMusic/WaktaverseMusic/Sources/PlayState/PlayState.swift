@@ -59,27 +59,14 @@ final class PlayState: ObservableObject {
         play()
     }
 
-    private func play() {
+    func play() {
         guard let currentSong = currentSong else { return }
         self.youTubePlayer.load(source: .url(currentSong.url)) // 바로 load
     }
 
-    private func uniqueIndex(of item: SimpleSong) -> Int? {
-        // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 nil 리턴
-        let index = playList.list.enumerated().compactMap { $0.element == item ? $0.offset : nil }.first
-        return index
-    }
-
-    func uniqueAppend(item: SimpleSong) {
-        let uniqueIndex = uniqueIndex(of: item)
-
-        if let uniqueIndex = uniqueIndex {
-            self.playList.currentPlayIndex = uniqueIndex
-        } else { // 재생 목록에 없으면
-            self.playList.append(item) // 재생목록에 추가
-            self.playList.currentPlayIndex = self.playList.lastIndex // index를 가장 마지막으로 옮김
-        }
+    func play(at item: SimpleSong?) {
         currentSong = item
+        play()
     }
 
 }
@@ -111,6 +98,23 @@ extension PlayState {
 
         func contains(_ item: SimpleSong) -> Bool {
             return list.contains(item)
+        }
+
+        func uniqueAppend(item: SimpleSong) {
+            let uniqueIndex = uniqueIndex(of: item)
+
+            if let uniqueIndex = uniqueIndex {
+                self.currentPlayIndex = uniqueIndex
+            } else { // 재생 목록에 없으면
+                list.append(item) // 재생목록에 추가
+                self.currentPlayIndex = self.lastIndex // index를 가장 마지막으로 옮김
+            }
+        }
+
+        private func uniqueIndex(of item: SimpleSong) -> Int? {
+            // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 nil 리턴
+            let index = list.enumerated().compactMap { $0.element == item ? $0.offset : nil }.first
+            return index
         }
 
     }
