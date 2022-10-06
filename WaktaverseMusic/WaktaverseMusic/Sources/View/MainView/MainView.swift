@@ -52,18 +52,18 @@ struct MainView: View {
                             switch viewModel.currentTab {
                             case .home:
                                 HomeView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
 
                             case .artists:
                                 ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
                             case .search:
                                 SearchView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight+10 : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight+10 : 0)
 
                             case .account:
                                 AccountView()
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?  tabHeight : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?  tabHeight : 0)
 
                             }
                         }
@@ -170,7 +170,7 @@ struct MainView: View {
 
                     }
 
-                    if playState.nowPlayingSong != nil {
+                    if playState.currentSong != nil {
                         MiniPlayer(animation: animation)
                             .environmentObject(playState)
                             .environmentObject(player)

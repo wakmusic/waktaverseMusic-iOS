@@ -23,13 +23,6 @@ final class PlayState: ObservableObject {
 
     var subscription = Set<AnyCancellable>()
 
-    var nowPlayingSong: SimpleSong? {
-        get {
-            if playList.count == 0 { return nil }
-            return playList[currentPlayIndex]
-        }
-    }
-
     func convertTimetoString(_ dtime: Double) -> String {
         let convertInt = lround(dtime)-1 >= 0 ? lround(dtime)-1 : 0
         let min: String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
@@ -80,11 +73,8 @@ final class PlayState: ObservableObject {
     }
 
     private func play() {
-        guard let nowPlayingSong = self.nowPlayingSong else { return }
-        if self.currentSong != nowPlayingSong { // 값이 다를경우
-            self.currentSong = nowPlayingSong // 곡 을 변경 후
-            self.youTubePlayer.load(source: .url(nowPlayingSong.url)) // 바로 load
-        }
+        guard let currentSong = currentSong else { return }
+        self.youTubePlayer.load(source: .url(currentSong.url)) // 바로 load
     }
 
     private func uniqueIndex(of item: SimpleSong) -> Int {

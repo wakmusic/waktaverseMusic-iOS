@@ -25,7 +25,7 @@ struct MiniPlayer: View {
     let hasNotch: Bool = UIDevice.current.hasNotch
 
     var body: some View {
-        if let currentSong = playState.nowPlayingSong {
+        if let currentSong = playState.currentSong {
             VStack(spacing: player.isMiniPlayer ? 0 : nil) {
 
                 // Spacer(minLength: 0)
@@ -48,8 +48,7 @@ struct MiniPlayer: View {
 
                     YoutubeView().environmentObject(playState).frame(maxWidth: player.isMiniPlayer ? miniWidth : player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight )
 
-                    if(player.isMiniPlayer) // 미니 플레이어 시 보여질 컨트롤러
-                    {
+                    if player.isMiniPlayer { // 미니 플레이어 시 보여질 컨트롤러
                         VStack(alignment: .leading) { // 리스트 보여주면 .leading
                             Text(currentSong.title)
                                 .modifier(PlayBarTitleModifier())
@@ -64,8 +63,8 @@ struct MiniPlayer: View {
 
                             Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).onTapGesture {
                                 playState.playList.removeAll()
-                        }
-
+                                playState.currentSong = nil
+                            }
                         }.padding(.horizontal)
 
                     }
@@ -223,15 +222,12 @@ struct ProgressBar: View {
 
     var body: some View {
 
-        if playState.nowPlayingSong != nil {
+        if playState.currentSong != nil {
             VStack {
-
                 // Sldier 설정 및 바인딩
-
                 Slider(value: $playState.currentProgress, in: 0...playState.endProgress) { change in
                     // onEditChanged
-                    if(change == false) // change == true는 slider를 건들기 시작할 때 false는 slider를 내려 놓을 때
-                    {
+                    if change == false { // change == true는 slider를 건들기 시작할 때 false는 slider를 내려 놓을 때
                         playState.youTubePlayer.seek(to: playState.currentProgress, allowSeekAhead: true) // allowSeekAhead = true 서버로 요청
                     }
                 }.onAppear {
@@ -243,14 +239,12 @@ struct ProgressBar: View {
                 }
 
                 HStack {
-
                     Text(playtime).modifier(FullScreenTimeModifer())
                     Spacer()
                     Text(endtime).modifier(FullScreenTimeModifer())
                 }
 
             }.onReceive(timer) { _ in
-
                 playState.youTubePlayer.getCurrentTime { completion in
                     switch completion {
                     case .success(let time):
