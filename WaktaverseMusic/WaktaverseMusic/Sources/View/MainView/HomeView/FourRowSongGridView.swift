@@ -51,11 +51,8 @@ private extension FourRowSongGridView {
             Button {
                 // FiveRowSong Grid에서는 재생 버튼 누르면 일단 load와 currentSong을 바꿈
                 let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
-                if playState.currentSong != simpleSong {
-                    playState.currentSong =  simpleSong // 강제 배정
-                    playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
-                    playState.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
-                }
+                playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
+                playState.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
             } label: {
                 ZStack {
 
