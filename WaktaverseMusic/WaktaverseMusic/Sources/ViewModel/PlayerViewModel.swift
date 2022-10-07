@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class VideoPlayerViewModel: ObservableObject {
+class PlayerViewModel: ObservableObject {
 
     @Published var showPlayer = false
     @Published var isPlayerListViewPresented = false // false = Image  ,true = PlayList
