@@ -53,7 +53,8 @@ extension PlayState {
         currentSong = item
         play()
     }
-
+    
+    // ⏩ 다음 곡으로 변경
     func forWard() {
         if self.playList.isLast { // 맨 뒤면
             self.playList.currentPlayIndex = 0 // 첫 번째로 이동
@@ -63,7 +64,8 @@ extension PlayState {
         currentSong = playList.list[playList.currentPlayIndex]
         play()
     }
-
+    
+    // ⏪ 이전 곡으로 변경
     func backWard() {
         if self.playList.currentPlayIndex ==  0 { // 첫 번째면
             self.playList.currentPlayIndex = playList.lastIndex // 맨 뒤로 위동
