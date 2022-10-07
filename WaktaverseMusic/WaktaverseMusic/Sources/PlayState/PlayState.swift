@@ -12,37 +12,15 @@ import YouTubePlayerKit
 final class PlayState: ObservableObject {
 
     static let shared = PlayState()
-
-    @Published var currentPlayIndex: Int // 현재 재생중인 노래 인덱스 번호
-    @Published var playList: [SimpleSong]
-    @Published var currentProgress: Double = 0
-    @Published var endProgress: Double = 0
+    @Published var playList = PlayList()
+    @Published var progress = PlayProgress()
     @Published var youTubePlayer = YouTubePlayer(configuration: .init(autoPlay: false, showControls: false, showRelatedVideos: false))
-    @Published var isPlaying: YouTubePlayer.PlaybackState // 커스텀이 아닌 실제 State로 변경
+    @Published var isPlaying: YouTubePlayer.PlaybackState  = .unstarted // YouTubePlayer의 재생상태에 따라 변화
     @Published var currentSong: SimpleSong?
 
     var subscription = Set<AnyCancellable>()
 
-    var nowPlayingSong: SimpleSong? {
-        get {
-            if playList.count == 0 { return nil }
-            return playList[currentPlayIndex]
-        }
-    }
-
-    func convertTimetoString(_ dtime: Double) -> String {
-        let convertInt = lround(dtime)-1 >= 0 ? lround(dtime)-1 : 0
-        let min: String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
-        let sec: String = "\(convertInt%60)".count == 1 ? "0\(convertInt%60)" : "\(convertInt%60)"
-
-        return min+sec
-    }
-
     init() {
-        self.currentPlayIndex = 0
-        self.isPlaying = .unstarted
-        self.playList = [SimpleSong]()
-
         youTubePlayer.playbackStatePublisher.sink { [weak self] state in
             guard let self = self else { return }
             if self.isPlaying != state { // 만약 현재상태와 다를 때
@@ -57,58 +35,98 @@ final class PlayState: ObservableObject {
 
         youTubePlayer.durationPublisher.sink { [weak self] time in
             guard let self = self else { return }
-            self.endProgress = time
+            self.progress.endProgress = time
         }.store(in: &subscription)
     }
 
+}
+
+// MARK: YouTubePlayer 컨트롤과 관련된 메소드들을 모아놓은 익스텐션입니다.
+extension PlayState {
+
+    func play() {
+        guard let currentSong = currentSong else { return }
+        self.youTubePlayer.load(source: .url(currentSong.url)) // 바로 load
+    }
+
+    func play(at item: SimpleSong?) {
+        currentSong = item
+        play()
+    }
+
     func forWard() {
-        if self.currentPlayIndex ==  playList.count-1 {
-            self.currentPlayIndex = 0
+        if self.playList.isLast { // 맨 뒤면
+            self.playList.currentPlayIndex = 0 // 첫 번째로 이동
         } else {
-            self.currentPlayIndex += 1
+            self.playList.currentPlayIndex += 1
         }
+        currentSong = playList.list[playList.currentPlayIndex]
         play()
     }
 
     func backWard() {
-        if self.currentPlayIndex ==  0 {
-            self.currentPlayIndex = playList.count-1
+        if self.playList.currentPlayIndex ==  0 { // 첫 번째면
+            self.playList.currentPlayIndex = playList.lastIndex // 맨 뒤로 위동
         } else {
-            self.currentPlayIndex -= 1
+            self.playList.currentPlayIndex -= 1
         }
+        currentSong = playList.list[playList.currentPlayIndex]
         play()
     }
 
-    private func play() {
-        guard let nowPlayingSong = self.nowPlayingSong else { return }
-        if self.currentSong != nowPlayingSong { // 값이 다를경우
-            self.currentSong = nowPlayingSong // 곡 을 변경 후
-            self.youTubePlayer.load(source: .url(nowPlayingSong.url)) // 바로 load
+}
+
+// MARK: 커스텀 타입들을 모아놓은 익스텐션입니다.
+extension PlayState {
+    public class PlayList: ObservableObject {
+        @Published var list: [SimpleSong]
+        @Published var currentPlayIndex: Int // 현재 재생중인 노래 인덱스 번호
+
+        init() {
+            list = [SimpleSong]()
+            currentPlayIndex = 0
         }
-    }
 
-    private func uniqueIndex(of item: SimpleSong) -> Int {
-        // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 -1 리턴
-        let index = playList.enumerated().compactMap { $0.element == item ? $0.offset : nil }.first ?? -1
-        return index
-    }
+        var first: SimpleSong? { return list.first }
+        var last: SimpleSong? { return list.last }
+        var count: Int { return list.count }
+        var lastIndex: Int { return list.count - 1 }
+        var isEmpty: Bool { return list.isEmpty }
+        var isLast: Bool { return currentPlayIndex == lastIndex }
 
-    func uniqueAppend(item: SimpleSong) {
-
-        let uniqueIndex = uniqueIndex(of: item)
-        if uniqueIndex == -1 { // 재생목록에 없으면
-            self.playList.append(item) // 재생목록에 추가
-            self.currentPlayIndex = self.playList.count - 1 // index를 가장 마지막으로 옮김
-        } else {
-            self.currentPlayIndex = uniqueIndex
+        func append(_ item: SimpleSong) {
+            list.append(item)
         }
-        currentSong = item
-    }
 
-    func appendList(item: SimpleSong) {
-        if uniqueIndex(of: item) == -1 { // 재생목록에 없으면
-            self.playList.append(item) // 재생목록에 추가
+        func removeAll() {
+            list.removeAll()
         }
+
+        func contains(_ item: SimpleSong) -> Bool {
+            return list.contains(item)
+        }
+
+        func uniqueAppend(item: SimpleSong) {
+            let uniqueIndex = uniqueIndex(of: item)
+
+            if let uniqueIndex = uniqueIndex {
+                self.currentPlayIndex = uniqueIndex
+            } else { // 재생 목록에 없으면
+                list.append(item) // 재생목록에 추가
+                self.currentPlayIndex = self.lastIndex // index를 가장 마지막으로 옮김
+            }
+        }
+
+        private func uniqueIndex(of item: SimpleSong) -> Int? {
+            // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 nil 리턴
+            let index = list.enumerated().compactMap { $0.element == item ? $0.offset : nil }.first
+            return index
+        }
+
     }
 
+    public struct PlayProgress {
+        var currentProgress: Double = 0
+        var endProgress: Double = 0
+    }
 }

@@ -52,18 +52,18 @@ struct MainView: View {
                             switch viewModel.currentTab {
                             case .home:
                                 HomeView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
 
                             case .artists:
                                 ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
                             case .search:
                                 SearchView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?   tabHeight+10 : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight+10 : 0)
 
                             case .account:
                                 AccountView()
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.nowPlayingSong != nil)  ?  tabHeight : 0)
+                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?  tabHeight : 0)
 
                             }
                         }
@@ -117,15 +117,16 @@ struct MainView: View {
                                         // 재생 바
                                         Spacer()
                                         Button {
-                                            let simpleSong = musicCart[0]
-                                            playState.currentSong =  simpleSong // 강제 배정
-                                            playState.youTubePlayer.load(source: .url(simpleSong.url)) // 강제 재생
-                                            playState.uniqueAppend(item: simpleSong)
+                                            // 1. 첫번째 선택 곡 즉시 재생
+                                            let firstSong = musicCart.first!
+                                            playState.play(at: firstSong)
 
-                                            for song in musicCart {
-                                                playState.appendList(item: song)
+                                            // 2. 재생목록에 없는 곡들은 재생목록에 추가
+                                            musicCart.forEach { song in
+                                                if !playState.playList.contains(song) {
+                                                    playState.playList.append(song)
+                                                }
                                             }
-
                                             musicCart.removeAll()
 
                                         } label: {
@@ -143,13 +144,13 @@ struct MainView: View {
                                         }
                                         Spacer()
                                         Button {
-
-                                            for song in musicCart {
-                                                playState.appendList(item: song)
+                                            // 재생목록에 없는 곡들은 재생목록에 추가
+                                            musicCart.forEach { song in
+                                                if !playState.playList.contains(song) {
+                                                    playState.playList.append(song)
+                                                }
                                             }
-
                                             musicCart.removeAll()
-
                                         } label: {
                                             ListBarIcon(width: width/5, height: height/28, systemIconName: "plus", text: "담기")
                                         }
@@ -170,7 +171,7 @@ struct MainView: View {
 
                     }
 
-                    if playState.nowPlayingSong != nil {
+                    if playState.currentSong != nil {
                         MiniPlayer(animation: animation)
                             .environmentObject(playState)
                             .environmentObject(player)

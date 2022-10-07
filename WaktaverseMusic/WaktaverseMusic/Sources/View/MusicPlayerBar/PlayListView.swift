@@ -52,9 +52,9 @@ struct PlayListView: View {
                         .animation(.easeIn, value: playState.currentSong)
 
                         HStack {
-                            TopLeftControlView(playList: $playState.playList, currentIndex: $playState.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState)
+                            TopLeftControlView(playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState)
                             Spacer()
-                            TopRightControlView(playList: $playState.playList, currentIndex: $playState.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing, 10)
+                            TopRightControlView(playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing, 10)
                         }// .frame(width:width)
 
                     }
@@ -63,7 +63,7 @@ struct PlayListView: View {
                 ScrollView(.vertical, showsIndicators: true) {
                     LazyVStack {
 
-                        ForEach(playState.playList, id: \.self.id) { song in
+                        ForEach(playState.playList.list, id: \.self.id) { song in
 
                             ItemCell(song: song, multipleSelection: $multipleSelection).environmentObject(playState)
 
@@ -75,7 +75,7 @@ struct PlayListView: View {
                                     return NSItemProvider(item: nil, typeIdentifier: song.title)
                                 }
 
-                                .onDrop(of: [song.title], delegate: MyDropDelegate(currentItem: song, currentIndex: $playState.currentPlayIndex, playList: $playState.playList, draggedItem: $draggedItem))
+                                .onDrop(of: [song.title], delegate: MyDropDelegate(currentItem: song, currentIndex: $playState.playList.currentPlayIndex, playList: $playState.playList.list, draggedItem: $draggedItem))
 
                         }
 
@@ -141,7 +141,7 @@ struct ItemCell: View {
         .onTapGesture {
             playState.currentSong = song
             playState.youTubePlayer.load(source: .url(song.url)) // 강제 재생
-            playState.currentPlayIndex = playState.playList.firstIndex(of: song) ?? 0
+            playState.playList.currentPlayIndex = playState.playList.list.firstIndex(of: song) ?? 0
         }
 
     }

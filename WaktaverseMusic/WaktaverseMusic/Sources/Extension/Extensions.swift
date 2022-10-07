@@ -61,6 +61,16 @@ extension Int {
     }
 }
 
+extension Double {
+    func convertTimetoString() -> String {
+        let convertInt = lround(self)-1 >= 0 ? lround(self)-1 : 0
+        let min: String = "\(convertInt/60)".count == 1 ? "0\(convertInt/60):" : "\(convertInt/60):"
+        let sec: String = "\(convertInt%60)".count == 1 ? "0\(convertInt%60)" : "\(convertInt%60)"
+
+        return min+sec
+    }
+}
+
 extension Color {
 
     init(hexcode: String) {
