@@ -110,7 +110,7 @@ struct MiniPlayer: View {
                     BlurView()
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                player.playerMode.mode = .mini
+                                player.playerMode.mode = .full
                                 UIApplication.shared.endEditing() // 키보드 닫기
                             }
                         }
