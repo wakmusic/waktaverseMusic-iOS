@@ -32,15 +32,14 @@ struct PlayListView: View {
                 if let song = playState.currentSong {
                     VStack(alignment: .leading) {
 
-                        Image(systemName: "xmark").font(.title).foregroundColor(.primary)
-
-                            .onTapGesture {
+                        Button {
                             withAnimation(.easeInOut) {
                                 player.playerMode.mode = .full
-
                             }
-
-                            }.padding(EdgeInsets(top: 10, leading: hasNotch ? 10 : 5, bottom: 10, trailing: 0))
+                        } label: {
+                            Image(systemName: "xmark").font(.title).foregroundColor(.primary)
+                                .padding()
+                        }
 
                             Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size: device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading, 10)
                             HStack {
@@ -316,7 +315,7 @@ struct TopRightControlView: View {
 
                 Button(role: .destructive) {
 
-                    if(multipleSelection.count == playList.count) { // 전체 제거 시
+                    if multipleSelection.count == playList.count { // 전체 제거 시
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
@@ -327,7 +326,7 @@ struct TopRightControlView: View {
                     } else { // 전체 제거가 아닐 때
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList = playList.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거 , 담기지 않은 것만 남겨둠
-                            if(multipleSelection.contains(playState.currentSong!.id)) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
+                            if multipleSelection.contains(playState.currentSong!.id) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
                                 currentIndex = 0 // 가장 처음 인덱스로
                             } else {
                                 let nowPlaySong: SimpleSong = playState.currentSong!

@@ -58,9 +58,11 @@ struct FlexiblePlayer: View {
                         HStack(spacing: 20) {
                             PlayPuaseButton().environmentObject(playState)
 
-                            Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).onTapGesture {
+                            Button {
                                 playState.playList.removeAll()
                                 playState.currentSong = nil
+                            } label: {
+                                Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).padding(10)
                             }
                         }.padding(.horizontal)
 
@@ -167,21 +169,21 @@ struct PlayerButtonBar: View {
                 player.playerMode.mode = player.playerMode.mode == .playlist ? .full : .playlist
             }
         } label: {
-            Image(systemName: "music.note.list")
+            Image(systemName: "music.note.list").padding(5)
         }
     }
     var backwardButton: some View {
         Button {
             playState.backWard()
         } label: {
-            Image(systemName: "backward.fill")
+            Image(systemName: "backward.fill").padding(5)
         }
     }
     var forwardButton: some View {
         Button {
             playState.forWard()
         } label: {
-            Image(systemName: "forward.fill")
+            Image(systemName: "forward.fill").padding(5)
         }
     }
     var heartButton: some View {
@@ -190,7 +192,7 @@ struct PlayerButtonBar: View {
                 isLike.toggle()
             }
         } label: {
-            Image(systemName: isLike == true ? "heart.fill" : "heart")
+            Image(systemName: isLike == true ? "heart.fill" : "heart").padding(5)
         }
     }
 }
