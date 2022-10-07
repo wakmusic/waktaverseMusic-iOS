@@ -15,8 +15,6 @@ struct MiniPlayer: View {
 
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
-    var titleModifier = FullScreenTitleModifier()
-    var artistModifier = FullScreenArtistModifer()
     var animation: Namespace.ID
     let standardLen = ScreenSize.width > ScreenSize.height ? ScreenSize.width : ScreenSize.height
     let miniWidth: CGFloat = ScreenSize.width * 0.3
@@ -82,10 +80,10 @@ struct MiniPlayer: View {
 
                             VStack(alignment: .center) { // 리스트 보여주면 .leading
                                 Text(currentSong.title)
-                                    .modifier(titleModifier)
+                                    .modifier(FullScreenTitleModifier())
 
                                 Text(currentSong.artist)
-                                    .modifier(artistModifier)
+                                    .modifier(FullScreenArtistModifer())
                             }
                         }
 
@@ -95,7 +93,7 @@ struct MiniPlayer: View {
 
                     ProgressBar().padding(.horizontal)
 
-                    PlayBar().environmentObject(playState)
+                    PlayerButtonBar().environmentObject(playState)
                         .padding(.bottom, hasNotch ? 40 :  20) // 밑에서 띄우기
                         .padding(.horizontal)
                 }.frame(width: player.playerMode.isMiniPlayer ? 0 : ScreenSize.width, height: player.playerMode.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
@@ -144,71 +142,57 @@ struct MiniPlayer: View {
     }
 }
 
-struct PlayBar: View {
-
-    var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+struct PlayerButtonBar: View {
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
     @State var isLike: Bool = false
 
     var body: some View {
         HStack {
-
-            Button {  // 리스트 버튼을 누를 경우 animation과 같이 toggle
-                withAnimation(.easeInOut) {
-                    player.isPlayerListViewPresented.toggle()
-
-                }
-
-            }label: {
-                Image(systemName: "music.note.list")
-
-                    .modifier(buttonModifier)
-            }
-
+            playListButton
             Spacer()
-
-            Button {
-                playState.backWard()
-                // 토스트 메시지 필요
-            } label: {
-                Image(systemName: "backward.fill")
-
-                    .modifier(buttonModifier)
-
-            }
-
+            backwardButton
             Spacer()
-
             PlayPuaseButton().environmentObject(playState)
-
             Spacer()
-
-            Button {
-                playState.forWard()
-                // 토스트 메시지 필요
-            } label: {
-                Image(systemName: "forward.fill")
-
-                    .modifier(buttonModifier)
-
-            }
-
+            forwardButton
             Spacer()
-
-            Button {
-                withAnimation(.easeInOut) {
-                    isLike.toggle()
-                }
-                // 토스트 메시지 필요
-            } label: {
-                Image(systemName: isLike == true ? "heart.fill" : "heart")
-
-                    .modifier(buttonModifier)
-            }
-
+            heartButton
         }
-        // .foregroundColor(Color.primary)
+        .modifier(FullScreenButtonImageModifier())
+    }
+
+    var playListButton: some View {
+        Button {  // 리스트 버튼을 누를 경우 animation과 같이 toggle
+            withAnimation(.easeInOut) {
+                player.isPlayerListViewPresented.toggle()
+            }
+        } label: {
+            Image(systemName: "music.note.list")
+        }
+    }
+    var backwardButton: some View {
+        Button {
+            playState.backWard()
+        } label: {
+            Image(systemName: "backward.fill")
+        }
+    }
+    var forwardButton: some View {
+        Button {
+            playState.forWard()
+        } label: {
+            Image(systemName: "forward.fill")
+        }
+    }
+    var heartButton: some View {
+        Button {
+            withAnimation(.easeInOut) {
+                isLike.toggle()
+            }
+        } label: {
+            Image(systemName: isLike == true ? "heart.fill" : "heart")
+        }
     }
 }
 
