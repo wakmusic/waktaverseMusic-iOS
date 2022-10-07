@@ -172,7 +172,7 @@ struct MainView: View {
                     }
 
                     if playState.currentSong != nil {
-                        MiniPlayer(animation: animation)
+                        FlexiblePlayer(animation: animation)
                             .environmentObject(playState)
                             .environmentObject(player)
                             .transition(.move(edge: .bottom))

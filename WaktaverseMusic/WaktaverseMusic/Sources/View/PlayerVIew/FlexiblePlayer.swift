@@ -11,7 +11,7 @@ import UIKit
 import PopupView
 import YouTubePlayerKit
 
-struct MiniPlayer: View {
+struct FlexiblePlayer: View {
 
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel

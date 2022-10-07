@@ -66,7 +66,7 @@
 		D80F436828E6DD1000C4A485 /* RadioButtonGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */; };
 		D80F436928E6DD1000C4A485 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433328E6DD1000C4A485 /* PlayerViewModel.swift */; };
 		D80F436A28E6DD1000C4A485 /* PlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433528E6DD1000C4A485 /* PlayListView.swift */; };
-		D80F436C28E6DD1000C4A485 /* MiniPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433728E6DD1000C4A485 /* MiniPlayer.swift */; };
+		D80F436C28E6DD1000C4A485 /* FlexiblePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433728E6DD1000C4A485 /* FlexiblePlayer.swift */; };
 		D80F436D28E6DD1000C4A485 /* PlayPuaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */; };
 		D80F437128E6DD1000C4A485 /* ApiCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433E28E6DD1000C4A485 /* ApiCollections.swift */; };
 		D80F437228E6DD1000C4A485 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433F28E6DD1000C4A485 /* Repository.swift */; };
@@ -131,7 +131,7 @@
 		D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonGroupView.swift; sourceTree = "<group>"; };
 		D80F433328E6DD1000C4A485 /* PlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		D80F433528E6DD1000C4A485 /* PlayListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListView.swift; sourceTree = "<group>"; };
-		D80F433728E6DD1000C4A485 /* MiniPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniPlayer.swift; sourceTree = "<group>"; };
+		D80F433728E6DD1000C4A485 /* FlexiblePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexiblePlayer.swift; sourceTree = "<group>"; };
 		D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPuaseButton.swift; sourceTree = "<group>"; };
 		D80F433E28E6DD1000C4A485 /* ApiCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCollections.swift; sourceTree = "<group>"; };
 		D80F433F28E6DD1000C4A485 /* Repository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
@@ -383,7 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				D80F433528E6DD1000C4A485 /* PlayListView.swift */,
-				D80F433728E6DD1000C4A485 /* MiniPlayer.swift */,
+				D80F433728E6DD1000C4A485 /* FlexiblePlayer.swift */,
 				D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */,
 				D80F432628E6DD1000C4A485 /* BlurView.swift */,
 			);
@@ -528,7 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D80F436C28E6DD1000C4A485 /* MiniPlayer.swift in Sources */,
+				D80F436C28E6DD1000C4A485 /* FlexiblePlayer.swift in Sources */,
 				D80F437828E9919300C4A485 /* HeaderViews.swift in Sources */,
 				D80F435B28E6DD1000C4A485 /* FourRowSongGridView.swift in Sources */,
 				D80F435728E6DD1000C4A485 /* NewSongOfTheMonth.swift in Sources */,
