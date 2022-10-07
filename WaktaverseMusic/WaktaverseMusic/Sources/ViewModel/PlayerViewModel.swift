@@ -11,7 +11,6 @@ import SwiftUI
 class PlayerViewModel: ObservableObject {
 
     @Published var showPlayer = false
-    @Published var isPlayerListViewPresented = false // false = Image  ,true = PlayList
     @Published var offset: CGFloat = 0
     @Published var playerMode = PlayerMode()
 
@@ -19,11 +18,12 @@ class PlayerViewModel: ObservableObject {
 
 extension PlayerViewModel {
     struct PlayerMode {
-        enum Mode { case full, mini }
+        enum Mode { case full, mini, playlist } // 모드가 겹치지 않음
         var mode: Mode = .mini
 
         var isFullPlayer: Bool { return mode == .full }
         var isMiniPlayer: Bool { return mode == .mini }
+        var isPlayListPresented: Bool { return mode == .playlist }
 
     }
 }

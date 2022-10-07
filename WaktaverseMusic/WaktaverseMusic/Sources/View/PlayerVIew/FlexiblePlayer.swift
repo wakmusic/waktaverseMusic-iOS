@@ -16,10 +16,6 @@ struct FlexiblePlayer: View {
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
     var animation: Namespace.ID
-    let standardLen = ScreenSize.width > ScreenSize.height ? ScreenSize.width : ScreenSize.height
-    let miniWidth: CGFloat = ScreenSize.width * 0.3
-    let miniHeight: CGFloat = (ScreenSize.width * 0.3 * 9)/16
-    let defaultHeight: CGFloat = (ScreenSize.width * 9)/16
     let hasNotch: Bool = UIDevice.current.hasNotch
 
     var body: some View {
@@ -33,27 +29,30 @@ struct FlexiblePlayer: View {
                  */
                 //
 
-                if !player.playerMode.isMiniPlayer && !player.isPlayerListViewPresented {
+                if player.playerMode.isFullPlayer {
                     if ScreenSize.height <= 600 {
                         Spacer(minLength: ScreenSize.height*0.2)
                     } else {
                         Spacer(minLength: ScreenSize.height*0.3)
                     }
-
                 }
 
                 HStack {
-
-                    YoutubeView().environmentObject(playState).frame(maxWidth: player.playerMode.isMiniPlayer ? miniWidth : player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.playerMode.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight )
+                    YoutubeView().environmentObject(playState)
+                        .frame(maxWidth: player.playerMode.isMiniPlayer ?
+                               PlayerSize.miniSize.width : PlayerSize.defaultSize.width,
+                               maxHeight: player.playerMode.isMiniPlayer ?
+                               PlayerSize.miniSize.height : PlayerSize.defaultSize.height)
+                        .opacity(player.playerMode.isPlayListPresented ? 0 : 1) // 플레이리스트 보여질땐 플레이어 감추기
 
                     if player.playerMode.isMiniPlayer { // 미니 플레이어 시 보여질 컨트롤러
                         VStack(alignment: .leading) { // 리스트 보여주면 .leading
                             Text(currentSong.title)
                                 .modifier(PlayBarTitleModifier())
-
                             Text(currentSong.artist)
                                 .modifier(PlayBarArtistModifer())
                         }
+
                         Spacer()
 
                         HStack(spacing: 20) {
@@ -67,12 +66,12 @@ struct FlexiblePlayer: View {
 
                     }
 
-                }.frame(maxWidth: player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.playerMode.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight, alignment: .leading)
+                }.frame(maxWidth: player.playerMode.isPlayListPresented ? 0 : ScreenSize.width, maxHeight: player.playerMode.isMiniPlayer ? PlayerSize.miniHeight : player.playerMode.isPlayListPresented ? 0 : PlayerSize.defaultHeight, alignment: .leading)
 
                 VStack {
                     Group { // 그룹으로 묶어 조건적으로 보여준다.
 
-                        if player.isPlayerListViewPresented {
+                        if player.playerMode.isPlayListPresented {
 
                             PlayListView().environmentObject(playState).padding(.top, UIDevice.current.hasNotch ? 30 : 0) // notch에 따라 패팅 top 줌 (
 
@@ -99,7 +98,7 @@ struct FlexiblePlayer: View {
                 }.frame(width: player.playerMode.isMiniPlayer ? 0 : ScreenSize.width, height: player.playerMode.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
                     .opacity(player.playerMode.isMiniPlayer ? 0 : 1)
 
-            }.frame(maxHeight: player.playerMode.isMiniPlayer ? miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
+            }.frame(maxHeight: player.playerMode.isMiniPlayer ? PlayerSize.miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
 
             .background(
 
@@ -135,7 +134,7 @@ struct FlexiblePlayer: View {
 
             if value.translation.height > ScreenSize.height/3 {
                 player.playerMode.mode = .mini
-                player.isPlayerListViewPresented = false
+                // player.playerMode.isPlayListPresented = false
             }
             player.offset = 0
         }
@@ -165,7 +164,7 @@ struct PlayerButtonBar: View {
     var playListButton: some View {
         Button {  // 리스트 버튼을 누를 경우 animation과 같이 toggle
             withAnimation(.easeInOut) {
-                player.isPlayerListViewPresented.toggle()
+                player.playerMode.mode = player.playerMode.mode == .playlist ? .full : .playlist
             }
         } label: {
             Image(systemName: "music.note.list")

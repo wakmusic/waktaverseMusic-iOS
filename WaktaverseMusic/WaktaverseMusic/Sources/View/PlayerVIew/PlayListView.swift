@@ -36,7 +36,7 @@ struct PlayListView: View {
 
                             .onTapGesture {
                             withAnimation(.easeInOut) {
-                                player.isPlayerListViewPresented = false
+                                player.playerMode.mode = .full
 
                             }
 
@@ -316,28 +316,22 @@ struct TopRightControlView: View {
 
                 Button(role: .destructive) {
 
-                    if(multipleSelection.count == playList.count) // 전체 제거 시
-                    {
+                    if(multipleSelection.count == playList.count) { // 전체 제거 시
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
                             player.playerMode.mode = .mini // Fullscrren 끄고
-                            player.isPlayerListViewPresented = false // 리스트창 끄고
                             playState.youTubePlayer.stop() // youtubePlayer Stop
                             playState.currentSong = nil // 현재 재생 노래 비어둠
                         }
-                    } else // 전체 제거가 아닐 때
-                    {
+                    } else { // 전체 제거가 아닐 때
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList = playList.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거 , 담기지 않은 것만 남겨둠
-                            if(multipleSelection.contains(playState.currentSong!.id)) // 현재삭제 목록에 재생중인 노래가 포함됬을 때
-                            {
+                            if(multipleSelection.contains(playState.currentSong!.id)) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
                                 currentIndex = 0 // 가장 처음 인덱스로
-
                             } else {
                                 let nowPlaySong: SimpleSong = playState.currentSong!
                                 currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 // 현재 재생중인 노래로
-
                             }
                             multipleSelection.removeAll() // 멀티셋 비우고
                         }
