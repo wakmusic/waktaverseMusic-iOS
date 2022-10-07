@@ -281,7 +281,7 @@
 				D80F430A28E6DD1000C4A485 /* LaunchScreen */,
 				D80F430C28E6DD1000C4A485 /* MainView */,
 				D80F432A28E6DD1000C4A485 /* WebView */,
-				D80F433128E6DD1000C4A485 /* MusicPlayerBar */,
+				D80F433128E6DD1000C4A485 /* PlayerVIew */,
 				7B1D20BC28E9A738006F67C6 /* Components */,
 				D80F432728E6DD1000C4A485 /* Modifier */,
 			);
@@ -379,7 +379,7 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
-		D80F433128E6DD1000C4A485 /* MusicPlayerBar */ = {
+		D80F433128E6DD1000C4A485 /* PlayerVIew */ = {
 			isa = PBXGroup;
 			children = (
 				D80F433528E6DD1000C4A485 /* PlayListView.swift */,
@@ -387,7 +387,7 @@
 				D80F433828E6DD1000C4A485 /* PlayPuaseButton.swift */,
 				D80F432628E6DD1000C4A485 /* BlurView.swift */,
 			);
-			path = MusicPlayerBar;
+			path = PlayerVIew;
 			sourceTree = "<group>";
 		};
 		D80F433D28E6DD1000C4A485 /* Repository */ = {
