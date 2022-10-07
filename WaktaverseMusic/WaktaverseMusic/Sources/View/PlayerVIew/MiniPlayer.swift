@@ -14,7 +14,7 @@ import YouTubePlayerKit
 struct MiniPlayer: View {
 
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     var titleModifier = FullScreenTitleModifier()
     var artistModifier = FullScreenArtistModifer()
     var animation: Namespace.ID
@@ -26,7 +26,7 @@ struct MiniPlayer: View {
 
     var body: some View {
         if let currentSong = playState.currentSong {
-            VStack(spacing: player.isMiniPlayer ? 0 : nil) {
+            VStack(spacing: player.playerMode.isMiniPlayer ? 0 : nil) {
 
                 // Spacer(minLength: 0)
                 /*
@@ -35,7 +35,7 @@ struct MiniPlayer: View {
                  */
                 //
 
-                if !player.isMiniPlayer && !player.isPlayerListViewPresented {
+                if !player.playerMode.isMiniPlayer && !player.isPlayerListViewPresented {
                     if ScreenSize.height <= 600 {
                         Spacer(minLength: ScreenSize.height*0.2)
                     } else {
@@ -46,9 +46,9 @@ struct MiniPlayer: View {
 
                 HStack {
 
-                    YoutubeView().environmentObject(playState).frame(maxWidth: player.isMiniPlayer ? miniWidth : player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight )
+                    YoutubeView().environmentObject(playState).frame(maxWidth: player.playerMode.isMiniPlayer ? miniWidth : player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.playerMode.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight )
 
-                    if player.isMiniPlayer { // 미니 플레이어 시 보여질 컨트롤러
+                    if player.playerMode.isMiniPlayer { // 미니 플레이어 시 보여질 컨트롤러
                         VStack(alignment: .leading) { // 리스트 보여주면 .leading
                             Text(currentSong.title)
                                 .modifier(PlayBarTitleModifier())
@@ -69,7 +69,7 @@ struct MiniPlayer: View {
 
                     }
 
-                }.frame(maxWidth: player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight, alignment: .leading)
+                }.frame(maxWidth: player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.playerMode.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight, alignment: .leading)
 
                 VStack {
                     Group { // 그룹으로 묶어 조건적으로 보여준다.
@@ -98,10 +98,10 @@ struct MiniPlayer: View {
                     PlayBar().environmentObject(playState)
                         .padding(.bottom, hasNotch ? 40 :  20) // 밑에서 띄우기
                         .padding(.horizontal)
-                }.frame(width: player.isMiniPlayer ? 0 : ScreenSize.width, height: player.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
-                    .opacity(player.isMiniPlayer ? 0 : 1)
+                }.frame(width: player.playerMode.isMiniPlayer ? 0 : ScreenSize.width, height: player.playerMode.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
+                    .opacity(player.playerMode.isMiniPlayer ? 0 : 1)
 
-            }.frame(maxHeight: player.isMiniPlayer ? miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
+            }.frame(maxHeight: player.playerMode.isMiniPlayer ? miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
 
             .background(
 
@@ -110,7 +110,7 @@ struct MiniPlayer: View {
                     BlurView()
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                player.isMiniPlayer = false
+                                player.playerMode.mode = .mini
                                 UIApplication.shared.endEditing() // 키보드 닫기
                             }
                         }
@@ -127,7 +127,7 @@ struct MiniPlayer: View {
     }
 
     func onChanged(value: DragGesture.Value) {
-        if value.translation.height > 0 && !player.isMiniPlayer {
+        if value.translation.height > 0 && !player.playerMode.isMiniPlayer {
             player.offset = value.translation.height
         }
     }
@@ -136,7 +136,7 @@ struct MiniPlayer: View {
         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.95, blendDuration: 0.96)) {
 
             if value.translation.height > ScreenSize.height/3 {
-                player.isMiniPlayer  = true
+                player.playerMode.mode = .mini
                 player.isPlayerListViewPresented = false
             }
             player.offset = 0
@@ -148,7 +148,7 @@ struct PlayBar: View {
 
     var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     @State var isLike: Bool = false
 
     var body: some View {

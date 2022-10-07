@@ -13,7 +13,7 @@ import ScalingHeaderScrollView
 struct PlayListView: View {
 
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
     var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
@@ -289,7 +289,7 @@ struct TopRightControlView: View {
     @Binding var currentIndex: Int
     @Binding var multipleSelection: Set<UUID>
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     let device = UIDevice.current.userInterfaceIdiom
     var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @State var isShowAlert: Bool = false
@@ -321,7 +321,7 @@ struct TopRightControlView: View {
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
-                            player.isMiniPlayer = true // Fullscrren 끄고
+                            player.playerMode.mode = .mini // Fullscrren 끄고
                             player.isPlayerListViewPresented = false // 리스트창 끄고
                             playState.youTubePlayer.stop() // youtubePlayer Stop
                             playState.currentSong = nil // 현재 재생 노래 비어둠

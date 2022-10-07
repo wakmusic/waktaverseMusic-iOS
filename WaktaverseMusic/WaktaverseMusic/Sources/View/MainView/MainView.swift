@@ -15,7 +15,7 @@ struct MainView: View {
     @State var isLoading: Bool = true
     @StateObject var viewModel: MainViewModel = MainViewModel()
     @StateObject var networkManager = NetworkManager()
-    @StateObject var player = VideoPlayerViewModel()
+    @StateObject var player = PlayerViewModel()
     @EnvironmentObject var playState: PlayState
     @Namespace var animation
     @GestureState var gestureOffset: CGFloat = 0
@@ -52,18 +52,18 @@ struct MainView: View {
                             switch viewModel.currentTab {
                             case .home:
                                 HomeView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
+                                    .padding(.bottom, (player.playerMode.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
 
                             case .artists:
                                 ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
+                                    .padding(.bottom, (player.playerMode.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
                             case .search:
                                 SearchView(musicCart: $musicCart).environmentObject(playState)
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight+10 : 0)
+                                    .padding(.bottom, (player.playerMode.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight+10 : 0)
 
                             case .account:
                                 AccountView()
-                                    .padding(.bottom, (player.isMiniPlayer&&playState.currentSong != nil)  ?  tabHeight : 0)
+                                    .padding(.bottom, (player.playerMode.isMiniPlayer&&playState.currentSong != nil)  ?  tabHeight : 0)
 
                             }
                         }
@@ -176,7 +176,7 @@ struct MainView: View {
                             .environmentObject(playState)
                             .environmentObject(player)
                             .transition(.move(edge: .bottom))
-                            .offset(y: player.isMiniPlayer
+                            .offset(y: player.playerMode.isMiniPlayer
                                     ?viewModel.keyboardHeight != .zero
                                     ? 0 :  -tabHeight : 0)
                             /*

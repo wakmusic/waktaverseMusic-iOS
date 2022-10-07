@@ -13,7 +13,17 @@ class PlayerViewModel: ObservableObject {
     @Published var showPlayer = false
     @Published var isPlayerListViewPresented = false // false = Image  ,true = PlayList
     @Published var offset: CGFloat = 0
-    @Published var width: CGFloat = UIScreen.main.bounds.width
-    @Published var isMiniPlayer = true
+    @Published var playerMode = PlayerMode()
 
+}
+
+extension PlayerViewModel {
+    struct PlayerMode {
+        enum Mode { case full, mini }
+        var mode: Mode = .mini
+
+        var isFullPlayer: Bool { return mode == .full }
+        var isMiniPlayer: Bool { return mode == .mini }
+
+    }
 }
