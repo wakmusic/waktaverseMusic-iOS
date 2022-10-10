@@ -41,6 +41,11 @@ final class HomeViewModel: ObservableObject {
         fetchNewSong()
         fetchNews()
     }
+    
+    deinit {
+        clearCache()
+        print("❌ HomeViewModel deinit")
+    }
 
     func fetchTop20(category: TopCategory) {
         Repository.shared.fetchTopRankedSong(category: category, limit: 20)
