@@ -41,7 +41,7 @@ final class HomeViewModel: ObservableObject {
         fetchNewSong()
         fetchNews()
     }
-    
+
     deinit {
         clearCache()
         print("❌ HomeViewModel deinit")

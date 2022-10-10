@@ -28,7 +28,7 @@ final class SearchViewModel: ObservableObject {
         clearCache()
         print("❌ SearchViewModel deinit")
     }
-    
+
     func fetchSong(_ keyword: String) {
         Repository.shared.fetchSearchWithKeyword(keyword)
             .sink { (_) in

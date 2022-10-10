@@ -37,10 +37,11 @@ struct NewsMoreView: View {
 
         .navigationTitle("NEWS")
         .navigationBarTitleDisplayMode(.large)
+        .navigationBarBackButtonHidden(true) // 백 버튼 없애고
         .background()
         .highPriorityGesture(DragGesture().onEnded({ value in
-            if(value.translation.width > 100) // 왼 오 드래그가 만족할 때
-            {
+            if value.translation.width > 100 { // 왼 오 드래그가 만족할 때
+                clearCache()
                 self.presentationMode.wrappedValue.dismiss() // 뒤로가기
             }
         })) // 부모 제스쳐가 먼져 ( swipe 하여 나가는게 NavigationLink의 클릭 이벤트 보다 우선)
@@ -58,6 +59,7 @@ extension NewsMoreView {
             } label: {
                 VStack(alignment: .leading, spacing: 5) {
                     KFImage(URL(string: "\(ApiCollections.newsThumbnail)\(data.time).png")!)
+                        .downsampling(size: CGSize(width: 400, height: 200)) // 약 절반 사이즈
                         .resizable()
                         .scaledToFill()
                         .clipped()

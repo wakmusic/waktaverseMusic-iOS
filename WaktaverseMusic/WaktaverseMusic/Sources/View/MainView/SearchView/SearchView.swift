@@ -106,6 +106,7 @@ struct SongListItemView: View {
                         .frame(width: 45, height: 45)
                         .transition(.opacity.combined(with: .scale))
                 })
+                .downsampling(size: CGSize(width: 200, height: 200)) // 약 절반 사이즈
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 45, height: 45)
