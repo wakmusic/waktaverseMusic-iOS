@@ -13,7 +13,7 @@ import ScalingHeaderScrollView
 struct PlayListView: View {
 
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
     var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
@@ -32,15 +32,14 @@ struct PlayListView: View {
                 if let song = playState.currentSong {
                     VStack(alignment: .leading) {
 
-                        Image(systemName: "xmark").font(.title).foregroundColor(.primary)
-
-                            .onTapGesture {
+                        Button {
                             withAnimation(.easeInOut) {
-                                player.isPlayerListViewPresented = false
-
+                                player.playerMode.mode = .full
                             }
-
-                            }.padding(EdgeInsets(top: 10, leading: hasNotch ? 10 : 5, bottom: 10, trailing: 0))
+                        } label: {
+                            Image(systemName: "xmark").font(.title).foregroundColor(.primary)
+                                .padding()
+                        }
 
                             Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size: device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading, 10)
                             HStack {
@@ -289,7 +288,7 @@ struct TopRightControlView: View {
     @Binding var currentIndex: Int
     @Binding var multipleSelection: Set<UUID>
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     let device = UIDevice.current.userInterfaceIdiom
     var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @State var isShowAlert: Bool = false
@@ -316,28 +315,22 @@ struct TopRightControlView: View {
 
                 Button(role: .destructive) {
 
-                    if(multipleSelection.count == playList.count) // 전체 제거 시
-                    {
+                    if multipleSelection.count == playList.count { // 전체 제거 시
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
-                            player.isMiniPlayer = true // Fullscrren 끄고
-                            player.isPlayerListViewPresented = false // 리스트창 끄고
+                            player.playerMode.mode = .mini // Fullscrren 끄고
                             playState.youTubePlayer.stop() // youtubePlayer Stop
                             playState.currentSong = nil // 현재 재생 노래 비어둠
                         }
-                    } else // 전체 제거가 아닐 때
-                    {
+                    } else { // 전체 제거가 아닐 때
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList = playList.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거 , 담기지 않은 것만 남겨둠
-                            if(multipleSelection.contains(playState.currentSong!.id)) // 현재삭제 목록에 재생중인 노래가 포함됬을 때
-                            {
+                            if multipleSelection.contains(playState.currentSong!.id) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
                                 currentIndex = 0 // 가장 처음 인덱스로
-
                             } else {
                                 let nowPlaySong: SimpleSong = playState.currentSong!
                                 currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 // 현재 재생중인 노래로
-
                             }
                             multipleSelection.removeAll() // 멀티셋 비우고
                         }

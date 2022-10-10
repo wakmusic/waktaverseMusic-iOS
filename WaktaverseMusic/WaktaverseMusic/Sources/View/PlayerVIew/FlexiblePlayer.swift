@@ -11,22 +11,16 @@ import UIKit
 import PopupView
 import YouTubePlayerKit
 
-struct MiniPlayer: View {
+struct FlexiblePlayer: View {
 
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
-    var titleModifier = FullScreenTitleModifier()
-    var artistModifier = FullScreenArtistModifer()
+    @EnvironmentObject var player: PlayerViewModel
     var animation: Namespace.ID
-    let standardLen = ScreenSize.width > ScreenSize.height ? ScreenSize.width : ScreenSize.height
-    let miniWidth: CGFloat = ScreenSize.width * 0.3
-    let miniHeight: CGFloat = (ScreenSize.width * 0.3 * 9)/16
-    let defaultHeight: CGFloat = (ScreenSize.width * 9)/16
     let hasNotch: Bool = UIDevice.current.hasNotch
 
     var body: some View {
         if let currentSong = playState.currentSong {
-            VStack(spacing: player.isMiniPlayer ? 0 : nil) {
+            VStack(spacing: player.playerMode.isMiniPlayer ? 0 : nil) {
 
                 // Spacer(minLength: 0)
                 /*
@@ -35,46 +29,51 @@ struct MiniPlayer: View {
                  */
                 //
 
-                if !player.isMiniPlayer && !player.isPlayerListViewPresented {
+                if player.playerMode.isFullPlayer {
                     if ScreenSize.height <= 600 {
                         Spacer(minLength: ScreenSize.height*0.2)
                     } else {
                         Spacer(minLength: ScreenSize.height*0.3)
                     }
-
                 }
 
                 HStack {
+                    YoutubeView().environmentObject(playState)
+                        .frame(maxWidth: player.playerMode.isMiniPlayer ?
+                               PlayerSize.miniSize.width : PlayerSize.defaultSize.width,
+                               maxHeight: player.playerMode.isMiniPlayer ?
+                               PlayerSize.miniSize.height : PlayerSize.defaultSize.height)
+                        .opacity(player.playerMode.isPlayListPresented ? 0 : 1) // 플레이리스트 보여질땐 플레이어 감추기
 
-                    YoutubeView().environmentObject(playState).frame(maxWidth: player.isMiniPlayer ? miniWidth : player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight )
-
-                    if player.isMiniPlayer { // 미니 플레이어 시 보여질 컨트롤러
+                    if player.playerMode.isMiniPlayer { // 미니 플레이어 시 보여질 컨트롤러
                         VStack(alignment: .leading) { // 리스트 보여주면 .leading
                             Text(currentSong.title)
                                 .modifier(PlayBarTitleModifier())
-
                             Text(currentSong.artist)
                                 .modifier(PlayBarArtistModifer())
                         }
+
                         Spacer()
 
                         HStack(spacing: 20) {
                             PlayPuaseButton().environmentObject(playState)
 
-                            Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).onTapGesture {
+                            Button {
                                 playState.playList.removeAll()
                                 playState.currentSong = nil
+                            } label: {
+                                Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).padding(10)
                             }
                         }.padding(.horizontal)
 
                     }
 
-                }.frame(maxWidth: player.isPlayerListViewPresented ? 0 : ScreenSize.width, maxHeight: player.isMiniPlayer ? miniHeight : player.isPlayerListViewPresented ? 0 : defaultHeight, alignment: .leading)
+                }.frame(maxWidth: player.playerMode.isPlayListPresented ? 0 : ScreenSize.width, maxHeight: player.playerMode.isMiniPlayer ? PlayerSize.miniHeight : player.playerMode.isPlayListPresented ? 0 : PlayerSize.defaultHeight, alignment: .leading)
 
                 VStack {
                     Group { // 그룹으로 묶어 조건적으로 보여준다.
 
-                        if player.isPlayerListViewPresented {
+                        if player.playerMode.isPlayListPresented {
 
                             PlayListView().environmentObject(playState).padding(.top, UIDevice.current.hasNotch ? 30 : 0) // notch에 따라 패팅 top 줌 (
 
@@ -82,10 +81,10 @@ struct MiniPlayer: View {
 
                             VStack(alignment: .center) { // 리스트 보여주면 .leading
                                 Text(currentSong.title)
-                                    .modifier(titleModifier)
+                                    .modifier(FullScreenTitleModifier())
 
                                 Text(currentSong.artist)
-                                    .modifier(artistModifier)
+                                    .modifier(FullScreenArtistModifer())
                             }
                         }
 
@@ -95,13 +94,13 @@ struct MiniPlayer: View {
 
                     ProgressBar().padding(.horizontal)
 
-                    PlayBar().environmentObject(playState)
+                    PlayerButtonBar().environmentObject(playState)
                         .padding(.bottom, hasNotch ? 40 :  20) // 밑에서 띄우기
                         .padding(.horizontal)
-                }.frame(width: player.isMiniPlayer ? 0 : ScreenSize.width, height: player.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
-                    .opacity(player.isMiniPlayer ? 0 : 1)
+                }.frame(width: player.playerMode.isMiniPlayer ? 0 : ScreenSize.width, height: player.playerMode.isMiniPlayer ? 0 : nil) // notch 없는 것들 오른쪽 치우침 방지..
+                    .opacity(player.playerMode.isMiniPlayer ? 0 : 1)
 
-            }.frame(maxHeight: player.isMiniPlayer ? miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
+            }.frame(maxHeight: player.playerMode.isMiniPlayer ? PlayerSize.miniHeight : .infinity) // notch 없는 것들 오른쪽 치우침 방지..
 
             .background(
 
@@ -110,7 +109,7 @@ struct MiniPlayer: View {
                     BlurView()
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                player.isMiniPlayer = false
+                                player.playerMode.mode = .full
                                 UIApplication.shared.endEditing() // 키보드 닫기
                             }
                         }
@@ -127,7 +126,7 @@ struct MiniPlayer: View {
     }
 
     func onChanged(value: DragGesture.Value) {
-        if value.translation.height > 0 && !player.isMiniPlayer {
+        if value.translation.height > 0 && !player.playerMode.isMiniPlayer {
             player.offset = value.translation.height
         }
     }
@@ -136,79 +135,65 @@ struct MiniPlayer: View {
         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.95, blendDuration: 0.96)) {
 
             if value.translation.height > ScreenSize.height/3 {
-                player.isMiniPlayer  = true
-                player.isPlayerListViewPresented = false
+                player.playerMode.mode = .mini
+                // player.playerMode.isPlayListPresented = false
             }
             player.offset = 0
         }
     }
 }
 
-struct PlayBar: View {
-
-    var buttonModifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
+struct PlayerButtonBar: View {
     @EnvironmentObject var playState: PlayState
-    @EnvironmentObject var player: VideoPlayerViewModel
+    @EnvironmentObject var player: PlayerViewModel
     @State var isLike: Bool = false
 
     var body: some View {
         HStack {
-
-            Button {  // 리스트 버튼을 누를 경우 animation과 같이 toggle
-                withAnimation(.easeInOut) {
-                    player.isPlayerListViewPresented.toggle()
-
-                }
-
-            }label: {
-                Image(systemName: "music.note.list")
-
-                    .modifier(buttonModifier)
-            }
-
+            playListButton
             Spacer()
-
-            Button {
-                playState.backWard()
-                // 토스트 메시지 필요
-            } label: {
-                Image(systemName: "backward.fill")
-
-                    .modifier(buttonModifier)
-
-            }
-
+            backwardButton
             Spacer()
-
             PlayPuaseButton().environmentObject(playState)
-
             Spacer()
-
-            Button {
-                playState.forWard()
-                // 토스트 메시지 필요
-            } label: {
-                Image(systemName: "forward.fill")
-
-                    .modifier(buttonModifier)
-
-            }
-
+            forwardButton
             Spacer()
-
-            Button {
-                withAnimation(.easeInOut) {
-                    isLike.toggle()
-                }
-                // 토스트 메시지 필요
-            } label: {
-                Image(systemName: isLike == true ? "heart.fill" : "heart")
-
-                    .modifier(buttonModifier)
-            }
-
+            heartButton
         }
-        // .foregroundColor(Color.primary)
+        .modifier(FullScreenButtonImageModifier())
+    }
+
+    var playListButton: some View {
+        Button {  // 리스트 버튼을 누를 경우 animation과 같이 toggle
+            withAnimation(.easeInOut) {
+                player.playerMode.mode = player.playerMode.mode == .playlist ? .full : .playlist
+            }
+        } label: {
+            Image(systemName: "music.note.list").padding(5)
+        }
+    }
+    var backwardButton: some View {
+        Button {
+            playState.backWard()
+        } label: {
+            Image(systemName: "backward.fill").padding(5)
+        }
+    }
+    var forwardButton: some View {
+        Button {
+            playState.forWard()
+        } label: {
+            Image(systemName: "forward.fill").padding(5)
+        }
+    }
+    var heartButton: some View {
+        Button {
+            withAnimation(.easeInOut) {
+                isLike.toggle()
+            }
+        } label: {
+            Image(systemName: isLike == true ? "heart.fill" : "heart").padding(5)
+        }
     }
 }
 
