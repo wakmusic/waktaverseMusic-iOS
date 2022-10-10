@@ -91,7 +91,8 @@ struct AlbumImageView: View {
             .onFailure { _ in
 
             }
-
+            // 대부분 500*500 or 480*360 으로 들어옴
+            .downsampling(size: CGSize(width: 200, height: 200)) // 약 절반 사이즈
             .resizable()
             .frame(width: 40, height: 40) // resize
     }

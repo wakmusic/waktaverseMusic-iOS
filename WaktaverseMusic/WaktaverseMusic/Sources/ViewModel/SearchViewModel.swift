@@ -24,6 +24,11 @@ final class SearchViewModel: ObservableObject {
             .assign(to: &$debouncedValue)
     }
 
+    deinit {
+        clearCache()
+        print("❌ SearchViewModel deinit")
+    }
+
     func fetchSong(_ keyword: String) {
         Repository.shared.fetchSearchWithKeyword(keyword)
             .sink { (_) in

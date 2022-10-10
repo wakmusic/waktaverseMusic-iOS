@@ -13,6 +13,11 @@ final class ChartViewModel: ObservableObject {
     @Published var updateTime: Int = 0
     var subscription = Set<AnyCancellable>()
 
+    deinit {
+        clearCache()
+        print("❌ ChartViewModel deinit")
+    }
+
     func fetchChart(_ category: TopCategory) {
         Repository.shared.fetchTopRankedSong(category: category).sink { completion in
             switch completion {

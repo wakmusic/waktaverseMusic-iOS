@@ -26,6 +26,7 @@
 		7B1D20B928E9969D006F67C6 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20B828E9969D006F67C6 /* RankView.swift */; };
 		7B1D20BB28E9A6AF006F67C6 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20BA28E9A6AF006F67C6 /* ChartViewModel.swift */; };
 		7B1D20BE28E9A753006F67C6 /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20BD28E9A753006F67C6 /* RoundedRectangleButton.swift */; };
+		7B877ABB28F3EA3F0096C025 /* ChartMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B877ABA28F3EA3F0096C025 /* ChartMoreView.swift */; };
 		D8086D6828BD335600D44F48 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6728BD335600D44F48 /* Alamofire */; };
 		D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6A28BD335D00D44F48 /* PopupView */; };
 		D8086D6E28BD336800D44F48 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6D28BD336800D44F48 /* Kingfisher */; };
@@ -51,7 +52,6 @@
 		D80F435728E6DD1000C4A485 /* NewSongOfTheMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431628E6DD1000C4A485 /* NewSongOfTheMonth.swift */; };
 		D80F435828E6DD1000C4A485 /* NewsMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431828E6DD1000C4A485 /* NewsMoreView.swift */; };
 		D80F435928E6DD1000C4A485 /* NewSongMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */; };
-		D80F435A28E6DD1000C4A485 /* ChartMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */; };
 		D80F435B28E6DD1000C4A485 /* FourRowSongGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431D28E6DD1000C4A485 /* FourRowSongGridView.swift */; };
 		D80F435C28E6DD1000C4A485 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431E28E6DD1000C4A485 /* HomeView.swift */; };
 		D80F435D28E6DD1000C4A485 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431F28E6DD1000C4A485 /* NewsView.swift */; };
@@ -95,6 +95,7 @@
 		7B1D20B828E9969D006F67C6 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
 		7B1D20BA28E9A6AF006F67C6 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7B1D20BD28E9A753006F67C6 /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
+		7B877ABA28F3EA3F0096C025 /* ChartMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMoreView.swift; sourceTree = "<group>"; };
 		D80F42F528E6DD1000C4A485 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D80F42F828E6DD1000C4A485 /* WaktaverseMusicApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaktaverseMusicApp.swift; sourceTree = "<group>"; };
 		D80F42F928E6DD1000C4A485 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -116,7 +117,6 @@
 		D80F431628E6DD1000C4A485 /* NewSongOfTheMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSongOfTheMonth.swift; sourceTree = "<group>"; };
 		D80F431828E6DD1000C4A485 /* NewsMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMoreView.swift; sourceTree = "<group>"; };
 		D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSongMoreView.swift; sourceTree = "<group>"; };
-		D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartMoreView.swift; sourceTree = "<group>"; };
 		D80F431D28E6DD1000C4A485 /* FourRowSongGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourRowSongGridView.swift; sourceTree = "<group>"; };
 		D80F431E28E6DD1000C4A485 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D80F431F28E6DD1000C4A485 /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
@@ -342,7 +342,7 @@
 				D80F431E28E6DD1000C4A485 /* HomeView.swift */,
 				D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */,
 				D80F431D28E6DD1000C4A485 /* FourRowSongGridView.swift */,
-				D80F431C28E6DD1000C4A485 /* ChartMoreView.swift */,
+				7B877ABA28F3EA3F0096C025 /* ChartMoreView.swift */,
 				D80F431628E6DD1000C4A485 /* NewSongOfTheMonth.swift */,
 				D80F431A28E6DD1000C4A485 /* NewSongMoreView.swift */,
 				D80F431F28E6DD1000C4A485 /* NewsView.swift */,
@@ -535,6 +535,7 @@
 				7B1D20AF28E95054006F67C6 /* Const.swift in Sources */,
 				7B1D20A728E94E2B006F67C6 /* ArtistViewModel.swift in Sources */,
 				7B1D20B528E97AE4006F67C6 /* MainViewModel.swift in Sources */,
+				7B877ABB28F3EA3F0096C025 /* ChartMoreView.swift in Sources */,
 				7B1D209628E941D3006F67C6 /* HomeViewModel.swift in Sources */,
 				D80F436028E6DD1000C4A485 /* SettingScreenView.swift in Sources */,
 				D80F434E28E6DD1000C4A485 /* RankedSong.swift in Sources */,
@@ -570,7 +571,6 @@
 				D80F437128E6DD1000C4A485 /* ApiCollections.swift in Sources */,
 				7B1D20A928E94E94006F67C6 /* AccountViewModel.swift in Sources */,
 				D80F436928E6DD1000C4A485 /* PlayerViewModel.swift in Sources */,
-				D80F435A28E6DD1000C4A485 /* ChartMoreView.swift in Sources */,
 				D80F434F28E6DD1000C4A485 /* Artist.swift in Sources */,
 				D80F435828E6DD1000C4A485 /* NewsMoreView.swift in Sources */,
 				D80F434A28E6DD1000C4A485 /* WaktaverseMusic.xcdatamodeld in Sources */,

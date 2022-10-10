@@ -9,6 +9,7 @@ import SwiftUI
 import UIKit
 import Foundation
 import AVFoundation
+import Kingfisher
 
 @main
 struct WaktaverseMusicApp: App {
@@ -44,4 +45,8 @@ func changeMode(isDarkMode: Bool) {
             window.overrideUserInterfaceStyle = .light
         }
     }
+}
+
+func clearCache() {
+    ImageCache.default.clearCache()
 }
