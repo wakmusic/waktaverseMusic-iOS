@@ -31,7 +31,7 @@ struct ChartMoreView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     Spacer(minLength: ScreenSize.height / 6)
-                    LazyVStack(pinnedViews: [.sectionHeaders]) {
+                    LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                         Section {
                             ForEach(viewModel.currentShowCharts.indices, id: \.self) { index in
                                 ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index], musicCart: $musicCart)
