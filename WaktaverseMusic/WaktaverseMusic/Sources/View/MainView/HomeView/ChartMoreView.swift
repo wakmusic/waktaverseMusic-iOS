@@ -8,7 +8,6 @@ import SwiftUI
 import Combine
 import Kingfisher
 import Foundation
-import ScalingHeaderScrollView
 
 // MARK: 차트 더보기를 눌렀을 때 나오는 뷰 입니다.
 struct ChartMoreView: View {
@@ -21,68 +20,62 @@ struct ChartMoreView: View {
     @State var scrollToTop: Bool = false
     let hasNotch: Bool = UIDevice.current.hasNotch
 
-    // MARK: For Smooth Sliding Effect
-
     var body: some View {
 
-        ZStack(alignment: .topLeading) {
+        ZStack(alignment: .top) {
+            VStack(spacing: 0) {
+                HeaderView()
+                Spacer()
+            } // 이세돌 배경
 
-            ScalingHeaderScrollView {
-                ZStack {
-                    Color.forced
-                    VStack(spacing: hasNotch ? 30 : 30) {
-                        HeaderView()
+            VStack(spacing: 0) {
+                ScrollView {
+                    Spacer(minLength: ScreenSize.height / 6)
+                    LazyVStack(pinnedViews: [.sectionHeaders]) {
+                        Section {
+                            ForEach(viewModel.currentShowCharts.indices, id: \.self) { index in
+                                ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index], musicCart: $musicCart)
+                            }
 
-                        PinnedHeaderView(selectedIndex: $index, chart: $viewModel.currentShowCharts, updateTime: $viewModel.updateTime).environmentObject(playState).coordinateSpace(name: "PinnedHeaderView") // header 위로 올렸을 때 가리기 위함
+                        } header: {
+                            PinnedHeaderView(selectedIndex: $index, chart: $viewModel.currentShowCharts, updateTime: $viewModel.updateTime).environmentObject(playState)
+                                .background(Color.forced) // 필터 ~ 업데이트 시간 부분까지
 
-                    }
-
-                }
-
-            } content: {
-                LazyVStack(spacing: 0) {
-
-                    ForEach(viewModel.currentShowCharts.indices, id: \.self) { index in
-
-                        ChartItemView(rank: index+1, song: viewModel.currentShowCharts[index], musicCart: $musicCart)
-                    }
-
-                }.animation(.ripple(), value: viewModel.currentShowCharts)
-                    .onChange(of: index, perform: { newValue in
-                        switch newValue {
-                        case 0:
-                            viewModel.fetchChart(.total)
-                            viewModel.fetchUpdateTime(.total)
-                        case 1:
-                            viewModel.fetchChart(.hourly)
-                            viewModel.fetchUpdateTime(.hourly)
-
-                        case 2:
-                            viewModel.fetchChart(.daily)
-                            viewModel.fetchUpdateTime(.daily)
-
-                        case 3:
-                            viewModel.fetchChart(.weekly)
-                            viewModel.fetchUpdateTime(.weekly)
-                        case 4:
-                            viewModel.fetchChart(.monthly)
-                            viewModel.fetchUpdateTime(.monthly)
-                        default:
-                            print("Default")
                         }
 
-                        scrollToTop = true
+                    } // LazyVStack
+                    .background(Color.forced) // 차트 아이템 부분
+                    .animation(.ripple(), value: viewModel.currentShowCharts)
+                        .onChange(of: index, perform: { newValue in
+                            switch newValue {
+                            case 0:
+                                viewModel.fetchChart(.total)
+                                viewModel.fetchUpdateTime(.total)
+                            case 1:
+                                viewModel.fetchChart(.hourly)
+                                viewModel.fetchUpdateTime(.hourly)
 
-                    })
+                            case 2:
+                                viewModel.fetchChart(.daily)
+                                viewModel.fetchUpdateTime(.daily)
+
+                            case 3:
+                                viewModel.fetchChart(.weekly)
+                                viewModel.fetchUpdateTime(.weekly)
+                            case 4:
+                                viewModel.fetchChart(.monthly)
+                                viewModel.fetchUpdateTime(.monthly)
+                            default:
+                                print("Default")
+                            }
+
+                            scrollToTop = true
+
+                        })
+                }
             }
-            .height(min: hasNotch ? ScreenSize.height/4 : ScreenSize.height/4, max: hasNotch ? ScreenSize.height/2.5 : ScreenSize.height/2.3)
-            .scrollToTop(resetScroll: $scrollToTop)
-
-            // - MARK: 스크롤
-
             .onAppear(perform: {
                 // 초기에 이전 화면 정보와 같게 하기 위해
-
                 index = Bindingindex
 
                 switch index {
@@ -107,13 +100,13 @@ struct ChartMoreView: View {
                     print("Default")
                 }
             })
-
             .onDisappear(perform: {
                 Bindingindex = index // 닫힐 때 저장된 인덱스 보냄
             })
 
-        }.navigationBarBackButtonHidden(true) // 백 버튼 없애고
-            .navigationBarHidden(true) // Bar 제거
+        } // ZStack
+        .navigationBarBackButtonHidden(true) // 백 버튼 없애고
+        .navigationBarHidden(true) // Bar 제거
         // .ignoresSafeArea(.container,edges:.vertical)
             .padding(1) // safeArea 방지
 
@@ -125,30 +118,26 @@ struct ChartMoreView: View {
                 }
             }))
 
-    }
+    } // body
+
 }
 
 struct HeaderView: View {
-
-    let height = UIScreen.main.bounds.size.height
-
     var body: some View {
 
         Image("mainChartLogo")
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: height/6)
+            .scaledToFit()
+            // .aspectRatio(contentMode: .fit)
+            .frame(width: ScreenSize.width, height: ScreenSize.height/6)
             .opacity(0.3)
-            .overlay(content: {
-                ZStack(alignment: .center) {
-                    VStack {
-                        // 텍스트 크기를 proxy를 기준으로 변경
-                        Text("BILLBOARDOO CHART").font(.system(size: height/30, weight: .light, design: .default))
-                        Text("HOT 100").font(.custom("GmarketSansTTFBold", size: height/21))
-                    }.padding(.top, 10)
-
+            .overlay(alignment: .center) {
+                VStack {
+                    // 텍스트 크기를 proxy를 기준으로 변경
+                    Text("WAKTAVERSE MUSIC").font(.system(size: ScreenSize.height/30, weight: .light, design: .default))
+                    Text("HOT 100").font(.custom("GmarketSansTTFBold", size: ScreenSize.height/21))
                 }
-            })
+            }
     }
 }
 
@@ -231,7 +220,8 @@ struct PinnedHeaderView: View {
 
             }.padding(.trailing, 5)
         }
-        .frame(height: ScreenSize.height/7)
+        .frame(height: ScreenSize.height/6)
+        .padding(.vertical, 10)
 
     }
 }
@@ -254,9 +244,11 @@ struct ChartItemView: View {
                 .placeholder({
                     Image("placeHolder")
                         .resizable()
-                        .frame(width: 40, height: 40)
+                        .frame(width: 45, height: 45)
                         .transition(.opacity.combined(with: .scale))
                 })
+                // 대부분 500*500 or 480*360 으로 들어옴
+                .downsampling(size: CGSize(width: 200, height: 200)) // 약 절반 사이즈
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 45, height: 45)
