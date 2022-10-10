@@ -35,7 +35,7 @@ extension NewsView {
 
     var OneGridRow: some View {
 
-        ForEach(viewModel.news, id: \.self.id) { news in
+        ForEach(viewModel.news.prefix(3), id: \.self.id) { news in
 
             NavigationLink {
                 CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(news.newsId)")
