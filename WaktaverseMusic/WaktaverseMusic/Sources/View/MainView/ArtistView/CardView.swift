@@ -13,7 +13,7 @@ struct CardView: View {
     var artist: Artist
     @Binding var selectedId: String
     let device = UIDevice.current.userInterfaceIdiom
-    let url = "https://billboardoo.com/artist/image/card/"
+    let url = "\(Const.URL.base)/artist/image/card/"
     var body: some View {
 
         VStack(spacing: 0) {

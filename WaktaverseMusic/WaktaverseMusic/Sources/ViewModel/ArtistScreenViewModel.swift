@@ -13,11 +13,17 @@ final class ArtistScreenViewModel: ObservableObject {
     @Published var selectedid: String = "woowakgood"
     @Published var artists: [Artist] = [Artist]()
     @Published var currentShowChart: [NewSong] = [NewSong]()
+    @Published var selectedIndex: Int = 0
     var subscription = Set<AnyCancellable>()
 
     init() {
         fetchArtist()
         fetchSongList("woowakgood")
+    }
+
+    deinit {
+        clearCache()
+        print("❌ ArtistViewModel deinit")
     }
 
     func fetchArtist() {
