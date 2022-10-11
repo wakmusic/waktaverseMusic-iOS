@@ -20,8 +20,6 @@ struct ArtistScreenView: View {
     @EnvironmentObject var playState: PlayState
     @Binding var musicCart: [SimpleSong]
 
- 
-
     var body: some View {
 
                 ScrollView {
@@ -108,7 +106,7 @@ struct ArtistHeaderVIew: View {
                     }
                 }
                 .frame(width: ScreenSize.width, height: proxy.size.height, alignment: .top)
-                .offset(y: -minY) //이미지 스크롤 안되게 막아줌 
+                .offset(y: -minY) // 이미지 스크롤 안되게 막아줌 
         }.frame(height: ScreenSize.height/3)
 
     }
