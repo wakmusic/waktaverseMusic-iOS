@@ -16,13 +16,8 @@ struct PlayListView: View {
     @EnvironmentObject var player: PlayerViewModel
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
-    var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     let device = UIDevice.current.userInterfaceIdiom
-    let width = UIScreen.main.bounds.width
-    let height = UIScreen.main.bounds.size.height
-    let hasNotch = UIDevice.current.hasNotch
-    let div: CGFloat = 3.3
-    let notchDiv: CGFloat = 3.5
+
     var body: some View {
 
         ZStack(alignment: .top) {
@@ -54,7 +49,7 @@ struct PlayListView: View {
                             TopLeftControlView(playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState)
                             Spacer()
                             TopRightControlView(playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing, 10)
-                        }// .frame(width:width)
+                        }
 
                     }
                 }
@@ -94,7 +89,6 @@ struct ItemCell: View {
     @Binding var multipleSelection: Set<UUID> // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 드래그 된 아이템
     @EnvironmentObject var playState: PlayState
-    var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     let device = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
@@ -217,7 +211,6 @@ struct MyDropDelegate: DropDelegate {
 
 struct NowPlaySongView: View {
     let song: SimpleSong
-    let width = UIScreen.main.bounds.width
     let div: CGFloat = 8
 
     var body: some View {
@@ -226,11 +219,11 @@ struct NowPlaySongView: View {
                 .placeholder({
                     Image("placeHolder")
                         .resizable()
-                        .frame(width: width/div, height: width/div)
+                        .frame(width: ScreenSize.width/div, height: ScreenSize.width/div)
                         .transition(.opacity.combined(with: .scale))
                 })
                 .resizable()
-                .frame(width: width/div, height: width/div)
+                .frame(width: ScreenSize.width/div, height: ScreenSize.width/div)
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
 
@@ -252,7 +245,6 @@ struct TopLeftControlView: View {
     @Binding var multipleSelection: Set<UUID>
     @EnvironmentObject var playState: PlayState
     let device = UIDevice.current.userInterfaceIdiom
-    var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
 
     var body: some View {
         HStack {
@@ -290,7 +282,6 @@ struct TopRightControlView: View {
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
     let device = UIDevice.current.userInterfaceIdiom
-    var modifier: FullScreenButtonImageModifier = FullScreenButtonImageModifier()
     @State var isShowAlert: Bool = false
 
     var body: some View {
