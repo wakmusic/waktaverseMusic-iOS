@@ -19,71 +19,38 @@ struct ArtistScreenView: View {
     @StateObject var viewModel = ArtistScreenViewModel()
     @EnvironmentObject var playState: PlayState
     @Binding var musicCart: [SimpleSong]
-    @State var scrollToTop: Bool = false
-    @State var selectedIndex: Int = 0
 
-    let artistFontSize = ScreenSize.height/30
-    let artistNameFontSize = ScreenSize.height/25
+ 
 
     var body: some View {
 
-        ZStack(alignment: .top) {
-            ScalingHeaderScrollView {
-                ZStack {
-                    Color.forced
+                ScrollView {
 
-                    VStack(spacing: 0) {
-                        ArtistHeaderVIew(artists: $viewModel.artists, selectedid: $viewModel.selectedid)
-                            .overlay {
-                                VStack {
-                                    Text("ARTIST").foregroundColor(.white).font(.system(size: artistFontSize, weight: .light, design: .default)).padding(.top, UIDevice.current.hasNotch ? 150 :  100)
-                                    Text(viewModel.selectedid.uppercased()).foregroundColor(.white).font(.custom("LeferiPoint-Special", size: artistNameFontSize)).bold()
-                                    // .padding(.top,UIDevice.current.hasNotch ? 30 : 50)
-                                    Spacer()
+                    ArtistHeaderVIew(artists: $viewModel.artists, selectedid: $viewModel.selectedid)
 
-                                    ScrollView(.horizontal, showsIndicators: false) {
+                    LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
 
-                                        LazyHGrid(rows: columns, alignment: device == .phone ? .top : .bottom, spacing: 10) {
-                                            ForEach(viewModel.artists, id: \.self.id) { artist in
-
-                                                CardView(artist: artist, selectedId: $viewModel.selectedid)
-
-                                            }
-                                        }
-
-                                    }.frame(height: device == .phone ? ScreenSize.height/4 : ScreenSize.height/7  )
-
-                                }
+                        Section {
+                            ForEach(viewModel.currentShowChart, id: \.self.id) { (song: NewSong) in
+                                ArtistSongListItemView(song: song, accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
 
                             }
+                        } header: {
+                            ArtistPinnedHeader(selectedIndex: $viewModel.selectedIndex, chart: $viewModel.currentShowChart).environmentObject(playState)
+                                .background(Color.forced)
+                        }
 
-                        ArtistPinnedHeader(selectedIndex: $selectedIndex, chart: $viewModel.currentShowChart, scrollToTop: $scrollToTop).environmentObject(playState)
+                    }.onChange(of: viewModel.selectedid) { newValue in
+                        viewModel.fetchSongList(newValue)
+
+                        viewModel.selectedIndex = 0 // 아티스트 변경시 최신순으로
                     }
-                }
-            } content: {
-                LazyVStack(spacing: 0) {
-
-                    ForEach(viewModel.currentShowChart, id: \.self.id) { (song: NewSong) in
-                        ArtistSongListItemView(song: song, accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
-
-                    }
-
-                }.onChange(of: viewModel.selectedid) { newValue in
-                    viewModel.fetchSongList(newValue)
-                    scrollToTop = true
-                    selectedIndex = 0 // 아티스트 변경시 최신순으로
+                    .background(Color.forced) // 차트 아이템 부분
+                    .animation(.easeInOut, value: viewModel.currentShowChart)
 
                 }
-                .transition(.move(edge: .leading).combined(with: .opacity))
-                .animation(.easeInOut, value: viewModel.currentShowChart)
 
-            }
-
-            .height(min: hasNotch == true ?  ScreenSize.height/4.5 : ScreenSize.height/5, max: hasNotch == true ? ScreenSize.height/2 : ScreenSize.height/1.8)
-            .scrollToTop(resetScroll: $scrollToTop)
-
-        }
-
+        .coordinateSpace(name: "SCROLL")
         .ignoresSafeArea(.container, edges: .all)
 
     }
@@ -93,24 +60,56 @@ struct ArtistHeaderVIew: View {
     let columns: [GridItem] = [GridItem(.fixed(0))]
     @Binding var artists: [Artist]
     @Binding var selectedid: String
-    let url = "https://billboardoo.com/artist/image/big/"
+    let url = "\(Const.URL.base)/artist/image/big/"
     let hasNotch: Bool = UIDevice.current.hasNotch
+    let artistFontSize = ScreenSize.height/30
+    let artistNameFontSize = ScreenSize.height/25
+
     var body: some View {
 
-        KFImage(URL(string: "\(url)\(selectedid).jpg")!)
-            .placeholder({
-                Image("bigholder")
-                    .resizable()
-                    .scaledToFill()
-            })
-            .resizable()
-            .scaledToFill()
-            .overlay {
-                ZStack {
-                    LinearGradient(colors: [.clear, .normal.opacity(1)], startPoint: .top, endPoint: .bottom)
+        GeometryReader { proxy in
+            let minY = proxy.frame(in: .named("SCROLL")).minY
+            let size = proxy.size
+            let height = (size.height + minY)
 
+            KFImage(URL(string: "\(url)\(selectedid).jpg")!)
+                .placeholder({
+                    Image("bigholder")
+                        .resizable()
+                        .scaledToFill()
+                })
+                .resizable()
+                .scaledToFill()
+
+                .overlay {
+                    ZStack(alignment: .bottom) {
+                        LinearGradient(colors: [.clear, .normal.opacity(1)], startPoint: .top, endPoint: .bottom)
+                        VStack {
+                            Spacer()
+                            Text("ARTIST").foregroundColor(.white).font(.system(size: artistFontSize, weight: .light, design: .default))
+                                // .padding(.top, hasNotch ? 20 : 10)
+
+                            Text(selectedid.uppercased()).foregroundColor(.white).font(.custom("LeferiPoint-Special", size: artistNameFontSize)).bold()
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+
+                                LazyHGrid(rows: columns, alignment: .top, spacing: 10) {
+                                    ForEach(artists, id: \.self.id) { artist in
+
+                                        CardView(artist: artist, selectedId: $selectedid)
+
+                                    }
+                                }
+
+                            }.frame(width: ScreenSize.width, height: hasNotch ? proxy.size.height/3 : proxy.size.height/2, alignment: .top)
+
+                        }
+
+                    }
                 }
-            }
+                .frame(width: ScreenSize.width, height: proxy.size.height, alignment: .top)
+                .offset(y: -minY) //이미지 스크롤 안되게 막아줌 
+        }.frame(height: ScreenSize.height/3)
 
     }
 
@@ -134,6 +133,7 @@ struct ArtistSongListItemView: View {
                         .frame(width: 45, height: 45)
                         .transition(.opacity.combined(with: .scale))
                 })
+                .downsampling(size: CGSize(width: 200, height: 200)) // 약 절반 사이즈
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 45, height: 45)
@@ -176,7 +176,6 @@ struct ArtistPinnedHeader: View {
     @Binding var chart: [NewSong]
     let hasNotch = UIDevice.current.hasNotch
     @Namespace var animation
-    @Binding var scrollToTop: Bool
 
     let sorting: [String] = ["최신순", "인기순", "오래된 순"]
 
@@ -236,7 +235,6 @@ struct ArtistPinnedHeader: View {
                                     print("현재 선택된 필터 값\(selectedIndex)")
 
                                 }
-                                scrollToTop = true
 
                             }
 
