@@ -55,14 +55,14 @@ struct FlexiblePlayer: View {
 
                         Spacer()
 
-                        HStack(spacing: 20) {
+                        HStack(spacing: 0) {
                             PlayPuaseButton().environmentObject(playState)
 
                             Button {
                                 playState.playList.removeAll()
                                 playState.currentSong = nil
                             } label: {
-                                Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).padding(10)
+                                Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).padding()
                             }
                         }.padding(.horizontal)
 
