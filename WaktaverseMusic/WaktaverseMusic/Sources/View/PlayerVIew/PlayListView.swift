@@ -16,7 +16,6 @@ struct PlayListView: View {
     @EnvironmentObject var player: PlayerViewModel
     @State private var multipleSelection = Set<UUID>() // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 현재 드래그된 노래
-    let device = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
 
@@ -36,7 +35,7 @@ struct PlayListView: View {
                                 .padding()
                         }
 
-                            Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size: device ==  . phone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading, 10)
+                        Text("지금 재생 중").font(.custom("PretendardVariable-Bold", size: Device.isPhone ? 13 : 20)).foregroundColor(.primary).bold() .padding(.leading, 10)
                             HStack {
                                 NowPlaySongView(song: song)
                                 Spacer()
@@ -89,7 +88,6 @@ struct ItemCell: View {
     @Binding var multipleSelection: Set<UUID> // 다중 선택 셋
     @State var draggedItem: SimpleSong? // 드래그 된 아이템
     @EnvironmentObject var playState: PlayState
-    let device = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
         HStack {
@@ -109,7 +107,7 @@ struct ItemCell: View {
             } label: {
 
                 Image(systemName: multipleSelection.contains(song.id) ? "checkmark.circle.fill" : "circle") // 멑티 셋 안에 해당 음악 id 있을 때 는 check 없으면 빈 circle
-                    .font(.system(size: device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+                    .font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary)
 
                     .padding(.leading, 10)
             }
@@ -122,7 +120,7 @@ struct ItemCell: View {
                 }
                 Spacer()
 
-                Image(systemName: "line.3.horizontal").font(.system(size: device == .phone  ? 20 : 25)).foregroundColor(Color.primary).padding(.trailing, 5)
+                Image(systemName: "line.3.horizontal").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary).padding(.trailing, 5)
 
             }
 
@@ -244,7 +242,6 @@ struct TopLeftControlView: View {
     @Binding var currentIndex: Int
     @Binding var multipleSelection: Set<UUID>
     @EnvironmentObject var playState: PlayState
-    let device = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
         HStack {
@@ -261,9 +258,9 @@ struct TopLeftControlView: View {
             } label: {
 
                 Label {
-                    Text("\(multipleSelection.count)").font(.system(size: device == .phone  ? 20 : 25)).foregroundColor(Color.primary)
+                    Text("\(multipleSelection.count)").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary)
                 } icon: {
-                    Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle").font(.system(size: device == .phone  ? 20 : 25)).foregroundColor(Color.primary).padding(.leading, 10)
+                    Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary).padding(.leading, 10)
                 }
 
             }
@@ -281,7 +278,6 @@ struct TopRightControlView: View {
     @Binding var multipleSelection: Set<UUID>
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
-    let device = UIDevice.current.userInterfaceIdiom
     @State var isShowAlert: Bool = false
 
     var body: some View {
@@ -294,7 +290,7 @@ struct TopRightControlView: View {
                 }
 
             } label: {
-                Image(systemName: "trash").font(.system(size: device == .phone  ? 20 : 25)).foregroundColor(Color.primary).padding(.trailing, 10)
+                Image(systemName: "trash").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary).padding(.trailing, 10)
             }
             .alert("삭제하시겠습니까?", isPresented: $isShowAlert) {
 
