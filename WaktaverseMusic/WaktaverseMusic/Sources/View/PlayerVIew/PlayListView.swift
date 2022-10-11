@@ -266,10 +266,10 @@ struct TopRightControlView: View {
             }
             // 2. Alert - 삭제하시겠습니까? 아니요 : 예
             .alert("삭제하시겠습니까?", isPresented: $isShowAlert) {
-                
+
                 // 2-1. 아니요 선택 시 Alert 창 닫힘
                 Button(role: .cancel) { } label: { Text("아니요") }
-                
+
                 // 2-2. 예 선택 시 목록에서 제거
                 Button(role: .destructive) {
                     if multipleSelection.count == playList.count { // 전체 제거 시
@@ -285,6 +285,7 @@ struct TopRightControlView: View {
                             playList = playList.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거 , 담기지 않은 것만 남겨둠
                             if multipleSelection.contains(playState.currentSong!.id) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
                                 currentIndex = 0 // 가장 처음 인덱스로
+                                playState.playAgain() // 첫번째 곡부터 재생
                             } else {
                                 let nowPlaySong: SimpleSong = playState.currentSong!
                                 currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 // 현재 재생중인 노래로
