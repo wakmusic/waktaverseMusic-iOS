@@ -56,7 +56,7 @@
 		D80F435C28E6DD1000C4A485 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431E28E6DD1000C4A485 /* HomeView.swift */; };
 		D80F435D28E6DD1000C4A485 /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F431F28E6DD1000C4A485 /* NewsView.swift */; };
 		D80F435E28E6DD1000C4A485 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432128E6DD1000C4A485 /* CardView.swift */; };
-		D80F435F28E6DD1000C4A485 /* ArtistScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432228E6DD1000C4A485 /* ArtistScreenView.swift */; };
+		D80F435F28E6DD1000C4A485 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432228E6DD1000C4A485 /* ArtistView.swift */; };
 		D80F436028E6DD1000C4A485 /* SettingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432428E6DD1000C4A485 /* SettingScreenView.swift */; };
 		D80F436128E6DD1000C4A485 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432528E6DD1000C4A485 /* MainView.swift */; };
 		D80F436228E6DD1000C4A485 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432628E6DD1000C4A485 /* BlurView.swift */; };
@@ -121,7 +121,7 @@
 		D80F431E28E6DD1000C4A485 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		D80F431F28E6DD1000C4A485 /* NewsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		D80F432128E6DD1000C4A485 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		D80F432228E6DD1000C4A485 /* ArtistScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistScreenView.swift; sourceTree = "<group>"; };
+		D80F432228E6DD1000C4A485 /* ArtistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
 		D80F432428E6DD1000C4A485 /* SettingScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingScreenView.swift; sourceTree = "<group>"; };
 		D80F432528E6DD1000C4A485 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D80F432628E6DD1000C4A485 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				D80F432128E6DD1000C4A485 /* CardView.swift */,
-				D80F432228E6DD1000C4A485 /* ArtistScreenView.swift */,
+				D80F432228E6DD1000C4A485 /* ArtistView.swift */,
 			);
 			path = ArtistView;
 			sourceTree = "<group>";
@@ -580,7 +580,7 @@
 				D80F435328E6DD1000C4A485 /* AccountView.swift in Sources */,
 				D80F434D28E6DD1000C4A485 /* SimpleSong.swift in Sources */,
 				D80F435E28E6DD1000C4A485 /* CardView.swift in Sources */,
-				D80F435F28E6DD1000C4A485 /* ArtistScreenView.swift in Sources */,
+				D80F435F28E6DD1000C4A485 /* ArtistView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -55,7 +55,7 @@ struct MainView: View {
                                     .padding(.bottom, (player.playerMode.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
 
                             case .artists:
-                                ArtistScreenView(musicCart: $musicCart).environmentObject(playState)
+                                ArtistView(musicCart: $musicCart).environmentObject(playState)
                                     .padding(.bottom, (player.playerMode.isMiniPlayer&&playState.currentSong != nil)  ?   tabHeight : 0)
                             case .search:
                                 SearchView(musicCart: $musicCart).environmentObject(playState)

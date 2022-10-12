@@ -10,7 +10,7 @@ import Combine
 import Kingfisher
 import ScalingHeaderScrollView
 
-struct ArtistScreenView: View {
+struct ArtistView: View {
 
     let columns: [GridItem] = [GridItem(.fixed(20), spacing: 20)]
     let device = UIDevice.current.userInterfaceIdiom
@@ -67,8 +67,8 @@ struct ArtistHeaderVIew: View {
 
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
-            let size = proxy.size
-            let height = (size.height + minY)
+            // let size = proxy.size
+            // let height = (size.height + minY)
 
             KFImage(URL(string: "\(url)\(selectedid).jpg")!)
                 .placeholder({
@@ -106,7 +106,7 @@ struct ArtistHeaderVIew: View {
                     }
                 }
                 .frame(width: ScreenSize.width, height: proxy.size.height, alignment: .top)
-                .offset(y: -minY) // 이미지 스크롤 안되게 막아줌 
+                .offset(y: -minY) // 이미지 스크롤 안되게 막아줌
         }.frame(height: ScreenSize.height/3)
 
     }
