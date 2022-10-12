@@ -206,7 +206,7 @@ struct PinnedHeaderView: View {
                     .onTapGesture {
                         playState.playList.removeAll() // 전부 지운후
                         playState.playList.list = castingFromRankedToSimple(rankedList: chart) // 현재 해당 chart로 덮어쓰고
-                        shuffle(playlist: &playState.playList.list)  // 셔플 시킨 후
+                        playState.playList.list.shuffle()  // 셔플 시킨 후
                         playState.play(at: playState.playList.first) // 첫번째 곡 재생
                         playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     }
@@ -291,15 +291,4 @@ func castingFromRankedToSimple(rankedList: [RankedSong]) -> [SimpleSong] {
     }
 
     return simpleList
-}
-
-func shuffle(playlist: inout [SimpleSong]) {
-
-    for i in 0..<playlist.count - 1 { // 0 ~ n-2
-        let randomIndex = Int.random(in: i..<playlist.count)
-
-        let temp = playlist[i]
-        playlist[i] = playlist[randomIndex]
-        playlist[randomIndex] = temp
-    }
 }

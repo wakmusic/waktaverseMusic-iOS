@@ -10,7 +10,7 @@ import Combine
 import Kingfisher
 import ScalingHeaderScrollView
 
-struct ArtistScreenView: View {
+struct ArtistView: View {
 
     let columns: [GridItem] = [GridItem(.fixed(20), spacing: 20)]
     let device = UIDevice.current.userInterfaceIdiom
@@ -67,8 +67,8 @@ struct ArtistHeaderVIew: View {
 
         GeometryReader { proxy in
             let minY = proxy.frame(in: .named("SCROLL")).minY
-            let size = proxy.size
-            let height = (size.height + minY)
+            // let size = proxy.size
+            // let height = (size.height + minY)
 
             KFImage(URL(string: "\(url)\(selectedid).jpg")!)
                 .placeholder({
@@ -106,7 +106,7 @@ struct ArtistHeaderVIew: View {
                     }
                 }
                 .frame(width: ScreenSize.width, height: proxy.size.height, alignment: .top)
-                .offset(y: -minY) // 이미지 스크롤 안되게 막아줌 
+                .offset(y: -minY) // 이미지 스크롤 안되게 막아줌
         }.frame(height: ScreenSize.height/3)
 
     }
@@ -257,7 +257,7 @@ struct ArtistPinnedHeader: View {
 
                         playState.playList.removeAll() // 전부 지운후
                         playState.playList.list = castingFromNewSongToSimple(newSongList: chart) // 현재 해당 chart로 덮어쓰고
-                        shuffle(playlist: &playState.playList.list)  // 셔플 시킨 후
+                        playState.playList.list.shuffle() // 셔플 시킨 후
                         playState.play(at: playState.playList.first) // 첫번째 곡 재생
                         playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     }
