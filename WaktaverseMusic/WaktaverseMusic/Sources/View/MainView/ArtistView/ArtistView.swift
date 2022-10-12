@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import Kingfisher
-import ScalingHeaderScrollView
+
 
 struct ArtistView: View {
 

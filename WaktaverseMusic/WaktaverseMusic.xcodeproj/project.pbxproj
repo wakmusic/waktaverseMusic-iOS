@@ -79,7 +79,6 @@
 		D80F438D28F6FD5E00C4A485 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D80F438C28F6FD5E00C4A485 /* FirebaseAuth */; };
 		D80F438F28F6FD5E00C4A485 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D80F438E28F6FD5E00C4A485 /* FirebaseAuthCombine-Community */; };
 		D80F439128F6FD5E00C4A485 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D80F439028F6FD5E00C4A485 /* FirebaseCrashlytics */; };
-		D8922EA628BFA73300C15FAE /* ScalingHeaderScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,7 +164,6 @@
 				D8086D6828BD335600D44F48 /* Alamofire in Frameworks */,
 				D80F439128F6FD5E00C4A485 /* FirebaseCrashlytics in Frameworks */,
 				D80F438B28F6FD5E00C4A485 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				D8922EA628BFA73300C15FAE /* ScalingHeaderScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +454,6 @@
 				D8086D6A28BD335D00D44F48 /* PopupView */,
 				D8086D6D28BD336800D44F48 /* Kingfisher */,
 				D8086D7028BD337000D44F48 /* YouTubePlayerKit */,
-				D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */,
 				D80F438428F6FD5E00C4A485 /* FirebaseAnalytics */,
 				D80F438628F6FD5E00C4A485 /* FirebaseAnalyticsOnDeviceConversion */,
 				D80F438828F6FD5E00C4A485 /* FirebaseAnalyticsSwift */,
@@ -499,7 +496,6 @@
 				D8086D6928BD335D00D44F48 /* XCRemoteSwiftPackageReference "PopupView" */,
 				D8086D6C28BD336800D44F48 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D8086D6F28BD337000D44F48 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
-				D8922EA428BFA73300C15FAE /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */,
 				D80F438328F6FD5E00C4A485 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D87EDF9B28859FE200999DE6 /* Products */;
@@ -901,14 +897,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		D8922EA428BFA73300C15FAE /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/ScalingHeaderScrollView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -966,11 +954,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D80F438328F6FD5E00C4A485 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
-		};
-		D8922EA528BFA73300C15FAE /* ScalingHeaderScrollView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D8922EA428BFA73300C15FAE /* XCRemoteSwiftPackageReference "ScalingHeaderScrollView" */;
-			productName = ScalingHeaderScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
 
