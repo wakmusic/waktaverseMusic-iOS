@@ -200,10 +200,8 @@ struct PlayerButtonBar: View {
 struct ProgressBar: View {
 
     @EnvironmentObject var playState: PlayState
-    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
-
-    @State var playtime: String = "00:00"
-    @State var endtime: String = "00:00"
+    var currentTime: String = PlayState.shared.progress.currentProgress.convertTimetoString()
+    var endTime: String = PlayState.shared.progress.endProgress.convertTimetoString()
 
     var body: some View {
 
@@ -224,23 +222,11 @@ struct ProgressBar: View {
                 }
 
                 HStack {
-                    Text(playtime).modifier(FullScreenTimeModifer())
+                    Text(currentTime).modifier(FullScreenTimeModifer())
                     Spacer()
-                    Text(endtime).modifier(FullScreenTimeModifer())
+                    Text(endTime).modifier(FullScreenTimeModifer())
                 }
 
-            }.onReceive(timer) { _ in
-                playState.youTubePlayer.getCurrentTime { completion in
-                    switch completion {
-                    case .success(let time):
-                        playState.progress.currentProgress = time
-                        playtime = time.convertTimetoString()
-                        endtime = playState.progress.endProgress.convertTimetoString()
-
-                    case.failure:
-                        print("\(#function) \(#line) Error 발생")
-                    }
-                }
             }
         }
     }

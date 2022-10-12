@@ -33,6 +33,11 @@ final class PlayState: ObservableObject {
             }
         }.store(in: &subscription)
 
+        youTubePlayer.currentTimePublisher().sink { [weak self] time in
+            guard let self = self else { return }
+            self.progress.currentProgress = time
+        }.store(in: &subscription)
+
         youTubePlayer.durationPublisher.sink { [weak self] time in
             guard let self = self else { return }
             self.progress.endProgress = time
