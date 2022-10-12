@@ -257,7 +257,7 @@ struct ArtistPinnedHeader: View {
 
                         playState.playList.removeAll() // 전부 지운후
                         playState.playList.list = castingFromNewSongToSimple(newSongList: chart) // 현재 해당 chart로 덮어쓰고
-                        shuffle(playlist: &playState.playList.list)  // 셔플 시킨 후
+                        playState.playList.list.shuffle() // 셔플 시킨 후
                         playState.play(at: playState.playList.first) // 첫번째 곡 재생
                         playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     }
