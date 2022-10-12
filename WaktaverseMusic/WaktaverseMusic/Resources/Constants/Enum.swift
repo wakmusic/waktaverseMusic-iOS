@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+enum Device {
+    static let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+    static let isPad = UIDevice.current.userInterfaceIdiom == .pad
+}
+
 enum ScreenSize {
     static let width = UIScreen.main.bounds.width
     static let height = UIScreen.main.bounds.size.height

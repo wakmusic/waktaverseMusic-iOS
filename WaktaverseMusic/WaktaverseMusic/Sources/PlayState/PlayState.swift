@@ -33,6 +33,11 @@ final class PlayState: ObservableObject {
             }
         }.store(in: &subscription)
 
+        youTubePlayer.currentTimePublisher().sink { [weak self] time in
+            guard let self = self else { return }
+            self.progress.currentProgress = time
+        }.store(in: &subscription)
+
         youTubePlayer.durationPublisher.sink { [weak self] time in
             guard let self = self else { return }
             self.progress.endProgress = time
@@ -54,7 +59,7 @@ extension PlayState {
         play()
     }
 
-    // ⏩ 다음 곡으로 변경
+    /// ⏩ 다음 곡으로 변경 후 재생
     func forWard() {
         if self.playList.isLast { // 맨 뒤면
             self.playList.currentPlayIndex = 0 // 첫 번째로 이동
@@ -65,7 +70,7 @@ extension PlayState {
         play()
     }
 
-    // ⏪ 이전 곡으로 변경
+    /// ⏪ 이전 곡으로 변경 후 재생
     func backWard() {
         if self.playList.currentPlayIndex ==  0 { // 첫 번째면
             self.playList.currentPlayIndex = playList.lastIndex // 맨 뒤로 위동
@@ -73,6 +78,13 @@ extension PlayState {
             self.playList.currentPlayIndex -= 1
         }
         currentSong = playList.list[playList.currentPlayIndex]
+        play()
+    }
+
+    /// ♻️ 첫번째 곡으로 변경 후 재생
+    func playAgain() {
+        self.playList.currentPlayIndex = 0
+        currentSong = playList.first
         play()
     }
 
