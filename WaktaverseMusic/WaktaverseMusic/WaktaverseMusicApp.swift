@@ -8,15 +8,27 @@
 import SwiftUI
 import UIKit
 import Foundation
-import AVFoundation
+import FirebaseCore
 import Kingfisher
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 @main
 struct WaktaverseMusicApp: App {
 
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
-    // @UIApplicationDelegateAdaptor var delegate: BillboardooDelegate
+
     var playState = PlayState.shared
+
+    // register app delegate for Firebase setup
+      @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {
