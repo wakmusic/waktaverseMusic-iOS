@@ -287,7 +287,7 @@ struct TopRightControlView: View {
                             } else {
                                 playState.playList.currentPlayIndex = playState.playList.list.firstIndex(of: playState.currentSong!) ?? 0 // 현재 재생중인 노래로
                             }
-                            
+
                             multipleSelection.removeAll() // 멀티셋 비우고
                         }
                     }
