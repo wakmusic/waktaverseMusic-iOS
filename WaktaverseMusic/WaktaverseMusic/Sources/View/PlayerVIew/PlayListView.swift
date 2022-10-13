@@ -273,16 +273,19 @@ struct TopRightControlView: View {
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playState.playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
-                            player.playerMode.mode = .mini // Fullscrren 끄고
+                            player.playerMode.mode = .mini // 다음번에 재생 시 미니모드로 켜짐
                             playState.youTubePlayer.stop() // youtubePlayer Stop
                             playState.currentSong = nil // 현재 재생 노래 비어둠
                         }
                     } else { // 전체 제거가 아닐 때
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playState.playList.list = playState.playList.list.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거, 담기지 않은 것만 남겨둠
-                            if multipleSelection.contains(playState.currentSong!.id) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
-                                playState.playList.currentPlayIndex = 0 // 가장 처음 인덱스로
-                                playState.playAgain() // 첫번째 곡부터 재생
+
+                            // 현재삭제 목록에 재생중인 노래가 포함됬을 때
+                            if multipleSelection.contains(playState.currentSong!.id) {
+                                playState.playAgain()
+                            } else {
+                                playState.playList.currentPlayIndex = playState.playList.list.firstIndex(of: playState.currentSong!) ?? 0 // 현재 재생중인 노래로
                             }
                             
                             multipleSelection.removeAll() // 멀티셋 비우고
