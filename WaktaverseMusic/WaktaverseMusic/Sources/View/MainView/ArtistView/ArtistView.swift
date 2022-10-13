@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 import Kingfisher
 
-
 struct ArtistView: View {
 
     let columns: [GridItem] = [GridItem(.fixed(20), spacing: 20)]
