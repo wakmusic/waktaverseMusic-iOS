@@ -65,7 +65,7 @@ extension NewSongMoreView {
 
                 KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
                     .placeholder({
-                        Image("placeHolder")
+                        Image("PlaceHolder")
                             .resizable()
                             .frame(width: width, height: width)
                             .transition(.opacity.combined(with: .scale))

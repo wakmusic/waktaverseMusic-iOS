@@ -11,8 +11,8 @@ struct LaunchScreenView: View {
 
     var body: some View {
         ZStack {
-            Color.black
-            Image("LaunchImage")
+            Color.launchScreenColor
+            Image("LaunchScreenLogo")
                 .resizable()
                 .aspectRatio(contentMode: .fit).padding(.horizontal)
         }
@@ -24,5 +24,6 @@ struct LaunchScreenView: View {
 struct LaunchScreenView_Previews: PreviewProvider {
     static var previews: some View {
         LaunchScreenView()
+            .preferredColorScheme(.dark)
     }
 }

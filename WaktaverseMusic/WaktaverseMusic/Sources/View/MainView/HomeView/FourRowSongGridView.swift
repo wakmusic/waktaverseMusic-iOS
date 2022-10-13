@@ -79,7 +79,7 @@ struct AlbumImageView: View {
         KFImage(URL(string: url.convertFullThumbNailImageUrl())!)
             .cancelOnDisappear(true)
             .placeholder {
-                Image("placeHolder")
+                Image("PlaceHolder")
                     .resizable()
                     .frame(width: 40, height: 40)
                     .transition(.opacity.combined(with: .scale))
