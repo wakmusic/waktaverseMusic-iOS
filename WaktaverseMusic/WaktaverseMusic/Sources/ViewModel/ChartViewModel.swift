@@ -34,7 +34,7 @@ final class ChartViewModel: ObservableObject {
 
     }
 
-    func fetchUpdateTime(_ category: TopCategory) {
+    func fetchUpdateTime(_ category: TopCategory) { // 카데고리 사라짐 
         Repository.shared.fetchUpdateTimeStmap(category: category).sink { completion in
             switch completion {
             case .failure(let err):

@@ -12,7 +12,7 @@ struct NewsModel: Codable, Identifiable, Equatable {
     let id = UUID()
     let newsId: Int
     let title: String
-    let time: Int
+    let time: Int  // 카테고리 0,1,2
 
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.newsId == rhs.newsId
