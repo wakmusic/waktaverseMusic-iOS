@@ -24,15 +24,15 @@ struct LoginView: View {
                     }
                 }
 
-            LoginButton(text: "네이버계정 로그인", image: "naver", textColor: .primary, buttonColor: .naver, url: ApiCollections.naver, showAlert: $showAelrt)
-                .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
-
-                    Button(role: .cancel) {
-
-                    } label: {
-                        Text("확인")
-                    }
-                }
+//            LoginButton(text: "네이버계정 로그인", image: "naver", textColor: .primary, buttonColor: .naver, url: ApiCollections.naver, showAlert: $showAelrt)
+//                .alert("서비스 준비중입니다.", isPresented: $showAelrt) {
+//
+//                    Button(role: .cancel) {
+//
+//                    } label: {
+//                        Text("확인")
+//                    }
+//                }
 
         }.padding(.horizontal)
 

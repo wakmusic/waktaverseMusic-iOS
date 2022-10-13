@@ -41,9 +41,10 @@ struct PlayListView: View {
                         .animation(.easeIn, value: playState.currentSong)
 
                         HStack {
-                            TopLeftControlView(playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState)
+                            TopLeftControlView(multipleSelection: $multipleSelection, playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex).environmentObject(playState)
                             Spacer()
-                            TopRightControlView(playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex, multipleSelection: $multipleSelection).environmentObject(playState).padding(.trailing, 10)
+                            TopRightControlView(multipleSelection: $multipleSelection, playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex).environmentObject(playState)
+                                .padding(.trailing, 10)
                         }
 
                     }
@@ -157,24 +158,24 @@ struct NowPlaySongView: View {
 
 struct TopLeftControlView: View {
     @EnvironmentObject var playState: PlayState
+    @Binding var multipleSelection: Set<UUID>
     @Binding var playList: [SimpleSong]
     @Binding var currentIndex: Int
-    @Binding var multipleSelection: Set<UUID>
 
     var body: some View {
         HStack {
             Button {
                 // 전체 선택된 상태면 모두 선택 해제, 아니면 모두 선택
-                if multipleSelection.count == playList.count {
+                if multipleSelection.count == playState.playList.count {
                     multipleSelection.removeAll()
                 } else {
-                    _ = playList.map { multipleSelection.insert($0.id) }
+                    _ = playState.playList.list.map { multipleSelection.insert($0.id) }
                 }
             } label: {
                 Label {
                     Text("\(multipleSelection.count)").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary)
                 } icon: {
-                    Image(systemName: multipleSelection.count == playList.count ? "checkmark.circle.fill" : "circle").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary).padding(.leading, 10)
+                    Image(systemName: multipleSelection.count == playState.playList.count ? "checkmark.circle.fill" : "circle").font(.system(size: Device.isPhone  ? 20 : 25)).foregroundColor(Color.primary).padding(.leading, 10)
                 }
             }
         } // HStack
@@ -184,9 +185,9 @@ struct TopLeftControlView: View {
 struct TopRightControlView: View {
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
+    @Binding var multipleSelection: Set<UUID>
     @Binding var playList: [SimpleSong]
     @Binding var currentIndex: Int
-    @Binding var multipleSelection: Set<UUID>
     @State var isShowAlert: Bool = false
 
     var body: some View {
@@ -205,11 +206,11 @@ struct TopRightControlView: View {
 
                 // 2-2. 예 선택 시 목록에서 제거
                 Button(role: .destructive) {
-                    if multipleSelection.count == playList.count { // 전체 제거 시
+                    if multipleSelection.count == playState.playList.count { // 전체 제거 시
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
-                            playList.removeAll() // 리스트 제거
+                            playState.playList.removeAll() // 리스트 제거
                             multipleSelection.removeAll() // 셋 제거
-                            player.playerMode.mode = .mini // Fullscrren 끄고
+                            player.playerMode.mode = .mini // 다음번에 재생 시 미니모드로 켜짐
                             playState.youTubePlayer.stop() // youtubePlayer Stop
                             playState.currentSong = nil // 현재 재생 노래 비어둠
                         }
@@ -217,8 +218,7 @@ struct TopRightControlView: View {
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
                             playList = playList.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거 , 담기지 않은 것만 남겨둠
                             if multipleSelection.contains(playState.currentSong!.id) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
-                                currentIndex = 0 // 가장 처음 인덱스로
-                                playState.playAgain() // 첫번째 곡부터 재생
+                                playState.playAgain()
                             } else {
                                 let nowPlaySong: SimpleSong = playState.currentSong!
                                 currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 // 현재 재생중인 노래로

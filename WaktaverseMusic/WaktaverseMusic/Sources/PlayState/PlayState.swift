@@ -61,23 +61,15 @@ extension PlayState {
 
     /// ⏩ 다음 곡으로 변경 후 재생
     func forWard() {
-        if self.playList.isLast { // 맨 뒤면
-            self.playList.currentPlayIndex = 0 // 첫 번째로 이동
-        } else {
-            self.playList.currentPlayIndex += 1
-        }
-        currentSong = playList.list[playList.currentPlayIndex]
+        self.playList.next()
+        self.currentSong = playList.current
         play()
     }
 
     /// ⏪ 이전 곡으로 변경 후 재생
     func backWard() {
-        if self.playList.currentPlayIndex ==  0 { // 첫 번째면
-            self.playList.currentPlayIndex = playList.lastIndex // 맨 뒤로 위동
-        } else {
-            self.playList.currentPlayIndex -= 1
-        }
-        currentSong = playList.list[playList.currentPlayIndex]
+        self.playList.back()
+        self.currentSong = playList.current
         play()
     }
 
@@ -103,6 +95,7 @@ extension PlayState {
 
         var first: SimpleSong? { return list.first }
         var last: SimpleSong? { return list.last }
+        var current: SimpleSong? { return list[currentPlayIndex] }
         var count: Int { return list.count }
         var lastIndex: Int { return list.count - 1 }
         var isEmpty: Bool { return list.isEmpty }
@@ -118,6 +111,16 @@ extension PlayState {
 
         func contains(_ item: SimpleSong) -> Bool {
             return list.contains(item)
+        }
+
+        func back() {
+            if currentPlayIndex == 0 { currentPlayIndex = lastIndex; return } // 현재 곡이 첫번째 곡이면 마지막 곡으로
+            currentPlayIndex -= 1
+        }
+
+        func next() {
+            if isLast { currentPlayIndex = 0; return } // 현재 곡이 마지막이면 첫번째 곡으로
+            currentPlayIndex += 1
         }
 
         func uniqueAppend(item: SimpleSong) {

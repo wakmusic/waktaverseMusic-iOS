@@ -97,16 +97,16 @@ extension Color {
         return Color("PrimaryColor")
     }
 
+    public static var launchScreenColor: Color {
+        return Color("LaunchScreenColor")
+    }
+
     public static var twitch: Color {
         return Color("twitch")
     }
 
     public static var normal: Color {
         return Color("normal")
-    }
-
-    public static var naver: Color {
-        return Color("naver")
     }
 
     public static var tabBar: Color {

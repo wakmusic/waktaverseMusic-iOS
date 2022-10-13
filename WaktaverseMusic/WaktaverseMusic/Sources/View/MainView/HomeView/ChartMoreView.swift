@@ -242,7 +242,7 @@ struct ChartItemView: View {
 
             KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
                 .placeholder({
-                    Image("placeHolder")
+                    Image("PlaceHolder")
                         .resizable()
                         .frame(width: 45, height: 45)
                         .transition(.opacity.combined(with: .scale))

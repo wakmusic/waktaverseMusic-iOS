@@ -70,10 +70,8 @@ struct NavigationLogo: View {
     let height = max(ScreenSize.width, ScreenSize.height)
     let device = UIDevice.current.userInterfaceIdiom
     var body: some View {
-        Image("mainLogoWhite")
+        Image("MainLogo")
             .resizable()
-            .renderingMode(.template)
-            .foregroundColor(Color.primary)
             .aspectRatio(contentMode: .fit)
             .frame(width: device == .phone ? width*0.5 : width*0.4, height: device == .phone ? width*0.3 : width*0.3)
 
