@@ -41,9 +41,9 @@ struct PlayListView: View {
                         .animation(.easeIn, value: playState.currentSong)
 
                         HStack {
-                            TopLeftControlView(multipleSelection: $multipleSelection).environmentObject(playState)
+                            TopLeftControlView(multipleSelection: $multipleSelection, playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex).environmentObject(playState)
                             Spacer()
-                            TopRightControlView(multipleSelection: $multipleSelection).environmentObject(playState)
+                            TopRightControlView(multipleSelection: $multipleSelection, playList: $playState.playList.list, currentIndex: $playState.playList.currentPlayIndex).environmentObject(playState)
                                 .padding(.trailing, 10)
                         }
 
@@ -226,6 +226,8 @@ struct NowPlaySongView: View {
 struct TopLeftControlView: View {
     @EnvironmentObject var playState: PlayState
     @Binding var multipleSelection: Set<UUID>
+    @Binding var playList: [SimpleSong]
+    @Binding var currentIndex: Int
 
     var body: some View {
         HStack {
@@ -251,6 +253,8 @@ struct TopRightControlView: View {
     @EnvironmentObject var playState: PlayState
     @EnvironmentObject var player: PlayerViewModel
     @Binding var multipleSelection: Set<UUID>
+    @Binding var playList: [SimpleSong]
+    @Binding var currentIndex: Int
     @State var isShowAlert: Bool = false
 
     var body: some View {
@@ -279,15 +283,13 @@ struct TopRightControlView: View {
                         }
                     } else { // 전체 제거가 아닐 때
                         withAnimation(Animation.spring(response: 0.6, dampingFraction: 0.7)) {
-                            playState.playList.list = playState.playList.list.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거, 담기지 않은 것만 남겨둠
-
-                            // 현재삭제 목록에 재생중인 노래가 포함됬을 때
-                            if multipleSelection.contains(playState.currentSong!.id) {
+                            playList = playList.filter {!multipleSelection.contains($0.id)} // 포함된 것만 제거 , 담기지 않은 것만 남겨둠
+                            if multipleSelection.contains(playState.currentSong!.id) { // 현재삭제 목록에 재생중인 노래가 포함됬을 때
                                 playState.playAgain()
                             } else {
-                                playState.playList.currentPlayIndex = playState.playList.list.firstIndex(of: playState.currentSong!) ?? 0 // 현재 재생중인 노래로
+                                let nowPlaySong: SimpleSong = playState.currentSong!
+                                currentIndex = playList.firstIndex(of: nowPlaySong) ?? 0 // 현재 재생중인 노래로
                             }
-
                             multipleSelection.removeAll() // 멀티셋 비우고
                         }
                     }
