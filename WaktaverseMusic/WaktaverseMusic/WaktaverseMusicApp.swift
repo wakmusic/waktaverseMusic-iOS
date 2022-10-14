@@ -44,6 +44,7 @@ struct WaktaverseMusicApp: App {
 }
 
 func changeMode(isDarkMode: Bool) {
+
     if let window = UIApplication.shared.connectedScenes.first as? UIWindowScene {
         if #available(iOS 15.0, *) {
             let windows = window.windows.first
