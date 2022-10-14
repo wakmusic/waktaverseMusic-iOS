@@ -90,7 +90,7 @@ iOSInjectionProject/
 ### SwiftPackageManager ###
 Packages
 xcuserdata
-*.xcodeproj
+
 
 # OSX Temp
 .DS_Store
