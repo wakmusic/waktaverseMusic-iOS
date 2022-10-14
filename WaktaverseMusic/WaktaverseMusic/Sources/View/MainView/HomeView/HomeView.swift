@@ -71,9 +71,6 @@ struct NavigationLogo: View {
     let device = UIDevice.current.userInterfaceIdiom
     var body: some View {
         Image("MainLogo")
-            .resizable()
-            // .frame(width: device == .phone ? width*0.3 : width*0.4, height: device == .phone ? width*0.3 : width*0.3)
             .aspectRatio(contentMode: .fit)
-
     }
 }
