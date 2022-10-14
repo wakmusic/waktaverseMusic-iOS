@@ -8,7 +8,6 @@
 import SwiftUI
 import UIKit
 import Kingfisher
-import ScalingHeaderScrollView
 
 struct PlayListView: View {
     @EnvironmentObject var playState: PlayState
