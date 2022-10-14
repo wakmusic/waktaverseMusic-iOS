@@ -18,7 +18,8 @@ class ApiCollections {
 
     // - MARK: new Songs , 무한 스크롤
     static let newWeekly: String = "\(Const.URL.base)/api/charts/new/weekly" // 이주의 신곡
-    static let newMonthly: String =  "\(Const.URL.base)/api/charts/new/monthly" // 이달의 신곡
+    static let newMonthly: String = "\(Const.URL.base)/api/charts/new/monthly/220501"
+    // "\(Const.URL.base)/api/charts/new/monthly" // 이달의 신곡
 
     // "\(Const.URL.base)/api/charts/new/monthly/220501"
 

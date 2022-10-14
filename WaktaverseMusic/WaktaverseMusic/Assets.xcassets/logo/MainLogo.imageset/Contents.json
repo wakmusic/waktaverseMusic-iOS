@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Header_Logo_white.png",
+      "filename" : "applogo_60.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,12 +12,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Header_Logo_Black.png",
+      "filename" : "applogo_60-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Header_Logo_white@2x.png",
+      "filename" : "applogo_60@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Header_Logo_Black@2x.png",
+      "filename" : "applogo_60@2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Header_Logo_white@3x.png",
+      "filename" : "applogo_60@3x-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Header_Logo_Black@3x.png",
+      "filename" : "applogo_60@3x-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
