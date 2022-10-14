@@ -36,8 +36,7 @@ class ApiCollections {
     //   0 -> 1 -> 2
     static let newsThumbnail: String = "\(Const.URL.base)/news/thumbnail/"
     static let newsCafe: String = "https://cafe.naver.com/steamindiegame/"
-   
-    
+
     // - MARK: 무한스크롤
     static let artist: String = "\(Const.URL.base)/api/artists/" // +artist id
     static let albums: String = "\(Const.URL.base)/api/albums/" // +artist id
@@ -45,7 +44,6 @@ class ApiCollections {
     static let searchOneSong: String = "\(Const.URL.base)/api/charts/search/id/" // id
     static let searchSongs: String = "\(Const.URL.base)/api/charts/search/ids/" // ids (아이디1,아이디2,아이디3,...)
 
-    
     // - MARK: 무한스크롤
     static let searchTitleOrArtiest: String = "\(Const.URL.base)/api/charts/search/keyword/" // (제목 또는 아티스트명)
 
@@ -58,7 +56,5 @@ class ApiCollections {
     static let chartUpdateWeekly: String = "\(Const.URL.base)/api/charts/update/weekly"
 
     static let chartUpdateMonthly: String = "\(Const.URL.base)/api/charts/update/monthly"
-
-
 
 }
