@@ -178,8 +178,9 @@ struct ArtistPinnedHeader: View {
 
     var body: some View {
 
-        VStack(alignment: .leading, spacing: hasNotch ? 30 :10) {
-
+        VStack(alignment: .leading, spacing: 10) {
+            Spacer()
+                .frame(height: 1)
             HStack(spacing: 5) {
                 ForEach(sorting.indices, id: \.self) { idx in
 
