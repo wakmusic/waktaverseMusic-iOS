@@ -83,10 +83,10 @@ struct ArtistHeaderVIew: View {
                         LinearGradient(colors: [.clear, .normal.opacity(1)], startPoint: .top, endPoint: .bottom)
                         VStack {
                             Spacer()
-                            Text("ARTIST").foregroundColor(.white).font(.system(size: artistFontSize, weight: .light, design: .default))
+                            Text("ARTIST").foregroundColor(.primary).font(.system(size: artistFontSize, weight: .light, design: .default))
                                 // .padding(.top, hasNotch ? 20 : 10)
 
-                            Text(selectedid.uppercased()).foregroundColor(.white).font(.custom("LeferiPoint-Special", size: artistNameFontSize)).bold()
+                            Text(selectedid.uppercased()).foregroundColor(.primary).font(.custom("LeferiPoint-Special", size: artistNameFontSize)).bold()
 
                             ScrollView(.horizontal, showsIndicators: false) {
 
