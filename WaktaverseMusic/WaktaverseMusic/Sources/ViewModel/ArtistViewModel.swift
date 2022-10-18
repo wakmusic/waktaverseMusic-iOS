@@ -10,15 +10,16 @@ import Combine
 
 final class ArtistViewModel: ObservableObject {
 
-    @Published var selectedid: String = "woowakgood"
+    @Published var selectedArtist: String = "woowakgood"
     @Published var artists: [Artist] = [Artist]()
     @Published var currentShowChart: [NewSong] = [NewSong]()
     @Published var selectedIndex: Int = 0
+    var selectedSort: String = "new"
     var subscription = Set<AnyCancellable>()
 
     init() {
         fetchArtist()
-        fetchSongList("woowakgood")
+        fetchSongList("woowakgood", sort: "new")
     }
 
     deinit {
@@ -40,15 +41,19 @@ final class ArtistViewModel: ObservableObject {
 
     }
 
-    func fetchSongList(_ name: String) {
-        Repository.shared.fetchSearchSongsList(name).sink { _ in
+    func fetchSongList(_ name: String, sort: String) {
+        Repository.shared.fetchSearchSongsList(selectedArtist, start: currentShowChart.count, sort: sort).sink { _ in
 
         } receiveValue: { [weak self] (data: [NewSong]) in
             guard let self = self else {return}
 
-            self.currentShowChart = data
+            _ = data.map { self.currentShowChart.append($0) }
         }.store(in: &subscription)
 
+    }
+
+    func clearSongList() {
+        self.currentShowChart = []
     }
 
 }
