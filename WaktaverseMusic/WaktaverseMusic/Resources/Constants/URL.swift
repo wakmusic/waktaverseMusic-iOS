@@ -21,6 +21,8 @@ extension Const {
         static let update = "/updated"
         static let `static` = "/static"
         static let  news = "/news"
+        static let artistList = "/artist/list"
+        static let artistAlbums = "/artist/albums/"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 

@@ -83,7 +83,7 @@ class Repository {
     /// 아티스트 정보들을 불러옵니다.
     /// - Returns: [Artist]
     func fetchArtists() -> AnyPublisher<[Artist], Error> {
-        let url = ApiCollections.artist
+        let url = Const.URL.base + Const.URL.api + Const.URL.artistList
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
@@ -95,13 +95,18 @@ class Repository {
             .eraseToAnyPublisher()
     }
 
-    /// 해당 아티스트의 곡 정보들을 불러옵니다.
+    /// 해당 아티스트의 노래를 start 부터 start+30 까지 불러옵니다.
     /// - Parameter name: 아티스트의 이름
+    /// - Parameter start: 몇번째 곡부터 불러올지
+    /// - Parameter sort: 정렬 (popular, new, old)
     /// - Returns [NewSong]
-    func fetchSearchSongsList(_ name: String) -> AnyPublisher<[NewSong], Error> {
-        let url = ApiCollections.albums + name
-
-        return AF.request(url)
+    func fetchSearchSongsList(_ name: String, start: Int, sort: String) -> AnyPublisher<[NewSong], Error> {
+        let url = Const.URL.base + Const.URL.api + Const.URL.artistAlbums + name
+        let params: Parameters = [
+            "start": start,
+            "sort": sort
+        ]
+        return AF.request(url, parameters: params)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewSong].self)
             .value()
