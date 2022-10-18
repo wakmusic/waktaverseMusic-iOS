@@ -117,7 +117,7 @@ struct ItemCell: View {
         .contentShape(Rectangle()) // 행 전체 클릭시 바로 재생되기 위해
         .onTapGesture {
             playState.currentSong = song
-            playState.youTubePlayer.load(source: .url(song.url)) // 강제 재생
+            playState.youTubePlayer.load(source: .url((song.song_id.youtube()))) // 강제 재생
             playState.playList.currentPlayIndex = playState.playList.list.firstIndex(of: song) ?? 0
         }
 
@@ -131,7 +131,7 @@ struct NowPlaySongView: View {
 
     var body: some View {
         HStack {
-            KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
+            KFImage(URL(string: song.song_id.albumImage() )!)
                 .placeholder({
                     Image("placeHolder")
                         .resizable()

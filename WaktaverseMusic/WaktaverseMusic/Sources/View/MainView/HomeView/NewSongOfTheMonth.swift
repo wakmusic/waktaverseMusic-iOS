@@ -45,10 +45,10 @@ extension NewSongOfTheMonthView {
         // (viewModel.newSongs.count < 6 ? viewModel.newSongs: Array(viewModel.newSongs[0..<6])
 
         ForEach(viewModel.newSongs, id: \.self.id) { song in
-            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist)
             VStack {
 
-                KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
+                KFImage(URL(string: song.song_id.albumImage())!)
                     .placeholder {
                         Image("PlaceHolder")
                             .resizable()

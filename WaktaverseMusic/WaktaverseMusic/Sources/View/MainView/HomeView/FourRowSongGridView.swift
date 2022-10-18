@@ -50,13 +50,13 @@ private extension FourRowSongGridView {
 
             Button {
                 // FiveRowSong Grid에서는 재생 버튼 누르면 일단 load와 currentSong을 바꿈
-                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+                let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist)
                 playState.play(at: simpleSong)
                 playState.playList.uniqueAppend(item: simpleSong) // 현재 누른 곡 담기
             } label: {
                 ZStack {
                     HStack {
-                        AlbumImageView(url: nowChart[index].image)
+                        AlbumImageView(url: nowChart[index].song_id.albumImage())
                         RankView(now: index+1, last: nowChart[index].last)
 
                         // 타이틀 , Artist 영역
@@ -76,7 +76,7 @@ struct AlbumImageView: View {
 
     var url: String
     var body: some View {
-        KFImage(URL(string: url.convertFullThumbNailImageUrl())!)
+        KFImage(URL(string: url)!)
             .cancelOnDisappear(true)
             .placeholder {
                 Image("PlaceHolder")

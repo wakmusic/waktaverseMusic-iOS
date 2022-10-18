@@ -27,9 +27,18 @@ extension String {
         return String(self[startIndex ..< endIndex])
     }
 
-    func convertFullThumbNailImageUrl() -> String {
-        return self.replacingOccurrences(of: "hqdefault", with: "maxresdefault")
+    func youtube() -> String {
+        return  "https://youtu.be/" + self
     }
+
+    func albumImage () -> String {
+        return "https://i.ytimg.com/vi/" + self +  "/hqdefault.jpg"
+
+    }
+
+//    func convertFullThumbNailImageUrl() -> String {
+//        return self.replacingOccurrences(of: "hqdefault", with: "maxresdefault")
+//    }
 }
 
 extension Int {

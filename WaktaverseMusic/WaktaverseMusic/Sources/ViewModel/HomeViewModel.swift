@@ -61,6 +61,7 @@ final class HomeViewModel: ObservableObject {
             } receiveValue: { [weak self] (datas: [RankedSong]) in
                 guard let self = self else {return}
                 self.nowChart = datas  // chart 갱신
+
             }.store(in: &subscription)
     }
 

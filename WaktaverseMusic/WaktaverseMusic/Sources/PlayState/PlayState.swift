@@ -51,7 +51,7 @@ extension PlayState {
 
     func play() {
         guard let currentSong = currentSong else { return }
-        self.youTubePlayer.load(source: .url(currentSong.url)) // 바로 load
+        self.youTubePlayer.load(source: .url(currentSong.song_id.youtube())) // 바로 load
     }
 
     func play(at item: SimpleSong?) {
