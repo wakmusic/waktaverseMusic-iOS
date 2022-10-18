@@ -6,7 +6,49 @@
 //
 
 import Foundation
+import Combine
 
 final class ArtistViewModel: ObservableObject {
+
+    @Published var selectedid: String = "woowakgood"
+    @Published var artists: [Artist] = [Artist]()
+    @Published var currentShowChart: [NewSong] = [NewSong]()
+    @Published var selectedIndex: Int = 0
+    var subscription = Set<AnyCancellable>()
+
+    init() {
+        fetchArtist()
+        fetchSongList("woowakgood")
+    }
+
+    deinit {
+        clearCache()
+        print("❌ ArtistViewModel deinit")
+    }
+
+    func fetchArtist() {
+        Repository.shared.fetchArtists().sink { _ in
+
+        } receiveValue: { [weak self] (data: [Artist]) in
+            guard let self = self else {return}
+
+            self.artists = data.filter { (artist: Artist) in
+                artist.artistId != nil // 더미데이터 제거
+            }
+
+        }.store(in: &subscription)
+
+    }
+
+    func fetchSongList(_ name: String) {
+        Repository.shared.fetchSearchSongsList(name).sink { _ in
+
+        } receiveValue: { [weak self] (data: [NewSong]) in
+            guard let self = self else {return}
+
+            self.currentShowChart = data
+        }.store(in: &subscription)
+
+    }
 
 }

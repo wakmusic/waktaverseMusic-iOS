@@ -15,7 +15,7 @@ struct ArtistView: View {
     let device = UIDevice.current.userInterfaceIdiom
     let hasNotch = UIDevice.current.hasNotch
 
-    @StateObject var viewModel = ArtistScreenViewModel()
+    @StateObject var viewModel = ArtistViewModel()
     @EnvironmentObject var playState: PlayState
     @Binding var musicCart: [SimpleSong]
 
