@@ -32,7 +32,7 @@ extension String {
     }
 
     func albumImage () -> String {
-        return "https://i.ytimg.com/vi/" + self +  "/hqdefault.jpg"
+        return "https://i.ytimg.com/vi/" + self +  "/maxresdefault.jpg"
 
     }
 
