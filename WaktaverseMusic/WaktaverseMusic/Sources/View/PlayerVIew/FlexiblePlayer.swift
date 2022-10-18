@@ -64,7 +64,7 @@ struct FlexiblePlayer: View {
                             } label: {
                                 Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).padding()
                             }
-                        }.padding(.horizontal)
+                        }.padding(.horizontal, 5)
 
                     }
 

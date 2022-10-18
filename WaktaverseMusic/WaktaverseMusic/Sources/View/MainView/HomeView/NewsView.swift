@@ -41,7 +41,7 @@ extension NewsView {
                 CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(news.newsId)")
             } label: {
                 VStack(alignment: .leading, spacing: 20) {
-                    KFImage(URL(string: "\(ApiCollections.newsThumbnail)\(news.time).png")!)
+                    KFImage(URL(string: "\(Const.URL.base)\(Const.URL.static)\(Const.URL.news)/\(news.time).png")!)
                         .resizable()
                         .scaledToFill()
                         .clipped()

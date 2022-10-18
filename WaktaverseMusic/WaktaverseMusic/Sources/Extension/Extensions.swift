@@ -31,9 +31,8 @@ extension String {
         return  "https://youtu.be/" + self
     }
 
-    func albumImage () -> String {
+    func albumImage() -> String {
         return "https://i.ytimg.com/vi/" + self +  "/maxresdefault.jpg"
-
     }
 
 //    func convertFullThumbNailImageUrl() -> String {

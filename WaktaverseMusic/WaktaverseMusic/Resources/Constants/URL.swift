@@ -18,7 +18,9 @@ extension Const {
         static let api = "/api"
         static let auth = "/auth"
         static let charts = "/charts"
-        static let update = "updated"
+        static let update = "/updated"
+        static let `static` = "/static"
+        static let  news = "/news"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 
