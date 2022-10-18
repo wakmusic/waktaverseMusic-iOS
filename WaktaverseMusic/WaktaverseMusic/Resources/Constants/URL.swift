@@ -20,9 +20,10 @@ extension Const {
         static let charts = "/charts"
         static let update = "/updated"
         static let `static` = "/static"
-        static let  news = "/news"
-        static let artistList = "/artist/list"
-        static let artistAlbums = "/artist/albums/"
+        static let news = "/news"
+        static let artist = "/artist"
+        static let list = "/list"
+        static let albums = "/albums/"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 

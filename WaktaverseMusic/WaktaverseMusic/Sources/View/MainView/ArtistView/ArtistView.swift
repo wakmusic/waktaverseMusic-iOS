@@ -23,7 +23,7 @@ struct ArtistView: View {
 
                 ScrollView {
 
-                    ArtistHeaderVIew(artists: $viewModel.artists, selectedid: $viewModel.selectedArtist)
+                    ArtistHeaderVIew(artists: $viewModel.artists, selectedArtist: $viewModel.selectedArtist)
 
                     LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
 
@@ -63,8 +63,8 @@ struct ArtistView: View {
 struct ArtistHeaderVIew: View {
     let columns: [GridItem] = [GridItem(.fixed(0))]
     @Binding var artists: [Artist]
-    @Binding var selectedid: String
-    let url = "\(Const.URL.base)/artist/image/big/"
+    @Binding var selectedArtist: String
+    let url = "\(Const.URL.base)\(Const.URL.static)\(Const.URL.artist)/big/"
     let hasNotch: Bool = UIDevice.current.hasNotch
     let artistFontSize = ScreenSize.height/30
     let artistNameFontSize = ScreenSize.height/25
@@ -76,7 +76,7 @@ struct ArtistHeaderVIew: View {
             // let size = proxy.size
             // let height = (size.height + minY)
 
-            KFImage(URL(string: "\(url)\(selectedid).jpg")!)
+            KFImage(URL(string: "\(url)\(selectedArtist).jpg")!)
                 .placeholder({
                     Image("bigholder")
                         .resizable()
@@ -84,7 +84,6 @@ struct ArtistHeaderVIew: View {
                 })
                 .resizable()
                 .scaledToFill()
-
                 .overlay {
                     ZStack(alignment: .bottom) {
                         LinearGradient(colors: [.clear, .normal.opacity(1)], startPoint: .top, endPoint: .bottom)
@@ -93,14 +92,14 @@ struct ArtistHeaderVIew: View {
                             Text("ARTIST").foregroundColor(.primary).font(.system(size: artistFontSize, weight: .light, design: .default))
                                 // .padding(.top, hasNotch ? 20 : 10)
 
-                            Text(selectedid.uppercased()).foregroundColor(.primary).font(.custom("LeferiPoint-Special", size: artistNameFontSize)).bold()
+                            Text(selectedArtist.uppercased()).foregroundColor(.primary).font(.custom("LeferiPoint-Special", size: artistNameFontSize)).bold()
 
                             ScrollView(.horizontal, showsIndicators: false) {
 
                                 LazyHGrid(rows: columns, alignment: .top, spacing: 10) {
                                     ForEach(artists, id: \.self.id) { artist in
 
-                                        CardView(artist: artist, selectedId: $selectedid)
+                                        CardView(artist: artist, selectedArtist: $selectedArtist)
 
                                     }
                                 }

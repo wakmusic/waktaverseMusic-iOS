@@ -11,13 +11,13 @@ import Kingfisher
 struct CardView: View {
 
     var artist: Artist
-    @Binding var selectedId: String
+    @Binding var selectedArtist: String
     let device = UIDevice.current.userInterfaceIdiom
-    let url = "\(Const.URL.base)/artist/image/card/"
+    let url = "\(Const.URL.base)\(Const.URL.static)\(Const.URL.artist)/card/"
     var body: some View {
 
         VStack(spacing: 0) {
-                KFImage(URL(string: "\(url)\(artist.artistId!).png")!)
+            KFImage(URL(string: "\(url)\(artist.artistId!).png")!)
                     .placeholder({
                         Image("cardholder")
                             .resizable()
@@ -36,11 +36,11 @@ struct CardView: View {
 
             .frame(width: device == .phone ? ScreenSize.width/4 : ScreenSize.width/7, height: device == .phone ? ScreenSize.width/4 : ScreenSize.width/10)
             .onTapGesture {
-                    selectedId = artist.artistId!
+                    selectedArtist = artist.artistId!
             }
 
-            .scaleEffect(selectedId == artist.artistId ? 0.9 : 0.8)
-            .animation(.easeInOut, value: selectedId)
+            .scaleEffect(selectedArtist == artist.artistId ? 0.9 : 0.8)
+            .animation(.easeInOut, value: selectedArtist)
 
     }
 }

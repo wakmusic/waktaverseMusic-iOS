@@ -83,7 +83,7 @@ class Repository {
     /// 아티스트 정보들을 불러옵니다.
     /// - Returns: [Artist]
     func fetchArtists() -> AnyPublisher<[Artist], Error> {
-        let url = Const.URL.base + Const.URL.api + Const.URL.artistList
+        let url = Const.URL.base + Const.URL.api + Const.URL.artist + Const.URL.list
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
@@ -101,7 +101,7 @@ class Repository {
     /// - Parameter sort: 정렬 (popular, new, old)
     /// - Returns [NewSong]
     func fetchSearchSongsList(_ name: String, start: Int, sort: String) -> AnyPublisher<[NewSong], Error> {
-        let url = Const.URL.base + Const.URL.api + Const.URL.artistAlbums + name
+        let url = Const.URL.base + Const.URL.api + Const.URL.artist + Const.URL.albums + name
         let params: Parameters = [
             "start": start,
             "sort": sort
