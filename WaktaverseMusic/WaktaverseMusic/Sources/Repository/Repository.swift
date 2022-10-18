@@ -38,7 +38,7 @@ class Repository {
     /// - Parameter category: 차트 카테고리
     /// - Returns: Int ex) 1664787831
     func fetchUpdateTimeStmap() -> AnyPublisher<Int, Error> {
-        let url = Const.URL.base + Const.URL.api + "/" + Const.URL.update
+        let url = Const.URL.base + Const.URL.api + Const.URL.update
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
@@ -54,7 +54,6 @@ class Repository {
     /// - Returns: newMonthInfo
     func fetchNewMonthSong() -> AnyPublisher<[NewSong], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.new
-        print(url)
         return AF.request(url)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewSong].self)
@@ -69,6 +68,7 @@ class Repository {
     /// - Returns: [NewsModel]
     func fetchNews() -> AnyPublisher<[NewsModel], Error> {
         let url = ApiCollections.news
+        print(url)
 
         return AF.request(url)
             .validate(statusCode: 200..<300)

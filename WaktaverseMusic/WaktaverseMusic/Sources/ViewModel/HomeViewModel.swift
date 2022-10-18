@@ -88,6 +88,7 @@ final class HomeViewModel: ObservableObject {
         } receiveValue: { [weak self] (data: [NewsModel]) in
             guard let self = self else {return}
             self.news = data
+
         }.store(in: &subscription)
     }
 }
