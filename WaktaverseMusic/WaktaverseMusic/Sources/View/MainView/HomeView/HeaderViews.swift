@@ -19,17 +19,17 @@ struct ChartHeaderView: View {
             HStack {
                 switch chartIndex {
                 case 0:
-                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
+                    Text("누적 Top 20").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 1:
-                    Text("빌보두 실시간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
+                    Text("실시간 Top 20").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 2:
-                    Text("빌보두 일간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
+                    Text("일간 Top 20").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 3:
-                    Text("빌보두 주간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
+                    Text("주간 Top 20").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 case 4:
-                    Text("빌보두 월간 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
+                    Text("월간 Top 20").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 default:
-                    Text("빌보두 누적 Top 100").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
+                    Text("누적 Top 20").font(.custom("PretendardVariable-Regular", size: 17)).bold().foregroundColor(Color.primary)
                 }
                 Spacer()
 

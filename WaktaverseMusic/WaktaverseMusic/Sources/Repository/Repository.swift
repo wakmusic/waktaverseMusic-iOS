@@ -85,6 +85,8 @@ class Repository {
     func fetchArtists() -> AnyPublisher<[Artist], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.artist + Const.URL.list
 
+        print(url)
+
         return AF.request(url)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [Artist].self)
