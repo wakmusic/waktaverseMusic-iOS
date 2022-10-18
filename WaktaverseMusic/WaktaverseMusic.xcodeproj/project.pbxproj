@@ -36,7 +36,7 @@
 		D80F434628E6DD1000C4A485 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F42FB28E6DD1000C4A485 /* PlayState.swift */; };
 		D80F434728E6DD1000C4A485 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D80F42FD28E6DD1000C4A485 /* Preview Assets.xcassets */; };
 		D80F434A28E6DD1000C4A485 /* WaktaverseMusic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D80F430028E6DD1000C4A485 /* WaktaverseMusic.xcdatamodeld */; };
-		D80F434B28E6DD1000C4A485 /* newMonthInfo+NewSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F430328E6DD1000C4A485 /* newMonthInfo+NewSong.swift */; };
+		D80F434B28E6DD1000C4A485 /* NewSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F430328E6DD1000C4A485 /* NewSong.swift */; };
 		D80F434C28E6DD1000C4A485 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F430428E6DD1000C4A485 /* NewsModel.swift */; };
 		D80F434D28E6DD1000C4A485 /* SimpleSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F430528E6DD1000C4A485 /* SimpleSong.swift */; };
 		D80F434E28E6DD1000C4A485 /* RankedSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F430628E6DD1000C4A485 /* RankedSong.swift */; };
@@ -108,7 +108,7 @@
 		D80F42FB28E6DD1000C4A485 /* PlayState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
 		D80F42FD28E6DD1000C4A485 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D80F430128E6DD1000C4A485 /* Billboardoo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Billboardoo.xcdatamodel; sourceTree = "<group>"; };
-		D80F430328E6DD1000C4A485 /* newMonthInfo+NewSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "newMonthInfo+NewSong.swift"; sourceTree = "<group>"; };
+		D80F430328E6DD1000C4A485 /* NewSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSong.swift; sourceTree = "<group>"; };
 		D80F430428E6DD1000C4A485 /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		D80F430528E6DD1000C4A485 /* SimpleSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSong.swift; sourceTree = "<group>"; };
 		D80F430628E6DD1000C4A485 /* RankedSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankedSong.swift; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 		D80F430228E6DD1000C4A485 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D80F430328E6DD1000C4A485 /* newMonthInfo+NewSong.swift */,
+				D80F430328E6DD1000C4A485 /* NewSong.swift */,
 				D80F430428E6DD1000C4A485 /* NewsModel.swift */,
 				D80F430528E6DD1000C4A485 /* SimpleSong.swift */,
 				D80F430628E6DD1000C4A485 /* RankedSong.swift */,
@@ -604,7 +604,7 @@
 				7B1D209C28E9445A006F67C6 /* Enum.swift in Sources */,
 				D80F435628E6DD1000C4A485 /* NetworkManager.swift in Sources */,
 				D80F439528F83D1000C4A485 /* ListDropDelegate.swift in Sources */,
-				D80F434B28E6DD1000C4A485 /* newMonthInfo+NewSong.swift in Sources */,
+				D80F434B28E6DD1000C4A485 /* NewSong.swift in Sources */,
 				D80F436128E6DD1000C4A485 /* MainView.swift in Sources */,
 				D80F436628E6DD1000C4A485 /* CafeWebView.swift in Sources */,
 				D80F435028E6DD1000C4A485 /* TwitchModel.swift in Sources */,

@@ -7,18 +7,11 @@
 
 import Foundation
 
-struct newMonthInfo: Codable {
-    let start, end, previous, next: Int
-    let data: [NewSong]
-}
-
 // MARK: - Datum
 struct NewSong: Codable, Identifiable, Equatable {
 
     let id = UUID()
     let song_id, title, artist: String
-    let image: String
-    let url: String
     let date, views: Int
 
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -27,7 +20,7 @@ struct NewSong: Codable, Identifiable, Equatable {
 
     private enum CodingKeys: String, CodingKey {
         case song_id = "id"
-        case title, artist, image, url, date, views
+        case title, artist, date, views
         // case viewsOfficial = "views_official"
 
     }

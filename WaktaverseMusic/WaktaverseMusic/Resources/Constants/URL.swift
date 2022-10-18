@@ -14,6 +14,7 @@ extension Const {
         // static let base = "https://wakmusic.xyz"
         // https://beta.wakmusic.xyz/api
 
+        static let new = "/new/monthly"
         static let api = "/api"
         static let auth = "/auth"
         static let charts = "/charts"

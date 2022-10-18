@@ -76,9 +76,9 @@ final class HomeViewModel: ObservableObject {
                     print(#function, "Finish")
                 }
 
-            } receiveValue: { [weak self] (rawData: newMonthInfo) in
+            } receiveValue: { [weak self] (rawData: [NewSong]) in
                 guard let self = self else {return}
-                self.newSongs = rawData.data
+                self.newSongs = rawData
             }.store(in: &subscription)
     }
 
