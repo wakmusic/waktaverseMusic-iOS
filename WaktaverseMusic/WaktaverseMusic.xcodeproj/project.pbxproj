@@ -13,10 +13,9 @@
 		7B1D209328E93E2F006F67C6 /* PretendardVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D209028E93E2F006F67C6 /* PretendardVariable.ttf */; };
 		7B1D209628E941D3006F67C6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D209528E941D3006F67C6 /* HomeViewModel.swift */; };
 		7B1D209828E94297006F67C6 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D209728E94297006F67C6 /* SearchViewModel.swift */; };
-		7B1D209A28E94306006F67C6 /* ArtistScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D209928E94306006F67C6 /* ArtistScreenViewModel.swift */; };
+		7B1D209A28E94306006F67C6 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D209928E94306006F67C6 /* ArtistViewModel.swift */; };
 		7B1D209C28E9445A006F67C6 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D209B28E9445A006F67C6 /* Enum.swift */; };
 		7B1D20A028E94C29006F67C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B1D20A228E94C29006F67C6 /* InfoPlist.strings */; };
-		7B1D20A728E94E2B006F67C6 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20A628E94E2B006F67C6 /* ArtistViewModel.swift */; };
 		7B1D20A928E94E94006F67C6 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20A828E94E94006F67C6 /* AccountViewModel.swift */; };
 		7B1D20AB28E94EA8006F67C6 /* NetoworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20AA28E94EA8006F67C6 /* NetoworkViewModel.swift */; };
 		7B1D20AF28E95054006F67C6 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20AE28E95054006F67C6 /* Const.swift */; };
@@ -88,11 +87,10 @@
 		7B1D209028E93E2F006F67C6 /* PretendardVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = PretendardVariable.ttf; path = WaktaverseMusic/fonts/PretendardVariable.ttf; sourceTree = SOURCE_ROOT; };
 		7B1D209528E941D3006F67C6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7B1D209728E94297006F67C6 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		7B1D209928E94306006F67C6 /* ArtistScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistScreenViewModel.swift; sourceTree = "<group>"; };
+		7B1D209928E94306006F67C6 /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		7B1D209B28E9445A006F67C6 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		7B1D20A128E94C29006F67C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B1D20A528E94C71006F67C6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7B1D20A628E94E2B006F67C6 /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		7B1D20A828E94E94006F67C6 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		7B1D20AA28E94EA8006F67C6 /* NetoworkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetoworkViewModel.swift; sourceTree = "<group>"; };
 		7B1D20AE28E95054006F67C6 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
@@ -213,11 +211,10 @@
 				7B1D209528E941D3006F67C6 /* HomeViewModel.swift */,
 				7B1D20BA28E9A6AF006F67C6 /* ChartViewModel.swift */,
 				7B1D209728E94297006F67C6 /* SearchViewModel.swift */,
-				7B1D20A628E94E2B006F67C6 /* ArtistViewModel.swift */,
+				7B1D209928E94306006F67C6 /* ArtistViewModel.swift */,
 				7B1D20A828E94E94006F67C6 /* AccountViewModel.swift */,
 				7B1D20AA28E94EA8006F67C6 /* NetoworkViewModel.swift */,
 				D80F433328E6DD1000C4A485 /* PlayerViewModel.swift */,
-				7B1D209928E94306006F67C6 /* ArtistScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -585,7 +582,6 @@
 				D80F435B28E6DD1000C4A485 /* FourRowSongGridView.swift in Sources */,
 				D80F435728E6DD1000C4A485 /* NewSongOfTheMonth.swift in Sources */,
 				7B1D20AF28E95054006F67C6 /* Const.swift in Sources */,
-				7B1D20A728E94E2B006F67C6 /* ArtistViewModel.swift in Sources */,
 				7B1D20B528E97AE4006F67C6 /* MainViewModel.swift in Sources */,
 				7B877ABB28F3EA3F0096C025 /* ChartMoreView.swift in Sources */,
 				7B1D209628E941D3006F67C6 /* HomeViewModel.swift in Sources */,
@@ -609,7 +605,7 @@
 				D80F436628E6DD1000C4A485 /* CafeWebView.swift in Sources */,
 				D80F435028E6DD1000C4A485 /* TwitchModel.swift in Sources */,
 				D80F435228E6DD1000C4A485 /* LoginView.swift in Sources */,
-				7B1D209A28E94306006F67C6 /* ArtistScreenViewModel.swift in Sources */,
+				7B1D209A28E94306006F67C6 /* ArtistViewModel.swift in Sources */,
 				D80F434228E6DD1000C4A485 /* Extensions.swift in Sources */,
 				D80F434628E6DD1000C4A485 /* PlayState.swift in Sources */,
 				D80F435D28E6DD1000C4A485 /* NewsView.swift in Sources */,

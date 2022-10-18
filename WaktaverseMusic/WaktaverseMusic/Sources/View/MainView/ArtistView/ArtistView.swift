@@ -15,7 +15,7 @@ struct ArtistView: View {
     let device = UIDevice.current.userInterfaceIdiom
     let hasNotch = UIDevice.current.hasNotch
 
-    @StateObject var viewModel = ArtistScreenViewModel()
+    @StateObject var viewModel = ArtistViewModel()
     @EnvironmentObject var playState: PlayState
     @Binding var musicCart: [SimpleSong]
 
@@ -23,23 +23,30 @@ struct ArtistView: View {
 
                 ScrollView {
 
-                    ArtistHeaderVIew(artists: $viewModel.artists, selectedid: $viewModel.selectedid)
+                    ArtistHeaderVIew(artists: $viewModel.artists, selectedid: $viewModel.selectedArtist)
 
                     LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
 
                         Section {
-                            ForEach(viewModel.currentShowChart, id: \.self.id) { (song: NewSong) in
-                                ArtistSongListItemView(song: song, accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
-
+                            ForEach(viewModel.currentShowChart.indices, id: \.self) { index in
+                                ArtistSongListItemView(song: viewModel.currentShowChart[index], accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
+                                    .onAppear {
+                                        // 마지막 노래가 보여졌을때 다음 30곡 호출
+                                        if index == viewModel.currentShowChart.count-1 {
+                                            // print("호출", index, viewModel.currentShowChart.count)
+                                            viewModel.fetchSongList(viewModel.selectedArtist, sort: viewModel.selectedSort)
+                                        }
+                                    }
                             }
                         } header: {
-                            ArtistPinnedHeader(selectedIndex: $viewModel.selectedIndex, chart: $viewModel.currentShowChart).environmentObject(playState)
+                            ArtistPinnedHeader(viewModel: viewModel).environmentObject(playState)
                                 .background(Color.forced)
                         }
 
-                    }.onChange(of: viewModel.selectedid) { newValue in
-                        viewModel.fetchSongList(newValue)
-
+                    }.onChange(of: viewModel.selectedArtist) { newValue in
+                        // 아티스트 변경 시
+                        viewModel.clearSongList()
+                        viewModel.fetchSongList(newValue, sort: "new")
                         viewModel.selectedIndex = 0 // 아티스트 변경시 최신순으로
                     }
                     .background(Color.forced) // 차트 아이템 부분
@@ -168,9 +175,8 @@ struct ArtistSongListItemView: View {
 }
 
 struct ArtistPinnedHeader: View {
-    @Binding var selectedIndex: Int
     @EnvironmentObject var playState: PlayState
-    @Binding var chart: [NewSong]
+    @ObservedObject var viewModel: ArtistViewModel
     let hasNotch = UIDevice.current.hasNotch
     @Namespace var animation
 
@@ -188,10 +194,10 @@ struct ArtistPinnedHeader: View {
 
                         Text(sorting[idx])
                             .font(.system(size: 15)) //
-                            .foregroundColor(selectedIndex == idx ? Color.primary : .gray)
+                            .foregroundColor(viewModel.selectedIndex == idx ? Color.primary : .gray)
 
                         ZStack { // 움직이는 막대기
-                            if selectedIndex == idx {
+                            if viewModel.selectedIndex == idx {
                                 RoundedRectangle(cornerRadius: 4, style: .continuous).fill( Color.primary).matchedGeometryEffect(id: "FILLTERTAB", in: animation)
 
                             } else {
@@ -210,30 +216,24 @@ struct ArtistPinnedHeader: View {
 
                         withAnimation(.easeInOut) { // 처음에 불러왔을 때는 최신 순 이므로 selectedIndex = 0 그리고 ripple 말고 tranistion 이용
 
-                            if selectedIndex != idx {
-                                selectedIndex = idx
-                                switch selectedIndex {
-
+                            if viewModel.selectedIndex != idx {
+                                viewModel.selectedIndex = idx
+                                switch viewModel.selectedIndex {
                                 case 0:
-                                    chart.sort {
-                                        $0.date > $1.date // 최신 순 (뒤에가 작은게 참) 최신순일 수록 값이 큼
-                                    }
+                                    viewModel.selectedSort = "new"
 
                                 case 1:
-                                    chart.sort {
-                                        $0.views > $1.views // 인기순
-                                    }
+                                    viewModel.selectedSort = "popular"
 
                                 case 2:
-                                    chart.sort {
-                                        $0.date < $1.date // 오래된 순 (뒤에가 큰게 참)
-                                    }
+                                    viewModel.selectedSort = "old"
 
                                 default:
-                                    print("현재 선택된 필터 값\(selectedIndex)")
-
+                                    viewModel.selectedSort = "new"
+                                    print("현재 선택된 필터 값\(viewModel.selectedIndex)")
                                 }
-
+                                viewModel.clearSongList()
+                                viewModel.fetchSongList(viewModel.selectedArtist, sort: viewModel.selectedSort)
                             }
 
                         }
@@ -246,7 +246,7 @@ struct ArtistPinnedHeader: View {
                 RoundedRectangleButton(width: ScreenSize.width/2.5, height: ScreenSize.width/15, text: "전체 재생", color: .tabBar, textColor: .primary, imageSource: "play.fill")
                     .onTapGesture {
                         playState.playList.removeAll() // 전부 지운후
-                        playState.playList.list = castingFromNewSongToSimple(newSongList: chart)  // 현재 해당 chart로 덮어쓰고
+                        playState.playList.list = castingFromNewSongToSimple(newSongList: viewModel.currentShowChart)  // 현재 해당 chart로 덮어쓰고
                         playState.play(at: playState.playList.first) // 첫번째 곡 재생
                         playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
                     }
@@ -256,7 +256,7 @@ struct ArtistPinnedHeader: View {
                     .onTapGesture {
 
                         playState.playList.removeAll() // 전부 지운후
-                        playState.playList.list = castingFromNewSongToSimple(newSongList: chart) // 현재 해당 chart로 덮어쓰고
+                        playState.playList.list = castingFromNewSongToSimple(newSongList: viewModel.currentShowChart) // 현재 해당 chart로 덮어쓰고
                         playState.playList.list.shuffle() // 셔플 시킨 후
                         playState.play(at: playState.playList.first) // 첫번째 곡 재생
                         playState.playList.currentPlayIndex = 0 // 인덱스 0으로 맞춤
