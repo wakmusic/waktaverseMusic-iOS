@@ -57,7 +57,7 @@ extension NewsMoreView {
                 CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(data.newsId)")
             } label: {
                 VStack(alignment: .leading, spacing: 5) {
-                    KFImage(URL(string: "\(ApiCollections.newsThumbnail)\(data.time).png")!)
+                    KFImage(URL(string: "\(Const.URL.base)\(Const.URL.static)\(Const.URL.news)/\(data.time).png")!)
                         .downsampling(size: CGSize(width: 400, height: 200)) // 약 절반 사이즈
                         .resizable()
                         .scaledToFill()
