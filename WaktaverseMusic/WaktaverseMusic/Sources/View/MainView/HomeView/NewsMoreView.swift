@@ -37,7 +37,6 @@ struct NewsMoreView: View {
 
         .navigationTitle("NEWS")
         .navigationBarTitleDisplayMode(.large)
-        .navigationBarBackButtonHidden(true) // 백 버튼 없애고
         .background()
         .highPriorityGesture(DragGesture().onEnded({ value in
             if value.translation.width > 100 { // 왼 오 드래그가 만족할 때

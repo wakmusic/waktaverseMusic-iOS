@@ -22,7 +22,6 @@ class Repository {
     /// - Returns: [RankedSong]
     func fetchTopRankedSong(category: TopCategory, limit: Int = 100) -> AnyPublisher<[RankedSong], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue + "?limit=\(limit)"
-        print(url)
         // print("https://beta.wakmusic.xyz/api/charts/hourly?limit=30")
 
         return AF.request(url)
@@ -53,12 +52,12 @@ class Repository {
 
     /// 이달의 신곡 정보들을 불러옵니다.
     /// - Returns: newMonthInfo
-    func fetchNewMonthSong() -> AnyPublisher<newMonthInfo, Error> {
-        let url = ApiCollections.newMonthly
-
+    func fetchNewMonthSong() -> AnyPublisher<[NewSong], Error> {
+        let url = Const.URL.base + Const.URL.api + Const.URL.new
+        print(url)
         return AF.request(url)
             .validate(statusCode: 200..<300)
-            .publishDecodable(type: newMonthInfo.self)
+            .publishDecodable(type: [NewSong].self)
             .value()
             .mapError { (err: AFError) in
                 return err as Error
