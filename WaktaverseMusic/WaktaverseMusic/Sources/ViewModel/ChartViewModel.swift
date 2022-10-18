@@ -13,6 +13,10 @@ final class ChartViewModel: ObservableObject {
     @Published var updateTime: Int = 0
     var subscription = Set<AnyCancellable>()
 
+    init() {
+        fetchUpdateTime()
+    }
+
     deinit {
         clearCache()
         print("❌ ChartViewModel deinit")
@@ -34,8 +38,8 @@ final class ChartViewModel: ObservableObject {
 
     }
 
-    func fetchUpdateTime(_ category: TopCategory) { // 카데고리 사라짐 
-        Repository.shared.fetchUpdateTimeStmap(category: category).sink { completion in
+    func fetchUpdateTime() { // 카데고리 사라짐
+        Repository.shared.fetchUpdateTimeStmap().sink { completion in
             switch completion {
             case .failure(let err):
                 print(#file, #function, #line, err.localizedDescription)
@@ -46,6 +50,7 @@ final class ChartViewModel: ObservableObject {
         } receiveValue: { [weak self] time in
             guard let self = self else {return}
             self.updateTime = time
+
         }.store(in: &subscription)
 
     }

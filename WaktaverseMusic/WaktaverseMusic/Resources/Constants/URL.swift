@@ -9,13 +9,18 @@ import Foundation
 
 extension Const {
     struct URL {
-        // base URL
-        static let base = "https://wakmusic.xyz"
-        // test URL: "http://150.230.172.79:1010/"
+        static let base = "https://beta.wakmusic.xyz"
+        // api/charts/hourly?limit=30
+        // static let base = "https://wakmusic.xyz"
+        // https://beta.wakmusic.xyz/api
 
         static let api = "/api"
         static let auth = "/auth"
         static let charts = "/charts"
-        static let update = "update"
+        static let update = "updated"
+
+        // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
+
     }
+
 }

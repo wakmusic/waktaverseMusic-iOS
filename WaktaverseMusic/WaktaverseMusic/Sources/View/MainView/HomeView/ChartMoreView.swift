@@ -50,21 +50,19 @@ struct ChartMoreView: View {
                             switch newValue {
                             case 0:
                                 viewModel.fetchChart(.total)
-                                viewModel.fetchUpdateTime(.total)
+
                             case 1:
                                 viewModel.fetchChart(.hourly)
-                                viewModel.fetchUpdateTime(.hourly)
 
                             case 2:
                                 viewModel.fetchChart(.daily)
-                                viewModel.fetchUpdateTime(.daily)
 
                             case 3:
                                 viewModel.fetchChart(.weekly)
-                                viewModel.fetchUpdateTime(.weekly)
+
                             case 4:
                                 viewModel.fetchChart(.monthly)
-                                viewModel.fetchUpdateTime(.monthly)
+
                             default:
                                 print("Default")
                             }
@@ -81,21 +79,19 @@ struct ChartMoreView: View {
                 switch index {
                 case 0:
                     viewModel.fetchChart(.total)
-                    viewModel.fetchUpdateTime(.total)
+
                 case 1:
                     viewModel.fetchChart(.hourly)
-                    viewModel.fetchUpdateTime(.hourly)
 
                 case 2:
                     viewModel.fetchChart(.daily)
-                    viewModel.fetchUpdateTime(.daily)
 
                 case 3:
                     viewModel.fetchChart(.weekly)
-                    viewModel.fetchUpdateTime(.weekly)
+
                 case 4:
                     viewModel.fetchChart(.monthly)
-                    viewModel.fetchUpdateTime(.monthly)
+
                 default:
                     print("Default")
                 }
@@ -235,12 +231,12 @@ struct ChartItemView: View {
     @State var isSelected: Bool = false
 
     var body: some View {
-        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist)
 
         HStack {
             RankView(now: rank, last: song.last)
 
-            KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
+            KFImage(URL(string: song.song_id.albumImage()))
                 .placeholder({
                     Image("PlaceHolder")
                         .resizable()
@@ -287,7 +283,7 @@ func castingFromRankedToSimple(rankedList: [RankedSong]) -> [SimpleSong] {
     var simpleList: [SimpleSong] = [SimpleSong]()
 
     for rSong in rankedList {
-        simpleList.append(SimpleSong(song_id: rSong.song_id, title: rSong.title, artist: rSong.artist, image: rSong.image, url: rSong.url))
+        simpleList.append(SimpleSong(song_id: rSong.song_id, title: rSong.title, artist: rSong.artist))
     }
 
     return simpleList

@@ -95,11 +95,11 @@ struct SongListItemView: View {
     @Binding var musicCart: [SimpleSong]
 
     var body: some View {
-        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist)
 
         HStack {
 
-            KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
+            KFImage(URL(string: song.song_id.albumImage()))
                 .placeholder({
                     Image("PlaceHolder")
                         .resizable()

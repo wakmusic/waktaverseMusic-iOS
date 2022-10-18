@@ -21,7 +21,9 @@ class Repository {
     /// - Parameter limit: 불러올 갯수
     /// - Returns: [RankedSong]
     func fetchTopRankedSong(category: TopCategory, limit: Int = 100) -> AnyPublisher<[RankedSong], Error> {
-        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue + "/" + String(limit)
+        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue + "?limit=\(limit)"
+        print(url)
+        // print("https://beta.wakmusic.xyz/api/charts/hourly?limit=30")
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
@@ -36,8 +38,8 @@ class Repository {
     /// category 차트의 새로고침 타임스탬프를 불러옵니다.
     /// - Parameter category: 차트 카테고리
     /// - Returns: Int ex) 1664787831
-    func fetchUpdateTimeStmap(category: TopCategory) -> AnyPublisher<Int, Error> {
-        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + Const.URL.update + "/" + category.rawValue
+    func fetchUpdateTimeStmap() -> AnyPublisher<Int, Error> {
+        let url = Const.URL.base + Const.URL.api + "/" + Const.URL.update
 
         return AF.request(url)
             .validate(statusCode: 200..<300)

@@ -60,10 +60,10 @@ extension NewSongMoreView {
 
         ForEach(newsongs, id: \.self.id) { song in
             let width = UIScreen.main.bounds.width/2.5
-            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+            let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist)
             VStack(alignment: .center) {
 
-                KFImage(URL(string: song.image.convertFullThumbNailImageUrl())!)
+                KFImage(URL(string: song.song_id.albumImage())!)
                     .placeholder({
                         Image("PlaceHolder")
                             .resizable()

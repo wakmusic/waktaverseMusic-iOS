@@ -12,8 +12,6 @@ struct SimpleSong: Codable, Identifiable, Equatable {
     let song_id: String
     let title: String
     let artist: String
-    let image: String
-    let url: String
 
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.song_id == rhs.song_id
@@ -21,7 +19,7 @@ struct SimpleSong: Codable, Identifiable, Equatable {
 
     private enum CodingKeys: String, CodingKey {
         case song_id = "id"
-        case title, artist, image, url
+        case title, artist
         // case viewsOfficial = "views_official"
 
     }

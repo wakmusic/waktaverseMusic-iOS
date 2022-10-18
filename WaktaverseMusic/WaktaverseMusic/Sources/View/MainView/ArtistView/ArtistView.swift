@@ -119,11 +119,11 @@ struct ArtistSongListItemView: View {
     var accentColor: Color
     @Binding var musicCart: [SimpleSong]
     var body: some View {
-        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist, image: song.image, url: song.url)
+        let simpleSong = SimpleSong(song_id: song.song_id, title: song.title, artist: song.artist)
 
         HStack {
 
-            KFImage(URL(string: song.image.convertFullThumbNailImageUrl()))
+            KFImage(URL(string: song.song_id.albumImage()))
                 .placeholder({
                     Image("PlaceHolder")
                         .resizable()
@@ -274,7 +274,7 @@ func castingFromNewSongToSimple(newSongList: [NewSong]) -> [SimpleSong] {
     var simpleList: [SimpleSong] = [SimpleSong]()
 
     for nSong in newSongList {
-        simpleList.append(SimpleSong(song_id: nSong.song_id, title: nSong.title, artist: nSong.artist, image: nSong.image, url: nSong.url))
+        simpleList.append(SimpleSong(song_id: nSong.song_id, title: nSong.title, artist: nSong.artist))
     }
 
     return simpleList
