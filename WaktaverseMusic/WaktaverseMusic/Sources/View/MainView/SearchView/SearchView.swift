@@ -21,7 +21,7 @@ struct SearchView: View {
 
         VStack {
 
-            SearchBarView(viewModel: viewModel).padding(10)
+            SearchBarView(viewModel: viewModel).padding(.vertical, 10)
             ScrollViewReader { (_: ScrollViewProxy) in
                 ScrollView(.vertical, showsIndicators: false) {
 
