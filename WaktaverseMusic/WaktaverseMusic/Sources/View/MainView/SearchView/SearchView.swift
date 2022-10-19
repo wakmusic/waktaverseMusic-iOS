@@ -104,7 +104,7 @@ struct SearchBarView: View {
         .background(
             RoundedRectangle(cornerRadius: 25)
                 .fill(Color.searchBarBackground)
-                .shadow(color: Color.primary.opacity(0.5), radius: 10, x: 0, y: 0)
+                .shadow(color: Color.primary.opacity(0.3), radius: 10, x: 0, y: 0)
         )
 
     }
