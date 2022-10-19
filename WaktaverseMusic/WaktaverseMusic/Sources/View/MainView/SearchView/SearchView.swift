@@ -123,7 +123,7 @@ struct SongListItemView: View {
 
             Spacer()
 
-        }.contentShape(Rectangle()).padding(.horizontal, 5).onTapGesture {
+        }.contentShape(Rectangle()).padding(5).onTapGesture {
 
             if musicCart.contains(simpleSong) {
                 musicCart = musicCart.filter({$0 != simpleSong})
