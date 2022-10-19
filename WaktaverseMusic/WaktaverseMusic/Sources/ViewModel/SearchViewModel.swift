@@ -30,7 +30,7 @@ final class SearchViewModel: ObservableObject {
     }
 
     func fetchSong(_ keyword: String) {
-        Repository.shared.fetchSearchWithKeyword(keyword)
+        Repository.shared.fetchSearchWithKeyword(keyword, "title")
             .sink { (_) in
 
             } receiveValue: { [weak self] (data: [NewSong]) in

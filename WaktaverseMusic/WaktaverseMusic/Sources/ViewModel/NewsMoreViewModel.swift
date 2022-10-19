@@ -19,6 +19,7 @@ final class NewsMoreViewModel: ObservableObject {
 
     deinit {
         print("❌ NewsMoreViewModel deinit")
+        // clearCache()
     }
 
     func fetchNews() {
