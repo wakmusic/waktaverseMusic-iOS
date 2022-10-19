@@ -12,13 +12,15 @@ final class SearchViewModel: ObservableObject {
     @Published var currentValue: String
     @Published var debouncedValue: String
     @Published var results: [NewSong] = [NewSong]()
-    @Published var type: String
+    @Published var type: SearchType
+    @Published var showBottomSheet: Bool
     var subscription = Set<AnyCancellable>()
 
     init(initalValue: String, delay: Double = 0.5) {
         _currentValue = Published(initialValue: initalValue)
         _debouncedValue = Published(initialValue: initalValue)
-        type = "title"
+        type = .title
+        showBottomSheet = false
 
         $currentValue
             .removeDuplicates()

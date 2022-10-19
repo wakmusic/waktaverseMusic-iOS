@@ -126,12 +126,24 @@ class Repository {
     /// keyword로 검색한 곡 정보들을 불러옵니다.
     /// - Parameter keyword: 검색한 내용
     /// - Returns [NewSong]
-    func fetchSearchWithKeyword(_ keyword: String, _ type: String) -> AnyPublisher<[NewSong], Error> {
+    func fetchSearchWithKeyword(_ keyword: String, _ type: SearchType) -> AnyPublisher<[NewSong], Error> {
         let url = Const.URL.base + Const.URL.api  + Const.URL.search
         // let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! // 한글로 인한 인코딩
 
+        var searchType: String
+
+        switch type {
+        case .title:
+            searchType = "title"
+        case .artist:
+            searchType = "artist"
+        case .remix:
+            searchType = "remix"
+
+        }
+
         let params: Parameters = [
-            "type": type,
+            "type": searchType,
             "sort": "popular",
             "keyword": keyword
         ]
