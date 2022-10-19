@@ -19,7 +19,7 @@ struct SearchView: View {
 
             VStack {
 
-                SearchBarView(currentValue: $viewModel.currentValue).padding(10)
+                SearchBarView(viewModel: viewModel).padding(10)
                 ScrollViewReader { (_: ScrollViewProxy) in
                     ScrollView(.vertical, showsIndicators: false) {
 
@@ -58,25 +58,25 @@ struct SearchView: View {
 
 struct SearchBarView: View {
 
-    @Binding var currentValue: String
+    @ObservedObject var viewModel: SearchViewModel
 
     var body: some View {
 
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor( currentValue.isEmpty ? .searchBaraccentColor : .primary)
+                .foregroundColor( viewModel.currentValue.isEmpty ? .searchBaraccentColor : .primary)
 
-            TextField("검색어를 입력해주세요", text: $currentValue)
+            TextField("검색어를 입력해주세요", text: $viewModel.currentValue)
                 .foregroundColor(Color.primary)
                 .disableAutocorrection(true) // 자동완성 끄기
 
             Image(systemName: "xmark.circle.fill")
                 .foregroundColor(.primary)
-                .opacity(currentValue.isEmpty ? 0.0 : 1.0)
+                .opacity(viewModel.currentValue.isEmpty ? 0.0 : 1.0)
 
                 .onTapGesture {
                     UIApplication.shared.endEditing()
-                    currentValue = ""
+                    viewModel.currentValue = ""
                 }.frame(alignment: .trailing)
 
         }
@@ -128,7 +128,7 @@ struct SongListItemView: View {
 
             Spacer()
 
-        }.contentShape(Rectangle()).padding(5).onTapGesture {
+        }.contentShape(Rectangle()).padding(.vertical, 5).onTapGesture {
 
             if musicCart.contains(simpleSong) {
                 musicCart = musicCart.filter({$0 != simpleSong})
