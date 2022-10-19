@@ -65,12 +65,17 @@ class Repository {
     }
 
     /// 뉴스 정보를 불러옵니다.
+    /// - Parameter start: 몇번째 뉴스부터 불러올건지
     /// - Returns: [NewsModel]
-    func fetchNews() -> AnyPublisher<[NewsModel], Error> {
-        let url = ApiCollections.news
+    func fetchNews(start: Int) -> AnyPublisher<[NewsModel], Error> {
+        let url = Const.URL.base + Const.URL.api + Const.URL.news
         print(url)
-
-        return AF.request(url)
+        
+        let params: Parameters = [
+            "start": start
+        ]
+        
+        return AF.request(url, parameters: params)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewsModel].self)
             .value()
