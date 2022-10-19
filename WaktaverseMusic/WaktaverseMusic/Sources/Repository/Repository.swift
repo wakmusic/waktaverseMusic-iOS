@@ -70,11 +70,11 @@ class Repository {
     func fetchNews(start: Int) -> AnyPublisher<[NewsModel], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.news
         print(url)
-        
+
         let params: Parameters = [
             "start": start
         ]
-        
+
         return AF.request(url, parameters: params)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewsModel].self)

@@ -83,7 +83,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     func fetchNews() {
-        Repository.shared.fetchNews().sink { (_) in
+        Repository.shared.fetchNews(start: 0).sink { (_) in
 
         } receiveValue: { [weak self] (data: [NewsModel]) in
             guard let self = self else {return}
