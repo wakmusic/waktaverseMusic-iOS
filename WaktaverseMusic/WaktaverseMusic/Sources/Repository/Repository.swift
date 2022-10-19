@@ -21,10 +21,13 @@ class Repository {
     /// - Parameter limit: 불러올 갯수
     /// - Returns: [RankedSong]
     func fetchTopRankedSong(category: TopCategory, limit: Int = 100) -> AnyPublisher<[RankedSong], Error> {
-        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue + "?limit=\(limit)"
-        // print("https://beta.wakmusic.xyz/api/charts/hourly?limit=30")
+        let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue // ?limit=\(limit)"
 
-        return AF.request(url)
+        let params: Parameters = [
+            "limit": limit
+        ]
+
+        return AF.request(url, parameters: params)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [RankedSong].self) // RankedSong 타입으로 decoding
             .value() // return: AnyPublisher<[RankedSong], AFError>
@@ -69,7 +72,6 @@ class Repository {
     /// - Returns: [NewsModel]
     func fetchNews(start: Int) -> AnyPublisher<[NewsModel], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.news
-        print(url)
 
         let params: Parameters = [
             "start": start
@@ -89,8 +91,6 @@ class Repository {
     /// - Returns: [Artist]
     func fetchArtists() -> AnyPublisher<[Artist], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.artist + Const.URL.list
-
-        print(url)
 
         return AF.request(url)
             .validate(statusCode: 200..<300)
@@ -126,11 +126,29 @@ class Repository {
     /// keyword로 검색한 곡 정보들을 불러옵니다.
     /// - Parameter keyword: 검색한 내용
     /// - Returns [NewSong]
-    func fetchSearchWithKeyword(_ keyword: String) -> AnyPublisher<[NewSong], Error> {
-        let url = ApiCollections.searchTitleOrArtiest + keyword
-        let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! // 한글로 인한 인코딩
+    func fetchSearchWithKeyword(_ keyword: String, _ type: SearchType) -> AnyPublisher<[NewSong], Error> {
+        let url = Const.URL.base + Const.URL.api  + Const.URL.search
+        // let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! // 한글로 인한 인코딩
 
-        return  AF.request(encodedUrl)
+        var searchType: String
+
+        switch type {
+        case .title:
+            searchType = "title"
+        case .artist:
+            searchType = "artist"
+        case .remix:
+            searchType = "remix"
+
+        }
+
+        let params: Parameters = [
+            "type": searchType,
+            "sort": "popular",
+            "keyword": keyword
+        ]
+
+        return  AF.request(url, parameters: params)
             .validate(statusCode: 200..<300)
             .publishDecodable(type: [NewSong].self)
             .value()

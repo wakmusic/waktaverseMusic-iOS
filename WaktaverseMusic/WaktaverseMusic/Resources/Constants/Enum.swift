@@ -24,6 +24,12 @@ enum Tab {
     func isSame(_ at: Tab) -> Bool { self == at }
 }
 
+enum SearchType {
+    case title
+    case artist
+    case remix
+}
+
 enum PlayerSize {
     static let standardLen = ScreenSize.width > ScreenSize.height ? ScreenSize.width : ScreenSize.height
     static let miniWidth: CGFloat = ScreenSize.width * 0.3

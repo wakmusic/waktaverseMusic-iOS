@@ -24,6 +24,7 @@ extension Const {
         static let artist = "/artist"
         static let list = "/list"
         static let albums = "/albums/"
+        static let search = "/search"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 
