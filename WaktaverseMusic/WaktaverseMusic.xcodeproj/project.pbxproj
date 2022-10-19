@@ -25,6 +25,7 @@
 		7B1D20BB28E9A6AF006F67C6 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20BA28E9A6AF006F67C6 /* ChartViewModel.swift */; };
 		7B1D20BE28E9A753006F67C6 /* RoundedRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1D20BD28E9A753006F67C6 /* RoundedRectangleButton.swift */; };
 		7B877ABB28F3EA3F0096C025 /* ChartMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B877ABA28F3EA3F0096C025 /* ChartMoreView.swift */; };
+		7BB32D6D28FF7EA900AFB097 /* NewsMoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB32D6C28FF7EA900AFB097 /* NewsMoreViewModel.swift */; };
 		D8086D6828BD335600D44F48 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6728BD335600D44F48 /* Alamofire */; };
 		D8086D6B28BD335D00D44F48 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6A28BD335D00D44F48 /* PopupView */; };
 		D8086D6E28BD336800D44F48 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8086D6D28BD336800D44F48 /* Kingfisher */; };
@@ -100,6 +101,7 @@
 		7B1D20BA28E9A6AF006F67C6 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7B1D20BD28E9A753006F67C6 /* RoundedRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectangleButton.swift; sourceTree = "<group>"; };
 		7B877ABA28F3EA3F0096C025 /* ChartMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMoreView.swift; sourceTree = "<group>"; };
+		7BB32D6C28FF7EA900AFB097 /* NewsMoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMoreViewModel.swift; sourceTree = "<group>"; };
 		D80F42F528E6DD1000C4A485 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D80F42F828E6DD1000C4A485 /* WaktaverseMusicApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaktaverseMusicApp.swift; sourceTree = "<group>"; };
 		D80F42F928E6DD1000C4A485 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				7B1D20A828E94E94006F67C6 /* AccountViewModel.swift */,
 				7B1D20AA28E94EA8006F67C6 /* NetoworkViewModel.swift */,
 				D80F433328E6DD1000C4A485 /* PlayerViewModel.swift */,
+				7BB32D6C28FF7EA900AFB097 /* NewsMoreViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				D80F434228E6DD1000C4A485 /* Extensions.swift in Sources */,
 				D80F434628E6DD1000C4A485 /* PlayState.swift in Sources */,
 				D80F435D28E6DD1000C4A485 /* NewsView.swift in Sources */,
+				7BB32D6D28FF7EA900AFB097 /* NewsMoreViewModel.swift in Sources */,
 				D80F435528E6DD1000C4A485 /* NetworkView.swift in Sources */,
 				D80F435928E6DD1000C4A485 /* NewSongMoreView.swift in Sources */,
 				D80F435128E6DD1000C4A485 /* LaunchScreenView.swift in Sources */,

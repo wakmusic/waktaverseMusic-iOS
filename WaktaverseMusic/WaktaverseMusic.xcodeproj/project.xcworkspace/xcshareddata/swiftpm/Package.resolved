@@ -15,7 +15,7 @@
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "bdecb2c87a21a236dcfe88b21532ad3f0e3d20f4"
+        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b"
       }
     },
     {
@@ -87,7 +87,7 @@
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
         "branch" : "master",
-        "revision" : "dffcc081c411bb34267297962666e2e21cd45b0d"
+        "revision" : "26a5aee988318f1a57adc9b9c3e676ce318630a8"
       }
     },
     {
@@ -114,7 +114,7 @@
       "location" : "https://github.com/exyte/PopupView.git",
       "state" : {
         "branch" : "master",
-        "revision" : "3c82a7d09ba44e1c7d8a2f7d17657de2e03d0f24"
+        "revision" : "3122129fba0f5501e1f59161db3210282efd2cea"
       }
     },
     {

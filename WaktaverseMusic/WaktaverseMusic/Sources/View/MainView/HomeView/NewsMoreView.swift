@@ -13,7 +13,7 @@ import Kingfisher
 struct NewsMoreView: View {
 
     @EnvironmentObject var playState: PlayState
-    @Binding var news: [NewsModel]
+    @StateObject var viewModel = NewsMoreViewModel()
     let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: Int(UIScreen.main.bounds.width)/180)
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
 
@@ -51,13 +51,14 @@ struct NewsMoreView: View {
 extension NewsMoreView {
     var ThreeColumnsGrid: some View {
 
-        ForEach(news, id: \.self.id) { data in
+        ForEach(viewModel.news.indices, id: \.self) { index in
+            let item = viewModel.news[index]
 
             NavigationLink {
-                CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(data.newsId)")
+                CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(item.newsId)")
             } label: {
                 VStack(alignment: .leading, spacing: 5) {
-                    KFImage(URL(string: "\(Const.URL.base)\(Const.URL.static)\(Const.URL.news)/\(data.time).png")!)
+                    KFImage(URL(string: "\(Const.URL.base)\(Const.URL.static)\(Const.URL.news)/\(item.time).png")!)
                         .downsampling(size: CGSize(width: 400, height: 200)) // 약 절반 사이즈
                         .resizable()
                         .scaledToFill()
@@ -65,7 +66,14 @@ extension NewsMoreView {
                         .frame(width: 180, height: 120, alignment: .center)
                         .cornerRadius(10)
                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 0)
-                    Text(data.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.system(size: 15, weight: .semibold, design: .default)).lineLimit(1)
+                        .onAppear {
+                            // 마지막 뉴스가 보여질 때 다음 30개를 불러옴
+                            print(index, viewModel.news.count)
+                            if index == viewModel.news.count - 1 {
+                                viewModel.fetchNews()
+                            }
+                        }
+                    Text(item.title.replacingOccurrences(of: "이세돌포커스 -", with: "")).font(.system(size: 15, weight: .semibold, design: .default)).lineLimit(1)
 
                 }
             }.frame(width: 180)

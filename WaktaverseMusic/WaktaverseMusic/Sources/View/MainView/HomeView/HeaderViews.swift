@@ -78,7 +78,7 @@ struct NewsHeader: View {
                 Spacer()
 
                 NavigationLink {
-                    NewsMoreView(news: $news)
+                    NewsMoreView()
                 } label: {
                     Text("더보기").foregroundColor(.gray)
                 }
