@@ -32,7 +32,12 @@ struct SearchView: View {
 
                             }
                         }.onChange(of: viewModel.debouncedValue) { newValue in
-                            viewModel.fetchSong(newValue)
+                            if newValue.isEmpty {
+                                viewModel.results.removeAll()
+                            } else {
+                                viewModel.fetchSong(newValue)
+                            }
+
                         }
 
                     }.onTapGesture {
