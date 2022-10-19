@@ -100,11 +100,11 @@ struct SearchBarView: View {
 
         }
         .font(.headline)
-        .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+        .padding(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 5))
         .background(
-            RoundedRectangle(cornerRadius: 25)
+            RoundedRectangle(cornerRadius: 8)
                 .fill(Color.searchBarBackground)
-                .shadow(color: Color.primary.opacity(0.3), radius: 10, x: 0, y: 0)
+
         )
 
     }
