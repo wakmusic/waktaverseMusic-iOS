@@ -22,7 +22,6 @@ class Repository {
     /// - Returns: [RankedSong]
     func fetchTopRankedSong(category: TopCategory, limit: Int = 100) -> AnyPublisher<[RankedSong], Error> {
         let url = Const.URL.base + Const.URL.api + Const.URL.charts + "/" + category.rawValue // ?limit=\(limit)"
-        
 
         let params: Parameters = [
             "limit": limit

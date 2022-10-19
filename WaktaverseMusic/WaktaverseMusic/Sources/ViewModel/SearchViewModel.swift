@@ -12,11 +12,13 @@ final class SearchViewModel: ObservableObject {
     @Published var currentValue: String
     @Published var debouncedValue: String
     @Published var results: [NewSong] = [NewSong]()
+    @Published var type: String
     var subscription = Set<AnyCancellable>()
 
     init(initalValue: String, delay: Double = 0.5) {
         _currentValue = Published(initialValue: initalValue)
         _debouncedValue = Published(initialValue: initalValue)
+        type = "title"
 
         $currentValue
             .removeDuplicates()
@@ -30,7 +32,8 @@ final class SearchViewModel: ObservableObject {
     }
 
     func fetchSong(_ keyword: String) {
-        Repository.shared.fetchSearchWithKeyword(keyword, "title")
+
+        Repository.shared.fetchSearchWithKeyword(keyword, self.type)
             .sink { (_) in
 
             } receiveValue: { [weak self] (data: [NewSong]) in
