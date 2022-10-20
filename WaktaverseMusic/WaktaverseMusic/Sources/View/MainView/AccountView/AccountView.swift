@@ -35,7 +35,7 @@ struct AccountView: View {
                     NavigationLink {
                         WebView(urlToLoad: Const.URL.form + songs)
                     } label: {
-                        Text("곡 건의사항")
+                        Text("노래 추가, 수정 요청")
 
                     }
                 } header: {
