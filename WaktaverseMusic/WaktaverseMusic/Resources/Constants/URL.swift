@@ -25,6 +25,7 @@ extension Const {
         static let list = "/list"
         static let albums = "/albums/"
         static let search = "/search"
+        static let cafe = "https://cafe.naver.com/steamindiegame/"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 

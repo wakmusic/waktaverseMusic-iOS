@@ -38,7 +38,7 @@ extension NewsView {
         ForEach(viewModel.news.prefix(3), id: \.self.id) { news in
 
             NavigationLink {
-                CafeWebView(urlToLoad: "\(ApiCollections.newsCafe)\(news.newsId)")
+                CafeWebView(urlToLoad: "\(Const.URL.cafe)\(news.newsId)")
             } label: {
                 VStack(alignment: .leading, spacing: 20) {
                     KFImage(URL(string: "\(Const.URL.base)\(Const.URL.static)\(Const.URL.news)/\(news.time).png")!)
