@@ -27,6 +27,7 @@ extension Const {
         static let search = "/search"
         static let cafe = "https://cafe.naver.com/steamindiegame/"
         static let sheets = "https://docs.google.com/spreadsheets/d/"
+        static let form = "https://forms.gle/"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 

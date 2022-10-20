@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AccountView: View {
 
-    let songs: String = "1n8bRCE_OBUOND4pfhlqwEBMR6qifVLyWk5YrHclRWfY"
+    let songs: String = "PiM4okVJSkGCdRCa9"
     let bugsheets: String = "1IrPOaQhtD9vHLEfdc1qyqSNNzou2Mmo49aQ0p7C4qic"
     var body: some View {
         NavigationView {
@@ -33,7 +33,7 @@ struct AccountView: View {
                     }
 
                     NavigationLink {
-                        WebView(urlToLoad: Const.URL.sheets + songs)
+                        WebView(urlToLoad: Const.URL.form + songs)
                     } label: {
                         Text("곡 건의사항")
 
