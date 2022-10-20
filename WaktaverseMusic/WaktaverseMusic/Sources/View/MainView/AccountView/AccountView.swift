@@ -21,6 +21,27 @@ struct AccountView: View {
                 } header: {
                     Text("내 계정").font(.headline).foregroundColor(.gray)
                 }
+                
+                Section {
+                    VStack(alignment: .leading) {
+                        NavigationLink {
+                            SettingScreenView()
+                        } label: {
+                            Text("버그 제보")
+
+                        }
+                        
+                        NavigationLink {
+                            SettingScreenView()
+                        } label: {
+                            Text("곡 건의사항")
+
+                        }
+
+                    }
+                } header: {
+                    Text("건의사항").font(.headline).foregroundColor(.gray)
+                }
 
                 Section {
                     VStack(alignment: .leading) {
