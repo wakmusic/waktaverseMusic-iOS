@@ -55,7 +55,7 @@ extension NewsMoreView {
             let item = viewModel.news[index]
 
             NavigationLink {
-                CafeWebView(urlToLoad: "\(Const.URL.cafe)\(item.newsId)")
+                WebView(urlToLoad: "\(Const.URL.cafe)\(item.newsId)")
             } label: {
                 VStack(alignment: .leading, spacing: 5) {
                     KFImage(URL(string: "\(Const.URL.base)\(Const.URL.static)\(Const.URL.news)/\(item.time).png")!)

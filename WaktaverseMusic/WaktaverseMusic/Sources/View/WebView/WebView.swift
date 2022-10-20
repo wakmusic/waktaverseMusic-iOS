@@ -10,7 +10,7 @@ import WebKit
 import Combine
 import SwiftUI
 
-struct CafeWebView: UIViewRepresentable {
+struct WebView: UIViewRepresentable {
 
     var urlToLoad: String
 

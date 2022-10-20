@@ -61,7 +61,7 @@
 		D80F436228E6DD1000C4A485 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432628E6DD1000C4A485 /* BlurView.swift */; };
 		D80F436328E6DD1000C4A485 /* TextModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432828E6DD1000C4A485 /* TextModifier.swift */; };
 		D80F436428E6DD1000C4A485 /* ImageModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432928E6DD1000C4A485 /* ImageModifier.swift */; };
-		D80F436628E6DD1000C4A485 /* CafeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432C28E6DD1000C4A485 /* CafeWebView.swift */; };
+		D80F436628E6DD1000C4A485 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F432C28E6DD1000C4A485 /* WebView.swift */; };
 		D80F436828E6DD1000C4A485 /* RadioButtonGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */; };
 		D80F436928E6DD1000C4A485 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433328E6DD1000C4A485 /* PlayerViewModel.swift */; };
 		D80F436A28E6DD1000C4A485 /* PlayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F433528E6DD1000C4A485 /* PlayListView.swift */; };
@@ -132,7 +132,7 @@
 		D80F432628E6DD1000C4A485 /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		D80F432828E6DD1000C4A485 /* TextModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
 		D80F432928E6DD1000C4A485 /* ImageModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModifier.swift; sourceTree = "<group>"; };
-		D80F432C28E6DD1000C4A485 /* CafeWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeWebView.swift; sourceTree = "<group>"; };
+		D80F432C28E6DD1000C4A485 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		D80F433028E6DD1000C4A485 /* RadioButtonGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButtonGroupView.swift; sourceTree = "<group>"; };
 		D80F433328E6DD1000C4A485 /* PlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		D80F433528E6DD1000C4A485 /* PlayListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayListView.swift; sourceTree = "<group>"; };
@@ -388,7 +388,7 @@
 		D80F432A28E6DD1000C4A485 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				D80F432C28E6DD1000C4A485 /* CafeWebView.swift */,
+				D80F432C28E6DD1000C4A485 /* WebView.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -602,7 +602,7 @@
 				D80F439528F83D1000C4A485 /* ListDropDelegate.swift in Sources */,
 				D80F434B28E6DD1000C4A485 /* NewSong.swift in Sources */,
 				D80F436128E6DD1000C4A485 /* MainView.swift in Sources */,
-				D80F436628E6DD1000C4A485 /* CafeWebView.swift in Sources */,
+				D80F436628E6DD1000C4A485 /* WebView.swift in Sources */,
 				D80F435028E6DD1000C4A485 /* TwitchModel.swift in Sources */,
 				D80F435228E6DD1000C4A485 /* LoginView.swift in Sources */,
 				7B1D209A28E94306006F67C6 /* ArtistViewModel.swift in Sources */,

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AccountView: View {
 
+    let songs: String = "1n8bRCE_OBUOND4pfhlqwEBMR6qifVLyWk5YrHclRWfY"
+    let bugsheets: String = "1IrPOaQhtD9vHLEfdc1qyqSNNzou2Mmo49aQ0p7C4qic"
     var body: some View {
         NavigationView {
 
@@ -23,13 +25,28 @@ struct AccountView: View {
                 }
 
                 Section {
-                    VStack(alignment: .leading) {
-                        NavigationLink {
-                            SettingScreenView()
-                        } label: {
-                            Text("화면 설정")
+                    NavigationLink {
+                        WebView(urlToLoad: Const.URL.sheets + bugsheets )
+                    } label: {
+                        Text("버그 제보")
 
-                        }
+                    }
+
+                    NavigationLink {
+                        WebView(urlToLoad: Const.URL.sheets + songs)
+                    } label: {
+                        Text("곡 건의사항")
+
+                    }
+                } header: {
+                    Text("건의사항").font(.headline).foregroundColor(.gray)
+                }
+
+                Section {
+                    NavigationLink {
+                        SettingScreenView()
+                    } label: {
+                        Text("화면 설정")
 
                     }
                 } header: {
