@@ -17,7 +17,6 @@ struct ChartMoreView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // 스와이프하여 뒤로가기를 위해
     @StateObject var viewModel: ChartViewModel = ChartViewModel()
     @Binding var musicCart: [SimpleSong]
-    @State var scrollToTop: Bool = false
     let hasNotch: Bool = UIDevice.current.hasNotch
 
     var body: some View {
@@ -66,8 +65,6 @@ struct ChartMoreView: View {
                             default:
                                 print("Default")
                             }
-
-                            scrollToTop = true
 
                         })
                 }
