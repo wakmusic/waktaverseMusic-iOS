@@ -26,6 +26,7 @@ extension Const {
         static let albums = "/albums/"
         static let search = "/search"
         static let cafe = "https://cafe.naver.com/steamindiegame/"
+        static let sheets = "https://docs.google.com/spreadsheets/d/"
 
         // "https://i.ytimg.com/vi/아이디/hqdefault.jpg "
 
