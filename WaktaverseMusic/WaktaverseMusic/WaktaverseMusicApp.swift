@@ -22,7 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct WaktaverseMusicApp: App {
-
+    @Environment(\.scenePhase) var scenePhase
     @AppStorage("isDarkMode") var isDarkMode: Bool = UserDefaults.standard.bool(forKey: "isDarkMode")
 
     var playState = PlayState.shared
@@ -38,7 +38,14 @@ struct WaktaverseMusicApp: App {
                 // 네트워크 등록
             }
 
-        }
+        }.onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .background {
+                  let isPlayed = playState.isPlaying
+                  DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+                      if isPlayed == .playing {playState.youTubePlayer.play()}
+                  })
+            }
+          }
     }
 
 }
