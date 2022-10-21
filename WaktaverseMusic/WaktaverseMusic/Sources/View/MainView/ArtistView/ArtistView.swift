@@ -20,42 +20,50 @@ struct ArtistView: View {
     @Binding var musicCart: [SimpleSong]
 
     var body: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                ArtistHeaderVIew(artists: $viewModel.artists, selectedArtist: $viewModel.selectedArtist).id("ARTIST_HEADER")
 
-                ScrollView {
+                LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
 
-                    ArtistHeaderVIew(artists: $viewModel.artists, selectedArtist: $viewModel.selectedArtist)
-
-                    LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {
-
-                        Section {
-                            ForEach(viewModel.currentShowChart.indices, id: \.self) { index in
-                                ArtistSongListItemView(song: viewModel.currentShowChart[index], accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
-                                    .onAppear {
-                                        // 마지막 노래가 보여졌을때 다음 30곡 호출
-                                        if index == viewModel.currentShowChart.count-1 {
-                                            // print("호출", index, viewModel.currentShowChart.count)
-                                            viewModel.fetchSongList(viewModel.selectedArtist, sort: viewModel.selectedSort)
-                                        }
+                    Section {
+                        ForEach(viewModel.currentShowChart.indices, id: \.self) { index in
+                            ArtistSongListItemView(song: viewModel.currentShowChart[index], accentColor: .primary, musicCart: $musicCart).environmentObject(playState)
+                                .onAppear {
+                                    // 마지막 노래가 보여졌을때 다음 30곡 호출
+                                    if index == viewModel.currentShowChart.count-1 {
+                                        // print("호출", index, viewModel.currentShowChart.count)
+                                        viewModel.fetchSongList(viewModel.selectedArtist, sort: viewModel.selectedSort)
                                     }
-                            }
-                        } header: {
-                            ArtistPinnedHeader(viewModel: viewModel).environmentObject(playState)
-                                .background(Color.forced)
+                                }
                         }
-
-                    }.onChange(of: viewModel.selectedArtist) { newValue in
-                        // 아티스트 변경 시
-                        viewModel.clearSongList()
-                        viewModel.fetchSongList(newValue, sort: "new")
-                        viewModel.selectedIndex = 0 // 아티스트 변경시 최신순으로
+                    } header: {
+                        ArtistPinnedHeader(viewModel: viewModel).environmentObject(playState)
+                            .background(Color.forced)
                     }
-                    .background(Color.forced) // 차트 아이템 부분
-                    .animation(.easeInOut, value: viewModel.currentShowChart)
+
+                }.onChange(of: viewModel.selectedArtist) { newValue in
+                    // 아티스트 변경 시
+                    viewModel.clearSongList()
+                    viewModel.fetchSongList(newValue, sort: "new")
+                    viewModel.selectedIndex = 0 // 아티스트 변경시 최신순으로
+                }
+                .onChange(of: viewModel.selectedSort) { _ in
+                    // 필터 변경 시
+                    withAnimation(.easeInOut(duration: 1)) { proxy.scrollTo("ARTIST_HEADER", anchor: .top) }
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.3, execute: {
+                        viewModel.clearSongList()
+                        viewModel.fetchSongList(viewModel.selectedArtist, sort: viewModel.selectedSort)
+                    })
 
                 }
+                .background(Color.forced) // 차트 아이템 부분
+                .animation(.easeInOut, value: viewModel.currentShowChart)
 
-        .coordinateSpace(name: "SCROLL")
-        .ignoresSafeArea(.container, edges: .all)
+            }
+            .coordinateSpace(name: "SCROLL")
+            .ignoresSafeArea(.container, edges: .all)
+        }
 
     }
 }
@@ -231,8 +239,6 @@ struct ArtistPinnedHeader: View {
                                     viewModel.selectedSort = "new"
                                     print("현재 선택된 필터 값\(viewModel.selectedIndex)")
                                 }
-                                viewModel.clearSongList()
-                                viewModel.fetchSongList(viewModel.selectedArtist, sort: viewModel.selectedSort)
                             }
 
                         }
