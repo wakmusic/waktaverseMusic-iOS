@@ -15,7 +15,7 @@ jobs:
     runs-on: macos-12 
     
     env: # 환경변수
-      XC_PROJ: ${{ 'WaktaverseMsuic/WaktaverseMusic.xcodeproj' }}
+      XC_PROJ: ${{ 'WaktaverseMusic/WaktaverseMusic.xcodeproj' }}
       XC_SCHEME: ${{ 'WaktaverseMusic' }}
       XC_ARCHIVE: ${{ 'WaktaverseMusic.xcarchive' }}
     
@@ -25,6 +25,7 @@ jobs:
       ENCRYPTED_CERT_FILE_PATH: ${{ '.github/secrets/Appstore_key.p12.gpg' }}
       DECRYPTED_CERT_FILE_PATH: ${{ '.github/secrets/Appstore_key.p12' }}
       CERT_ENCRYPTION_KEY: ${{ secrets.CERTS_ENCRYPTION_PWD }} # gpg로 파일 암호화할 때 사용한 암호
+      CERT_EXPORT_KEY: ${{ secrets.CERT_EXPORT_PWD }} # .p12 ->gpg 후 key chain에 export할 때 사용 
       
       # provisioning
       ENCRYPTED_PROVISION_FILE_PATH: ${{ '.github/secrets/Appstore_Waktaverse_Music.mobileprovision.gpg' }}
@@ -67,3 +68,57 @@ jobs:
             UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i ./$PROVISION)`
           cp "./$PROVISION" "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
         done
+        
+    - name: Force Xcode 13.4.1
+      run: sudo xcode-select -s /Applications/Xcode_13.4.1.app
+
+    - name : Decrypt file
+      env:
+        ENCRYPTED_SECURITY_FILE_PATH: ${{ '.github/secrets/Security.xcconfig.gpg' }}
+        DECRYPTED_SECURITY_FILE_PATH: ${{ 'WaktaverseMusic/Security.xcconfig' }}
+        SECURITY_ENCRYPTION_KEY: ${{ secrets.SECURITY_KEY }} 
+      run: |  
+        gpg -d -o "$DECRYPTED_SECURITY_FILE_PATH" --pinentry-mode=loopback --passphrase "$SECURITY_ENCRYPTION_KEY" "$ENCRYPTED_SECURITY_FILE_PATH"
+        
+    - name: auto update build number
+      run: |
+        echo `ls .`
+        cd WaktaverseMusic
+        agvtool what-marketing-version # 현재 버전정보
+        xcrun agvtool new-marketing-version 1.1 # - 마켓버전
+        agvtool next-version -all
+               
+        
+   
+
+  
+    # 빌드 및 아카이브
+    - name: Archive app
+      run: |
+        xcodebuild clean archive -project $XC_PROJ -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE        
+    
+    
+    - name: Export app
+      # export 를 통해 ipa 파일 만듦
+      run: |
+        xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
+    
+    
+    - name: Install private API key P8
+      env:
+        PRIVATE_API_KEY_BASE64: ${{ secrets.PRIVATE_API_KEY_BASE64 }}
+        API_KEY: ${{ secrets.APPSTORE_API_KEY_ID }}
+      run: | 
+        mkdir -p ~/private_keys
+        echo -n "$PRIVATE_API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_$API_KEY.p8
+        
+        
+    - name: Upload app to TestFlight
+      env:
+        API_KEY: ${{ secrets.APPSTORE_API_KEY_ID }}
+        API_ISSUER : ${{ secrets.APPSTORE_ISSUER_ID  }}
+      run: |
+        echo `ls .`
+        xcrun altool --output-format xml --upload-app -f WaktaverseMusic.ipa -t ios --apiKey $API_KEY --apiIssuer $API_ISSUER
+        
+        
