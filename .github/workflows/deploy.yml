@@ -3,10 +3,7 @@ name: deploy
 on:
 # 테스트 필요 시 브랜치 변경 핑료
   push:
-    branches: [ "develop", "master", "release/*" ]
-  pull_request:
-    branches: [ "develop", "master", "release/*" ]
-
+    branches: [ "release/*", "master" ]
 
   workflow_dispatch:
 
