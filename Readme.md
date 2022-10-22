@@ -134,3 +134,5 @@
 - 스타티스(앱 설명)
 </footer>
 
+[![Run build](https://github.com/billboardoo/waktaverseMusic-iOS/actions/workflows/swift.yml/badge.svg)](https://github.com/billboardoo/waktaverseMusic-iOS/actions/workflows/swift.yml)
+
