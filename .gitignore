@@ -10,6 +10,8 @@
 xcuserdata/
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+## 설정 파일 숨김
+*.xcconfig 
 *.xcscmblueprint
 *.xccheckout
 
@@ -88,7 +90,7 @@ iOSInjectionProject/
 ### SwiftPackageManager ###
 Packages
 xcuserdata
-*.xcodeproj
+
 
 # OSX Temp
 .DS_Store
