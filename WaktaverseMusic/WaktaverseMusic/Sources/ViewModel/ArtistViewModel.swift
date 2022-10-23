@@ -23,7 +23,7 @@ final class ArtistViewModel: ObservableObject {
     }
 
     deinit {
-        
+
         print("❌ ArtistViewModel deinit")
     }
 

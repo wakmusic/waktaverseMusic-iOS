@@ -39,7 +39,7 @@ struct HomeView: View {
                     Spacer(minLength: 30)
 
                     VStack(spacing: 10) {
-                        Text("(주)빌보두왁론주식회사").font(.caption).foregroundColor(.gray)
+                        Text("WAKTAVERSE Music").font(.caption).foregroundColor(.gray)
                         Text("ⓒ Wak Entertainment Corp.").font(.caption).foregroundColor(.gray)
                         /*Image("youtube")
                             .resizable()
