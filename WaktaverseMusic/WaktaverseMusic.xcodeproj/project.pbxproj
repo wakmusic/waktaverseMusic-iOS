@@ -78,7 +78,6 @@
 		D80F438F28F6FD5E00C4A485 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D80F438E28F6FD5E00C4A485 /* FirebaseAuthCombine-Community */; };
 		D80F439128F6FD5E00C4A485 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = D80F439028F6FD5E00C4A485 /* FirebaseCrashlytics */; };
 		D80F439528F83D1000C4A485 /* ListDropDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80F439428F83D1000C4A485 /* ListDropDelegate.swift */; };
-		D8887CAE2904FFF9008B14D6 /* Security.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D8887CAD2904FFF8008B14D6 /* Security.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,7 +144,6 @@
 		D80F438128F6FC7A00C4A485 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D80F439428F83D1000C4A485 /* ListDropDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDropDelegate.swift; sourceTree = "<group>"; };
 		D87EDF9A28859FE200999DE6 /* WaktaverseMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WaktaverseMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8887CAD2904FFF8008B14D6 /* Security.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Security.xcconfig; path = ../../Security.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,7 +422,6 @@
 		D87EDF9128859FE200999DE6 = {
 			isa = PBXGroup;
 			children = (
-				D8887CAD2904FFF8008B14D6 /* Security.xcconfig */,
 				1D6B7A2B28E7E99C00EBCCFA /* .swiftlint.yml */,
 				D80F42F328E6DD1000C4A485 /* WaktaverseMusic */,
 				D87EDF9B28859FE200999DE6 /* Products */,
@@ -527,7 +524,6 @@
 				7B1D209228E93E2F006F67C6 /* LeferiPointSpecial.ttf in Resources */,
 				D80F434728E6DD1000C4A485 /* Preview Assets.xcassets in Resources */,
 				D80F434528E6DD1000C4A485 /* Assets.xcassets in Resources */,
-				D8887CAE2904FFF9008B14D6 /* Security.xcconfig in Resources */,
 				7B1D209328E93E2F006F67C6 /* PretendardVariable.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
