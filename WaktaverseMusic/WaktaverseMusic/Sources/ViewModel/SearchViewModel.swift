@@ -29,7 +29,7 @@ final class SearchViewModel: ObservableObject {
     }
 
     deinit {
-        clearCache()
+
         print("❌ SearchViewModel deinit")
     }
 

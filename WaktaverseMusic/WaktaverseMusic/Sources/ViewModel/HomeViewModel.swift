@@ -43,7 +43,6 @@ final class HomeViewModel: ObservableObject {
     }
 
     deinit {
-        clearCache()
         print("❌ HomeViewModel deinit")
     }
 

@@ -18,7 +18,7 @@ final class ChartViewModel: ObservableObject {
     }
 
     deinit {
-        clearCache()
+
         print("❌ ChartViewModel deinit")
     }
 
