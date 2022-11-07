@@ -9,10 +9,8 @@ import Foundation
 
 extension Const {
     struct URL {
-        static let base = "https://beta.wakmusic.xyz"
+        static let base = "https://wakmusic.xyz"
         // api/charts/hourly?limit=30
-        // static let base = "https://wakmusic.xyz"
-        // https://beta.wakmusic.xyz/api
 
         static let new = "/new/monthly"
         static let api = "/api"
