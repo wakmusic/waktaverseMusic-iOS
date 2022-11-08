@@ -32,6 +32,16 @@ struct MainView: View {
 
         if isLoading {
             LaunchScreenView().onAppear {
+                if let datas = UserDefaults.standard.array(forKey: "currentPlayList") as? [Data] {
+                    let decodedPlayList = datas.map { try! JSONDecoder().decode(SimpleSong.self, from: $0) }
+                    print("✅ \(datas.count) 개의 곡을 불러왔습니다.")
+                    if !decodedPlayList.isEmpty {
+                        playState.playList.list = decodedPlayList
+                        playState.currentSong = decodedPlayList.first
+                        playState.youTubePlayer.cue(source: .url(decodedPlayList.first!.song_id.youtube()))
+                    }
+                }
+
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     withAnimation { isLoading.toggle() }
                 }

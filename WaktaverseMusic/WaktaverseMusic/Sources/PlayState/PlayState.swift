@@ -42,6 +42,15 @@ final class PlayState: ObservableObject {
             guard let self = self else { return }
             self.progress.endProgress = time
         }.store(in: &subscription)
+
+        playList.$list.sink { list in
+            if !list.isEmpty {
+                let encodedPlayList = list.map { try? JSONEncoder().encode($0) }
+                print("✅ \(encodedPlayList.count) 개의 곡을 key: currentPlayList 에 저장합니다.")
+                UserDefaults.standard.set(encodedPlayList, forKey: "currentPlayList")
+            }
+        }.store(in: &subscription)
+
     }
 
 }
