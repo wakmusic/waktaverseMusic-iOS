@@ -61,6 +61,11 @@ struct FlexiblePlayer: View {
                             Button {
                                 playState.playList.removeAll()
                                 playState.currentSong = nil
+
+                                print("✅ key: currentPlayList에 저장된 데이터를 제거합니다.")
+                                UserDefaults.standard.set(nil, forKey: "currentPlayList")
+                                print("✅ key: lastPlayedSong에 저장된 데이터를 제거합니다.")
+                                UserDefaults.standard.set(nil, forKey: "lastPlayedSong")
                             } label: {
                                 Image(systemName: "xmark").modifier(PlayBarButtonImageModifier()).padding()
                             }
