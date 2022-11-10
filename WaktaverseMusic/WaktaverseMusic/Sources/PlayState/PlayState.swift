@@ -42,6 +42,23 @@ final class PlayState: ObservableObject {
             guard let self = self else { return }
             self.progress.endProgress = time
         }.store(in: &subscription)
+
+        playList.$list.sink { list in
+            if !list.isEmpty {
+                let encodedPlayList = list.map { try? JSONEncoder().encode($0) }
+                print("✅ \(encodedPlayList.count) 개의 곡을 key: currentPlayList 에 저장합니다.")
+                UserDefaults.standard.set(encodedPlayList, forKey: "currentPlayList")
+            }
+        }.store(in: &subscription)
+
+        $currentSong.sink { song in
+            if let song {
+                let encodedSong = try? JSONEncoder().encode(song)
+                print("✅ \(song.title) 곡을 key: lastPlayedSong 에 저장합니다.")
+                UserDefaults.standard.set(encodedSong, forKey: "lastPlayedSong")
+            }
+        }.store(in: &subscription)
+
     }
 
 }
@@ -107,6 +124,10 @@ extension PlayState {
 
         func removeAll() {
             list.removeAll()
+            print("✅ key: currentPlayList에 저장된 데이터를 제거합니다.")
+            UserDefaults.standard.set(nil, forKey: "currentPlayList")
+            print("✅ key: lastPlayedSong에 저장된 데이터를 제거합니다.")
+            UserDefaults.standard.set(nil, forKey: "lastPlayedSong")
         }
 
         func contains(_ item: SimpleSong) -> Bool {

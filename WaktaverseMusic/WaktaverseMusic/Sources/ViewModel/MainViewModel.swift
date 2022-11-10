@@ -45,4 +45,16 @@ final class MainViewModel: ObservableObject {
     func change(to tab: Tab) {
         self.currentTab = tab
     }
+
+    func loadToCurrentPlayList() -> [SimpleSong] {
+        guard let datas = UserDefaults.standard.array(forKey: "currentPlayList") as? [Data] else { return [] }
+        let playList = datas.map { try! JSONDecoder().decode(SimpleSong.self, from: $0) }
+        return playList
+    }
+
+    func loadToLastPlayedSong() -> SimpleSong? {
+        guard let data = UserDefaults.standard.object(forKey: "lastPlayedSong") as? Data else { return nil }
+        let lastPlayedSong = try! JSONDecoder().decode(SimpleSong.self, from: data)
+        return lastPlayedSong
+    }
 }

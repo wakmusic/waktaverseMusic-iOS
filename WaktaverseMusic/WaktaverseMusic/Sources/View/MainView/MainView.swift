@@ -32,6 +32,23 @@ struct MainView: View {
 
         if isLoading {
             LaunchScreenView().onAppear {
+                let playList: [SimpleSong] = viewModel.loadToCurrentPlayList()
+                let lastPlayedSong: SimpleSong? = viewModel.loadToLastPlayedSong()
+
+                print("✅ \(playList.count) 개의 곡을 불러왔습니다.")
+                print("✅ 마지막으로 재생중이던 곡 \(lastPlayedSong?.title ?? "없음") 을 불러왔습니다.")
+
+                if !playList.isEmpty {
+                    playState.playList.list = playList
+                    playState.currentSong = lastPlayedSong ?? playList.first
+
+                    // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 nil 리턴
+                    let index: Int? = playList.enumerated().compactMap { $0.element == lastPlayedSong ? $0.offset : nil }.first
+                    playState.playList.currentPlayIndex = index ?? 0 // 예상치못한 오류로 index 가 nil 이면 0번째로
+
+                    playState.youTubePlayer.cue(source: .url(playState.currentSong!.song_id.youtube()))
+                }
+
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     withAnimation { isLoading.toggle() }
                 }
@@ -195,7 +212,6 @@ struct MainView: View {
         }
 
     }
-
 }
 
 // - MARK: Function
