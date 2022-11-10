@@ -116,6 +116,8 @@ extension PlayState {
 
         func removeAll() {
             list.removeAll()
+            print("✅ key: currentPlayList에 저장된 데이터를 제거합니다.")
+            UserDefaults.standard.set(nil, forKey: "currentPlayList")
         }
 
         func contains(_ item: SimpleSong) -> Bool {
