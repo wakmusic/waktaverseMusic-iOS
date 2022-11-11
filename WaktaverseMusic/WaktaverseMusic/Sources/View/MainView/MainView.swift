@@ -49,7 +49,7 @@ struct MainView: View {
 
                     playState.youTubePlayer.cue(source: .url(playState.currentSong!.song_id.youtube()))
                 }
-                
+
                 // 2. 불러온 다음 구독
                 playState.subscribePlayList()
                 playState.subscribeCurrentSong()
