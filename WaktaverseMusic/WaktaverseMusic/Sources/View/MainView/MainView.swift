@@ -32,6 +32,7 @@ struct MainView: View {
 
         if isLoading {
             LaunchScreenView().onAppear {
+                // 1. 유저디폴트에서 불러오기
                 let playList: [SimpleSong] = viewModel.loadToCurrentPlayList()
                 let lastPlayedSong: SimpleSong? = viewModel.loadToLastPlayedSong()
 
@@ -42,12 +43,16 @@ struct MainView: View {
                     playState.playList.list = playList
                     playState.currentSong = lastPlayedSong ?? playList.first
 
-                    // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 nil 리턴
-                    let index: Int? = playList.enumerated().compactMap { $0.element == lastPlayedSong ? $0.offset : nil }.first
-                    playState.playList.currentPlayIndex = index ?? 0 // 예상치못한 오류로 index 가 nil 이면 0번째로
+                    // 해당 곡이 이미 재생목록에 있으면 재생목록 속 해당 곡의 index, 없으면 0 리턴
+                    let index: Int = playList.enumerated().compactMap { $0.element == lastPlayedSong ? $0.offset : nil }.first ?? 0
+                    playState.playList.currentPlayIndex = index
 
                     playState.youTubePlayer.cue(source: .url(playState.currentSong!.song_id.youtube()))
                 }
+                
+                // 2. 불러온 다음 구독
+                playState.subscribePlayList()
+                playState.subscribeCurrentSong()
 
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     withAnimation { isLoading.toggle() }
