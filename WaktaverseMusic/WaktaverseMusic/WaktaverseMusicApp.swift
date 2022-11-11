@@ -58,13 +58,14 @@ func changeMode(isDarkMode: Bool) {
             windows?.overrideUserInterfaceStyle = isDarkMode  == true ? .dark : .light
 
         }
-    } else if let window = UIApplication.shared.windows.first {
-        if #available(iOS 13.0, *) {
-            window.overrideUserInterfaceStyle = isDarkMode == true ? .dark : .light
-        } else { // IOS 13 미만은 dark모드 불가
-            window.overrideUserInterfaceStyle = .light
-        }
     }
+//    else if let window = UIApplication.shared.windows.first {
+//        if #available(iOS 13.0, *) {
+//            window.overrideUserInterfaceStyle = isDarkMode == true ? .dark : .light
+//        } else { // IOS 13 미만은 dark모드 불가
+//            window.overrideUserInterfaceStyle = .light
+//        }
+//    }
 }
 
 func clearCache() {

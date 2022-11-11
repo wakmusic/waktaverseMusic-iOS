@@ -44,6 +44,32 @@ final class PlayState: ObservableObject {
         }.store(in: &subscription)
     }
 
+    func subscribePlayList() {
+        playList.$list.sink { list in
+            if !list.isEmpty {
+                let encodedPlayList = list.map { try? JSONEncoder().encode($0) }
+                print("✅ \(encodedPlayList.count) 개의 곡을 key: currentPlayList 에 저장합니다.")
+                UserDefaults.standard.set(encodedPlayList, forKey: "currentPlayList")
+            } else {
+                print("✅ key: currentPlayList에 저장된 데이터를 제거합니다.")
+                UserDefaults.standard.set(nil, forKey: "currentPlayList")
+            }
+        }.store(in: &subscription)
+    }
+
+    func subscribeCurrentSong() {
+        $currentSong.sink { song in
+            if let song {
+                let encodedSong = try? JSONEncoder().encode(song)
+                print("✅ \(song.title) 곡을 key: lastPlayedSong 에 저장합니다.")
+                UserDefaults.standard.set(encodedSong, forKey: "lastPlayedSong")
+            } else {
+                print("✅ key: lastPlayedSong에 저장된 데이터를 제거합니다.")
+                UserDefaults.standard.set(nil, forKey: "lastPlayedSong")
+            }
+        }.store(in: &subscription)
+    }
+
 }
 
 // MARK: YouTubePlayer 컨트롤과 관련된 메소드들을 모아놓은 익스텐션입니다.
